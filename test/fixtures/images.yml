@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  recipe_id: 1
+  contents: 
+
+two:
+  recipe_id: 1
+  contents: 

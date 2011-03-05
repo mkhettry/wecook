@@ -1,0 +1,20 @@
+<div id="recipe_detail">
+
+  <%= image_tag @recipe.sample_image, :class => 'center' %>
+  <h1><%= @recipe.title %></h1>
+
+  <ul class="ingredient_list">
+  <% @recipe.ingredients.each do |i| %>
+    <li class="ingredient"> <%=  i.raw %> </li>
+  <% end %>
+  </ul>
+
+    <% @recipe.prep.split('\n').each do |p| %>
+      <p>
+    <%= p %>
+      </p>
+    <% end %>
+  </ul>
+</div>
+<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+<%= link_to 'Back', recipes_path %>

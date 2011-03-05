@@ -1,0 +1,3 @@
+class BloggerDocument < RecipeDocument
+
+end
