@@ -9,9 +9,9 @@
   <% end %>
   </ul>
 
-    <% @recipe.prep.split('\n').each do |p| %>
+    <% @recipe.directions.each do |p| %>
       <p>
-    <%= p %>
+    <%= p.raw_text %>
       </p>
     <% end %>
   </ul>

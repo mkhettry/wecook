@@ -62,7 +62,11 @@ class RecipesController < ApplicationController
       @recipe.images << image
     end
 
-    @recipe.prep = recipe_document.extract_prep
+    directions = recipe_document.extract_prep
+    directions.each do |d|
+      direction = Direction.new(:raw_text => d)
+      @recipe.directions << direction
+    end
 
     respond_to do |format|
       if @recipe.save

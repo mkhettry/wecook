@@ -39,7 +39,7 @@ test:
   encoding: unicode
   database: cooks_test
   pool: 5
-  username: manish
+  username: cooks 
   password:
 
 production:
