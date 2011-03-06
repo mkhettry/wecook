@@ -1,7 +1,6 @@
 #prepares the data in a format that liblinear/libsvm can understand
-
-LABEL_ID_MAPPING = {"PR" => "0", "IN" => "1", "OT" => "2", "FO" => "3", "NO" => 4, "TA" => 5}
-MAX_COUNT_PER_CLASS = 300
+LABEL_ID_MAPPING = {"PR" => "0", "IN" => "1", "OT" => "2", "FO" => "3", "NO" => "4", "TA" => "5"}
+IGNORE_WORDS = {"a" => 1, "an" => 1, "the" => 1, "of" => 1, "and" => 1, "to" => 1}
 
 class WordFeatureExtractor
 
@@ -11,11 +10,27 @@ class WordFeatureExtractor
 
   def extract_features(training_row)
     features = []
-    training_row.description.split(/ +/).each do |word|
+    training_row.get_words().each do |word|
       features << ["word_" + word, 1]
     end
     features
   end
+end
+
+class FirstAndSecondWordFeatureExtractor
+
+  def initialize(training_rows)
+    #NOTHING
+  end
+
+  def extract_features(training_row)
+    features = []
+    words = training_row.get_words
+    features << ["first_word_" + words[0],1] if words.length > 0
+    features << ["second_word_" + words[1],1] if words.length > 1
+    features
+  end
+
 end
 
 class LengthFeatureExtractor
@@ -28,7 +43,6 @@ class LengthFeatureExtractor
   def extract_features(training_row)
     value = Float(training_row.description.length/@max_description_length)
     feature = ["length", value]
-    puts "length feature: #{feature}"
     [feature]
   end
 end
@@ -42,16 +56,37 @@ class TrainingRow
     @description = description.strip()
     @class_label = class_label.strip()
   end
+
+def get_words()
+    #words = doc.split(/\W+/)
+    #words = doc.split
+    #split on white space and "-"
+    words = @description.split(/[\s-]/)
+
+    words = words.select {|w| w.strip.length > 0 and IGNORE_WORDS[w].nil?}
+    words.collect { |w| w.downcase}
+    new_words = []
+    words.each do |w|
+      if w =~ /(\d+)([a-zA-Z]+)$/
+        new_words << $1
+        new_words << $2
+      else
+        new_words << w
+      end
+    end
+    new_words.uniq
+    end
 end
 
 class LibLinearFeatures
 
   @@feature_id_map = {}
-  attr_accessor :class_id
+  attr_accessor :class_id, :description
 
   def initialize(class_id)
     @feature_map = {}
     @class_id = class_id
+    @description = ""
   end
 
   def add_feature_value(feature_id, feature_value)
@@ -80,6 +115,7 @@ class LibLinearFeatures
         lib_linear_features.add_feature_value(LibLinearFeatures.get_feature_id(k[0]),k[1])
       end
     end
+    lib_linear_features.description = training_row.description
     lib_linear_features
   end
 
@@ -104,34 +140,36 @@ def main
   ## extract features and convert to lib-linear features ##
   word_feature_extractor = WordFeatureExtractor.new(training_rows)
   length_feature_extractor = LengthFeatureExtractor.new(training_rows)
+  first_second_word_extractor = FirstAndSecondWordFeatureExtractor.new(training_rows)
+  extractors = [word_feature_extractor, length_feature_extractor, first_second_word_extractor]
 
   liblinear_features_list = training_rows.collect do |training_row|
-    LibLinearFeatures.to_lib_linear_features([word_feature_extractor,length_feature_extractor], training_row)
+    LibLinearFeatures.to_lib_linear_features(extractors, training_row)
   end
   puts "Size of liblinear-features-list: #{liblinear_features_list.length}"
 
   ## Write train/test ##
-  output_train = File.new(ARGV[1] + "training_data.libsvm", "w")
-  output_test = File.new(ARGV[1] + "test_data.libsvm", "w")
-  write_outputs(output_train, output_test, liblinear_features_list)
+  output_train = File.new("training_data.libsvm", "w")
+  output_test = File.new("test_data.libsvm", "w")
+  output_test_description = File.new("test_data_description.libsvm","w")
+  write_outputs(output_train,output_test, output_test_description, liblinear_features_list)
 
 
 end
 
 
 
-def write_outputs(output_train, output_test, liblinear_features)
-  class_counts = {"0" => 0, "1" => 0, "2" => 0}
+def write_outputs(output_train, output_test, output_test_description, liblinear_features)
+  class_counts = {"0" =>0, "1" => 0, "2" => 0, "3" =>0, "4" =>0, "5" =>0}
   liblinear_features.each do |feature|
     if class_counts.has_key?feature.class_id
-      #check how much has gone to train
-      if (class_counts[feature.class_id] > MAX_COUNT_PER_CLASS)
+      random = rand(100)
+      if (random > 79)
         output_test.puts(feature.to_s)
+        output_test_description.puts(feature.class_id + "\t" + feature.description)
       else
         output_train.puts(feature.to_s)
       end
-
-      class_counts[feature.class_id] += 1
     end
   end
 end
@@ -158,8 +196,8 @@ def get_filenames(dir)
 end
 
 if __FILE__ == $PROGRAM_NAME
-  if ARGV.length != 2
-    puts "Usage: ruby create_lib_svm_data.rb.rb <training-data-dir> <output-dir>"
+  if ARGV.length != 1
+    puts "Usage: ruby create_lib_svm_data.rb <training-data-dir>"
   else
     main()
   end
