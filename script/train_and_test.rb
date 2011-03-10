@@ -50,6 +50,7 @@ test_lines.each do |line|
     num_error += 1
     if (actual == :ingredients ||actual == :prep || prediction == :ingredients || prediction == :prep)
       bad_error += 1
+      puts "golden=#{actual}:prediction=#{prediction}--- #{text}"
     end
   end
 end

@@ -153,6 +153,7 @@ class RecipeDocument
     ingredients = @doc.xpath("//div[contains(@class, 'ingredients')]//li").collect { |s| clean_text(s.text)}
 
     ingredients = @doc.xpath("//li[contains(@class,'ingredient')]").collect { |s| clean_text(s.text)} if ingredients.empty?
+    ingredients = @doc.xpath("//li[contains(@itemprop,'ingredient')]").collect { |s| clean_text(s.text)} if ingredients.empty?
     ingredients = @doc.xpath("//span[contains(@class, 'ingredient')]").collect { |s| clean_text(s.text)} if ingredients.empty?
 
     ingredients
@@ -163,12 +164,13 @@ class RecipeDocument
 
     prep_text_nodes = @doc.xpath("//p[contains(@class, 'instructions')]")
     prep_text_nodes = @doc.xpath("//div[contains(@class, 'instructions')]/p") if prep_text_nodes.empty?
+    prep_text_nodes = @doc.xpath("//li[contains(@itemprop, 'instruction')]") if prep_text_nodes.empty?
+
     prep_text_nodes = @doc.xpath("//span[contains(@class, 'instructions')]/ol/li/span") if prep_text_nodes.empty?
     prep_text_nodes = @doc.xpath("//span[contains(@class, 'instructions')]/div[contains(@class,'section')]") if prep_text_nodes.empty?
 
 
     prep_text_nodes.each do |p|
-      puts p.class
       new_lines = create_lines_from_nodes(p)
       next if new_lines.empty?
       prep_lines += new_lines
