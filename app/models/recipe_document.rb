@@ -62,9 +62,18 @@ class RecipeDocument
   end
 
   def extract_lines()
+#    nodes = []
+#    @doc.traverse do |n|
+#      nodes << n
+#    end
+    create_lines_from_nodes(@doc)
+  end
+
+  def create_lines_from_nodes(doc)
     lines = []
     current_line = ""
-    @doc.traverse do |n|
+
+    doc.traverse do |n|
       if !inside_ignorable_element(n)
 
         if n.text? and not n.text.lstrip.rstrip.empty?
@@ -78,6 +87,7 @@ class RecipeDocument
         end
       end
     end
+    lines << current_line if current_line != ""
     clean_lines(lines)
   end
 
@@ -140,11 +150,11 @@ class RecipeDocument
   # allrecipes.com,
   # TODO: food.com is problematic here.
   def extract_ingredients_structured
-    ingredients = @doc.xpath("//div[contains(@class, 'ingredients')]//li").collect { |s| s.text.lstrip.rstrip}
+    ingredients = @doc.xpath("//div[contains(@class, 'ingredients')]//li").collect { |s| clean_text(s.text)}
 
-    if (ingredients.nil? || ingredients.empty?)
-      ingredients = @doc.xpath("//li[contains(@class,'ingredient')]").collect { |s| s.text.lstrip.rstrip}
-    end
+    ingredients = @doc.xpath("//li[contains(@class,'ingredient')]").collect { |s| clean_text(s.text)} if ingredients.empty?
+    ingredients = @doc.xpath("//span[contains(@class, 'ingredient')]").collect { |s| clean_text(s.text)} if ingredients.empty?
+
     ingredients
   end
 
@@ -153,9 +163,15 @@ class RecipeDocument
 
     prep_text_nodes = @doc.xpath("//p[contains(@class, 'instructions')]")
     prep_text_nodes = @doc.xpath("//div[contains(@class, 'instructions')]/p") if prep_text_nodes.empty?
+    prep_text_nodes = @doc.xpath("//span[contains(@class, 'instructions')]/ol/li/span") if prep_text_nodes.empty?
+    prep_text_nodes = @doc.xpath("//span[contains(@class, 'instructions')]/div[contains(@class,'section')]") if prep_text_nodes.empty?
+
 
     prep_text_nodes.each do |p|
-      prep_lines << clean_text(p.text)
+      puts p.class
+      new_lines = create_lines_from_nodes(p)
+      next if new_lines.empty?
+      prep_lines += new_lines
     end
 
     prep_lines

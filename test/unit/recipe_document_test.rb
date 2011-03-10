@@ -66,7 +66,7 @@ class RecipeDocumentTest < ActiveSupport::TestCase
         r.extract_lines
   end
 
-  test "extract ingredients structured allrecipes.com" do
+  test "extract ingredients structured allrecipes com" do
     r = RecipeDocument.new(
         :url => "foo",
         :string => <<-eohtml
@@ -106,7 +106,7 @@ class RecipeDocumentTest < ActiveSupport::TestCase
   end
 
 
-  test "extract ingredients structured epicurious.com" do
+  test "extract ingredients structured epicurious com" do
     r = RecipeDocument.new(
         :url => "foo", # http://www.epicurious.com/recipes/food/views/Avocado-Goat-Cheese-Salad-with-Lime-Dressing-362911",
         :string => <<-eohtml
@@ -238,9 +238,38 @@ class RecipeDocumentTest < ActiveSupport::TestCase
                   "2 cups Japanese bread crumbs (panko), plus 1/4 cup for filling",
                   "Vegetable oil, for frying"], r.extract_ingredients_structured
     directions = r.extract_prep_structured
-    assert_equal "Combine butter, parsley, tarragon, 1 teaspoon salt, and 1/4 teaspoon black pepper in the bowl of a stand mixer. Place mixture on plastic wrap or waxed paper and roll into small log; place in freezer.",
+    assert_equal "Combine butter, parsley, tarragon, 1 teaspoon salt, and 1/4 teaspoon black pepper in the bowl of a stand mixer . Place mixture on plastic wrap or waxed paper and roll into small log; place in freezer.",
                 directions[0]
 
+  end
+
+  test "extract structured food dot com" do
+    r = RecipeDocument.new(
+        :file => fixture_path + 'webpages/Chicken Tortilla Soup II Recipe - Food.com - 4627.html',
+        :url => 'http://www.food.com/recipe/chicken-tortilla-soup-ii-4627'
+    )
+    assert_lines [
+      "Saute carrots, onions, celery in corn oil, garlic, salt and pepper until tender.",
+      "Add chicken broth and bring to boil.",
+      "Add tomatoes, Rotel, taco seasoning, and chicken.",
+      "Cut Tortillas into small pieces and add to broth mixture.",
+      "Let boil for 20 minutes or until tortillas are thoroughly incorporated into soup stirring occasionally to keep from sticking.",
+      "Reduce heat and add 8 oz. cheese. Simmer for additional 10 minutes.",
+      "Add milk and simmer for additional 10 minutes.",
+      "If thicker soup is desired, add more diced tortillas and let incorporate into soup.",
+      "Garnish with shredded cheese and broken tortilla chips.",
+      "Substitutions: 1 cup Masa Harina (Masa Flour) for 1 10 ct. package of corn tortillas. Gradually add masa flour mixing into broth, mixing thoroughly into broth. If thicker soup is desired, add more masa flour.",
+      "You can also use grilled chicken fajita meat for poached diced chicken.",
+    ], r.extract_prep_structured
+
+  end
+
+  test "extract structured recipe dot com" do
+     r = RecipeDocument.new(
+        :file => fixture_path + 'webpages/Company-Pleasing Crab Cakes.html',
+        :url => 'http://www.recipe.com/company-pleasing-crab-cakes/'
+    )
+    puts r.extract_prep_structured
   end
 #
 #  test "extract lines removes header elements" do

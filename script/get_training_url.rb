@@ -4,6 +4,10 @@ if ARGV.length != 1
   exit -1
 end
 
+def write_training_line(f, classification, line)
+  f.puts("#{classification}\t#{line}")
+end
+
 urls = File.open(ARGV[0], 'r') do |file|
   i=0
   file.each_line do |url|
@@ -15,13 +19,32 @@ urls = File.open(ARGV[0], 'r') do |file|
     next if (File.exists?(name))
 
     puts "working on #{url}"
-    r = RecipeDocument.new(:url => url)
-    lines = r.extract_lines
+
     f = File.open(name, 'w')
     f.puts('#' + url)
-    lines.each do |line|
-      f.write("OT\t") # put a leading tab with the default classification (OTher)
-      f.puts(line)
+
+    r = RecipeDocument.new(:url => url)
+    ingredients = r.extract_ingredients_structured
+    directions = r.extract_prep_structured
+    if (ingredients.empty? or directions.empty?)
+      puts "Unstructured document. A human will have to train it"
+      lines = r.extract_lines
+      lines.each do |line|
+        write_training_line(f, "OT", line)
+      end
+    else
+      puts "Structured document found"
+      ingredients.each do |i|
+        write_training_line(f, "IN", i)
+      end
+
+      directions.each do |d|
+        write_training_line(f, "PR", d)
+      end
+
     end
+
+
+
   end
 end
