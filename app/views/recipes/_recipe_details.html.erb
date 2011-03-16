@@ -9,5 +9,5 @@
     <%= p.raw_text %>
       </p>
     <% end %>
-  </ul>
+   <%= link_to "Read original recipe at #{@recipe.url.split('/')[2]}", @recipe.url, :target => '_blank' %>
 </div>
