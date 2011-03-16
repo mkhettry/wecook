@@ -5,11 +5,17 @@
 
   - @recipes.each do |recipe|
     %tr
-      %td= image_tag recipe.sample_image, :class => 'list_image'
+      %td= link_to image_tag(recipe.sample_image, :class => 'list_image'), recipe
       %td.recipe_summary
         %dl
           %dt= recipe.title
-      %td= link_to 'Show', recipe
+          %dt= recipe.ingredients[0].raw
+          %dt= recipe.ingredients[1].raw if recipe.ingredients[1]
+          %dt= recipe.ingredients[2].raw if recipe.ingredients[2]
+          %dt= recipe.ingredients[3].raw if recipe.ingredients[3]
+          %dt= '.....'
+
+
 
   %br
 

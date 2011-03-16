@@ -3,18 +3,7 @@
   <%= image_tag @recipe.sample_image, :class => 'center' %>
   <h1><%= @recipe.title %></h1>
 
-  <ul class="ingredient_list">
-  <% @recipe.ingredients.each do |i| %>
-    <li class="ingredient"> <%=  i.raw %> </li>
-  <% end %>
-  </ul>
-
-    <% @recipe.directions.each do |p| %>
-      <p>
-    <%= p.raw_text %>
-      </p>
-    <% end %>
-  </ul>
+  <%= render :partial => 'recipe_details' %>
 </div>
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
 <%= link_to 'Back', recipes_path %>

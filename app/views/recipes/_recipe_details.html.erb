@@ -1,0 +1,13 @@
+<div class="ingredient_and_prep">
+  <ul class="ingredient_list">
+  <% @recipe.ingredients.each do |i| %>
+    <li class="ingredient"> <%=  i.raw %> </li>
+  <% end %>
+  </ul>
+    <% @recipe.directions.each do |p| %>
+      <p>
+    <%= p.raw_text %>
+      </p>
+    <% end %>
+  </ul>
+</div>
