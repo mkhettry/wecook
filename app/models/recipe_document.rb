@@ -20,15 +20,53 @@ class RecipeDocument
     @url = opts[:url]
 
     if opts[:file]
-      s = File.open(opts[:file])
+      s = File.open(opts[:file]).read
     elsif opts[:string]
       s=opts[:string]
     else
-      s = open(opts[:url])
+      s = open(opts[:url]).read
     end
 
     @doc = Nokogiri::HTML(s)
+#    @rdoc = ReadabilityDocument.new(s, {:min_text_length => 8})
+    remove_unlikely_candidates!
     @title = @doc.xpath("//title").text.lstrip.rstrip.gsub(/[\n]+/, " ")
+    @options = opts
+  end
+
+
+  def remove_unlikely_candidates!
+    # this was the original from readability.
+    # unlikely = /combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|pager|popup/i
+    unlikely = /combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|popup/i
+    likely = /and|article|body|column|main|shadow/i
+
+    @doc.css("*").each do |elem|
+      str = "#{elem[:class]}#{elem[:id]}"
+      if str =~ unlikely && str !~ likely && elem.name.downcase != 'body'
+        debug("Removing unlikely candidate - #{str}")
+        elem.remove
+      end
+    end
+
+    @doc.css("script, style").each { |i| i.remove }
+
+  end
+
+  def remove_divs_with_high_link_density!
+
+    @doc.xpath("//div").each do |div|
+      link_length = div.css("a").map {|i| i.text}.join("").length
+      div_length = div.text.length
+      if (link_length / div_length > 0.25)
+        debug("Removing div " + div[:id])
+        div.remove
+      end
+    end
+  end
+
+  def debug(i)
+    puts i
   end
 
 
@@ -66,7 +104,15 @@ class RecipeDocument
 #    @doc.traverse do |n|
 #      nodes << n
 #    end
+#
+    #create_lines_from_nodes(@doc)
+
+    # Is it wasteful to get the content and reparse the readable document. Should I just
+    # get @rdoc.content return a NodeSet?
+#    create_lines_from_nodes(Nokogiri::HTML(@rdoc.content))
+
     create_lines_from_nodes(@doc)
+
   end
 
   def create_lines_from_nodes(doc)
