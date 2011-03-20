@@ -1,5 +1,5 @@
 #prepares the data in a format that liblinear/libsvm can understand
-LABEL_ID_MAPPING = {"PR" => "0", "IN" => "1", "OT" => "2", "FO" => "3", "NO" => "4", "TA" => "5"}
+LABEL_ID_MAPPING = {"PR" => 0, "IN" => 1, "OT" => 2, "FO" => 3, "NO" => 4, "TA" => 5}
 IGNORE_WORDS = {"a" => 1, "an" => 1, "the" => 1, "of" => 1, "and" => 1, "to" => 1}
 
 class WordFeatureExtractor
@@ -11,7 +11,7 @@ class WordFeatureExtractor
   def extract_features(training_row)
     features = []
     training_row.get_words().each do |word|
-      features << ["word_" + word, 1]
+      features << Feature.new("word_" + word)
     end
     features
   end
@@ -26,8 +26,8 @@ class FirstAndSecondWordFeatureExtractor
   def extract_features(training_row)
     features = []
     words = training_row.get_words
-    features << ["first_word_" + words[0],1] if words.length > 0
-    features << ["second_word_" + words[1],1] if words.length > 1
+    features << Feature.new("first_word_" + words[0]) if words.length > 0
+    features << Feature.new("second_word_" + words[1]) if words.length > 1
     features
   end
 
@@ -42,7 +42,7 @@ class LengthFeatureExtractor
 
   def extract_features(training_row)
     value = Float(training_row.description.length/@max_description_length)
-    feature = ["length", value]
+    feature = Feature.new("length", value)
     [feature]
   end
 end
@@ -64,7 +64,7 @@ def get_words()
     words = @description.split(/[\s-]/)
 
     words = words.select {|w| w.strip.length > 0 and IGNORE_WORDS[w].nil?}
-    words.collect { |w| w.downcase}
+    words.collect! { |w| w}
     new_words = []
     words.each do |w|
       if w =~ /(\d+)([a-zA-Z]+)$/
@@ -78,56 +78,6 @@ def get_words()
     end
 end
 
-class LibLinearFeatures
-
-  @@feature_id_map = {}
-  attr_accessor :class_id, :description
-
-  def initialize(class_id)
-    @feature_map = {}
-    @class_id = class_id
-    @description = ""
-  end
-
-  def add_feature_value(feature_id, feature_value)
-    @feature_map[feature_id] = feature_value
-  end
-
-  def to_s
-    outString = @class_id + " "
-    outString << get_sorted_features()
-    outString.strip()
-  end
-
-  def get_sorted_features
-    sorted_keys = @feature_map.keys.sort
-    sorted_features = ""
-    sorted_keys.each{|k| sorted_features << "#{k}:#{@feature_map[k]} "}
-    sorted_features
-  end
-
-  def LibLinearFeatures.to_lib_linear_features(feature_extractors, training_row)
-    lib_linear_features = LibLinearFeatures.new(LABEL_ID_MAPPING[training_row.class_label])
-
-    feature_extractors.each do |current_feature_extractor|
-      current_features = current_feature_extractor.extract_features(training_row)
-      current_features.each do |k|
-        lib_linear_features.add_feature_value(LibLinearFeatures.get_feature_id(k[0]),k[1])
-      end
-    end
-    lib_linear_features.description = training_row.description
-    lib_linear_features
-  end
-
-  def LibLinearFeatures.get_feature_id(feature_name)
-    unless @@feature_id_map.has_key?(feature_name)
-      @@feature_id_map[feature_name] = @@feature_id_map.length + 1
-    end
-    @@feature_id_map[feature_name]
-  end
-end
-
-
 def main
   ## Read training rows ##
   files = get_filenames(ARGV[0])
@@ -135,41 +85,64 @@ def main
   files.each do |file|
     training_rows.concat(get_training_rows_from_file(ARGV[0] + file))
   end
+
   puts "Size of training rows: #{training_rows.length}"
 
   ## extract features and convert to lib-linear features ##
   word_feature_extractor = WordFeatureExtractor.new(training_rows)
   length_feature_extractor = LengthFeatureExtractor.new(training_rows)
   first_second_word_extractor = FirstAndSecondWordFeatureExtractor.new(training_rows)
-  extractors = [word_feature_extractor, length_feature_extractor, first_second_word_extractor]
+  extractors = [word_feature_extractor, first_second_word_extractor]
 
-  liblinear_features_list = training_rows.collect do |training_row|
-    LibLinearFeatures.to_lib_linear_features(extractors, training_row)
+  feature_matrix = []
+  class_labels = []
+
+  training_rows.each do |row|
+    next if row.description.strip.empty?
+    feature_vector = []
+    class_labels << LABEL_ID_MAPPING[row.class_label]
+    extractors.each do |extractor|
+      feature_vector += extractor.extract_features(row)
+    end
+    feature_vector.sort!
+    feature_matrix << feature_vector
   end
-  puts "Size of liblinear-features-list: #{liblinear_features_list.length}"
+
+  #puts liblinear_features_list.to_s
+  puts "Size of liblinear-features-list: #{feature_matrix.length}"
 
   ## Write train/test ##
   output_train = File.new("training_data.libsvm", "w")
   output_test = File.new("test_data.libsvm", "w")
   output_test_description = File.new("test_data_description.libsvm","w")
-  write_outputs(output_train,output_test, output_test_description, liblinear_features_list)
+  write_outputs(output_train,output_test, output_test_description, feature_matrix, class_labels, training_rows)
+  output_test.close
+  output_train.close
+  output_test_description.close
 
-
+  Feature.write_feature_ids_to_file(File.new("feature_ids.libsvm", 'w'))
 end
 
 
+def write_feature_vector(fv)
+  s = ""
+  fv.each do |f|
+    s << f.to_liblinear_form
+    s << " "
+  end
+  s
+end
 
-def write_outputs(output_train, output_test, output_test_description, liblinear_features)
-  class_counts = {"0" =>0, "1" => 0, "2" => 0, "3" =>0, "4" =>0, "5" =>0}
-  liblinear_features.each do |feature|
-    if class_counts.has_key?feature.class_id
-      random = rand(100)
-      if (random > 79)
-        output_test.puts(feature.to_s)
-        output_test_description.puts(feature.class_id + "\t" + feature.description)
-      else
-        output_train.puts(feature.to_s)
-      end
+# [feature, feature]
+def write_outputs(output_train, output_test, output_test_description, feature_matrix, class_labels, training_rows)
+  for i in 0...feature_matrix.length
+    random = rand(100)
+    feature_vector = feature_matrix[i]
+    if (random > 79)
+      output_test.puts(class_labels[i].to_s + " " + write_feature_vector(feature_vector))
+      output_test_description.puts(class_labels[i].to_s + "\t" + training_rows[i].description)
+    else
+      output_train.puts(class_labels[i].to_s + " " + write_feature_vector(feature_vector))
     end
   end
 end
