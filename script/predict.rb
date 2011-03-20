@@ -1,7 +1,7 @@
 
 def main()
 
-  model = LibLinearModel.new_liblinear_model(:file=>ARGV[0])
+  model = LibLinearModel.new(:model_file=>ARGV[0])
   test_file = File.new(ARGV[1])
   output_file = File.new(ARGV[2],"w")
 

@@ -28,6 +28,10 @@ class Feature
     @feature_id <=> other.feature_id
   end
 
+  def to_s
+    "#{feature_id}:#{name}=#{value}"
+  end
+
   def self.write_feature_ids_to_file(outfile)
     @@name_id_map.sort_by{|k,v| v}.each do |pair|
       outfile.puts(pair[0])
