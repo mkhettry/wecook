@@ -1,4 +1,10 @@
-ruby create_lib_svm_data.rb ../config/training/
-(cd /Users/srinidhi/workspace/ruby/work/classifiers/liblinear-1.7;./train -s 0 /Users/srinidhi/workspace/ruby/cooks/script/training_data.libsvm;./predict -b 1 /Users/srinidhi/workspace/ruby/cooks/script/test_data.libsvm training_data.libsvm.model /Users/srinidhi/workspace/ruby/cooks/script/predictions.libsvm)
-ruby test_liblinear.rb predictions.libsvm test_data_description.libsvm
+rails runner script/create_lib_svm_data.rb config/training/
+p=`PWD`
+(cd $LL_HOME;./train -s 0 $p/training_data.libsvm;)
+rails runner script/predict.rb $LL_HOME/training_data.libsvm.model test_data.libsvm predictions_ours.libsvm
+(cd $LL_HOME;./predict -b 1 $p/test_data.libsvm training_data.libsvm.model $p/predictions_theirs.libsvm)
+echo "Running ours"
+rails runner script/test_liblinear.rb predictions_ours.libsvm test_data_description.libsvm
+echo "Running theirs"
+rails runner script/test_liblinear.rb predictions_theirs.libsvm test_data_description.libsvm
 
