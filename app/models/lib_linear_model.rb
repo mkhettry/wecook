@@ -95,7 +95,8 @@ class LibLinearModel
     lines = rd.extract_lines
     lines.each do |line|
       fv = get_feature_vector(line)
-      puts predict_class(fv).to_s + "\t" + line
+      class_probs = predict(fv).sort_by{|k,v| v}[-2..-1]
+      puts "#{class_probs[1][0]}=#{(class_probs[1][1]*100).round/100.0},#{class_probs[0][0]}=#{(class_probs[0][1]*100).round/100.0}" + "\t" + line
     end
   end
 
