@@ -243,6 +243,16 @@ class RecipeDocumentTest < ActiveSupport::TestCase
 
   end
 
+  test "extract lines from nigella lawson" do
+    r = RecipeDocument.new(
+        :file => fixture_path + 'webpages/nigella_devils_food_cake.html',
+        :url => "http://www.nigella.com/recipes/view/DEVILS-FOOD-CAKE-5310"
+    )
+    lines = r.extract_lines
+    puts lines
+    assert lines.detect { |line| line =~ /225g plain flour/ and line =~ /Preheat the oven to 180°c\/gas mark 4./}
+  end
+
   test "extract structured food dot com" do
     r = RecipeDocument.new(
         :file => fixture_path + 'webpages/Chicken Tortilla Soup II Recipe - Food.com - 4627.html',

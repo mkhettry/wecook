@@ -28,8 +28,16 @@ class RecipeDocument
     end
 
     @doc = Nokogiri::HTML(s)
+
+
+    @doc.css("form, object, embed").each do |elem|
+      elem.remove
+    end
+
 #    @rdoc = ReadabilityDocument.new(s, {:min_text_length => 8})
     remove_unlikely_candidates!
+    remove_divs_with_high_link_density!
+
     @title = @doc.xpath("//title").text.lstrip.rstrip.gsub(/[\n]+/, " ")
     @options = opts
   end
@@ -58,8 +66,10 @@ class RecipeDocument
     @doc.xpath("//div").each do |div|
       link_length = div.css("a").map {|i| i.text}.join("").length
       div_length = div.text.length
+      next if div_length == 0
       if (link_length / div_length > 0.25)
-        debug("Removing div " + div[:id])
+        div_name = div[:class].nil? ? (div[:id].nil? ? "" : div[:id]) : div[:class]
+        debug("Removing link heavy div " + div_name)
         div.remove
       end
     end
