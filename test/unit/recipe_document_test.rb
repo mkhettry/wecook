@@ -163,7 +163,8 @@ class RecipeDocumentTest < ActiveSupport::TestCase
             :url => 'http://www.epicurious.com/recipes/food/views/Swiss-Chard-Lasagna-with-Ricotta-and-Mushroom-362954',
             :file => fixture_path + '/webpages/Mascarpone-Filled Cake with Sherried Berries Recipe at Epicurious.com.html')
     # TODO: Obviously missing an assert.
-    puts r.extract_prep_structured
+    one_prep = ["Sift together flour, baking powder, baking soda, and salt."]
+    assert_equal one_prep,  one_prep & r.extract_prep_structured
   end
 
   test "extract lines from structured sites" do
@@ -226,7 +227,8 @@ class RecipeDocumentTest < ActiveSupport::TestCase
   test "extract structured foodnetwork" do
     r = RecipeDocument.new(
         :file => fixture_path + 'webpages/Chicken Kiev Recipe   Alton Brown   Food Network.html',
-        :url => "http://www.foodnetwork.com/recipes/alton-brown/chicken-kiev-recipe/index.html"
+        :url => "http://www.foodnetwork.com/recipes/alton-brown/chicken-kiev-recipe/index.html",
+        :debug => true
     )
     assert_lines ["8 tablespoons (1 stick) unsalted butter, room temperature",
                   "1 teaspoon dried parsley",
@@ -249,8 +251,18 @@ class RecipeDocumentTest < ActiveSupport::TestCase
         :url => "http://www.nigella.com/recipes/view/DEVILS-FOOD-CAKE-5310"
     )
     lines = r.extract_lines
-    puts lines
-    assert lines.detect { |line| line =~ /225g plain flour/ and line =~ /Preheat the oven to 180°c\/gas mark 4./}
+    assert lines.detect { |line| line =~ /225g plain flour/}
+  end
+
+  # on her pages, she has a div element called "grid_3" which is just a
+  # set of links (home/recipes/kitchen wisdom' etc. This should be removed because its link heavy.
+  test "nigella's top grid is stripped" do
+    r = RecipeDocument.new(
+        :file => fixture_path + 'webpages/nigella_devils_food_cake.html',
+        :url => "http://www.nigella.com/recipes/view/DEVILS-FOOD-CAKE-5310"
+    )
+    lines = r.extract_lines
+    assert_equal nil, lines.detect { |line| line =~ /BOOKS/}
   end
 
   test "extract structured food dot com" do

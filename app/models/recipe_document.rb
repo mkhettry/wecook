@@ -5,12 +5,10 @@ class RecipeDocument
   attr :doc
   attr :title
 
+  DEFAULT_OPTIONS = {:debug => false}
+
   def self.newDocument(opts={})
-    if (opts[:url] =~ /blogspot/)
-      BloggerDocument.new(opts)
-    else
-      RecipeDocument.new(opts)
-    end
+    RecipeDocument.new(opts)
   end
 
   # Either pass in a hash with :file as filename and :url as the address or
@@ -27,21 +25,28 @@ class RecipeDocument
       s = open(opts[:url]).read
     end
 
-    @doc = Nokogiri::HTML(s)
+    @options = DEFAULT_OPTIONS.merge(opts)
 
+    puts @options
+
+    @doc = Nokogiri::HTML(s)
 
     @doc.css("form, object, embed").each do |elem|
       elem.remove
     end
+
 
 #    @rdoc = ReadabilityDocument.new(s, {:min_text_length => 8})
     remove_unlikely_candidates!
     remove_divs_with_high_link_density!
 
     @title = @doc.xpath("//title").text.lstrip.rstrip.gsub(/[\n]+/, " ")
-    @options = opts
   end
 
+
+  def node_name(elem)
+    "#{elem[:class]}#{elem[:id]}"
+  end
 
   def remove_unlikely_candidates!
     # this was the original from readability.
@@ -50,7 +55,7 @@ class RecipeDocument
     likely = /and|article|body|column|main|shadow/i
 
     @doc.css("*").each do |elem|
-      str = "#{elem[:class]}#{elem[:id]}"
+      str = node_name(elem)
       if str =~ unlikely && str !~ likely && elem.name.downcase != 'body'
         debug("Removing unlikely candidate - #{str}")
         elem.remove
@@ -67,16 +72,27 @@ class RecipeDocument
       link_length = div.css("a").map {|i| i.text}.join("").length
       div_length = div.text.length
       next if div_length == 0
-      if (link_length / div_length > 0.25)
-        div_name = div[:class].nil? ? (div[:id].nil? ? "" : div[:id]) : div[:class]
-        debug("Removing link heavy div " + div_name)
+      div_name = node_name(div)
+      if ((link_length / Float(div_length) > 0.25) and div_length < 128)
+        debug("Removing link heavy ll=#{link_length}..dl=#{div_length}")
         div.remove
+      else
+        debug("keeping #{div_name}, ll=#{link_length}..dl=#{div_length}")
       end
     end
   end
 
+  def self.get_link_density(node)
+    link_length = node.css("a").map {|i| i.text}.join("").length
+    text_length = node.text.length
+
+    puts "#{text_length}--#{link_length}"
+    1.0 if text_length == 0 and link_length > 0
+    link_length / text_length
+  end
+
   def debug(i)
-    puts i
+    puts i if @options[:debug]
   end
 
 
