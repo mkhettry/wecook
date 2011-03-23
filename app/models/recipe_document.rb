@@ -219,6 +219,7 @@ class RecipeDocument
   # TODO: food.com is problematic here.
   def extract_ingredients_structured
     ingredients = @doc.xpath("//div[contains(@class, 'ingredients')]//li").collect { |s| clean_text(s.text)}
+    ingredients = @doc.xpath("//div[contains(@id, 'ingredients')]//li").collect { |s| clean_text(s.text)} if ingredients.empty?
 
     ingredients = @doc.xpath("//li[contains(@class,'ingredient')]").collect { |s| clean_text(s.text)} if ingredients.empty?
     ingredients = @doc.xpath("//li[contains(@itemprop,'ingredient')]").collect { |s| clean_text(s.text)} if ingredients.empty?
@@ -232,6 +233,7 @@ class RecipeDocument
 
     prep_text_nodes = @doc.xpath("//p[contains(@class, 'instructions')]")
     prep_text_nodes = @doc.xpath("//div[contains(@class, 'instructions')]/p") if prep_text_nodes.empty?
+    prep_text_nodes = @doc.xpath("//div[contains(@id, 'directions')]/ol/li") if prep_text_nodes.empty?
     prep_text_nodes = @doc.xpath("//li[contains(@itemprop, 'instruction')]") if prep_text_nodes.empty?
 
     prep_text_nodes = @doc.xpath("//span[contains(@class, 'instructions')]/ol/li/span") if prep_text_nodes.empty?
