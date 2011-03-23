@@ -147,7 +147,7 @@ class RecipeDocument
         if n.text? and not n.text.lstrip.rstrip.empty?
           #puts "appending #{n.text.lstrip.rstrip} because of #{n.name}"
           current_line = current_line + " " + n.text.lstrip.rstrip
-        elsif n.name == 'br' || n.name == 'p' || n.name == 'div' || n.name == 'ul' ||n.name == 'li'
+        elsif n.name == 'br' || n.name == 'p' || n.name == 'div' || n.name == 'ul' ||n.name == 'li' || n.name =~ /h\d/
 
           #puts "skipping line: #{current_line} because of #{n.name}"
           lines << current_line.lstrip.rstrip if not current_line.empty?

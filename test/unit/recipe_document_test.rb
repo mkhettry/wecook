@@ -188,6 +188,20 @@ class RecipeDocumentTest < ActiveSupport::TestCase
     assert_equal 0, r.extract_lines.length
   end
 
+  test "headers are processed correctly" do
+    r = RecipeDocument.new(
+        :url => "http://www.foodandwine.com/recipes/green-lentil-curry",
+        :string => <<-eohtml
+                        <div id='ingredients'>
+                          <h3>Ingredients</h3>
+                          <ol>
+                            <li>1 teaspoon finely grated ginger</li>
+                          </ol>
+                      eohtml
+    )
+    assert_lines ["Ingredients", "1 teaspoon finely grated ginger"], r.extract_lines
+  end
+
 
   test "extract lines from structured sites" do
     r = RecipeDocument.new(
