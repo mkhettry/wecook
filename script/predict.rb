@@ -15,6 +15,15 @@ def main()
   test_file.close
 end
 
+# clsasname, classname, classname
+# feature
+# feature
+
+def predict_url(url)
+  # read a model
+  # read the feature
+end
+
 def get_feature_vector(line)
   fv = []
   parts = line.split()

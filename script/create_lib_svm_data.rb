@@ -1,4 +1,5 @@
 #prepares the data in a format that liblinear/libsvm can understand
+# Can we move this to a class?
 LABEL_ID_MAPPING = {"PR" => 0, "IN" => 1, "OT" => 2, "FO" => 3, "NO" => 4, "TA" => 5}
 IGNORE_WORDS = {"a" => 1, "an" => 1, "the" => 1, "of" => 1, "and" => 1, "to" => 1}
 

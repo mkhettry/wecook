@@ -27,15 +27,13 @@ class RecipeDocument
 
     @options = DEFAULT_OPTIONS.merge(opts)
 
-    puts @options
-
     @doc = Nokogiri::HTML(s)
 
     @doc.css("form, object, embed").each do |elem|
       elem.remove
     end
 
-
+    @trimmed_doc = Nokogiri::HTML(s)
 #    @rdoc = ReadabilityDocument.new(s, {:min_text_length => 8})
     remove_unlikely_candidates!
     remove_divs_with_high_link_density!
@@ -43,6 +41,9 @@ class RecipeDocument
     @title = @doc.xpath("//title").text.lstrip.rstrip.gsub(/[\n]+/, " ")
   end
 
+  def to_s
+    @url
+  end
 
   def node_name(elem)
     "#{elem[:class]}#{elem[:id]}"
@@ -54,7 +55,7 @@ class RecipeDocument
     unlikely = /combx|comment|community|disqus|extra|foot|header|menu|remark|rss|shoutbox|sidebar|sponsor|ad-break|agegate|pagination|popup/i
     likely = /and|article|body|column|main|shadow/i
 
-    @doc.css("*").each do |elem|
+    @trimmed_doc.css("*").each do |elem|
       str = node_name(elem)
       if str =~ unlikely && str !~ likely && elem.name.downcase != 'body'
         debug("Removing unlikely candidate - #{str}")
@@ -62,33 +63,40 @@ class RecipeDocument
       end
     end
 
-    @doc.css("script, style").each { |i| i.remove }
+    @trimmed_doc.css("script, style").each { |i| i.remove }
 
   end
 
   def remove_divs_with_high_link_density!
 
-    @doc.xpath("//div").each do |div|
-      link_length = div.css("a").map {|i| i.text}.join("").length
-      div_length = div.text.length
-      next if div_length == 0
+    @trimmed_doc.xpath("//div").each do |div|
       div_name = node_name(div)
-      if ((link_length / Float(div_length) > 0.25) and div_length < 128)
-        debug("Removing link heavy ll=#{link_length}..dl=#{div_length}")
+      if (remove_node(div))
         div.remove
-      else
-        debug("keeping #{div_name}, ll=#{link_length}..dl=#{div_length}")
       end
     end
   end
 
-  def self.get_link_density(node)
-    link_length = node.css("a").map {|i| i.text}.join("").length
-    text_length = node.text.length
+  def remove_node(node)
+    density = get_link_density(node)
+    node_length = get_text_length(node)
 
-    puts "#{text_length}--#{link_length}"
+    remove = density > 0.6 or (density> 0.3 and node_length <256)
+    remove
+  end
+
+  def get_text_length(node)
+    node.text.squeeze.strip.length
+  end
+
+
+  def get_link_density(node)
+    link_length = node.css("a").map {|i| i.text}.join("").length
+    text_length = node.text.squeeze.strip.length
+
+    #puts "#{text_length}--#{link_length}"
     1.0 if text_length == 0 and link_length > 0
-    link_length / text_length
+    link_length / Float(text_length)
   end
 
   def debug(i)
@@ -125,20 +133,8 @@ class RecipeDocument
     end
   end
 
-  def extract_lines()
-#    nodes = []
-#    @doc.traverse do |n|
-#      nodes << n
-#    end
-#
-    #create_lines_from_nodes(@doc)
-
-    # Is it wasteful to get the content and reparse the readable document. Should I just
-    # get @rdoc.content return a NodeSet?
-#    create_lines_from_nodes(Nokogiri::HTML(@rdoc.content))
-
-    create_lines_from_nodes(@doc)
-
+  def extract_lines
+    create_lines_from_nodes(@trimmed_doc)
   end
 
   def create_lines_from_nodes(doc)

@@ -1,6 +1,6 @@
-if ARGV.length != 1
+if ARGV.length != 1 and ARGV.length != 2
   puts "Must specify filename!"
-  puts "Usage: get_training_url <filename>"
+  puts "Usage: get_training_url [dir] <filename>"
   exit -1
 end
 
@@ -8,14 +8,22 @@ def write_training_line(f, classification, line)
   f.puts("#{classification}\t#{line}")
 end
 
-urls = File.open(ARGV[0], 'r') do |file|
+if (ARGV.length == 1)
+  dir = "config/training"
+  filename = ARGV[0]
+else
+  dir = ARGV[0]
+  filename = ARGV[1]
+end
+
+  urls = File.open(filename, 'r') do |file|
   i=0
   file.each_line do |url|
 
     url = url.lstrip.rstrip
     next if url.empty? or url.start_with?("#")
 
-    name = "config/training/" +  url.split("/")[2].gsub(".", "_") + "_" + url.hash.abs.to_s + ".trn"
+    name = dir + "/" +  url.split("/")[2].gsub(".", "_") + "_" + url.hash.abs.to_s + ".trn"
     next if (File.exists?(name))
 
     puts "working on #{url}"

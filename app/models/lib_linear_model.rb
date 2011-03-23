@@ -1,4 +1,5 @@
 class LibLinearModel
+  LABEL_ID_MAPPING = {"PR" => 0, "IN" => 1, "OT" => 2, "FO" => 3, "NO" => 4, "TA" => 5}
 
   attr_accessor :name_id_map, :extractors, :model_weights_for_classes
 
@@ -95,9 +96,29 @@ class LibLinearModel
     lines = rd.extract_lines
     lines.each do |line|
       fv = get_feature_vector(line)
-      class_probs = predict(fv).sort_by{|k,v| v}[-2..-1]
-      puts "#{class_probs[1][0]}=#{(class_probs[1][1]*100).round/100.0},#{class_probs[0][0]}=#{(class_probs[0][1]*100).round/100.0}" + "\t" + line
+      p = predict(fv)
+      puts "#{p.top_class}\t#{p.top_two}\t#{line[0..256]}"
     end
+    nil
+  end
+
+  def predict_trn(trn)
+    error_lines = []
+    line_count = 0
+    trn.get_lines.each do |line|
+      line_count += 1
+      fv = get_feature_vector line.text
+      p = predict(fv)
+      if (p.top_class != LibLinearModel.from_class_str(line.class))
+        error_lines << "#{LibLinearModel.from_class_str(line.class)}\t#{p.top_class}\t#{p.top_two}" + "\t" + line.text[0..256]
+      end
+    end
+
+    puts "#{trn.url} (#{error_lines.length}/#{line_count})"
+    error_lines.each do |er|
+      puts er
+    end
+    ""
   end
 
   def get_feature_vector(line)
@@ -115,25 +136,86 @@ class LibLinearModel
 
 
   def predict_class(feature_vector)
-    class_probs = predict(feature_vector)
-    class_probs.sort_by{|k,v| v}[-1][0]
+    p = predict(feature_vector)
+    p.top_class
   end
 
-  #feature_vector is a list of features
-  def predict(feature_vector)
-    class_probabilities = {}
-    classes = @model_weights_for_classes.keys
-    sum = 0.0
-    classes.each do |class_id|
-      current_probability = probability_for_class(class_id, feature_vector)
-      class_probabilities[class_id] = current_probability
-      sum += current_probability
+  class Prediction
+
+    def initialize(map)
+      sum = 0.0
+      map.values.each do |p|
+        sum += p
+      end
+
+      @sorted_pairs = []
+      map.each do |k,v|
+        @sorted_pairs << [k, v/Float(sum)]
+      end
+
+      @sorted_pairs.sort! {|a,b| a[1] <=> b[1]}
     end
 
-    class_probabilities.keys.each do |key|
-      class_probabilities[key] = class_probabilities[key]/sum
+
+    def top_class
+      @sorted_pairs[-1][0]
     end
-    class_probabilities
+
+    def one_to_s(p)
+      (" " + p[0].to_s + "=" + ("%0.2f" % p[1]))
+    end
+
+    def to_s
+      s = ""
+      @sorted_pairs.reverse.each do |p|
+        s += one_to_s(p)
+      end
+      s
+    end
+
+    def top_two
+      s = ""
+      @sorted_pairs[-2..-1].reverse.each do |p|
+        s += one_to_s(p)
+      end
+      s
+    end
+  end
+
+  #LABEL_ID_MAPPING = {"PR" => 0, "IN" => 1, "OT" => 2, "FO" => 3, "NO" => 4, "TA" => 5}
+
+  def self.from_class_id(class_id)
+    case class_id
+      when 0 then :PR
+      when 1 then :IN
+      when 2 then :OT
+      when 3 then :FO
+      when 4 then :NO
+      when 5 then :TA
+      else :UN
+    end
+  end
+
+  def self.from_class_str(class_str)
+    case class_str.downcase
+        when "pr" then :PR
+        when "in" then :IN
+        when "ot" then :OT
+        when "fo" then :FO
+        when "no" then :NO
+        when "ta" then :TA
+        else :UN
+      end
+
+  end
+  #feature_vector is a list of features
+  def predict(feature_vector)
+    prediction = {}
+    @model_weights_for_classes.keys.each do |class_id|
+      current_probability = probability_for_class(class_id, feature_vector)
+      prediction[LibLinearModel.from_class_id(class_id)] = current_probability
+    end
+    Prediction.new(prediction)
   end
 
 
