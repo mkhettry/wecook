@@ -121,6 +121,24 @@ class LibLinearModel
     ""
   end
 
+  def get_top_features(class_name, top_n)
+    feature_score = {}
+    @name_id_map.each do |name, fid|
+      feature_weight = @model_weights_for_classes[LABEL_ID_MAPPING[class_name]][fid]
+      feature_score[name] = probability_from_weight_sum(feature_weight)
+    end
+    feature_score.sort_by{|k,v| -v}[0..top_n]
+  end
+
+  def get_feature_weight(feature_name)
+    fid = @name_id_map[feature_name]
+    m = {}
+    LABEL_ID_MAPPING.each do |class_name,class_id|
+      m[class_name] = probability_from_weight_sum(@model_weights_for_classes[class_id][fid])
+    end
+    m
+  end
+
   def get_feature_vector(line)
     fv = []
     @extractors.each do |e|
@@ -240,7 +258,11 @@ class LibLinearModel
       end
     end
     #puts "length of feature vector=#{feature_vector.get_features.length}, weight_sum=#{weight_sum}, features=#{features.join(';')}"
-    1.0/(1.0 + Math.exp(-weight_sum))
+    probability_from_weight_sum(weight_sum)
+  end
+
+  def probability_from_weight_sum(w)
+    1.0/(1.0 + Math.exp(-w))
   end
 
   def to_s
