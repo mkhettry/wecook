@@ -245,6 +245,7 @@ class RecipeDocument
   end
 
 
+
   def create_lines_from_nodes(doc)
     lines = []
     current_line = ""
@@ -255,7 +256,7 @@ class RecipeDocument
         if n.text? and not n.text.lstrip.rstrip.empty?
           #puts "appending #{n.text.lstrip.rstrip} because of #{n.name}"
           current_line = current_line + " " + n.text.lstrip.rstrip
-        elsif n.name == 'br' || n.name == 'p' || n.name == 'div' || n.name == 'ul' ||n.name == 'li' || n.name =~ /h\d/
+        elsif split_line(n)
 
           #puts "skipping line: #{current_line} because of #{n.name}"
           clean_text = clean_text current_line
@@ -268,5 +269,8 @@ class RecipeDocument
     clean_lines(lines)
   end
 
+  def split_line(node)
+    node.name == 'br' || node.name == 'p' || node.name == 'div' || node.name == 'ul' ||node.name == 'li' || node.name =~ /h\d/ || node.name == 'tr'
+  end
 
 end

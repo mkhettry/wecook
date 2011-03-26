@@ -170,6 +170,35 @@ class RecipeDocumentTest < ActiveSupport::TestCase
     assert_equal one_ingredient, one_ingredient & lines
   end
 
+  test "deal with tables" do
+    s = <<-eohtml
+          <table cellspacing="0" cellpadding="0" border="0">
+            <tr valign="top"><td class='ing_q'>1</td><td class='ing_uom'>tablespoon</td><td class='ing_i'><a href="/Thai/Ingredients/red_curry_paste.htm#red%20curry%20paste">red curry paste</a></td><td class='ing_opt'>&nbsp;</td></tr>
+            <tr valign="top"><td class='ing_q'>3</td><td class='ing_uom'>cups</td><td class='ing_i'>water</td><td class='ing_opt'>&nbsp;</td></tr>
+            <tr valign="top"><td class='ing_q'>2</td><td class='ing_uom'>tablespoons</td><td class='ing_i'>vinegar</td><td class='ing_opt'>&nbsp;</td></tr>
+            <tr valign="top"><td class='ing_q'>1/3</td><td class='ing_uom'>cup</td><td class='ing_i'>tofu - extra firm, julienne</td><td class='ing_opt'>&nbsp;</td></tr>
+            <tr valign="top"><td class='ing_q'>1/2</td><td class='ing_uom'>package</td><td class='ing_i'><a href="/Thai/Ingredients/Thai_rice_noodles.htm#Thai%20rice%20noodles">Thai rice noodles</a></td><td class='ing_opt'>&nbsp;</td></tr>
+            <tr valign="top"><td class='ing_q'>2</td><td class='ing_uom'>tablespoons</td><td class='ing_i'>sugar</td><td class='ing_opt'>&nbsp;</td></tr>
+            <tr valign="top"><td class='ing_q'>1/3</td><td class='ing_uom'>cup</td><td class='ing_i'><a href="/Thai/Ingredients/pickled_mustard.htm#pickled%20mustard">pickled mustard</a>, sliced</td><td class='ing_opt'>&nbsp;</td></tr>
+            <tr valign="top"><td class='ing_q'>1</td><td class='ing_uom'></td><td class='ing_i'><a href="/Thai/Ingredients/green_onion.htm#green%20onion">green onion</a>, sliced</td><td class='ing_opt'>&nbsp;</td></tr>
+            <tr valign="top"><td class='ing_q'>2</td><td class='ing_uom'>tablespoons</td><td class='ing_i'><a href="/Thai/Ingredients/fried_shallot.htm#fried%20shallot">fried shallot</a></td><td class='ing_opt'>&nbsp;</td></tr>
+            <tr valign="top"><td class='ing_q'>2</td><td class='ing_uom'>tablespoons</td><td class='ing_i'><a href="/Thai/Ingredients/fish_sauce.htm#fish%20sauce">fish sauce</a></td><td class='ing_opt'>&nbsp;</td></tr>
+            <tr valign="top"><td class='ing_q'>1</td><td class='ing_uom'>cup</td><td class='ing_i'><a href="/Thai/Ingredients/coconut_milk.htm#coconut%20milk">coconut milk</a></td><td class='ing_opt'>&nbsp;</td></tr>
+            <tr valign="top"><td class='ing_q'>5-7</td><td class='ing_uom'>sprigs</td><td class='ing_i'><a href="/Thai/Ingredients/cilantro.htm#cilantro">cilantro</a>, sliced</td><td class='ing_opt'>&nbsp;</td></tr>
+            <tr valign="top"><td class='ing_q'>1/2</td><td class='ing_uom'>lb</td><td class='ing_i'>beef</td><td class='ing_opt'>&nbsp;</td></tr>
+            <tr valign="top"><td class='ing_q'>1/3</td><td class='ing_uom'>cup</td><td class='ing_i'><a href="/Thai/Ingredients/bean_sprouts.htm#bean%20sprouts">bean sprouts</a></td><td class='ing_opt'>&nbsp;</td></tr>
+            <tr valign="top"><td class='ing_q'>1</td><td class='ing_uom'></td><td class='ing_i'>hard boiled egg, halved</td><td class='ing_opt'>Optional</td></tr>
+          </table>
+    eohtml
+    r = RecipeDocument.new(
+        :url => 'http://www.thaitable.com/Thai/recipes/Curried_Noodles.htm',
+        :string => s
+    )
+    any_two_ingredients = ['1 hard boiled egg, halved Optional', '1/3 cup tofu - extra firm, julienne']
+    lines = r.extract_lines
+    assert_equal any_two_ingredients, any_two_ingredients & lines
+  end
+
   test "extract prep from epicurious.com" do
     r = RecipeDocument.new(
             :url => 'http://www.epicurious.com/recipes/food/views/Swiss-Chard-Lasagna-with-Ricotta-and-Mushroom-362954',
