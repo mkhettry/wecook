@@ -13,6 +13,9 @@ class TrainingFile
         @url = line[1..-1]
         next
       end
+
+      next if line.strip.empty?
+
       tr = TrainingRow.new(line)
       lines << tr unless tr.text.nil? or tr.text.empty?
     end
@@ -25,6 +28,7 @@ class TrainingFile
     def initialize(line)
       @class = line[0,2].downcase
       @text = line[3, line.length]
+      @text = @text.strip.downcase unless @text.nil?
     end
   end
 end

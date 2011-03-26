@@ -202,6 +202,10 @@ class LibLinearModel
 
   #LABEL_ID_MAPPING = {"PR" => 0, "IN" => 1, "OT" => 2, "FO" => 3, "NO" => 4, "TA" => 5}
 
+  def self.from_class_str_to_ids(class_str)
+    LABEL_ID_MAPPING[class_str] or LABEL_ID_MAPPING[class_str.upcase]
+  end
+
   def self.from_class_id(class_id)
     case class_id
       when 0 then :PR

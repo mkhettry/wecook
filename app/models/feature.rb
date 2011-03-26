@@ -20,6 +20,15 @@ class Feature
     @@name_id_map[name]
   end
 
+  def self.write_feature_vector(fv)
+    s = ""
+    fv.each do |f|
+      s << f.to_liblinear_form
+      s << " "
+    end
+    s
+  end
+
   def to_liblinear_form
     @feature_id.to_s + ":" + @value.to_s
   end
