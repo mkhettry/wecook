@@ -158,6 +158,18 @@ class RecipeDocumentTest < ActiveSupport::TestCase
     assert_equal ["http://www.epicurious.com/images/recipesmenus/2011/2011_january/362954_116.jpg"], r.extract_images
   end
 
+  test "deal with nbsp" do
+    s = <<-eothml
+      <span style="color: #FF6600;">Ingredients (use <a href="http://vegweb.com/index.php?topic=15403.0">vegan versions</a>):</span><br /><br />&nbsp; &nbsp; 14 oz. lite coconut milk<br />
+    eothml
+    rd = RecipeDocument.new(:url => 'http://vegweb.com/index.php?PHPSESSID=79f08cce8adba4eeba82fbe23e5a96a0&topic=12376.0',
+                            :string => s)
+    lines = rd.extract_lines
+    one_ingredient = ['14 oz. lite coconut milk']
+
+    assert_equal one_ingredient, one_ingredient & lines
+  end
+
   test "extract prep from epicurious.com" do
     r = RecipeDocument.new(
             :url => 'http://www.epicurious.com/recipes/food/views/Swiss-Chard-Lasagna-with-Ricotta-and-Mushroom-362954',

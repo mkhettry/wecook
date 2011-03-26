@@ -13,7 +13,7 @@ class LibLinearModelTest <  ActiveSupport::TestCase
       0.11
       0.12
     eodata
-    model = LibLinearModel.new_liblinear_model(:lines=>test_model_data)
+    model = LibLinearModel.new(:model_lines=>test_model_data)
     result = model.model_weights_for_classes
 
     #check classes
@@ -32,7 +32,7 @@ class LibLinearModelTest <  ActiveSupport::TestCase
       0.11
       0.12
     eodata
-    model = LibLinearModel.new_liblinear_model(:lines=>test_model_data)
+    model = LibLinearModel.new(:model_lines=>test_model_data)
     result = model.model_weights_for_classes
 
     #check feature size
@@ -55,7 +55,7 @@ class LibLinearModelTest <  ActiveSupport::TestCase
       0.11 0.12 0.13
       0.12 -0.22 0.23
     eodata
-    model = LibLinearModel.new_liblinear_model(:lines=>test_model_data)
+    model = LibLinearModel.new(:model_lines=>test_model_data)
     result = model.model_weights_for_classes
 
     #check classes
@@ -75,7 +75,7 @@ class LibLinearModelTest <  ActiveSupport::TestCase
       0.12 -0.22 0.23
     eodata
 
-    model = LibLinearModel.new_liblinear_model(:lines=>test_model_data)
+    model = LibLinearModel.new(:model_lines=>test_model_data)
     test_fv = [Feature.from_liblinear_form("3:10")]
     result = model.predict(test_fv)
     assert_equal(1.0/3.0, result[5])
@@ -96,7 +96,7 @@ test "predict" do
       0 0 1
     eodata
 
-    model = LibLinearModel.new_liblinear_model(:lines=>test_model_data)
+    model = LibLinearModel.new(:model_lines=>test_model_data)
     test_fv = [Feature.from_liblinear_form("1:1")]
     result = model.predict(test_fv)
     assert_equal(true, result[5] > result[1])
