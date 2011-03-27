@@ -5,7 +5,7 @@ class FeatureExtractor
     #words = doc.split(/\W+/)
     #words = doc.split
     #split on white space and "-"
-    words = line.split(/[\s-]/)
+    words = line.downcase.split(/[\s\(\)-]+/)
 
     words = words.select {|w| w.strip.length > 0 and IGNORE_WORDS[w].nil?}
     words.collect! { |w| w}
@@ -20,6 +20,28 @@ class FeatureExtractor
     end
     new_words.uniq
   end
+
+  class WordBucketingFeatureExtractor
+
+    def initialize(lines)
+    end
+
+    def extract_features(line)
+      length = FeatureExtractor.get_words(line).length
+      case
+        when length <=5
+          return [Feature.new("word_length_5")]
+        when length <=10
+          return [Feature.new("word_length_10")]
+        when length <=15
+          return [Feature.new("word_length_15")]
+        else
+          return [Feature.new("word_length_>15")]
+      end
+    end
+  end
+
+
 
 
   class WordFeatureExtractor

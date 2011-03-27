@@ -17,7 +17,7 @@ class TrainingFile
       next if line.strip.empty?
 
       tr = TrainingRow.new(line)
-      lines << tr unless tr.text.nil? or tr.text.empty?
+      lines << tr if tr.valid_line?
     end
     lines
   end
@@ -29,6 +29,18 @@ class TrainingFile
       @class = line[0,2].downcase
       @text = line[3, line.length]
       @text = @text.strip.downcase unless @text.nil?
+    end
+
+    def valid_line?
+      if @text.nil? or @text.empty?
+        return false
+      end
+
+      if @text =~ /[a-z]/i
+        true
+      else
+        false
+      end
     end
   end
 end

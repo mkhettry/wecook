@@ -105,11 +105,17 @@ class LibLinearModel
   def predict_trn(trn)
     error_lines = []
     line_count = 0
+    num_bad_errors = 0
     trn.get_lines.each do |line|
       line_count += 1
       fv = get_feature_vector line.text
       p = predict(fv)
-      if (p.top_class != LibLinearModel.from_class_str(line.class))
+      golden_symbol = LibLinearModel.from_class_str(line.class)
+      if p.is_bad_error(golden_symbol)
+        num_bad_errors += 1
+      end
+
+      if (p.is_bad_error(golden_symbol))
         error_lines << "#{LibLinearModel.from_class_str(line.class)}\t#{p.top_class}\t#{p.top_two}" + "\t" + line.text[0..256]
       end
     end
@@ -118,7 +124,7 @@ class LibLinearModel
     error_lines.each do |er|
       puts er
     end
-    ""
+    [num_bad_errors,line_count]
   end
 
   def get_top_features(class_name, top_n)
@@ -133,8 +139,8 @@ class LibLinearModel
   def get_feature_weight(feature_name)
     fid = @name_id_map[feature_name]
     m = {}
-    LABEL_ID_MAPPING.each do |class_name,class_id|
-      m[class_name] = probability_from_weight_sum(@model_weights_for_classes[class_id][fid])
+    LABEL_ID_MAPPING.each do |class_name,v|
+      m[class_name] = probability_from_weight_sum(@model_weights_for_classes[v][fid])
     end
     m
   end
@@ -175,8 +181,33 @@ class LibLinearModel
     end
 
 
+    def is_error(golden_symb)
+      golden_symb != self.top_class
+    end
+
+    def is_bad_error(golden_symb)
+      is_error(golden_symb) && (Prediction.is_ingredient_or_prep(golden_symb) || Prediction.is_ingredient_or_prep(top_class))
+    end
+
+    def self.is_ingredient_or_prep(some_symbol)
+      some_symbol == :PR or some_symbol == :IN
+    end
+
+    def delta_between(idx1, idx2)
+      (@sorted_pairs[idx1][1] - @sorted_pairs[idx2][1]).abs
+    end
+
     def top_class
-      @sorted_pairs[-1][0]
+      if (delta_between(-1,-2) <= 0.05)
+        if @sorted_pairs[-1][0] == :OT || @sorted_pairs[-2][0] == :OT
+          return :OT
+        end
+      end
+
+      if delta_between(0,-1) <= 0.05
+        return :OT
+      end
+      return @sorted_pairs[-1][0]
     end
 
     def one_to_s(p)
