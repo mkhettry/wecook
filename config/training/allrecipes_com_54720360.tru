@@ -10,48 +10,48 @@ OT	left 1 of 15
 OT	right
 OT	Chinese Chicken Fried Rice II
 OT	By: LISA TOURVILLE
-OT	"Chicken, rice, soy sauce and shredded egg stir fried together. This is a very simple recipe. It is easy, but tasty! Note: Never use rice that you have just cooked."
+NO	"Chicken, rice, soy sauce and shredded egg stir fried together. This is a very simple recipe. It is easy, but tasty! Note: Never use rice that you have just cooked."
 OT	Rate/Review Read Reviews ( 671 )
 OT	40,209 people have saved this 20 custom versions
-OT	What to Drink?
-OT	Riesling
-OT	Beer
-OT	Tea
-OT	Prep Time:
-OT	5 Min
-OT	Cook Time:
-OT	10 Min
-OT	Ready In:
-OT	15 Min
+FO	What to Drink?
+FO	Riesling
+FO	Beer
+FO	Tea
+FO	Prep Time:
+FO	5 Min
+FO	Cook Time:
+FO	10 Min
+FO	Ready In:
+FO	15 Min
 OT	Servings ( Help )
 OT	US Metric Calculate
-OT	Original Recipe Yield 2 to 4 servings
+FO	Original Recipe Yield 2 to 4 servings
 OT	Ingredients
-OT	1 egg
-OT	1 tablespoon water
-OT	1 tablespoon butter
-OT	1 tablespoon vegetable oil
-OT	1 onion, chopped
-OT	2 cups cooked white rice, cold
-OT	2 tablespoons soy sauce
-OT	1 teaspoon ground black pepper
-OT	1 cup cooked, chopped chicken meat
+IN	1 egg
+IN	1 tablespoon water
+IN	1 tablespoon butter
+IN	1 tablespoon vegetable oil
+IN	1 onion, chopped
+IN	2 cups cooked white rice, cold
+IN	2 tablespoons soy sauce
+IN	1 teaspoon ground black pepper
+IN	1 cup cooked, chopped chicken meat
 OT	Directions
-OT	In a small bowl, beat egg with water. Melt butter in a large skillet over medium low heat. Add egg and leave flat for 1 to 2 minutes. Remove from skillet and cut into shreds.
-OT	Heat oil in same skillet; add onion and saute until soft. Then add rice, soy sauce, pepper and chicken. Stir fry together for about 5 minutes, then stir in egg. Serve hot.
+PR	In a small bowl, beat egg with water. Melt butter in a large skillet over medium low heat. Add egg and leave flat for 1 to 2 minutes. Remove from skillet and cut into shreds.
+PR	Heat oil in same skillet; add onion and saute until soft. Then add rice, soy sauce, pepper and chicken. Stir fry together for about 5 minutes, then stir in egg. Serve hot.
 OT	Nutritional Information
-OT	Amount Per Serving Calories: 255 Total Fat: 10.2g Cholesterol: 90mg Powered by ESHA Nutrient Database
+FO	Amount Per Serving Calories: 255 Total Fat: 10.2g Cholesterol: 90mg Powered by ESHA Nutrient Database
 OT	Nutritional Information
 OT	Chinese Chicken Fried Rice II
-OT	Servings Per Recipe: 4
-OT	Amount Per Serving
-OT	Calories: 255
-OT	Total Fat: 10.2g
-OT	Cholesterol: 90mg
-OT	Sodium: 516mg
-OT	Total Carbs: 25.9g
-OT	Dietary Fiber: 1g
-OT	Protein: 14.1g
+FO	Servings Per Recipe: 4
+FO	Amount Per Serving
+FO	Calories: 255
+FO	Total Fat: 10.2g
+FO	Cholesterol: 90mg
+FO	Sodium: 516mg
+FO	Total Carbs: 25.9g
+FO	Dietary Fiber: 1g
+FO	Protein: 14.1g
 OT	VIEW DETAILED NUTRITION
 OT	About: Nutrition Info
 OT	ADVERTISEMENT

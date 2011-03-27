@@ -10,42 +10,42 @@ OT	left 1 of 15
 OT	right
 OT	Spicy Collard Greens
 OT	By: JSS6801
-OT	"These greens turn out just a little spicy, a kick even the little ones love."
+NO	"These greens turn out just a little spicy, a kick even the little ones love."
 OT	Rate/Review Read Reviews ( 21 )
 OT	1,640 people have saved this 0 custom versions
-OT	Prep Time:
-OT	15 Min
-OT	Cook Time:
-OT	45 Min
-OT	Ready In:
-OT	1 Hr
+FO	Prep Time:
+FO	15 Min
+FO	Cook Time:
+FO	45 Min
+FO	Ready In:
+FO	1 Hr
 OT	Servings ( Help )
 OT	US Metric Calculate
-OT	Original Recipe Yield 4 servings
+FO	Original Recipe Yield 4 servings
 OT	Ingredients
-OT	6 slices bacon
-OT	1 bunch collard greens, rinsed and trimmed
-OT	1/3 cup vinegar
-OT	salt to taste
-OT	ground black pepper to taste
-OT	ground cayenne pepper to taste
+IN	6 slices bacon
+IN	1 bunch collard greens, rinsed and trimmed
+IN	1/3 cup vinegar
+IN	salt to taste
+IN	ground black pepper to taste
+IN	ground cayenne pepper to taste
 OT	Directions
-OT	Place bacon in a large, deep skillet. Cook over medium high heat until evenly brown.
-OT	Bring a large pot of water to a boil. Add collard greens, bacon (with grease), vinegar, salt, black pepper and cayenne pepper.
-OT	Boil until greens are tender, about 30 minutes.
+PR	Place bacon in a large, deep skillet. Cook over medium high heat until evenly brown.
+PR	Bring a large pot of water to a boil. Add collard greens, bacon (with grease), vinegar, salt, black pepper and cayenne pepper.
+PR	Boil until greens are tender, about 30 minutes.
 OT	Nutritional Information
-OT	Amount Per Serving Calories: 211 Total Fat: 19.2g Cholesterol: 29mg Powered by ESHA Nutrient Database
+FO	Amount Per Serving Calories: 211 Total Fat: 19.2g Cholesterol: 29mg Powered by ESHA Nutrient Database
 OT	Nutritional Information
 OT	Spicy Collard Greens
-OT	Servings Per Recipe: 4
-OT	Amount Per Serving
-OT	Calories: 211
-OT	Total Fat: 19.2g
-OT	Cholesterol: 29mg
-OT	Sodium: 526mg
-OT	Total Carbs: 3.7g
-OT	Dietary Fiber: 2g
-OT	Protein: 6.3g
+FO	Servings Per Recipe: 4
+FO	Amount Per Serving
+FO	Calories: 211
+FO	Total Fat: 19.2g
+FO	Cholesterol: 29mg
+FO	Sodium: 526mg
+FO	Total Carbs: 3.7g
+FO	Dietary Fiber: 2g
+FO	Protein: 6.3g
 OT	VIEW DETAILED NUTRITION
 OT	About: Nutrition Info
 OT	ADVERTISEMENT

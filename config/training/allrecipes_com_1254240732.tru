@@ -10,49 +10,49 @@ OT	left 1 of 15
 OT	right
 OT	Ricotta Stuffed Zucchini
 OT	By: chunker
-OT	"This appetizer is quick to prepare and delicious."
+NO	"This appetizer is quick to prepare and delicious."
 OT	Rate/Review Read Reviews ( 38 )
 OT	2,982 people have saved this 1 custom version
-OT	What to Drink?
-OT	Sauvignon Blanc
-OT	Prep Time:
-OT	10 Min
-OT	Cook Time:
-OT	15 Min
-OT	Ready In:
-OT	25 Min
+FO	What to Drink?
+FO	Sauvignon Blanc
+FO	Prep Time:
+FO	10 Min
+FO	Cook Time:
+FO	15 Min
+FO	Ready In:
+FO	25 Min
 OT	Servings ( Help )
 OT	US Metric Calculate
-OT	Original Recipe Yield 4 servings
+FO	Original Recipe Yield 4 servings
 OT	Ingredients
-OT	2 zucchini, halved lengthwise
-OT	1/2 teaspoon salt
-OT	1/2 teaspoon ground black pepper
-OT	1/2 cup part-skim ricotta cheese
-OT	1/4 cup shredded part-skim mozzarella cheese
-OT	2 tablespoons grated Parmesan cheese
-OT	1 teaspoon fresh lemon juice
-OT	2 teaspoons dried basil
-OT	1/2 teaspoon salt
-OT	1/2 teaspoon ground black pepper
+IN	2 zucchini, halved lengthwise
+IN	1/2 teaspoon salt
+IN	1/2 teaspoon ground black pepper
+IN	1/2 cup part-skim ricotta cheese
+IN	1/4 cup shredded part-skim mozzarella cheese
+IN	2 tablespoons grated Parmesan cheese
+IN	1 teaspoon fresh lemon juice
+IN	2 teaspoons dried basil
+IN	1/2 teaspoon salt
+IN	1/2 teaspoon ground black pepper
 OT	Directions
-OT	Preheat oven to 450 degrees F (230 degrees C). Grease a baking sheet.
-OT	Scoop out the seeds of each zucchini half with a spoon. Season the hollowed-out halves with 1/2 teaspoon salt and 1/2 teaspoon ground pepper.
-OT	Mix together the ricotta cheese, mozzarella cheese, Parmesan cheese, lemon juice, dried basil, 1/2 teaspoon salt and 1/2 teaspoon ground pepper in a bowl. Divide cheese mixture between four zucchini halves. Arrange stuffed zucchini on greased baking sheet.
-OT	Bake in preheated oven until zucchini is tender and filling is beginning to brown, 15 to 20 minutes.
+PR	Preheat oven to 450 degrees F (230 degrees C). Grease a baking sheet.
+PR	Scoop out the seeds of each zucchini half with a spoon. Season the hollowed-out halves with 1/2 teaspoon salt and 1/2 teaspoon ground pepper.
+PR	Mix together the ricotta cheese, mozzarella cheese, Parmesan cheese, lemon juice, dried basil, 1/2 teaspoon salt and 1/2 teaspoon ground pepper in a bowl. Divide cheese mixture between four zucchini halves. Arrange stuffed zucchini on greased baking sheet.
+PR	Bake in preheated oven until zucchini is tender and filling is beginning to brown, 15 to 20 minutes.
 OT	Nutritional Information
-OT	Amount Per Serving Calories: 84 Total Fat: 4.4g Cholesterol: 16mg Powered by ESHA Nutrient Database
+FO	Amount Per Serving Calories: 84 Total Fat: 4.4g Cholesterol: 16mg Powered by ESHA Nutrient Database
 OT	Nutritional Information
 OT	Ricotta Stuffed Zucchini
-OT	Servings Per Recipe: 4
-OT	Amount Per Serving
-OT	Calories: 84
-OT	Total Fat: 4.4g
-OT	Cholesterol: 16mg
-OT	Sodium: 708mg
-OT	Total Carbs: 4.5g
-OT	Dietary Fiber: 1g
-OT	Protein: 7.1g
+FO	Servings Per Recipe: 4
+FO	Amount Per Serving
+FO	Calories: 84
+FO	Total Fat: 4.4g
+FO	Cholesterol: 16mg
+FO	Sodium: 708mg
+FO	Total Carbs: 4.5g
+FO	Dietary Fiber: 1g
+FO	Protein: 7.1g
 OT	VIEW DETAILED NUTRITION
 OT	About: Nutrition Info
 OT	ADVERTISEMENT

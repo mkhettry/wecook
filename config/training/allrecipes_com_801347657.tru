@@ -10,46 +10,46 @@ OT	left 1 of 15
 OT	right
 OT	Fettucine Carbonara
 OT	By: Shannon1975
-OT	"Easy restaurant quality carbonara. I am asked to make this again and again from both friends and family!"
+NO	"Easy restaurant quality carbonara. I am asked to make this again and again from both friends and family!"
 OT	Rate/Review Read Reviews ( 93 )
 OT	5,453 people have saved this 0 custom versions
-OT	What to Drink?
-OT	Barbera
-OT	Negroni Cocktail I
-OT	Prep Time:
-OT	25 Min
-OT	Cook Time:
-OT	2 Min
-OT	Ready In:
-OT	30 Min
+FO	What to Drink?
+FO	Barbera
+FO	Negroni Cocktail I
+FO	Prep Time:
+FO	25 Min
+FO	Cook Time:
+FO	2 Min
+FO	Ready In:
+FO	30 Min
 OT	Servings ( Help )
 OT	US Metric Calculate
-OT	Original Recipe Yield 8 servings
+FO	Original Recipe Yield 8 servings
 OT	Ingredients
-OT	1 pound dry fettuccini noodles
-OT	8 slices bacon
-OT	4 eggs
-OT	1/2 cup grated Parmesan cheese
-OT	1 1/4 cups heavy cream
-OT	ground black pepper to taste (optional)
+IN	1 pound dry fettuccini noodles
+IN	8 slices bacon
+IN	4 eggs
+IN	1/2 cup grated Parmesan cheese
+IN	1 1/4 cups heavy cream
+IN	ground black pepper to taste (optional)
 OT	Directions
-OT	Bring a large pot of lightly salted water to a boil. Add fettuccini and cook for 8 to 10 minutes or until al dente; drain.
-OT	Fry bacon in skillet over medium heat until crispy, remove and drain on paper towel. Chop with knife into bits.
-OT	Beat the eggs, cheese and cream in a bowl, then add the bacon. Pour over the pasta in the pan and toss gently using tongs.
-OT	Return the pan to a very low heat and cook for 1 to 2 minutes, or until slightly thickened. Don't overheat or the eggs will scramble. Season well with black pepper and serve.
+PR	Bring a large pot of lightly salted water to a boil. Add fettuccini and cook for 8 to 10 minutes or until al dente; drain.
+PR	Fry bacon in skillet over medium heat until crispy, remove and drain on paper towel. Chop with knife into bits.
+PR	Beat the eggs, cheese and cream in a bowl, then add the bacon. Pour over the pasta in the pan and toss gently using tongs.
+PR	Return the pan to a very low heat and cook for 1 to 2 minutes, or until slightly thickened. Don't overheat or the eggs will scramble. Season well with black pepper and serve.
 OT	Nutritional Information
-OT	Amount Per Serving Calories: 439 Total Fat: 22.8g Cholesterol: 171mg Powered by ESHA Nutrient Database
+FO	Amount Per Serving Calories: 439 Total Fat: 22.8g Cholesterol: 171mg Powered by ESHA Nutrient Database
 OT	Nutritional Information
 OT	Fettucine Carbonara
-OT	Servings Per Recipe: 8
-OT	Amount Per Serving
-OT	Calories: 439
-OT	Total Fat: 22.8g
-OT	Cholesterol: 171mg
-OT	Sodium: 339mg
-OT	Total Carbs: 43g
-OT	Dietary Fiber: 2g
-OT	Protein: 16.8g
+FO	Servings Per Recipe: 8
+FO	Amount Per Serving
+FO	Calories: 439
+FO	Total Fat: 22.8g
+FO	Cholesterol: 171mg
+FO	Sodium: 339mg
+FO	Total Carbs: 43g
+FO	Dietary Fiber: 2g
+FO	Protein: 16.8g
 OT	VIEW DETAILED NUTRITION
 OT	About: Nutrition Info
 OT	ADVERTISEMENT
