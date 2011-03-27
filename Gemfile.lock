@@ -75,7 +75,7 @@ PLATFORMS
 
 DEPENDENCIES
   haml
-  nokogiri
+  nokogiri (>= 1.4.2)
   paperclip
   pg
   rails (= 3.0.3)

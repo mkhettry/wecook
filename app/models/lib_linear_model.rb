@@ -116,15 +116,15 @@ class LibLinearModel
       end
 
       if (p.is_bad_error(golden_symbol))
-        error_lines << "#{LibLinearModel.from_class_str(line.class)}\t#{p.top_class}\t#{p.top_two}" + "\t" + line.text[0..256]
+        error_lines << "#{LibLinearModel.from_class_str(line.class)}\t#{p.top_class}\t#{p.top_two}" + "\t" + line.text[0..128]
       end
     end
 
-    puts "#{trn.url} (#{error_lines.length}/#{line_count})"
+    #puts "#{trn.url.strip} (#{error_lines.length}/#{line_count})"
     error_lines.each do |er|
-      puts er
+      #puts er
     end
-    [num_bad_errors,line_count]
+    [num_bad_errors,line_count, error_lines]
   end
 
   def get_top_features(class_name, top_n)

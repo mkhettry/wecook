@@ -29,7 +29,9 @@ def split_files(files, ranges)
     #length_feature_extractor = FeatureExtractor::LengthFeatureExtractor.new(lines)
     first_second_word_extractor = FeatureExtractor::FirstAndSecondWordFeatureExtractor.new(lines)
     num_words_extractor = FeatureExtractor::WordBucketingFeatureExtractor.new(lines)
-    extractors = [word_feature_extractor, first_second_word_extractor, num_words_extractor]
+    fraction_extractor = FeatureExtractor::HasFractionFeatureExtractor.new(lines)
+
+    extractors = [word_feature_extractor, first_second_word_extractor, num_words_extractor, fraction_extractor]
 
     lines.each do |line|
       fv = []
@@ -62,34 +64,38 @@ def train
   `$LL_HOME/train -s 0 training.txt`
 end
 
-def predict(test_files)
+def predict(test_files, logfile)
   model = LibLinearModel.new(:feature_id_file => 'feature_ids.txt', :model_file => 'training.txt.model')
   tot_bad_errors = 0
   tot_length = 0
   without_errors = 0
   test_files.each do |trn_file|
-    cur_bad_errors, cur_length = model.predict_trn(trn_file)
+    cur_bad_errors, cur_length, errors = model.predict_trn(trn_file)
     if cur_bad_errors == 0
       without_errors += 1
     end
     tot_bad_errors += cur_bad_errors
     tot_length += cur_length
+    errors.each do |e|
+      logfile.puts("#{trn_file.url.strip}\t#{e}")
+    end
   end
-  puts "{#{without_errors}/#{test_files.length}}"
+  #logfile.puts "{#{without_errors}/#{test_files.length}}"
   [tot_bad_errors, tot_length]
 end
 
-def main
+def main(logfile)
   bad_errors = 0
   total_length = 0
   dir = Dir.new('config/training')
+  logfile = File.new(logfile + ".log", 'w')
   files = dir.select {|f| f if f =~ /\.trn$/}.sort
   for i in 0...files.length
     ranges = get_training_range(files.length, i)
     test_files = split_files(files, ranges)
     train
-    cur_error, cur_length = predict(test_files)
-    puts "(#{cur_error}/#{cur_length})=#{cur_error/Float(cur_length)}"
+    cur_error, cur_length = predict(test_files, logfile)
+    puts "#{i}:(#{cur_error}/#{cur_length})=#{cur_error/Float(cur_length)}"
     bad_errors += cur_error
     total_length += cur_length
   end
@@ -98,9 +104,9 @@ end
 
 
 if __FILE__ == $PROGRAM_NAME
-  if ARGV.length != 0
-    puts "Usage: ruby create_lib_svm_data.rb"
+  if ARGV.length != 1
+    puts "Usage: ruby create_lib_svm_data.rb identifier"
   else
-    main()
+    main($ARGV[0])
   end
 end

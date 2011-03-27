@@ -21,6 +21,19 @@ class FeatureExtractor
     new_words.uniq
   end
 
+  class HasFractionFeatureExtractor
+    def initialize(lines)
+    end
+
+    def extract_features(line)
+      words = FeatureExtractor.get_words(line)
+      words.each do |word|
+        return [Feature.new("fraction")] if word =~ /^\d+\/\d+$/
+      end
+      []
+    end
+  end
+
   class WordBucketingFeatureExtractor
 
     def initialize(lines)

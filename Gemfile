@@ -6,9 +6,10 @@ gem 'rails', '3.0.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem 'nokogiri'
+gem 'nokogiri', ">= 1.4.2"
 gem 'paperclip'
 gem 'haml'
+#gem 'ruby-readability', :require => 'readability'
 
 #gem 'classifier'
 
