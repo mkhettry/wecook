@@ -1,15 +1,13 @@
-#don't really need this-- its structured
-#http://www.epicurious.com/recipes/food/views/Sunny-Side-up-Eggs-on-Mustard-Creamed-Spinach-with-Crispy-Crumbs-363650
-#http://www.epicurious.com/recipes/food/views/Veggie-Detox-362932
-#http://www.epicurious.com/recipes/food/views/Broccoli-Soup-with-Leeks-and-Thyme-363691
-#http://www.epicurious.com/recipes/food/views/Calamari-Olive-Salad-357410
-#http://www.epicurious.com/recipes/food/views/Seared-Asian-Steak-and-Mushrooms-on-Mixed-Greens-with-Ginger-Dressing-361612
+http://www.epicurious.com/recipes/food/views/Veggie-Detox-362932
+http://www.epicurious.com/recipes/food/views/Broccoli-Soup-with-Leeks-and-Thyme-363691
+http://www.epicurious.com/recipes/food/views/Calamari-Olive-Salad-357410
+http://www.epicurious.com/recipes/food/views/Seared-Asian-Steak-and-Mushrooms-on-Mixed-Greens-with-Ginger-Dressing-361612
 
-#http://www.williams-sonoma.com/recipe/almond-scented-white-cake.html
-#http://www.williams-sonoma.com/recipe/alaskan-halibut-cioppino.html
-#http://www.williams-sonoma.com/recipe/roasted-chestnut-soup-with-wild-mushrooms-and-crispy-pork-belly.html
-#http://www.williams-sonoma.com/recipe/turkey-poblano-chili.html
-#http://www.williams-sonoma.com/recipe/cuban-pork-sandwiches.html
+http://www.williams-sonoma.com/recipe/almond-scented-white-cake.html
+http://www.williams-sonoma.com/recipe/alaskan-halibut-cioppino.html
+http://www.williams-sonoma.com/recipe/roasted-chestnut-soup-with-wild-mushrooms-and-crispy-pork-belly.html
+http://www.williams-sonoma.com/recipe/turkey-poblano-chili.html
+http://www.williams-sonoma.com/recipe/cuban-pork-sandwiches.html
 
 http://www.jamieoliver.com/recipes/vegeterian-recipes/antipasti-of-mozzarella-chilli-lemon
 http://www.jamieoliver.com/recipes/other-recipes/apple-horseradish-chutney
