@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 require 'test_helper'
 
 class RecipeDocumentTest < ActiveSupport::TestCase
@@ -347,6 +349,7 @@ class RecipeDocumentTest < ActiveSupport::TestCase
         :file => fixture_path + 'webpages/Chicken Tortilla Soup II Recipe - Food.com - 4627.html',
         :url => 'http://www.food.com/recipe/chicken-tortilla-soup-ii-4627'
     )
+    prep = r.extract_prep_structured
     assert_lines [
       "Saute carrots, onions, celery in corn oil, garlic, salt and pepper until tender.",
       "Add chicken broth and bring to boil.",
@@ -359,7 +362,7 @@ class RecipeDocumentTest < ActiveSupport::TestCase
       "Garnish with shredded cheese and broken tortilla chips.",
       "Substitutions: 1 cup Masa Harina (Masa Flour) for 1 10 ct. package of corn tortillas. Gradually add masa flour mixing into broth, mixing thoroughly into broth. If thicker soup is desired, add more masa flour.",
       "You can also use grilled chicken fajita meat for poached diced chicken.",
-    ], r.extract_prep_structured
+    ], prep
 
   end
 
@@ -368,7 +371,22 @@ class RecipeDocumentTest < ActiveSupport::TestCase
         :file => fixture_path + 'webpages/Company-Pleasing Crab Cakes.html',
         :url => 'http://www.recipe.com/company-pleasing-crab-cakes/'
     )
-    puts r.extract_prep_structured
+    prep =  r.extract_prep_structured
+    assert_equal '1. In a large skillet, melt 2 tablespoons of the butter or margarine over medium-high heat. Add sweet pepper, celery, and onion. Cook and stir about 5 minutes or until tender, but not brown.',
+                 prep[0]
+
+  end
+
+  test "extract structured all recipes" do
+    r = RecipeDocument.new(
+        :url => 'http://allrecipes.com/Recipe/Ricotta-Stuffed-Zucchini/Detail.aspx',
+        :file => fixture_path + 'webpages/Ricotta Stuffed Zucchini Recipe - Allrecipes.com.html')
+    first_last_ingredients = ['2 zucchini, halved lengthwise', '1/2 teaspoon ground black pepper']
+    assert_equal first_last_ingredients, first_last_ingredients & r.extract_ingredients_structured
+
+    first_last_prep = ['Preheat oven to 450 degrees F (230 degrees C). Grease a baking sheet.',
+                       'Bake in preheated oven until zucchini is tender and filling is beginning to brown, 15 to 20 minutes.']
+    assert_equal first_last_prep, first_last_prep & r.extract_prep_structured
   end
 #
 #  test "extract lines removes header elements" do

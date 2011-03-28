@@ -23,8 +23,9 @@ end
     url = url.lstrip.rstrip
     next if url.empty? or url.start_with?("#")
 
-    name = dir + "/" +  url.split("/")[2].gsub(".", "_") + "_" + url.hash.abs.to_s;
-    next if (File.exists?(name))
+    name = dir + "/" +  url.split("/")[2].gsub(".", "_") + "_" + url.hash.abs.to_s
+
+    next if (File.exists?(name + ".trs") or File.exists?(name + ".tru"))
 
     puts "working on #{url}"
 

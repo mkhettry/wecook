@@ -30,13 +30,13 @@ class RecipeDocument
 
     @doc = Nokogiri::HTML(s)
 
-    @doc.css("form, object, embed").each do |elem|
+    # remove hardspaces &nbsp with a simple space.
+    @trimmed_doc = Nokogiri::HTML(s.gsub("&nbsp;", ' '))
+
+    @trimmed_doc.css("form, object, embed").each do |elem|
       elem.remove
     end
 
-    # remove hardspaces &nbsp with a simple space.
-    @trimmed_doc = Nokogiri::HTML(s.gsub('&nbsp;', ' '))
-#    @rdoc = ReadabilityDocument.new(s, {:min_text_length => 8})
     remove_unlikely_candidates!
     remove_divs_with_high_link_density!
 
@@ -99,7 +99,8 @@ class RecipeDocument
   def extract_prep_structured
     prep_lines = []
 
-    prep_text_nodes = @doc.xpath("//p[contains(@class, 'instructions')]")
+    prep_text_nodes = @doc.xpath("//div[@class = 'directions']/ol/li")
+    prep_text_nodes = @doc.xpath("//p[contains(@class, 'instructions')]") if prep_text_nodes.empty?
     prep_text_nodes = @doc.xpath("//div[contains(@class, 'instructions')]/p") if prep_text_nodes.empty?
     prep_text_nodes = @doc.xpath("//div[contains(@id, 'directions')]/ol/li") if prep_text_nodes.empty?
     prep_text_nodes = @doc.xpath("//li[contains(@itemprop, 'instruction')]") if prep_text_nodes.empty?
