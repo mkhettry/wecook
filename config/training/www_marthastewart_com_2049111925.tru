@@ -9,14 +9,14 @@ OT	Save
 OT	Print
 OT	We Also Love
 OT	1 of 2
-OT	The less vermouth in it, the drier the martini.
-OT	Yield Serves 4
+NO	The less vermouth in it, the drier the martini.
+FO	Yield Serves 4
 OT	Add to Shopping List Ingredients
-OT	3/4 cup vodka or gin
-OT	2 teaspoons dry vermouth
-OT	Cocktail olives
+IN	3/4 cup vodka or gin
+IN	2 teaspoons dry vermouth
+IN	Cocktail olives
 OT	Directions
-OT	In a cocktail shaker half full of ice cubes, combine gin or vodka and vermouth. Shake well, and strain into martini glasses. Garnish with olives, and serve.
+PR	In a cocktail shaker half full of ice cubes, combine gin or vodka and vermouth. Shake well, and strain into martini glasses. Garnish with olives, and serve.
 OT	Save to your Collections
 OT	Sorry for the inconvenience! Saving is temporarily unavailable as we work through a few kinks in our new recipe design (we hope you like it!). Don't worry, your collections are safe and you'll be able to save recipes again very soon.
 OT	Shared On Facebook
