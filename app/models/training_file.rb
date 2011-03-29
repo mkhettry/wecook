@@ -1,6 +1,6 @@
 class TrainingFile
 
-  attr_accessor :url
+  attr_accessor :url, :filename
 
   def initialize(filename)
     @filename = filename

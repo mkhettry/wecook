@@ -77,11 +77,11 @@ def predict(test_files, logfile)
     tot_bad_errors += cur_bad_errors
     tot_length += cur_length
     errors.each do |e|
-      logfile.puts("#{trn_file.url.strip}\t#{e}")
+      logfile.puts("#{trn_file.filename}\t#{e}")
     end
   end
   #logfile.puts "{#{without_errors}/#{test_files.length}}"
-  [tot_bad_errors, tot_length]
+  [tot_bad_errors, tot_length, without_errors]
 end
 
 def main(logfile)
@@ -89,13 +89,13 @@ def main(logfile)
   total_length = 0
   dir = Dir.new('config/training')
   logfile = File.new(logfile + ".log", 'w')
-  files = dir.select {|f| f if f =~ /\.trn$/}.sort
+  files = dir.select {|f| f if f =~ /\.tr[su]$/}.sort
   for i in 0...files.length
     ranges = get_training_range(files.length, i)
     test_files = split_files(files, ranges)
     train
-    cur_error, cur_length = predict(test_files, logfile)
-    puts "#{i}:(#{cur_error}/#{cur_length})=#{cur_error/Float(cur_length)}"
+    cur_error, cur_length, no_errors = predict(test_files, logfile)
+    puts "#{i}:{#{no_errors}/#{test_files.length}}(#{cur_error}/#{cur_length})=#{cur_error/Float(cur_length)}"
     bad_errors += cur_error
     total_length += cur_length
   end
