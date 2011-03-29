@@ -55,6 +55,43 @@ class FeatureExtractor
   end
 
 
+  class HasColonCharFeatureExtractor
+    #Giving worse results
+    def initialize(lines)
+    end
+
+    def extract_features(line)
+      if (line.include?(":"))
+        return [Feature.new("colon_")]
+      end
+      []
+    end
+  end
+
+  class NumSentencesBucketingFeatureExtractor
+    def initialize(lines)
+    end
+
+    #TODO try histogram of sentence counts for each class. Should get better idea about sentence-count boundaries
+    def extract_features(line)
+      sentences = line.split(/[\.;]/)
+      num_sentences = 0
+      sentences.each do |s|
+        num_sentences += 1 if not s.strip.empty?
+      end
+
+      case
+        when num_sentences <= 1
+          return [Feature.new("sentence_count_1")]
+        when num_sentences <= 3
+          return [Feature.new("sentence_count_3")]
+        when num_sentences <= 5
+          return [Feature.new("sentence_count_5")]
+        else
+          return [Feature.new("sentence_count_>5")]
+      end
+    end
+  end
 
 
   class WordFeatureExtractor

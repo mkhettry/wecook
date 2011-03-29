@@ -30,6 +30,8 @@ def split_files(files, ranges)
     first_second_word_extractor = FeatureExtractor::FirstAndSecondWordFeatureExtractor.new(lines)
     num_words_extractor = FeatureExtractor::WordBucketingFeatureExtractor.new(lines)
     fraction_extractor = FeatureExtractor::HasFractionFeatureExtractor.new(lines)
+    #colon_char_extractor = FeatureExtractor::HasColonCharFeatureExtractor.new(lines)
+    #sentence_count_extractor = FeatureExtractor::NumSentencesBucketingFeatureExtractor.new(lines)
 
     extractors = [word_feature_extractor, first_second_word_extractor, num_words_extractor, fraction_extractor]
 
