@@ -4,6 +4,7 @@ class RecipeDocument
 
   attr :doc
   attr :title
+  attr :trimmed_doc
 
 
   DEFAULT_OPTIONS = {:debug => false}
@@ -27,11 +28,10 @@ class RecipeDocument
     end
 
     @options = DEFAULT_OPTIONS.merge(opts)
-
     @doc = Nokogiri::HTML(s)
 
     # remove hardspaces &nbsp with a simple space.
-    @trimmed_doc = Nokogiri::HTML(s.gsub("&nbsp;", ' '))
+    @trimmed_doc = Nokogiri::HTML(s)
 
     @trimmed_doc.css("form, object, embed").each do |elem|
       elem.remove

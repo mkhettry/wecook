@@ -64,6 +64,8 @@ end
 
 def train
   `$LL_HOME/train -s 0 training.txt`
+  model_size=`ls -l training.txt.model`
+  puts "Adding model file: #{model_size}"
 end
 
 def predict(test_files, logfile)
@@ -91,7 +93,8 @@ def main(logfile)
   total_length = 0
   dir = Dir.new('config/training')
   logfile = File.new(logfile + ".log", 'w')
-  files = dir.select {|f| f if f =~ /\.tr[su]$/}.sort
+  files = dir.select {|f| f if f =~ /\.tr[su]$/}
+  files.sort! {|a,b| a.hash <=> b.hash}
   for i in 0...files.length
     ranges = get_training_range(files.length, i)
     test_files = split_files(files, ranges)
@@ -109,6 +112,12 @@ if __FILE__ == $PROGRAM_NAME
   if ARGV.length != 1
     puts "Usage: ruby create_lib_svm_data.rb identifier"
   else
-    main($ARGV[0])
+    ll_home = `echo $LL_HOME`
+    puts ll_home
+    if ll_home.strip.empty?
+      puts "You must set LL_HOME environment variable."
+    else
+      main($ARGV[0])
+    end
   end
 end

@@ -1,6 +1,6 @@
 class TrainingFile
 
-  attr_accessor :url, :filename
+  attr_accessor :url, :filename, :num_lines
 
   def initialize(filename)
     @filename = filename
@@ -19,8 +19,31 @@ class TrainingFile
       tr = TrainingRow.new(line)
       lines << tr if tr.valid_line?
     end
+    @num_lines = lines.length
     lines
   end
+
+  def summarize(predictions)
+    error_lines = []
+    line_count = 0
+    num_bad_errors = 0
+
+    lines = get_lines
+    lines.each_index do |idx|
+      line = lines[idx]
+      p = predictions[idx]
+
+      line_count += 1
+      golden_symbol = LibLinearModel.from_class_str(line.class)
+      if p.is_bad_error(golden_symbol)
+        num_bad_errors += 1
+        error_lines << "#{LibLinearModel.from_class_str(line.class)}\t#{p.top_class}\t#{p.top_two}" + "\t" + line.text[0..128]
+      end
+    end
+
+    [num_bad_errors,line_count, error_lines]
+  end
+
 
   class TrainingRow
     attr_accessor :class, :text

@@ -3,10 +3,42 @@ class LibLinearModel
 
   attr_accessor :name_id_map, :extractors, :model_weights_for_classes
 
+  def initialize(opt={})
+    @model_weights_for_classes = {}
+    @name_id_map = {}
+    @extractors = []
+    if (opt[:dir])
+      model_file = nil
+      fid_file = nil
+      dir = Dir.new(opt[:dir])
+      dir.each do |f|
+        if (f =~ /\.model$/)
+          if (model_file)
+            raise "more than one model [#{model_file}, #{f}] file found in #{dir}"
+          end
+          model_file = f
+        end
+
+        if (f == 'feature_ids.txt')
+          fid_file = f
+        end
+      end
+
+      if (fid_file and model_file)
+        read_model_weights!(:model_file => model_file)
+        read_feature_ids_and_extractors!(:feature_id_file => fid_file)
+      end
+    else
+      read_model_weights!(:model_file => opt[:model_file])
+      read_feature_ids_and_extractors!(opt)
+    end
+  end
+
   def read_model_weights!(opt)
     model_file_lines = []
-    if opt[:model_file]
-      file = File.new(opt[:model_file])
+    model_file = opt[:model_file]
+    if model_file
+      file = File.new(model_file)
       file.each_line do |line|
         model_file_lines << line
       end
@@ -18,6 +50,8 @@ class LibLinearModel
     solver_type, nr_classes, labels, nr_features, bias = nil
     current_feature_id = 0
     in_header_section = true
+    Rails.logger.info("Reading #{model_file_lines.length} lines in model.")
+
     model_file_lines.each do |line|
       if (in_header_section)
         parts = line.split
@@ -38,23 +72,18 @@ class LibLinearModel
       else
         current_feature_id += 1
         weights = line.split
+
         #puts "weights: " + weights.to_s + ", weights.length="+weights.length.to_s + ", labels:"+labels.to_s+", labels.length="+labels.length.to_s
         for i in 0...weights.length
           add_model_weight(LibLinearModelWeight.new(current_feature_id, labels[i], Float(weights[i])))
         end
       end
     end
-
+    Rails.logger.info("Finished reading model")
     check_model(solver_type, nr_classes, labels, nr_features, bias)
+
   end
 
-  def initialize(opt={})
-    @model_weights_for_classes = {}
-    @name_id_map = {}
-    @extractors = []
-    read_model_weights!(opt)
-    read_feature_ids_and_extractors!(opt)
-  end
 
 
   def read_feature_ids_and_extractors!(opt)
@@ -102,29 +131,18 @@ class LibLinearModel
     nil
   end
 
-  def predict_trn(trn)
-    error_lines = []
-    line_count = 0
-    num_bad_errors = 0
+  def predict_trn_only(trn)
+    predictions = []
     trn.get_lines.each do |line|
-      line_count += 1
-      fv = get_feature_vector line.text
-      p = predict(fv)
-      golden_symbol = LibLinearModel.from_class_str(line.class)
-      if p.is_bad_error(golden_symbol)
-        num_bad_errors += 1
-      end
-
-      if (p.is_bad_error(golden_symbol))
-        error_lines << "#{LibLinearModel.from_class_str(line.class)}\t#{p.top_class}\t#{p.top_two}" + "\t" + line.text[0..128]
-      end
+        fv = get_feature_vector line.text
+        predictions <<  predict(fv)
     end
+    predictions
+  end
 
-    #puts "#{trn.url.strip} (#{error_lines.length}/#{line_count})"
-    error_lines.each do |er|
-      #puts er
-    end
-    [num_bad_errors,line_count, error_lines]
+  def predict_trn(trn)
+    predictions = predict_trn_only(trn)
+    trn.summarize(predictions)
   end
 
   def get_top_features(class_name, top_n)
@@ -180,6 +198,14 @@ class LibLinearModel
       @sorted_pairs.sort! {|a,b| a[1] <=> b[1]}
     end
 
+    def probability(category)
+      @sorted_pairs.each do |pair|
+        if pair[0] == category
+          return pair[1]
+        end
+      end
+      0.0
+    end
 
     def is_error(golden_symb)
       golden_symb != self.top_class
@@ -197,17 +223,19 @@ class LibLinearModel
       (@sorted_pairs[idx1][1] - @sorted_pairs[idx2][1]).abs
     end
 
-    def top_class
-      if (delta_between(-1,-2) <= 0.05)
-        if @sorted_pairs[-1][0] == :OT || @sorted_pairs[-2][0] == :OT
-          return :OT
-        end
-      end
+
+    # if n = 1, returns the second class and so on.
+    def top_class (n = 0)
+#      if (delta_between(-1,-2) <= 0.05)
+#        if @sorted_pairs[-1][0] == :OT || @sorted_pairs[-2][0] == :OT
+#          return :OT
+#        end
+#      end
 
       if delta_between(0,-1) <= 0.05
         return :OT
       end
-      return @sorted_pairs[-1][0]
+      @sorted_pairs[-n-1][0]
     end
 
     def one_to_s(p)
@@ -229,6 +257,22 @@ class LibLinearModel
       end
       s
     end
+  end
+
+  class OverriddenPrediction
+    def initialize(original, override)
+      @original = original
+      @override = override
+    end
+
+    def top_class
+      @override
+    end
+
+    def method_missing(method, *args)
+      args.empty? ? @original.send(method) : @original.send(method, args)
+    end
+
   end
 
   #LABEL_ID_MAPPING = {"PR" => 0, "IN" => 1, "OT" => 2, "FO" => 3, "NO" => 4, "TA" => 5}

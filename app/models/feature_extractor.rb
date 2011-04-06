@@ -5,11 +5,15 @@ class FeatureExtractor
     #words = doc.split(/\W+/)
     #words = doc.split
     #split on white space and "-"
-    words = line.downcase.split(/[\s\(\)-]+/)
+
+    # remove the first word if it is of the form 2.
+    line = line.gsub(/^\d+\.\s/, '')
+
+    words = line.downcase.split(/[,\s\(\)-]+/)
 
     words = words.select {|w| w.strip.length > 0 and IGNORE_WORDS[w].nil?}
-    words.collect! { |w| w}
     new_words = []
+
     words.each do |w|
       if w =~ /(\d+)([a-zA-Z]+)$/
         new_words << $1
@@ -40,6 +44,7 @@ class FeatureExtractor
     end
 
     def extract_features(line)
+
       length = FeatureExtractor.get_words(line).length
       case
         when length <=5
@@ -74,6 +79,7 @@ class FeatureExtractor
 
     #TODO try histogram of sentence counts for each class. Should get better idea about sentence-count boundaries
     def extract_features(line)
+
       sentences = line.split(/[\.;]/)
       num_sentences = 0
       sentences.each do |s|

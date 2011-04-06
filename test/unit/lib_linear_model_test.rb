@@ -83,7 +83,7 @@ class LibLinearModelTest <  ActiveSupport::TestCase
     assert_equal(1.0/3.0, result[3])
   end
 
-test "predict" do
+  test "predict" do
     test_model_data = <<-eodata
       solver_type L2R_LR
       nr_class 3
@@ -104,5 +104,16 @@ test "predict" do
     assert_equal(result[1], result[3])
   end
 
+  test "prediction basic" do
+    map = {}
+    map[:PR] = 0.025
+    map[:IN] = 0.020
+    map[:FO] = 0.024
+    map[:NO] = 0.01
+    map[:TA] = 0.011
+    map[:OT] = 0.023
+    p = LibLinearModel::Prediction.new(map)
+    assert_equal :PR, p.top_class
+  end
 
 end

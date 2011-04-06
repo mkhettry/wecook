@@ -374,7 +374,6 @@ class RecipeDocumentTest < ActiveSupport::TestCase
     prep =  r.extract_prep_structured
     assert_equal '1. In a large skillet, melt 2 tablespoons of the butter or margarine over medium-high heat. Add sweet pepper, celery, and onion. Cook and stir about 5 minutes or until tender, but not brown.',
                  prep[0]
-
   end
 
   test "extract structured all recipes" do
