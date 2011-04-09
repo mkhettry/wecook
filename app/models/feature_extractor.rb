@@ -9,7 +9,8 @@ class FeatureExtractor
     # remove the first word if it is of the form 2.
     line = line.gsub(/^\d+\.\s/, '')
 
-    words = line.downcase.split(/[,\s\(\)-]+/)
+    #words = line.downcase.split(/[,\s\(\)-]+/)
+    words = line.downcase.split(/[^a-z0-9]+/i)
 
     words = words.select {|w| w.strip.length > 0 and IGNORE_WORDS[w].nil?}
     new_words = []
@@ -23,6 +24,59 @@ class FeatureExtractor
       end
     end
     new_words.uniq
+  end
+
+  def self.is_numeric?(word)
+    1 if word =~/^([0-9]+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen)$/
+  end
+
+  class HasNumberFeatureExtractor
+    def initialize(lines)
+    end
+
+    def extract_features(line)
+      words = FeatureExtractor.get_words(line)
+      words.each do |word|
+        return [Feature.new("has_number",1)] if FeatureExtractor.is_numeric?(word)
+      end
+      []
+    end
+  end
+
+  class PosFeatureExtractor
+    @@tagger = Tagger.new
+    def initialize(lines)
+    end
+
+    def extract_features(line)
+      tags = @@tagger.getTags(line)
+      tag_counts = {}
+      for i in 0...tags.length
+        tag = tags[i]
+        tag_counts[tag] = tag_counts.fetch(tag, 0) + 1
+      end
+      fv = []
+      tag_counts.each do |pos,count|
+        fv << Feature.new("pos_"+pos.to_s, count)
+      end
+      fv
+    end
+
+  end
+
+
+  class FirstWordIsANumberExtractor
+    def initialize(lines)
+    end
+
+    def extract_features(line)
+      words = FeatureExtractor.get_words(line)
+      if words.length > 0 and FeatureExtractor.is_numeric?(words[0])
+        return [Feature.new("numeric_first_word")]
+      end
+      []
+    end
+
   end
 
   class HasFractionFeatureExtractor
@@ -51,10 +105,10 @@ class FeatureExtractor
           return [Feature.new("word_length_5")]
         when length <=10
           return [Feature.new("word_length_10")]
-        when length <=15
-          return [Feature.new("word_length_15")]
+        when length <=20
+          return [Feature.new("word_length_20")]
         else
-          return [Feature.new("word_length_>15")]
+          return [Feature.new("word_length_>20")]
       end
     end
   end

@@ -341,7 +341,11 @@ class LibLinearModel
   end
 
   def probability_from_weight_sum(w)
-    1.0/(1.0 + Math.exp(-w))
+    if w
+      1.0/(1.0 + Math.exp(-w))
+    else
+      0.0
+    end
   end
 
   def to_s
