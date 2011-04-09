@@ -25,7 +25,7 @@ class LibLinearModel
       end
 
       if (fid_file and model_file)
-        read_model_weights!(:model_file => model_file)
+        read_model_weights!(:model_file => opt[:dir] + "/" + model_file)
         read_feature_ids_and_extractors!(:feature_id_file => fid_file)
       end
     else
@@ -168,9 +168,11 @@ class LibLinearModel
   end
 
   def get_feature_vector(line)
+
     fv = []
     @extractors.each do |e|
       features = e.extract_features(line)
+      next if features.nil?
       features.each do |feature|
         feature.feature_id = @name_id_map[feature.name]
         fv << feature
@@ -204,7 +206,7 @@ class LibLinearModel
           @sorted_pairs << [k, v/Float(sum)]
         end
 
-        @sorted_pairs.sort! {|a,b| a[1] <=> b[1]}
+        @sorted_pairs.sort! {|a,b| b[1] <=> a[1]}
       else
         @sorted_pairs = m[:original].sorted_pairs
       end
@@ -238,16 +240,10 @@ class LibLinearModel
 
     # if n = 1, returns the second class and so on.
     def top_class (n = 0)
-#      if (delta_between(-1,-2) <= 0.05)
-#        if @sorted_pairs[-1][0] == :OT || @sorted_pairs[-2][0] == :OT
-#          return :OT
-#        end
-#      end
-
       if delta_between(0,-1) <= 0.05
         return :OT
       end
-      @sorted_pairs[-n-1][0]
+      @sorted_pairs[n][0]
     end
 
     def one_to_s(idx)
@@ -258,13 +254,13 @@ class LibLinearModel
     def to_s
       s = ""
       @sorted_pairs.each_index do |idx|
-        s += one_to_s(-(idx + 1))
+        s += one_to_s(idx)
       end
       s
     end
 
     def top_two
-      one_to_s(-1) + " " + one_to_s(-2)
+      one_to_s(0) + " " + one_to_s(1)
     end
   end
 
@@ -284,7 +280,7 @@ class LibLinearModel
     end
 
     def top_two
-      (" " + @override.to_s + "= 1.0" + one_to_s(-1))
+      (" " + @override.to_s + "= 1.0" + one_to_s(1))
     end
 
   end
