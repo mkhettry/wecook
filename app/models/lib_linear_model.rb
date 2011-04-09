@@ -131,13 +131,17 @@ class LibLinearModel
     nil
   end
 
-  def predict_trn_only(trn)
+  def predict_lines(lines)
     predictions = []
-    trn.get_lines.each do |line|
-        fv = get_feature_vector line.text
-        predictions <<  predict(fv)
+    lines.each do |line|
+      fv = get_feature_vector line.text
+      predictions << predict(fv)
     end
     predictions
+  end
+
+  def predict_trn_only(trn)
+    predict_lines(trn.get_lines)
   end
 
   def predict_trn(trn)
@@ -184,18 +188,26 @@ class LibLinearModel
 
   class Prediction
 
-    def initialize(map)
-      sum = 0.0
-      map.values.each do |p|
-        sum += p
-      end
+    attr_accessor :sorted_pairs
 
+    def initialize(m)
       @sorted_pairs = []
-      map.each do |k,v|
-        @sorted_pairs << [k, v/Float(sum)]
-      end
+      if (m[:map])
+        map = m[:map]
+        sum = 0.0
+        map.values.each do |p|
+          sum += p
+        end
 
-      @sorted_pairs.sort! {|a,b| a[1] <=> b[1]}
+        @sorted_pairs = []
+        map.each do |k,v|
+          @sorted_pairs << [k, v/Float(sum)]
+        end
+
+        @sorted_pairs.sort! {|a,b| a[1] <=> b[1]}
+      else
+        @sorted_pairs = m[:original].sorted_pairs
+      end
     end
 
     def probability(category)
@@ -208,7 +220,7 @@ class LibLinearModel
     end
 
     def is_error(golden_symb)
-      golden_symb != self.top_class
+      golden_symb != top_class
     end
 
     def is_bad_error(golden_symb)
@@ -238,39 +250,41 @@ class LibLinearModel
       @sorted_pairs[-n-1][0]
     end
 
-    def one_to_s(p)
+    def one_to_s(idx)
+      p = @sorted_pairs[idx]
       (" " + p[0].to_s + "=" + ("%0.2f" % p[1]))
     end
 
     def to_s
       s = ""
-      @sorted_pairs.reverse.each do |p|
-        s += one_to_s(p)
+      @sorted_pairs.each_index do |idx|
+        s += one_to_s(-(idx + 1))
       end
       s
     end
 
     def top_two
-      s = ""
-      @sorted_pairs[-2..-1].reverse.each do |p|
-        s += one_to_s(p)
-      end
-      s
+      one_to_s(-1) + " " + one_to_s(-2)
     end
   end
 
-  class OverriddenPrediction
+
+  class OverriddenPrediction < Prediction
     def initialize(original, override)
-      @original = original
+      super({:original => original})
       @override = override
     end
 
-    def top_class
-      @override
+    def top_class (n = 0)
+      if (n == 0)
+        @override
+      else
+        super.top_class n
+      end
     end
 
-    def method_missing(method, *args)
-      args.empty? ? @original.send(method) : @original.send(method, args)
+    def top_two
+      (" " + @override.to_s + "= 1.0" + one_to_s(-1))
     end
 
   end
@@ -312,7 +326,7 @@ class LibLinearModel
       current_probability = probability_for_class(class_id, feature_vector)
       prediction[LibLinearModel.from_class_id(class_id)] = current_probability
     end
-    Prediction.new(prediction)
+    Prediction.new(:map => prediction)
   end
 
 

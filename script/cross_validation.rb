@@ -67,22 +67,23 @@ end
 def train
   `$LL_HOME/train -s 0 training.txt`
   model_size=`ls -l training.txt.model`
-  puts "Adding model file: #{model_size}"
+  #puts "Adding model file: #{model_size}"
 end
 
 def predict(test_files, logfile)
   model = LibLinearModel.new(:feature_id_file => 'feature_ids.txt', :model_file => 'training.txt.model')
+  m2 = HueresticLibLinearModel.new(model)
   tot_bad_errors = 0
   tot_length = 0
   without_errors = 0
   test_files.each do |trn_file|
-    cur_bad_errors, cur_length, errors = model.predict_trn(trn_file)
-    if cur_bad_errors == 0
+    h = m2.predict_trn(trn_file)
+    if h[:num_bad_errors] == 0
       without_errors += 1
     end
-    tot_bad_errors += cur_bad_errors
-    tot_length += cur_length
-    errors.each do |e|
+    tot_bad_errors += h[:num_bad_errors]
+    tot_length += trn_file.num_lines
+    h[:error_lines].each do |e|
       logfile.puts("#{trn_file.filename}\t#{e}")
     end
   end

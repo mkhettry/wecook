@@ -7,6 +7,14 @@ class CategoryRange
     @range = range
   end
 
+  def begin
+    @range.begin
+  end
+
+  def end
+    @range.end
+  end
+
   def score
     s = 0.0
     @probabilities.each do |p|
@@ -57,5 +65,32 @@ class CategoryRange
     end
 
     (fin - start) / Float(total_length - 2)
+  end
+
+  def absolute_distance(other)
+    if (range.begin < other.range.begin)
+      other.range.begin - range.end
+    else
+      range.begin - other.range.end
+    end
+  end
+
+  def to_s
+    @cat.to_s + " " + @range.to_s
+  end
+
+
+  def single_line?
+    @range.end - @range.begin == -1
+  end
+
+  def pretty_print(lines)
+    start = lines[@range.begin].text[0..12]
+    ending = lines[@range.end - 1].text[0..12]
+    if (single_line?)
+      "[#{cat.to_s} #{start}]"
+    end
+      "[#{@cat.to_s} #{start}..#{ending}]"
+
   end
 end

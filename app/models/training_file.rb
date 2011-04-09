@@ -4,9 +4,11 @@ class TrainingFile
 
   def initialize(filename)
     @filename = filename
+    @lines = []
   end
 
   def get_lines()
+    @lines unless @lines.empty?
     lines = []
     File.open(@filename).each do |line|
       if  line.start_with? "#"
@@ -20,7 +22,7 @@ class TrainingFile
       lines << tr if tr.valid_line?
     end
     @num_lines = lines.length
-    lines
+    @lines = lines
   end
 
   def summarize(predictions)
@@ -41,7 +43,7 @@ class TrainingFile
       end
     end
 
-    [num_bad_errors,line_count, error_lines]
+    {:num_bad_errors => num_bad_errors, :error_lines =>error_lines}
   end
 
 
