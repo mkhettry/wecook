@@ -10,7 +10,7 @@ class Tagger
 
   def initialize()
     @lexicon = {}
-    file = File.new('app/models/lexicon.txt', 'r')
+    file = File.new('config/lexicon.txt', 'r')
     file.each_line {|line|
                       toks=line.split
                       @lexicon[toks.shift]=toks
