@@ -74,7 +74,6 @@ class FeatureExtractor
       if words.length > 0 and FeatureExtractor.is_numeric?(words[0])
         return [Feature.new("numeric_first_word")]
       end
-      []
     end
 
   end
@@ -84,11 +83,7 @@ class FeatureExtractor
     end
 
     def extract_features(line)
-      words = FeatureExtractor.get_words(line)
-      words.each do |word|
-        return [Feature.new("fraction")] if word =~ /^\d+\/\d+$/
-      end
-      []
+      [Feature.new("fraction")] if line =~ /\b\d+\/\d+\b/
     end
   end
 
@@ -123,7 +118,6 @@ class FeatureExtractor
       if (line.include?(":"))
         return [Feature.new("colon_")]
       end
-      []
     end
   end
 
