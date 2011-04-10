@@ -37,11 +37,31 @@ class FeatureExtractor
     def extract_features(line)
       words = FeatureExtractor.get_words(line)
       words.each do |word|
-        return [Feature.new("has_number",1)] if FeatureExtractor.is_numeric?(word)
+        return [Feature.new("has_number")] if FeatureExtractor.is_numeric?(word)
       end
       []
     end
   end
+
+
+  class IngredientFeatureExtractor
+    @@ingredients = Set.new
+    def initialize(lines)
+      f = File.new("config/ingredients.txt")
+      f.each_line do |line|
+        @@ingredients.add(line.downcase.strip)
+      end
+
+    end
+
+    def extract_features(line)
+      FeatureExtractor.get_words(line).each do |word|
+        return [Feature.new("contains_ingredient")] if @@ingredients.member?(word)
+      end
+      []
+    end
+  end
+
 
   class PosFeatureExtractor
     @@tagger = Tagger.new

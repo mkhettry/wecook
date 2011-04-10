@@ -26,7 +26,7 @@ class LibLinearModel
 
       if (fid_file and model_file)
         read_model_weights!(:model_file => opt[:dir] + "/" + model_file)
-        read_feature_ids_and_extractors!(:feature_id_file => fid_file)
+        read_feature_ids_and_extractors!(:feature_id_file => opt[:dir] + "/" + fid_file)
       end
     else
       read_model_weights!(:model_file => opt[:model_file])

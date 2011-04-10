@@ -40,7 +40,8 @@ def split_files(files, ranges)
     lines.each do |line|
       fv = []
       extractors.each do |e|
-        fv += e.extract_features(line.text)
+        cur_fv = e.extract_features(line.text)
+        fv += cur_fv unless cur_fv.nil?
       end
       fv.sort!
       class_id = LibLinearModel.from_class_str_to_ids(line.class)
@@ -64,14 +65,17 @@ def in_range(ranges, idx)
   false
 end
 
-def train
+def train(train_folder)
   `$LL_HOME/train -s 0 training.txt`
   model_size=`ls -l training.txt.model`
+  `mkdir #{train_folder}`
+  `mv training.txt.model #{train_folder}`
+  `mv feature_ids.txt #{train_folder}`
   #puts "Adding model file: #{model_size}"
 end
 
-def predict(test_files, logfile)
-  model = LibLinearModel.new(:feature_id_file => 'feature_ids.txt', :model_file => 'training.txt.model')
+def predict(test_files, logfile, train_folder)
+  model = LibLinearModel.new(:dir => `pwd`.strip+"/"+train_folder)
   m2 = HueresticLibLinearModel.new(model)
   tot_bad_errors = 0
   tot_length = 0
@@ -99,10 +103,11 @@ def main(logfile)
   files = dir.select {|f| f if f =~ /\.tr[su]$/}
   files.sort! {|a,b| a.hash <=> b.hash}
   for i in 0...files.length
+    train_folder = "iteration_#{i}"
     ranges = get_training_range(files.length, i)
     test_files = split_files(files, ranges)
-    train
-    cur_error, cur_length, no_errors = predict(test_files, logfile)
+    train(train_folder)
+    cur_error, cur_length, no_errors = predict(test_files, logfile, train_folder)
     puts "#{i}:{#{no_errors}/#{test_files.length}}(#{cur_error}/#{cur_length})=#{cur_error/Float(cur_length)}"
     bad_errors += cur_error
     total_length += cur_length
