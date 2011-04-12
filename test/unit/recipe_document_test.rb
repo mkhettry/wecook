@@ -18,6 +18,28 @@ class RecipeDocumentTest < ActiveSupport::TestCase
   assert_equal "lots of freshly grated Parmesan cheese", lines[1]
   end
 
+
+  test "extract structured serious eats" do
+    rd = RecipeDocument.new(
+            :file => fixture_path + '/webpages/Serious_Eats_Belgian_Tripel.html',
+            :url => 'http://www.seriouseats.com/recipes/2011/04/homebrewing-belgian-tripel-recipe.html')
+    assert_lines [
+        "9 pounds Pilsner malt extract",
+        "1 pound light Belgian candy sugar",
+        "1 pound Carapils malt, crushed",
+        "2 ounces Hallertau hops - 60 minutes",
+        "6 gallons of tap water, split",
+        "2 Liter starter of liquid Belgian Ale yeast (Whitelabs WLP500 or Wyeast 1214)"
+        ],
+        rd.extract_ingredients_structured
+
+    any_two_prep = [
+        'If possible, place 3 gallons in the refrigerator to cool in a sanitized container.',
+        'After primary fermentation is complete (take at least two consistent gravity readings), transfer to a secondary carboy for conditioning as discussed here and store as cool as possible.'
+    ]
+    assert_equal any_two_prep & rd.extract_prep_structured, any_two_prep
+  end
+
   test "extract lines blogspot evolvingtastes" do
     r = RecipeDocument.new(
         :url => "http://evolvingtastes.blogspot.com/2010/11/insalata-caprese.html",

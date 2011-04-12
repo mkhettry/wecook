@@ -28,9 +28,11 @@ class RecipeDocument
     end
 
     @options = DEFAULT_OPTIONS.merge(opts)
+    # remove hardspaces &nbsp with a simple space.
+    s.gsub!('&nbsp;', ' ')
     @doc = Nokogiri::HTML(s)
 
-    # remove hardspaces &nbsp with a simple space.
+
     @trimmed_doc = Nokogiri::HTML(s)
 
     @trimmed_doc.css("form, object, embed").each do |elem|
@@ -92,6 +94,7 @@ class RecipeDocument
     ingredients = @doc.xpath("//li[contains(@class,'ingredient')]").collect { |s| clean_text(s.text)} if ingredients.empty?
     ingredients = @doc.xpath("//li[contains(@itemprop,'ingredient')]").collect { |s| clean_text(s.text)} if ingredients.empty?
     ingredients = @doc.xpath("//span[contains(@class, 'ingredient')]").collect { |s| clean_text(s.text)} if ingredients.empty?
+    ingredients = @doc.css("div.ingredients-section li").collect { |s| clean_text(s.text)} if ingredients.empty?
 
     ingredients
   end
@@ -108,6 +111,7 @@ class RecipeDocument
     prep_text_nodes = @doc.xpath("//span[contains(@class, 'instructions')]/ol/li/span") if prep_text_nodes.empty?
     prep_text_nodes = @doc.xpath("//span[contains(@class, 'instructions')]/div[contains(@class,'section')]") if prep_text_nodes.empty?
 
+    prep_text_nodes = @doc.css("div.procedure-text p") if prep_text_nodes.empty?
 
     prep_text_nodes.each do |p|
       new_lines = create_lines_from_nodes(p)
@@ -166,7 +170,7 @@ class RecipeDocument
     nodes
   end
 
-
+  # TODO: This can be thrown away. Possibly. This work is now done by remove_unlikely_candidates!
   def inside_ignorable_element(n)
     while not n.kind_of? Nokogiri::HTML::Document and n.kind_of? Nokogiri::XML::Node and n.parent() != nil
       if ignorable_element(n)
@@ -252,18 +256,17 @@ class RecipeDocument
     current_line = ""
 
     doc.traverse do |n|
-      if !inside_ignorable_element(n)
+#      next if inside_ignorable_element(n)
 
-        if n.text? and not n.text.lstrip.rstrip.empty?
-          #puts "appending #{n.text.lstrip.rstrip} because of #{n.name}"
-          current_line = current_line + " " + n.text.lstrip.rstrip
-        elsif split_line(n)
+      if n.text? and not n.text.lstrip.rstrip.empty?
+        #puts "appending #{n.text.lstrip.rstrip} because of #{n.name}"
+        current_line = current_line + " " + n.text.lstrip.rstrip
+      elsif split_line(n)
 
-          #puts "skipping line: #{current_line} because of #{n.name}"
-          clean_text = clean_text current_line
-          lines << clean_text if not clean_text.empty?
-          current_line = ""
-        end
+        #puts "skipping line: #{current_line} because of #{n.name}"
+        clean_text = clean_text current_line
+        lines << clean_text if not clean_text.empty?
+        current_line = ""
       end
     end
     lines << current_line if current_line != ""
