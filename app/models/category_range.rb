@@ -85,8 +85,21 @@ class CategoryRange
   end
 
   def pretty_print(lines)
-    start = lines[@range.begin].text[0..12]
-    ending = lines[@range.end - 1].text[0..12]
+    line = lines[@range.begin]
+    if (line.kind_of? String)
+      start = line[0..12]
+    else
+      start = line.text[0..12]
+    end
+
+
+    line = lines[@range.end - 1]
+    if (line.kind_of? String)
+      ending = line[0..12]
+    else
+      ending = line.text[0..12]
+    end
+
     if (single_line?)
       "[#{cat.to_s} #{start}]"
     end

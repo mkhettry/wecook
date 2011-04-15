@@ -82,7 +82,9 @@ class RecipeDocument
     create_lines_from_nodes(@trimmed_doc)
   end
 
-
+  def is_structured?
+    (not extract_ingredients_structured.empty?) and (not extract_prep_structured.empty?)
+  end
 
   # This extractor is used to get stuff out of fairly structured recipe sites.
   # allrecipes.com,

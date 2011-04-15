@@ -8,6 +8,23 @@ class HueresticLibLinearModel
   def predict_trn(trn)
     predictions = predict_lines(trn.filename, trn.get_lines)
     trn.summarize(predictions)
+  end
+
+  def predict_url(url)
+    rd = RecipeDocument.new(:url => url)
+    if (rd.is_structured?)
+      ing = rd.extract_ingredients_structured
+      prep = rd.extract_prep_structured
+      puts "ing " + ing
+      puts "prep " + prep
+    else
+      lines = rd.extract_lines
+      predictions = predict_lines(url, lines)
+      lines.each_index do |idx|
+        p = predictions[idx]
+        puts "#{p.top_two}" + "\t" + lines[idx][0..80]
+      end
+    end
 
   end
 

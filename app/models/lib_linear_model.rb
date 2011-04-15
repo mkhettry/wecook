@@ -134,7 +134,12 @@ class LibLinearModel
   def predict_lines(lines)
     predictions = []
     lines.each do |line|
-      fv = get_feature_vector line.text
+      if (line.kind_of? String)
+        s = line
+      else
+        s = line.text
+      end
+      fv = get_feature_vector s
       predictions << predict(fv)
     end
     predictions

@@ -1,3 +1,5 @@
+require 'script/model_builder.rb'
+
 TEST_PERCENTAGE = 80
 
 # 100 files
@@ -13,48 +15,20 @@ def get_training_range(total_size, idx)
 end
 
 def split_files(files, ranges)
-    test_files = []
-    training_file = File.new('training.txt', 'w')
-    lines = []
-    for idx in 0...files.length
-      tf = TrainingFile.new('config/training/' + files[idx])
-      if not in_range(ranges, idx)
-        test_files << tf
-        next
-      end
-      lines += tf.get_lines
+  test_files = []
+  train_files = []
+  for idx in 0...files.length
+    tf = TrainingFile.new('config/training/' + files[idx])
+    if not in_range(ranges, idx)
+      test_files << tf
+      next
+    else
+      train_files << tf
     end
-
-    word_feature_extractor = FeatureExtractor::WordFeatureExtractor.new(lines)
-    #length_feature_extractor = FeatureExtractor::LengthFeatureExtractor.new(lines)
-    first_second_word_extractor = FeatureExtractor::FirstAndSecondWordFeatureExtractor.new(lines)
-    num_words_extractor = FeatureExtractor::WordBucketingFeatureExtractor.new(lines)
-    fraction_extractor = FeatureExtractor::HasFractionFeatureExtractor.new(lines)
-    pos_extractor = FeatureExtractor::PosFeatureExtractor.new(lines)
-    #has_number_extractor = FeatureExtractor::HasNumberFeatureExtractor.new(lines)
-    #colon_char_extractor = FeatureExtractor::HasColonCharFeatureExtractor.new(lines)
-    #sentence_count_extractor = FeatureExtractor::NumSentencesBucketingFeatureExtractor.new(lines)
-
-    extractors = [word_feature_extractor, pos_extractor, first_second_word_extractor, num_words_extractor, fraction_extractor]
-
-    lines.each do |line|
-      fv = []
-      extractors.each do |e|
-        cur_fv = e.extract_features(line.text)
-        fv += cur_fv unless cur_fv.nil?
-      end
-      fv.sort!
-      class_id = LibLinearModel.from_class_str_to_ids(line.class)
-      feature_vector_str = Feature.write_feature_vector(fv)
-      training_file.puts("#{class_id} #{feature_vector_str}")
-    end
-
-
-    feature_id_file = File.new('feature_ids.txt', 'w')
-    feature_id_file.puts(extractors.collect{|extractor| extractor.class}.join(","))
-    Feature.write_feature_ids_to_file(feature_id_file)
-    return test_files
+  end
+  return test_files, train_files
 end
+
 
 def in_range(ranges, idx)
   ranges.each do |range|
@@ -65,22 +39,15 @@ def in_range(ranges, idx)
   false
 end
 
-def train(train_folder)
-  `$LL_HOME/train -s 0 training.txt`
-  model_size=`ls -l training.txt.model`
-  `mkdir #{train_folder}`
-  `mv training.txt.model #{train_folder}`
-  `mv feature_ids.txt #{train_folder}`
-  #puts "Adding model file: #{model_size}"
-end
 
-def predict(test_files, logfile, train_folder)
-  model = LibLinearModel.new(:dir => `pwd`.strip+"/"+train_folder)
+def predict(test_files, logfile)
+  model = LibLinearModel.new(:dir => `pwd`.strip)
   m2 = HueresticLibLinearModel.new(model)
   tot_bad_errors = 0
   tot_length = 0
   without_errors = 0
   test_files.each do |trn_file|
+    puts "Predicting #{trn_file.filename}"
     h = m2.predict_trn(trn_file)
     if h[:num_bad_errors] == 0
       without_errors += 1
@@ -95,24 +62,34 @@ def predict(test_files, logfile, train_folder)
   [tot_bad_errors, tot_length, without_errors]
 end
 
-def main(logfile)
+def create_run(run_name)
+  Dir.mkdir(run_name)
+  log = File.new(run_name + "/run.log", 'w')
+  summary = File.new(run_name + "/run.sum", 'w')
+  [log, summary]
+end
+
+def main(run_name)
   bad_errors = 0
   total_length = 0
   dir = Dir.new('config/training')
-  logfile = File.new(logfile + ".log", 'w')
+
+  logfile, summaryfile = create_run(run_name)
+
   files = dir.select {|f| f if f =~ /\.tr[su]$/}
   files.sort! {|a,b| a.hash <=> b.hash}
   for i in 0...files.length
-    train_folder = "iteration_#{i}"
     ranges = get_training_range(files.length, i)
-    test_files = split_files(files, ranges)
-    train(train_folder)
-    cur_error, cur_length, no_errors = predict(test_files, logfile, train_folder)
-    puts "#{i}:{#{no_errors}/#{test_files.length}}(#{cur_error}/#{cur_length})=#{cur_error/Float(cur_length)}"
+    test_files, train_files = split_files(files, ranges)
+    ModelBuilder.build_model_from_training_files(train_files)
+    cur_error, cur_length, no_errors = predict(test_files, logfile)
+    puts("#{i}:{#{no_errors}/#{test_files.length}}(#{cur_error}/#{cur_length})=#{cur_error/Float(cur_length)}")
+    summaryfile.puts("#{i}:{#{no_errors}/#{test_files.length}}(#{cur_error}/#{cur_length})=#{cur_error/Float(cur_length)}")
+    summaryfile.flush
     bad_errors += cur_error
     total_length += cur_length
   end
-  puts "(#{bad_errors}/#{total_length})=#{bad_errors/Float(total_length)}"
+  summaryfile.puts("(#{bad_errors}/#{total_length})=#{bad_errors/Float(total_length)}")
 end
 
 
@@ -125,7 +102,7 @@ if __FILE__ == $PROGRAM_NAME
     if ll_home.strip.empty?
       puts "You must set LL_HOME environment variable."
     else
-      main($ARGV[0])
+      main(ARGV[0])
     end
   end
 end
