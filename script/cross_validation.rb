@@ -47,7 +47,6 @@ def predict(test_files, logfile)
   tot_length = 0
   without_errors = 0
   test_files.each do |trn_file|
-    puts "Predicting #{trn_file.filename}"
     h = m2.predict_trn(trn_file)
     if h[:num_bad_errors] == 0
       without_errors += 1

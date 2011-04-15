@@ -4,11 +4,17 @@ class Feature
   @@name_id_map = {}
   @@max_id = 1
 
-  attr_accessor :feature_id, :name, :value
+  attr_accessor :feature_id, :name, :value, :categorical
 
-  def initialize(name, value = 1)
+  def initialize(name, *value)
     @name = name
-    @value = value
+    if value.length == 0
+      @value = 1
+      @categorical = true
+    else
+      @value = value[0]
+      @categorical = false
+    end
     @feature_id = Feature.get_feature_id(name)
   end
 

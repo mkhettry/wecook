@@ -52,6 +52,7 @@ class ModelBuilder
         train_data << [class_id, fv]
       end
 
+      @@feature_selector.compute
       train_data.each do |data|
         class_id = data[0]
         fv = @@feature_selector.filter(data[1])
