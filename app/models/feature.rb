@@ -37,6 +37,14 @@ class Feature
     @feature_id <=> other.feature_id
   end
 
+  def eql?(object)
+    [@name, @value] == [object.name, object.value]
+  end
+
+  def hash
+    [@name, @value].hash
+  end
+
   def to_s
     "#{feature_id}:#{name}=#{value}"
   end

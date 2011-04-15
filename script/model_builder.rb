@@ -1,10 +1,16 @@
 class ModelBuilder
+  @@feature_selector = FeatureSelector.new
+
+  def self.feature_selector
+    @@feature_selector
+  end
+
   def self.build(opt)
     if opt[:dir]
       dirname = opt[:dir]
       dir = Dir.new(dirname)
       files = dir.select {|f| f if f =~ /\.tr[su]$/}
-      files.map! { |f| dirname + "/" + f}
+      files.map! { |f| TrainingFile.new(dirname + "/" + f)}
     else
       files = opt[:files]
     end
@@ -34,18 +40,25 @@ class ModelBuilder
 
       extractors = [word_feature_extractor, pos_extractor, first_second_word_extractor, num_words_extractor, fraction_extractor]
 
+      train_data = []
       lines.each do |line|
         fv = []
         extractors.each do |e|
           cur_fv = e.extract_features(line.text)
           fv += cur_fv unless cur_fv.nil?
         end
-        fv.sort!
         class_id = LibLinearModel.from_class_str_to_ids(line.class)
+        @@feature_selector.update(LibLinearModel.from_class_str(line.class), fv)
+        train_data << [class_id, fv]
+      end
+
+      train_data.each do |data|
+        class_id = data[0]
+        fv = @@feature_selector.filter(data[1])
+        fv.sort!
         feature_vector_str = Feature.write_feature_vector(fv)
         training_file.puts("#{class_id} #{feature_vector_str}")
       end
-
 
       feature_id_file = File.new('feature_ids.txt', 'w')
       feature_id_file.puts(extractors.collect{|extractor| extractor.class}.join(","))
