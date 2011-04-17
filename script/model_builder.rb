@@ -16,10 +16,10 @@ class ModelBuilder
     end
 
     puts files[0]
-    build_model_from_training_files(files)
+    build_model_from_training_files(files, opt[:use_svm])
   end
 
-  def self.build_model_from_training_files(train_files)
+  def self.build_model_from_training_files(train_files, use_svm = true)
 
       lines = []
       train_files.each do |f|
@@ -48,14 +48,15 @@ class ModelBuilder
           fv += cur_fv unless cur_fv.nil?
         end
         class_id = LibLinearModel.from_class_str_to_ids(line.class)
-        @@feature_selector.update(LibLinearModel.from_class_str(line.class), fv)
+        #@@feature_selector.update(LibLinearModel.from_class_str(line.class), fv)
         train_data << [class_id, fv]
       end
 
       @@feature_selector.compute
       train_data.each do |data|
         class_id = data[0]
-        fv = @@feature_selector.filter(data[1])
+        #fv = @@feature_selector.filter(data[1])
+        fv = data[1]
         fv.sort!
         feature_vector_str = Feature.write_feature_vector(fv)
         training_file.puts("#{class_id} #{feature_vector_str}")
@@ -64,11 +65,17 @@ class ModelBuilder
       feature_id_file = File.new('feature_ids.txt', 'w')
       feature_id_file.puts(extractors.collect{|extractor| extractor.class}.join(","))
       Feature.write_feature_ids_to_file(feature_id_file)
-      train
+      train(use_svm)
   end
 
-  def self.train()
-    `$LL_HOME/train -s 0 training.txt`
+  def self.train(use_svm)
+    if (use_svm)
+      puts "Training SVM model"
+      `$LL_HOME/train -c 0.1 training.txt`
+    else
+      puts "Training logistic model"
+      `$LL_HOME/train -s 0 training.txt`
+    end
     model_size=`ls -l training.txt.model`
     #puts "Adding model file: #{model_size}"
   end

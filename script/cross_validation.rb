@@ -68,7 +68,7 @@ def create_run(run_name)
   [log, summary]
 end
 
-def main(run_name)
+def main(run_name, use_svm)
   bad_errors = 0
   total_length = 0
   dir = Dir.new('config/training')
@@ -80,7 +80,7 @@ def main(run_name)
   for i in 0...files.length
     ranges = get_training_range(files.length, i)
     test_files, train_files = split_files(files, ranges)
-    ModelBuilder.build_model_from_training_files(train_files)
+    ModelBuilder.build_model_from_training_files(train_files, use_svm)
     cur_error, cur_length, no_errors = predict(test_files, logfile)
     puts("#{i}:{#{no_errors}/#{test_files.length}}(#{cur_error}/#{cur_length})=#{cur_error/Float(cur_length)}")
     summaryfile.puts("#{i}:{#{no_errors}/#{test_files.length}}(#{cur_error}/#{cur_length})=#{cur_error/Float(cur_length)}")
@@ -93,15 +93,16 @@ end
 
 
 if __FILE__ == $PROGRAM_NAME
+  use_svm = ARGV.delete("-s")
   if ARGV.length != 1
-    puts "Usage: ruby create_lib_svm_data.rb identifier"
+    puts "Usage: ruby create_lib_svm_data.rb identifier [-s]"
   else
     ll_home = `echo $LL_HOME`
     puts ll_home
     if ll_home.strip.empty?
       puts "You must set LL_HOME environment variable."
     else
-      main(ARGV[0])
+      main(ARGV[0], !use_svm.nil?)
     end
   end
 end

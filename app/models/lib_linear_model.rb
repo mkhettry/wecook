@@ -1,12 +1,13 @@
 class LibLinearModel
   LABEL_ID_MAPPING = {"PR" => 0, "IN" => 1, "OT" => 2, "FO" => 3, "NO" => 4, "TA" => 5}
 
-  attr_accessor :name_id_map, :extractors, :model_weights_for_classes
+  attr_accessor :name_id_map, :extractors, :model_weights_for_classes, :solver_type
 
   def initialize(opt={})
     @model_weights_for_classes = {}
     @name_id_map = {}
     @extractors = []
+    @solver_type = nil
     if (opt[:dir])
       model_file = nil
       fid_file = nil
@@ -47,7 +48,7 @@ class LibLinearModel
     end
 
     #TODO ignoring bias for now
-    solver_type, nr_classes, labels, nr_features, bias = nil
+    nr_classes, labels, nr_features, bias = nil
     current_feature_id = 0
     in_header_section = true
     Rails.logger.info("Reading #{model_file_lines.length} lines in model.")
@@ -57,7 +58,15 @@ class LibLinearModel
         parts = line.split
         case parts[0]
           when "solver_type" then
-            solver_type = parts[1]
+            if (parts[1] =~ /LR$/)
+              @solver_type = :logistic
+            else
+              if (parts[1] =~ /_SVC_/)
+                @solver_type = :svm
+              else
+                raise Exception, "Unsupported solver type: #{parts[1]}"
+              end
+            end
           when "nr_class" then
             nr_classes = Integer(parts[1])
           when "label" then
@@ -80,7 +89,7 @@ class LibLinearModel
       end
     end
     Rails.logger.info("Finished reading model")
-    check_model(solver_type, nr_classes, labels, nr_features, bias)
+    check_model(nr_classes, labels, nr_features, bias)
 
   end
 
@@ -98,7 +107,7 @@ class LibLinearModel
     end
   end
 
-  def check_model(solver_type, nr_classes, labels, nr_features, bias)
+  def check_model(nr_classes, labels, nr_features, bias)
     #check number of classes
     if @model_weights_for_classes.keys.length != nr_classes
       raise Exception, "\nNumber of classes do not match. nr_classes=#{nr_classes}
@@ -208,7 +217,12 @@ class LibLinearModel
 
         @sorted_pairs = []
         map.each do |k,v|
-          @sorted_pairs << [k, v/Float(sum)]
+          if (m.has_key?(:normalize) and m[:normalize] == false)
+            @sorted_pairs << [k,v]
+          else
+            @sorted_pairs << [k, v/Float(sum)]
+
+          end
         end
 
         @sorted_pairs.sort! {|a,b| b[1] <=> a[1]}
@@ -245,9 +259,9 @@ class LibLinearModel
 
     # if n = 1, returns the second class and so on.
     def top_class (n = 0)
-      if delta_between(0,-1) <= 0.05
-        return :OT
-      end
+      #if delta_between(0,-1) <= 0.05
+      #  return :OT
+      #end
       @sorted_pairs[n][0]
     end
 
@@ -310,25 +324,47 @@ class LibLinearModel
 
   def self.from_class_str(class_str)
     case class_str.downcase
-        when "pr" then :PR
-        when "in" then :IN
-        when "ot" then :OT
-        when "fo" then :FO
-        when "no" then :NO
-        when "ta" then :TA
-        else :UN
-      end
+      when "pr" then :PR
+      when "in" then :IN
+      when "ot" then :OT
+      when "fo" then :FO
+      when "no" then :NO
+      when "ta" then :TA
+      else :UN
+    end
 
   end
   #feature_vector is a list of features
   def predict(feature_vector)
     prediction = {}
+    normalize = nil
     @model_weights_for_classes.keys.each do |class_id|
-      current_probability = probability_for_class(class_id, feature_vector)
-      prediction[LibLinearModel.from_class_id(class_id)] = current_probability
+      if (@solver_type == :logistic)
+        current_score = probability_for_class(class_id, feature_vector)
+      else
+        current_score = svm_score_for_class(class_id, feature_vector)
+      end
+      prediction[LibLinearModel.from_class_id(class_id)] = current_score
     end
-    Prediction.new(:map => prediction)
+    if (@solver_type == :logistic)
+      Prediction.new(:map => prediction)
+    else
+      Prediction.new(:map => prediction, :normalize => false)
+    end
   end
+
+
+  def svm_score_for_class(class_id, feature_vector)
+    weight_sum = 0.0
+    feature_vector.each do |feature|
+      if @model_weights_for_classes[class_id].has_key?(feature.feature_id)
+        weight_sum += @model_weights_for_classes[class_id][feature.feature_id] * feature.value
+      end
+    end
+
+    weight_sum
+  end
+
 
 
   def solver_type=(solver_type)
