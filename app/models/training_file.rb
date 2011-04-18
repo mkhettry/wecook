@@ -22,8 +22,37 @@ class TrainingFile
       lines << tr if tr.valid_line?
     end
     @num_lines = lines.length
-#    puts "Found #{@num_lines} in #{@filename}"
     @lines = lines
+  end
+
+  def get_lines_only
+    get_lines.collect {|line| line.text}
+  end
+
+  # Returns an array of feature vectors.
+  def to_feature_vectors(extractors)
+
+    extractors.each do |e|
+      e.initialize_document(@lines.collect {|line| line.text})
+    end
+
+    feature_vectors = []
+    get_lines.each_index do |idx|
+      line = @lines[idx]
+      fv = []
+      extractors.each do |e|
+        cur_fv = e.extract_features(idx, line.text)
+        fv += cur_fv unless cur_fv.nil?
+      end
+      feature_vectors << fv
+    end
+
+    feature_vectors
+  end
+
+  def get_category(idx)
+    line = @lines[idx]
+    LibLinearModel.from_class_str_to_ids(line.class)
   end
 
   def summarize_line(line, p)
