@@ -27,13 +27,18 @@ body {
     width: 50px;
     height: 50px;
     clear: left;
-    padding: 5px 15px;
+    padding-top: 5px;
+    padding-right: 15px;
+    padding-bottom: 5px;
+
 }
 
 .recipeline .recipetitle {
     /*float: left;*/
     font-size: medium;
-    float: left;
+    /*float: left;*/
+    width: 650px;
+    overflow: visible;
 /*    width: 54px;*/
 }
 
