@@ -5,12 +5,11 @@
 }
 
 .recipeline {
-    height: 50px;
-    border: 1px solid #a52a2a;
+    height: 60px;
+    border: 0 solid #a52a2a;
+    border-top-width: 1px;
     margin: 0;
     display: block;
-    border-bottom-width: 0;
-
 }
 
 body {
@@ -26,8 +25,9 @@ body {
 .recipeline .recipeimage {
     float: left;
     width: 50px;
+    height: 50px;
     clear: left;
-    padding-right: 15px;
+    padding: 5px 15px;
 }
 
 .recipeline .recipetitle {
@@ -35,6 +35,17 @@ body {
     font-size: medium;
     float: left;
 /*    width: 54px;*/
+}
+
+/* copied from instapaper */
+#recipe_list > div:last-child {
+border-bottom-width: 1px;
+/*-moz-border-radius-bottomleft: 15px;*/
+/*-webkit-border-bottom-left-radius: 15px;*/
+/*border-bottom-left-radius: 15px;*/
+/*-moz-border-radius-bottomright: 15px;*/
+/*-webkit-border-bottom-right-radius: 15px;*/
+/*border-bottom-right-radius: 15px;*/
 }
 
 /*#recipe_list table {*/
