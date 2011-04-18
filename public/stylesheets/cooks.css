@@ -1,37 +1,40 @@
-depot_form fieldset {
-    background: #efe;
-}
 
-.depot_form legend {
-    color: #dfd;
-    background: #141;
-    font-family: sans-serif;
-    padding: 0.2em 1em;
-}
-
-.depot_form label {
-    width: 5em;
-    float: left;
-    text-align: right;
-    padding-top: 0.2em;
-    margin-right: 0.1em;
-    display: block;
-}
-
-.depot_form select, .depot_form textarea, .depot_form input {
-    margin-left: 0.5em;
-}
-.depot_form .submit {
-    margin-left: 4em;
-}
-.depot_form div {
-    margin: 0.5em 0;
-}
-
-# Is this the correct css?
 .list_image {
-  width:        60px;
-  height:       70px;
+  width:        50px;
+  height:       50px;
+}
+
+.recipeline {
+    height: 50px;
+    border: 1px solid #a52a2a;
+    margin: 0;
+    display: block;
+    border-bottom-width: 0;
+
+}
+
+body {
+    width: 750px;
+    position: relative;
+    margin: 0 auto 0 auto;
+}
+
+#recipe_list {
+    width: 700px;
+}
+
+.recipeline .recipeimage {
+    float: left;
+    width: 50px;
+    clear: left;
+    padding-right: 15px;
+}
+
+.recipeline .recipetitle {
+    /*float: left;*/
+    font-size: medium;
+    float: left;
+/*    width: 54px;*/
 }
 
 /*#recipe_list table {*/

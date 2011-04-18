@@ -1,22 +1,31 @@
 %h1 Listing Recipes
 #recipe_list
 
-%table
+  - @recipes.each_index do |idx|
+  - recipe = @recipes[idx]
+    .recipeline
+      .recipeimage= image_tag(recipe.sample_image, :class => 'list_image')
+      .recipetitle= recipe.title
 
-  - @recipes.each do |recipe|
-    %tr
-      %td= link_to image_tag(recipe.sample_image, :class => 'list_image'), recipe
-      %td.recipe_summary
-        %dl
-          %dt= recipe.title
-          %dt= recipe.ingredients[0].raw
-          %dt= recipe.ingredients[1].raw if recipe.ingredients[1]
-          %dt= recipe.ingredients[2].raw if recipe.ingredients[2]
-          %dt= recipe.ingredients[3].raw if recipe.ingredients[3]
-          %dt= '.....'
-
-
-
-  %br
 
 = link_to 'New Recipe', new_recipe_path
+
+-#%table
+-#
+-#  - @recipes.each do |recipe|
+-#    %tr
+-#      %td= link_to image_tag(recipe.sample_image, :class => 'list_image'), recipe
+-#      %td.recipe_summary
+-#        %dl
+-#          %dt= recipe.title
+-#          %dt= recipe.ingredients[0].raw
+-#          %dt= recipe.ingredients[1].raw if recipe.ingredients[1]
+-#          %dt= recipe.ingredients[2].raw if recipe.ingredients[2]
+-#          %dt= recipe.ingredients[3].raw if recipe.ingredients[3]
+-#          %dt= '.....'
+-#
+-#
+-#
+-#  %br
+-#
+-#= link_to 'New Recipe', new_recipe_path
