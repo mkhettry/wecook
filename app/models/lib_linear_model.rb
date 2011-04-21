@@ -30,7 +30,7 @@ class LibLinearModel
         read_feature_ids_and_extractors!(:feature_id_file => opt[:dir] + "/" + fid_file)
       end
     else
-      read_model_weights!(:model_file => opt[:model_file])
+      read_model_weights!(:model_file => opt[:model_file], :model_lines => opt[:model_lines])
       read_feature_ids_and_extractors!(opt)
     end
   end
@@ -361,7 +361,6 @@ class LibLinearModel
         weight_sum += @model_weights_for_classes[class_id][feature.feature_id] * feature.value
       end
     end
-
     weight_sum
   end
 

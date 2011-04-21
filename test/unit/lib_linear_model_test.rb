@@ -67,7 +67,7 @@ class LibLinearModelTest <  ActiveSupport::TestCase
     test_model_data = <<-eodata
       solver_type L2R_LR
       nr_class 3
-      label 5 1 3
+      label 0 1 2
       nr_feature 2
       bias -1
       w
@@ -78,16 +78,16 @@ class LibLinearModelTest <  ActiveSupport::TestCase
     model = LibLinearModel.new(:model_lines=>test_model_data)
     test_fv = [Feature.from_liblinear_form("3:10")]
     result = model.predict(test_fv)
-    assert_equal(1.0/3.0, result[5])
-    assert_equal(1.0/3.0, result[1])
-    assert_equal(1.0/3.0, result[3])
+    assert_equal(1.0/3.0, result.probability(LibLinearModel.from_class_id(0)))
+    assert_equal(1.0/3.0, result.probability(LibLinearModel.from_class_id(1)))
+    assert_equal(1.0/3.0, result.probability(LibLinearModel.from_class_id(2)))
   end
 
   test "predict" do
     test_model_data = <<-eodata
       solver_type L2R_LR
       nr_class 3
-      label 5 1 3
+      label 0 1 2
       nr_feature 3
       bias -1
       w
@@ -99,9 +99,14 @@ class LibLinearModelTest <  ActiveSupport::TestCase
     model = LibLinearModel.new(:model_lines=>test_model_data)
     test_fv = [Feature.from_liblinear_form("1:1")]
     result = model.predict(test_fv)
-    assert_equal(true, result[5] > result[1])
-    assert_equal(true, result[5] > result[3])
-    assert_equal(result[1], result[3])
+
+    category_0 = LibLinearModel.from_class_id(0)
+    category_1 = LibLinearModel.from_class_id(1)
+    category_2 = LibLinearModel.from_class_id(2)
+
+    assert_equal(true, result.probability(category_0) > result.probability(category_1))
+    assert_equal(true, result.probability(category_0) > result.probability(category_2))
+    assert_equal(result.probability(category_1), result.probability(category_2))
   end
 
   test "prediction basic" do
@@ -112,7 +117,7 @@ class LibLinearModelTest <  ActiveSupport::TestCase
     map[:NO] = 0.01
     map[:TA] = 0.011
     map[:OT] = 0.023
-    p = LibLinearModel::Prediction.new(map)
+    p = LibLinearModel::Prediction.new(:map => map)
     assert_equal :PR, p.top_class
   end
 
