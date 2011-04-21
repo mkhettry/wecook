@@ -82,8 +82,10 @@ def main(run_name, use_svm)
     test_files, train_files = split_files(files, ranges)
     ModelBuilder.build_model_from_training_files(train_files, use_svm)
     cur_error, cur_length, no_errors = predict(test_files, logfile)
-    puts("#{i}:{#{no_errors}/#{test_files.length}}(#{cur_error}/#{cur_length})=#{cur_error/Float(cur_length)}")
-    summaryfile.puts("#{i}:{#{no_errors}/#{test_files.length}}(#{cur_error}/#{cur_length})=#{cur_error/Float(cur_length)}")
+
+    run_summary = "#{i}:{#{no_errors}/#{test_files.length}}(#{cur_error}/#{cur_length})=#{"%0.3f" % (cur_error/Float(cur_length))}"
+    puts(run_summary)
+    summaryfile.puts(run_summary)
     summaryfile.flush
     bad_errors += cur_error
     total_length += cur_length
