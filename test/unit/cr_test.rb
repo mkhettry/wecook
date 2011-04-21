@@ -6,7 +6,7 @@ class CRTest < ActiveSupport::TestCase
   end
 
   def newp(map)
-    LibLinearModel::Prediction.new(map)
+    LibLinearModel::Prediction.new(:map => map)
   end
 
   test "list with one element" do
