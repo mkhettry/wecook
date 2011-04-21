@@ -259,6 +259,10 @@ class RecipeDocument
 
     doc.traverse do |n|
 #      next if inside_ignorable_element(n)
+#      puts "#{n.name}--#{n.next_sibling.name if n.next_sibling}"
+#      if (n.text?)
+#        puts "#{n.text.lstrip.rstrip.empty?}"
+#      end
 
       if n.text? and not n.text.lstrip.rstrip.empty?
         #puts "appending #{n.text.lstrip.rstrip} because of #{n.name}"
@@ -276,7 +280,17 @@ class RecipeDocument
   end
 
   def split_line(node)
-    node.name == 'br' || node.name == 'p' || node.name == 'div' || node.name == 'ul' ||node.name == 'li' || node.name =~ /h\d/ || node.name == 'tr'
+    node.name == 'br' ||
+        node.name == 'p' ||
+        node.name == 'div' ||
+        node.name == 'ul' ||
+        node.name == 'li' ||
+        node.name =~ /h\d/ ||
+        node.name == 'tr' ||
+        node.next_sibling.name == 'ul' if node.next_sibling ||
+        node.next_sibling.name == 'ol' if node.next_sibling
+
+
   end
 
 end
