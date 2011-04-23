@@ -49,8 +49,37 @@ class RecipeDocument
     @url
   end
 
-  def extract_ingredients
-    extract_ingredients_structured
+  def extract_lines_for_category(predictions, category)
+    ingredients = []
+    predictions.each_index do |idx|
+      if predictions[idx].top_class == category
+        ingredients << extract_lines[idx]
+      end
+    end
+    ingredients
+  end
+
+  def extract_ingredients(predictions=nil)
+    if is_structured?
+      extract_ingredients_structured
+    elsif predictions
+      Rails.logger.info("Using model to predict for #{@url}")
+      extract_lines_for_category(predictions, :IN)
+    else
+      raise "no model for unstructured site: #{@url}"
+    end
+
+  end
+
+  def extract_prep(predictions=nil)
+      if (is_structured?)
+        extract_prep_structured
+      elsif predictions
+        Rails.logger.info("Using model to predict for #{@url}")
+        extract_lines_for_category(predictions, :PR)
+      else
+        raise "No predictions passed in"
+    end
   end
 
   def extract_images
@@ -79,7 +108,7 @@ class RecipeDocument
   end
 
   def extract_lines
-    create_lines_from_nodes(@trimmed_doc)
+    @lines ||= create_lines_from_nodes(@trimmed_doc)
   end
 
   def is_structured?
@@ -124,9 +153,6 @@ class RecipeDocument
     prep_lines
   end
 
-  def extract_prep
-    extract_prep_structured
-  end
 
   private
   def ignorable_element(n)

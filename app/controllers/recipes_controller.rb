@@ -1,6 +1,7 @@
 require 'nokogiri'
 
 class RecipesController < ApplicationController
+
   # GET /recipes
   # GET /recipes.xml
   def index
@@ -42,18 +43,26 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.xml
   def create
-
+    model = LibLinearModel.get_model
     # This should be moved to RecipeDocument
     recipe_document = RecipeDocument.new(params[:recipe])
-
     @recipe = Recipe.new(params[:recipe])
+
+
     @recipe.title = recipe_document.title
 
-    ingredients = recipe_document.extract_ingredients
-    puts ingredients
+    predictions = model.predict_url(recipe_document)
+
+    ingredients = recipe_document.extract_ingredients predictions
     ingredients.each do |i|
       ingredient = Ingredient.new(:raw => i)
       @recipe.ingredients << ingredient
+    end
+
+    directions = recipe_document.extract_prep(predictions)
+    directions.each do |d|
+      direction = Direction.new(:raw_text => d)
+      @recipe.directions << direction
     end
 
     images = recipe_document.extract_images
@@ -62,11 +71,6 @@ class RecipesController < ApplicationController
       @recipe.images << image
     end
 
-    directions = recipe_document.extract_prep
-    directions.each do |d|
-      direction = Direction.new(:raw_text => d)
-      @recipe.directions << direction
-    end
 
     respond_to do |format|
       if @recipe.save

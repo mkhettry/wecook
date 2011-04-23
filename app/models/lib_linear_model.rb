@@ -2,6 +2,13 @@ class LibLinearModel
   LABEL_ID_MAPPING = {"PR" => 0, "IN" => 1, "OT" => 2, "FO" => 3, "NO" => 4, "TA" => 5}
 
   attr_accessor :name_id_map, :extractors, :model_weights_for_classes, :solver_type
+  @@model = nil
+
+  # TODO: is this the right way to get shared state initialized just once for controllers?
+  def self.get_model
+    @@model ||= LibLinearModel.new(:dir => "config/model")
+    @@model
+  end
 
   def initialize(opt={})
     @model_weights_for_classes = {}
@@ -132,12 +139,14 @@ class LibLinearModel
 
   def predict_url(rd)
     lines = rd.extract_lines
+    predictions = []
     lines.each do |line|
       fv = get_feature_vector(line)
       p = predict(fv)
+      predictions << p
       puts "#{p.top_class}\t#{p.top_two}\t#{line[0..256]}"
     end
-    nil
+    predictions
   end
 
   def predict_lines(lines)
