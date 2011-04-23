@@ -5,7 +5,7 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.xml
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.paginate :page=>params[:page], :order=>'created_at desc', :per_page => 10
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,4 +1,7 @@
-%h1 Listing Recipes
+%h1 WeCook
+
+.add_button= link_to 'Add +', new_recipe_path
+
 #recipe_list
 
   - @recipes.each_index do |idx|
@@ -7,5 +10,7 @@
       .recipeimage= image_tag(recipe.sample_image, :class => 'list_image')
       .recipetitle= link_to recipe.title, recipe
 
-= link_to 'New Recipe', new_recipe_path
+.p= will_paginate @orders
+
+
 

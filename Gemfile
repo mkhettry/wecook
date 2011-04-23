@@ -9,9 +9,7 @@ gem 'pg'
 gem 'nokogiri', ">= 1.4.2"
 gem 'paperclip'
 gem 'haml'
-#gem 'ruby-readability', :require => 'readability'
-
-#gem 'classifier'
+gem 'will_paginate', '>= 3.0.pre'
 
 # Use unicorn as the web server
 # gem 'unicorn'

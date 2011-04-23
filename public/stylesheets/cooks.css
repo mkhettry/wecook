@@ -26,13 +26,12 @@ a:hover {
 }
 
 body {
-    width: 750px;
+    width: 700px;
     position: relative;
     margin: 0 auto 0 auto;
 }
 
 #recipe_list {
-    width: 700px;
 }
 
 .recipeline .recipeimage {
@@ -101,5 +100,15 @@ img.center {
 #recipe_detail h1 {
     font-size: 25px;
     overflow: hidden;
+}
+
+.pagination{
+    padding-top:5px;
+    text-align:right;
+}
+
+.add_button{
+    text-align:right;
+    font-size:110%;
 }
 
