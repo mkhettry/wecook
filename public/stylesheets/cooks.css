@@ -12,6 +12,19 @@
     display: block;
 }
 
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #000;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 body {
     width: 750px;
     position: relative;
@@ -81,21 +94,12 @@ img.center {
     width: 200px;
 }
 
-#recipe_detail h1 {
-color:#6A6A6A;
-font-family:Georgia,Times,Times New Roman,serif;
-font-size:1.75em;
-font-weight:normal;
-letter-spacing:0.02em;
-line-height:150%;
-margin:2px 0 6px 15px;
-padding:0 0 3px;
-text-align:center;
-text-decoration:none;
+.recipe_detail{
+    font-family:Helvetica,sans-serif;
 }
 
-ul {
-    margin-left: 20px;
-    list-style-type: none;
-    color: #6b8e23;
+#recipe_detail h1 {
+    font-size: 25px;
+    overflow: hidden;
 }
+

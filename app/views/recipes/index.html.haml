@@ -5,7 +5,7 @@
   - recipe = @recipes[idx]
     %div{:class => ((idx != 0) ? ((idx == @recipes.length - 1) ? "recipeline recipelast" : "recipeline") : "recipeline recipefirst")}
       .recipeimage= image_tag(recipe.sample_image, :class => 'list_image')
-      .recipetitle= recipe.title
+      .recipetitle= link_to recipe.title, recipe
 
 = link_to 'New Recipe', new_recipe_path
 
