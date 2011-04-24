@@ -70,10 +70,8 @@ class ModelBuilder
 
   def self.train(use_svm)
     if (use_svm)
-      puts "Training SVM model"
       `$LL_HOME/train -c 0.1 training.txt`
     else
-      puts "Training logistic model"
       `$LL_HOME/train -s 0 training.txt`
     end
     model_size=`ls -l training.txt.model`

@@ -69,6 +69,8 @@ def create_run(run_name)
 end
 
 def main(run_name, use_svm)
+  puts use_svm ? "Using SVM" : "Using Logistic"
+
   bad_errors = 0
   total_length = 0
   dir = Dir.new('config/training')
@@ -83,14 +85,16 @@ def main(run_name, use_svm)
     ModelBuilder.build_model_from_training_files(train_files, use_svm)
     cur_error, cur_length, no_errors = predict(test_files, logfile)
 
-    run_summary = "#{i}:{#{no_errors}/#{test_files.length}}(#{cur_error}/#{cur_length})=#{"%0.3f" % (cur_error/Float(cur_length))}"
+    run_summary = "#{i}:{#{no_errors}/#{test_files.length}}(#{cur_error}/#{cur_length})=#{"%0.3f" % (100*cur_error/Float(cur_length))}%"
     puts(run_summary)
     summaryfile.puts(run_summary)
     summaryfile.flush
     bad_errors += cur_error
     total_length += cur_length
   end
-  summaryfile.puts("(#{bad_errors}/#{total_length})=#{bad_errors/Float(total_length)}")
+  total_summary = "(#{bad_errors}/#{total_length})=#{"%0.4f" % (100*bad_errors/Float(total_length))}%"
+  puts "END:" + total_summary
+  summaryfile.puts(total_summary)
 end
 
 
