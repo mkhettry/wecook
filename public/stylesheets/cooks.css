@@ -112,3 +112,8 @@ img.center {
     font-size:110%;
 }
 
+.inline_recipe{
+    width: 600px;
+    margin-left: 50px;
+    background-color: #f0ffff;
+}
