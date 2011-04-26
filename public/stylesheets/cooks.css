@@ -54,6 +54,12 @@ body {
 /*    width: 54px;*/
 }
 
+.recipeline .recipemeta {
+    font-size: smaller;
+    float: right;
+    padding-top: 20px;
+}
+
 /* copied from instapaper */
 #recipe_list > div:last-child {
 border-bottom-width: 1px;

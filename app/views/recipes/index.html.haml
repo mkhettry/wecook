@@ -9,6 +9,10 @@
     %div{:class => ((idx != 0) ? ((idx == @recipes.length - 1) ? "recipeline recipelast" : "recipeline") : "recipeline recipefirst")}
       .recipeimage= image_tag(recipe.sample_image, :class => 'list_image')
       .recipetitle= link_to recipe.title, recipe, :remote => true
+      .recipemeta
+        -#= link_to "show", recipe, :remote => true
+        -#= link_to "details", recipe
+        = time_ago_in_words(recipe.created_at) + " ago"
     %div{:class=> "inline_recipe", :id => "r_#{recipe.id}", :style => "display:none"}
 
 .p= will_paginate @orders
