@@ -50,13 +50,15 @@ class RecipeDocument
   end
 
   def extract_lines_for_category(predictions, category)
-    ingredients = []
+    category_lines = []
     predictions.each_index do |idx|
       if predictions[idx].top_class == category
-        ingredients << extract_lines[idx]
+        line = extract_lines[idx]
+        line = remove_start_numbering(line) if category == :PR
+        category_lines << line
       end
     end
-    ingredients
+    category_lines
   end
 
   def extract_ingredients(predictions=nil)
@@ -147,7 +149,9 @@ class RecipeDocument
     prep_text_nodes.each do |p|
       new_lines = create_lines_from_nodes(p)
       next if new_lines.empty?
-      prep_lines += new_lines
+      new_lines.each do |line|
+        prep_lines << remove_start_numbering(line)
+      end
     end
 
     prep_lines
@@ -174,6 +178,10 @@ class RecipeDocument
     return true if n.name == 'title'
 
     false
+  end
+
+  def remove_start_numbering(line)
+    line.sub(/^\d+[\.\)]/,"").strip
   end
 
   def is_header(n)
