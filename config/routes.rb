@@ -1,5 +1,7 @@
 Cooks::Application.routes.draw do
 
+  resources :bookmarks
+
   controller :sessions do
     get 'login' => :new
     post 'login' => :create

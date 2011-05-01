@@ -1,0 +1,35 @@
+page << "function foo(){
+  var d=document;
+  l=d.location;
+  e=encodeURIComponent;
+  p=l.href;
+  return p};
+ function post_to_url() {
+    var form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', 'http://localhost:3000/bookmarks/');
+    var hiddenField = document.createElement('input');
+    hiddenField.setAttribute('type', 'hidden');
+    hiddenField.setAttribute('name', 'recipe[url]');
+    var a = foo();
+    console.log('got url' + a);
+    hiddenField.setAttribute('value', a);
+
+    var auth = document.createElement('input');
+    auth.setAttribute('type', 'hidden');
+    auth.setAttribute('name', 'authenticity_token');
+"
+s = "auth.setAttribute('value','"+form_authenticity_token + "');"
+
+page << s
+
+page << "
+    form.appendChild(hiddenField);
+    form.appendChild(auth);
+
+    document.body.appendChild(form);
+    console.log('submitting form');
+    form.submit();
+    console.log('submitted form');
+}
+post_to_url();"
