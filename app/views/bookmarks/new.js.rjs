@@ -7,7 +7,7 @@ page << "function foo(){
  function post_to_url() {
     var form = document.createElement('form');
     form.setAttribute('method', 'post');
-    form.setAttribute('action', 'http://localhost:3000/bookmarks/');
+    form.setAttribute('action', 'http://localhost:3000/recipes/');
     var hiddenField = document.createElement('input');
     hiddenField.setAttribute('type', 'hidden');
     hiddenField.setAttribute('name', 'recipe[url]');
