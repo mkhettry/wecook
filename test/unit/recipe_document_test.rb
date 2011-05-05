@@ -506,6 +506,7 @@ class RecipeDocumentTest < ActiveSupport::TestCase
               :url => 'http://www.foodbuzz.com/blogs/3623585-triple-berry-orange-glazed-shortbread',
               :file => fixture_path + 'webpages/foodbuzz-triple-berry.html')
     assert_equal('http://www.sprinkledwithflour.com/2011/05/triple-berry-orange-shortbread.html', opts[:url])
+    assert_equal [:url], opts.keys
   end
 
 #
