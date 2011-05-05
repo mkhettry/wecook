@@ -9,8 +9,29 @@ class RecipeDocument
 
   DEFAULT_OPTIONS = {:debug => false}
 
-  def self.newDocument(opts={})
-    RecipeDocument.new(opts)
+  def self.new_document(opts={})
+    RecipeDocument.new(redirect_if_needed(opts))
+  end
+
+  def self.redirect_if_needed(opts)
+    url = opts[:url]
+    if (url =~ /foodbuzz.com/)
+      doc = Nokogiri::HTML(read_document(opts))
+      iframe = doc.css('iframe#frame')
+      return :url => iframe[0]['src'] if iframe and iframe[0]
+    end
+    opts
+  end
+
+  def self.read_document(opts)
+    if opts[:file]
+      s = File.open(opts[:file]).read
+    elsif opts[:string]
+      s=opts[:string]
+    else
+      s = open(opts[:url]).read
+    end
+    s
   end
 
   # Either pass in a hash with :file as filename and :url as the address or
@@ -19,13 +40,7 @@ class RecipeDocument
   def initialize(opts={})
     @url = opts[:url]
 
-    if opts[:file]
-      s = File.open(opts[:file]).read
-    elsif opts[:string]
-      s=opts[:string]
-    else
-      s = open(opts[:url]).read
-    end
+    s = read_document(opts)
 
     @options = DEFAULT_OPTIONS.merge(opts)
     # remove hardspaces &nbsp with a simple space.

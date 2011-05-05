@@ -44,9 +44,11 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.xml
   def create
+    Rails.logger.info(" recipe_create #{params}")
+
     model = LibLinearModel.get_model
     # This should be moved to RecipeDocument
-    recipe_document = RecipeDocument.new(params[:recipe])
+    recipe_document = RecipeDocument.new_document(params[:recipe])
     @recipe = Recipe.new(params[:recipe])
 
 
