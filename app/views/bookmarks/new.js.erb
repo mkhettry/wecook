@@ -1,0 +1,19 @@
+//var container = document.createElement("div");
+//container.id="saveme2";
+//container.visibility=false;
+//container.innerHTML = '<%= escape_javascript render(:partial => "recipes/form", :object => @recipe) %>';
+//document.body.appendChild(container);
+//var form_field = document.getElementById("recipe_url");
+//form_field.value=document.location;
+
+var w = window;
+
+var x=w.XMLHttpRequest ? new XMLHttpRequest() : (w.ActiveXObject?new ActiveXObject('Microsoft.XMLHTTP'):0);
+x.open('POST', 'http://localhost:3000/bookmarks/', true);
+x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+//x.setRequestHeader('Content-length', 3);
+x.setRequestHeader('Connection', 'close');
+x.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+x.onreadystatechange=function() { alert('hello!!! from ajax forms'); };
+
+x.send('&foobar=' + document.location + '&authenticity_token=' + '<%= escape_javascript form_authenticity_token %>' + '&action=create&controller=bookmarks');

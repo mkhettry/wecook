@@ -1,4 +1,6 @@
 class BookmarksController < ApplicationController
+  skip_before_filter :verify_authenticity_token
+
   # GET /bookmarks
   # GET /bookmarks.xml
   def index
@@ -26,7 +28,7 @@ class BookmarksController < ApplicationController
   def new
     @recipe = Recipe.new
     @url = params[:url]
-    Rails.logger.info("I am here")
+    Rails.logger.info("bookmarks#new")
     respond_to do |format|
       format.html # new.html.erb
       format.js
@@ -44,7 +46,7 @@ class BookmarksController < ApplicationController
   def create
     model = LibLinearModel.get_model
     # This should be moved to RecipeDocument
-    recipe_document = RecipeDocument.new(params[:recipe])
+    recipe_document = RecipeDocument.new(:url => params[:foobar])
     @recipe = Recipe.new(params[:recipe])
 
 
@@ -68,6 +70,12 @@ class BookmarksController < ApplicationController
     images.each do |i|
       image = Image.new(:jpg => open(i))
       @recipe.images << image
+    end
+
+    # TODO: error handling?
+    @recipe.save
+    respond_to do |format|
+      format.js
     end
   end
 

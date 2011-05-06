@@ -40,7 +40,7 @@ class RecipeDocument
   def initialize(opts={})
     @url = opts[:url]
 
-    s = read_document(opts)
+    s = RecipeDocument.read_document(opts)
 
     @options = DEFAULT_OPTIONS.merge(opts)
     # remove hardspaces &nbsp with a simple space.

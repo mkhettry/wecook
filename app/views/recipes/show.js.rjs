@@ -1,4 +1,0 @@
-page["r_#{@recipe.id}"].toggle
-page.replace_html "r_#{@recipe.id}".intern, :partial => 'recipe_details', :object => @recipe
-#page["r_#{@recipe.id}"].removeClassName("hidden_recipe")
-
