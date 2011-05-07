@@ -43,10 +43,11 @@ class RecipesController < ApplicationController
     params[:changed].split("|").each do |change|
       next if change.empty?
       idx, category = change.split("=")
-      corrections[idx] = category
+      corrections[Integer(idx)] = category
     end
 
     @recipe.correct!(corrections)
+    @recipe.state = :ready
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to(@recipe, :notice => 'Recipe was successfully corrected.') }

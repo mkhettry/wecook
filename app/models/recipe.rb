@@ -27,9 +27,11 @@ class Recipe < ActiveRecord::Base
   end
 
   def correct!(corrections)
+    Rails.logger.debug("got corrections with: " + corrections.to_s)
     get_lines_with_prediction.each_with_index do |map, idx|
       if corrections.has_key?(idx)
         prediction = corrections[idx].downcase
+        Rails.logger.debug("Using corrected prediction " + prediction + " for id: " + idx.to_s)
       else
         prediction = map[:class].downcase
       end
