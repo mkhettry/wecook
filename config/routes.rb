@@ -13,6 +13,7 @@ Cooks::Application.routes.draw do
   resources :recipes do
     member do
       get 'show_provisional'
+      post 'submit_provisional'
     end
   end
 

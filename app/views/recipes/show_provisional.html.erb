@@ -2,11 +2,15 @@
     $(document).ready(function(){
 
         $("select").change(function(event){
+            //mark as changed
             $(this).addClass("prov_changed");
+            //change css class of line
             var line_id = $(this).attr('id').replace("select","line");
             var line_class = $('#'+line_id).attr('class');
             $('#'+line_id).removeClass(line_class);
             $('#'+line_id).addClass($(this).val());
+            //add changed text
+            $('#text_field').val($('#text_field').val() + '|' + line_id.replace("prov_line","") + '=' + $(this).val());
         });
 
         $("div.prov").hover(
@@ -22,7 +26,7 @@
     })
 </script>
 
-<% get_lines_with_prediction(@recipe).each_with_index do |map,idx| %>
+<% @recipe.get_lines_with_prediction.each_with_index do |map,idx| %>
     <% id_string = idx.to_s %>
 
     <div id= "<%='prov_'+id_string %>" class="prov">
@@ -36,4 +40,9 @@
       </div>
 
     </div>
+<% end %>
+
+<%= form_tag(submit_provisional_recipe_path(@recipe)) do %>
+    <%= text_field_tag :changed, nil, :id => "text_field" %>
+    <%= submit_tag 'Save Changes' %>
 <% end %>

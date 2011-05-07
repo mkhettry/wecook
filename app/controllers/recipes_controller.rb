@@ -34,8 +34,30 @@ class RecipesController < ApplicationController
       format.js
       format.xml  { render :xml => @recipe }
     end
-
   end
+
+
+  def submit_provisional
+    @recipe = Recipe.find(params[:id])
+    corrections = {}
+    params[:changed].split("|").each do |change|
+      next if change.empty?
+      idx, category = change.split("=")
+      corrections[idx] = category
+    end
+
+    @recipe.correct!(corrections)
+    respond_to do |format|
+      if @recipe.save
+        format.html { redirect_to(@recipe, :notice => 'Recipe was successfully corrected.') }
+        format.xml  { render :xml => @recipe, :status => :created, :location => @recipe }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @recipe.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
 
   # GET /recipes/new
   # GET /recipes/new.xml

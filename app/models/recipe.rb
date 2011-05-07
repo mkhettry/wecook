@@ -15,6 +15,35 @@ class Recipe < ActiveRecord::Base
     self[:state].intern == :ready
   end
 
+  def get_lines_with_prediction
+    out = []
+    self[:page].split("\n").each do |line|
+      parts = line.split("\t")
+      category = parts[0].downcase
+      category = "ot" unless category == "in" or category == "pr"
+      out << {:class => category, :line => parts[1]}
+    end
+    out
+  end
+
+  def correct!(corrections)
+    get_lines_with_prediction.each_with_index do |map, idx|
+      if corrections.has_key?(idx)
+        prediction = corrections[idx].downcase
+      else
+        prediction = map[:class].downcase
+      end
+      next if prediction == "ot"
+
+      line = map[:line]
+      if (prediction == "in")
+        self.ingredients << Ingredient.new(:raw => line)
+      elsif (prediction == "pr")
+        self.directions << Direction.new(:raw_text => line)
+      end
+    end
+  end
+
   def extract_lines_internal(doc)
     l2 = []
     current_line = ""

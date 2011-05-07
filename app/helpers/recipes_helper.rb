@@ -18,16 +18,4 @@ module RecipesHelper
     end
   end
 
-  def get_lines_with_prediction(recipe)
-    out = []
-    recipe.page.split("\n").each do |line|
-      parts = line.split("\t")
-      category = parts[0].downcase
-      category = "ot" unless category == "in" or category == "pr"
-      out << {:class => category, :line => parts[1]}
-    end
-    out
-  end
-
-
 end
