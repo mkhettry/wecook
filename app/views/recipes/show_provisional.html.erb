@@ -1,5 +1,23 @@
-<% get_lines_with_prediction(@recipe).each do |map| %>
-    <div class = "<%= map[:class]%>" >
-      <%=  map[:line] %> </br>
+<script>
+  $(document).ready(function(){
+      $("select").change(function(event){
+          var line_id = $(this).attr('id').replace("select","line");
+          var line_class = $('#'+line_id).attr('class');
+          $('#'+line_id).removeClass(line_class);
+          $('#'+line_id).addClass($(this).val());
+      });
+  })
+</script>
+
+<% get_lines_with_prediction(@recipe).each_with_index do |map,idx| %>
+
+
+    <div id= "<%='pr_line'+idx.to_s%>" class="<%= map[:class]%>" >
+      <%=  map[:line] %>
     </div>
+
+    <div>
+      <%= select_tag "pr_select"+idx.to_s, options_for_select(RecipesHelper::CATEGORY_MAP, map[:class]) %>
+    </div>
+    </br>
 <% end %>

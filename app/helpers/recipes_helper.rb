@@ -1,5 +1,7 @@
 module RecipesHelper
 
+  CATEGORY_MAP = {:Ingredients => "in", :Directions => "pr", :Other => "ot"}
+
   def get_class_for_inline_recipe(recipe)
     if recipe.is_ready?
       "recipeline"
@@ -20,7 +22,9 @@ module RecipesHelper
     out = []
     recipe.page.split("\n").each do |line|
       parts = line.split("\t")
-      out << {:class => "pr_"+parts[0].downcase, :line => parts[1]}
+      category = parts[0].downcase
+      category = "ot" unless category == "in" or category == "pr"
+      out << {:class => category, :line => parts[1]}
     end
     out
   end
