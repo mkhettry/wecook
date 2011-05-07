@@ -8,7 +8,7 @@
   - recipe = @recipes[idx]
     %div{:class => get_class_for_inline_recipe(recipe)}
       .recipeimage= image_tag(recipe.sample_image, :class => 'list_image')
-      .recipetitle= link_to recipe.title, recipe, :remote => true
+      .recipetitle= get_title_link(recipe)
       .recipemeta
         -#= link_to "show", recipe, :remote => true
         -#= link_to "details", recipe

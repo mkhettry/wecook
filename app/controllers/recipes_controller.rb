@@ -25,6 +25,18 @@ class RecipesController < ApplicationController
     end
   end
 
+
+  def show_provisional
+    @recipe = Recipe.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.js
+      format.xml  { render :xml => @recipe }
+    end
+
+  end
+
   # GET /recipes/new
   # GET /recipes/new.xml
   def new

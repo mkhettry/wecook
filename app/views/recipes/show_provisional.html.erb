@@ -1,0 +1,5 @@
+<% get_lines_with_prediction(@recipe).each do |map| %>
+    <div class = "<%= map[:class]%>" >
+      <%=  map[:line] %> </br>
+    </div>
+<% end %>

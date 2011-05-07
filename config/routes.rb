@@ -10,6 +10,12 @@ Cooks::Application.routes.draw do
 
   resources :recipes
 
+  resources :recipes do
+    member do
+      get 'show_provisional'
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

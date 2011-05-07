@@ -151,6 +151,16 @@ img.center {
     -moz-border-radius-topright: 15px;
     -webkit-border-top-right-radius: 15px;
     border-top-right-radius: 15px;
+}
 
+.pr_ot{
+}
+.pr_in{
+    background-color: #E0EEE0;
+}
+.pr_pr{
+    background-color:#fafad2;
+}
+.pr_no{
 
 }
