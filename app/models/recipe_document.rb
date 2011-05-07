@@ -60,6 +60,44 @@ class RecipeDocument
     @title = @doc.xpath("//title").text.lstrip.rstrip.gsub(/[\n]+/, " ")
   end
 
+  def create_recipe(model)
+    recipe = Recipe.new()
+    recipe.url = @url
+
+    recipe.title = @title
+    if (is_structured?)
+      recipe.state = :ready
+      ingredients = extract_ingredients
+      ingredients.each do |i|
+        ingredient = Ingredient.new(:raw => i)
+        recipe.ingredients << ingredient
+      end
+
+      directions = extract_prep
+      directions.each do |d|
+        direction = Direction.new(:raw_text => d)
+        recipe.directions << direction
+      end
+    else
+      h = model.predict_url(self)
+      lines = h[:lines]
+      predictions = h[:predictions]
+      line_to_output = ""
+      lines.each_index do |idx|
+        line_to_output += predictions[idx].top_class.to_s + "\t" + lines[idx] + "\n"
+      end
+      recipe.page = line_to_output
+      recipe.state = :provisional
+    end
+
+    images = extract_images
+    images.each do |i|
+      image = Image.new(:jpg => open(i))
+      recipe.images << image
+    end
+    recipe
+  end
+  
   def to_s
     @url
   end

@@ -41,6 +41,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
   end
 
+
   # POST /recipes
   # POST /recipes.xml
   def create
@@ -49,30 +50,7 @@ class RecipesController < ApplicationController
     model = LibLinearModel.get_model
     # This should be moved to RecipeDocument
     recipe_document = RecipeDocument.new_document(params[:recipe])
-    @recipe = Recipe.new(params[:recipe])
-
-
-    @recipe.title = recipe_document.title
-
-    predictions = model.predict_url(recipe_document)
-
-    ingredients = recipe_document.extract_ingredients predictions
-    ingredients.each do |i|
-      ingredient = Ingredient.new(:raw => i)
-      @recipe.ingredients << ingredient
-    end
-
-    directions = recipe_document.extract_prep(predictions)
-    directions.each do |d|
-      direction = Direction.new(:raw_text => d)
-      @recipe.directions << direction
-    end
-
-    images = recipe_document.extract_images
-    images.each do |i|
-      image = Image.new(:jpg => open(i))
-      @recipe.images << image
-    end
+    @recipe = recipe_document.create_recipe(model)
 
 
     respond_to do |format|

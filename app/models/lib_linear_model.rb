@@ -146,7 +146,7 @@ class LibLinearModel
       predictions << p
       puts "#{p.top_class}\t#{p.top_two}\t#{line[0..256]}"
     end
-    predictions
+    {:lines => lines, :predictions => predictions}
   end
 
   def predict_lines(lines)
