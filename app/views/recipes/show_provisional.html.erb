@@ -42,7 +42,8 @@
     </div>
 <% end %>
 
+<br/>
 <%= form_tag(submit_provisional_recipe_path(@recipe)) do %>
-    <%= text_field_tag :changed, nil, :id => "text_field" %>
+    <%= text_field_tag :changed, nil, :id => "text_field", :style => "display:none" %>
     <%= submit_tag 'Save Changes' %>
 <% end %>
