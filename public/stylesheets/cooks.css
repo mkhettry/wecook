@@ -154,11 +154,27 @@ img.center {
 }
 
 .ot{
+    float: left;
+    width: 600px;
 }
 
 .in{
     background-color: #E0EEE0;
+    float: left;
+    width: 600px;
 }
 .pr{
     background-color:#fafad2;
+    float: left;
+    width: 600px;
 }
+
+.prov_select{
+    float: right;
+    width: 100px;
+}
+
+.prov{
+    clear: both;
+}
+
