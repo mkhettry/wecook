@@ -6,7 +6,7 @@
 
   - @recipes.each_index do |idx|
   - recipe = @recipes[idx]
-    %div{:class => ((idx != 0) ? ((idx == @recipes.length - 1) ? "recipeline recipelast" : "recipeline") : "recipeline recipefirst")}
+    %div{:class => get_class_for_inline_recipe(recipe)}
       .recipeimage= image_tag(recipe.sample_image, :class => 'list_image')
       .recipetitle= link_to recipe.title, recipe, :remote => true
       .recipemeta

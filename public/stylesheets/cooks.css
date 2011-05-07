@@ -54,6 +54,11 @@ body {
 /*    width: 54px;*/
 }
 
+.recipe_provisional{
+    font-weight:bold;
+    background-color:#f8f8ff;
+}
+
 .recipeline .recipemeta {
     font-size: smaller;
     float: right;

@@ -11,6 +11,10 @@ class Recipe < ActiveRecord::Base
     "url=#{url}"
   end
 
+  def is_ready?
+    self[:state].intern == :ready
+  end
+
   def extract_lines_internal(doc)
     l2 = []
     current_line = ""
