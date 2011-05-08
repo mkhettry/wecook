@@ -2,8 +2,6 @@
     $(document).ready(function(){
 
         $("select").change(function(event){
-            //mark as changed
-            $(this).addClass("prov_changed");
             //change css class of line
             var line_id = $(this).attr('id').replace("select","line");
             var line_class = $('#'+line_id).attr('class');
