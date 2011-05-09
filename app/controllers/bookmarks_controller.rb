@@ -45,33 +45,10 @@ class BookmarksController < ApplicationController
   # POST /bookmarks.xml
   def create
     model = LibLinearModel.get_model
-    # This should be moved to RecipeDocument
-    recipe_document = RecipeDocument.new(:url => params[:foobar])
-    @recipe = Recipe.new(params[:recipe])
+    recipe_document = RecipeDocument.new_document(:url => params[:foobar])
+    @recipe = recipe_document.create_recipe(model)
 
-
-    @recipe.title = recipe_document.title
-
-    predictions = model.predict_url(recipe_document)
-
-    ingredients = recipe_document.extract_ingredients predictions
-    ingredients.each do |i|
-      ingredient = Ingredient.new(:raw => i)
-      @recipe.ingredients << ingredient
-    end
-
-    directions = recipe_document.extract_prep(predictions)
-    directions.each do |d|
-      direction = Direction.new(:raw_text => d)
-      @recipe.directions << direction
-    end
-
-    images = recipe_document.extract_images
-    images.each do |i|
-      image = Image.new(:jpg => open(i))
-      @recipe.images << image
-    end
-
+    Rails.logger.info("Got this recipe: " + @recipe.url)
     # TODO: error handling?
     @recipe.save
     respond_to do |format|

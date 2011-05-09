@@ -83,7 +83,6 @@ class RecipesController < ApplicationController
     Rails.logger.info(" recipe_create #{params}")
 
     model = LibLinearModel.get_model
-    # This should be moved to RecipeDocument
     recipe_document = RecipeDocument.new_document(params[:recipe])
     @recipe = recipe_document.create_recipe(model)
 
