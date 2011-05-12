@@ -51,6 +51,7 @@ body {
     /*float: left;*/
     width: 650px;
     overflow: visible;
+    min-height: 38px;
 /*    width: 54px;*/
 }
 
@@ -62,7 +63,6 @@ body {
 .recipeline .recipemeta {
     font-size: smaller;
     float: right;
-    padding-top: 20px;
 }
 
 /* copied from instapaper */
