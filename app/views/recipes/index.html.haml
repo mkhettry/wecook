@@ -15,7 +15,7 @@
         = time_ago_in_words(recipe.created_at) + " ago"
     %div{:class=> "inline_recipe", :id => "r_#{recipe.id}", :style => "display:none"}
 
-.p= will_paginate @orders
+.p= will_paginate @recipes
 
 
 
