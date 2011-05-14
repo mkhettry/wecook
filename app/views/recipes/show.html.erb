@@ -1,7 +1,6 @@
 <div id="recipe_detail">
 
-  <%= image_tag @recipe.sample_image, :class => 'center' %>
-  <h1><%= @recipe.title %></h1>
+  <%= render :partial => 'recipe_header' %>
 
   <%= render :partial => 'recipe_details' %>
 
