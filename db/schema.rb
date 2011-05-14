@@ -10,7 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110507174610) do
+ActiveRecord::Schema.define(:version => 20110514220258) do
+
+  create_table "bookmarks", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "directions", :force => true do |t|
     t.text    "raw_text"
@@ -29,7 +34,6 @@ ActiveRecord::Schema.define(:version => 20110507174610) do
   create_table "ingredients", :force => true do |t|
     t.string  "raw"
     t.integer "recipe_id"
-    t.integer "ordinal"
   end
 
   create_table "recipes", :force => true do |t|
@@ -39,6 +43,14 @@ ActiveRecord::Schema.define(:version => 20110507174610) do
     t.string   "title",      :null => false
     t.text     "page"
     t.string   "state"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
