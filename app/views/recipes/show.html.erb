@@ -5,7 +5,8 @@
   <%= render :partial => 'recipe_details' %>
 
   <div class="section_header"></div>
-  <%= link_to "Read original recipe at #{@recipe.url.split('/')[2]}", @recipe.url, :target => '_blank' %>
+  <%=
+      link_to "Read original recipe at #{@recipe.site_source()}", @recipe.url, :target => '_blank' %>
 </div>
 
 <%= link_to 'Back', recipes_path %>

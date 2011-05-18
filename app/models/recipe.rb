@@ -11,6 +11,10 @@ class Recipe < ActiveRecord::Base
     "url=#{url}"
   end
 
+  def site_source
+    url.split('/')[2]
+  end
+
   def is_ready?
     self[:state].intern == :ready
   end

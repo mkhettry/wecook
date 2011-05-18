@@ -10,9 +10,7 @@
       .recipeimage= image_tag(recipe.sample_image, :class => 'list_image')
       .recipetitle= get_title_link(recipe)
       .recipemeta
-        -#= link_to "show", recipe, :remote => true
-        -#= link_to "details", recipe
-        = time_ago_in_words(recipe.created_at) + " ago"
+        = render :partial => 'recipe_meta', :locals => {:recipe => recipe}
     %div{:class=> "inline_recipe", :id => "r_#{recipe.id}", :style => "display:none"}
 
 .p= will_paginate @recipes
