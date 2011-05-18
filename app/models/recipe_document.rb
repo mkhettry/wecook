@@ -50,7 +50,7 @@ class RecipeDocument
 
     @trimmed_doc = Nokogiri::HTML(s)
 
-    @trimmed_doc.css("form, object, embed").each do |elem|
+    @trimmed_doc.css("object, embed").each do |elem|
       elem.remove
     end
 
@@ -68,8 +68,8 @@ class RecipeDocument
     if (is_structured?)
       recipe.state = :ready
       ingredients = extract_ingredients
-      ingredients.each do |i|
-        ingredient = Ingredient.new(:raw => i)
+      ingredients.each_with_index do |txt, i|
+        ingredient = Ingredient.new(:raw => txt, :ordinal => i)
         recipe.ingredients << ingredient
       end
 

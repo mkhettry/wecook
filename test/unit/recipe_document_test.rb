@@ -18,6 +18,12 @@ class RecipeDocumentTest < ActiveSupport::TestCase
   assert_equal "lots of freshly grated Parmesan cheese", lines[1]
   end
 
+  test "sfgate recipe got zero lines" do
+    r = RecipeDocument.new(
+        :url => "http://www.sfgate.com/food/recipes/detail.html?p=detail&rid=18199&sorig=qs",
+        :file => fixture_path + '/webpages/Recipes — Cooking Ideas — Minted Cucumber-Lime Soda— SFGate Food & Wine.html')
+  end
+
   test "easy better recipes line break" do
     r =RecipeDocument.new(
         :url => 'http://easy.betterrecipes.com/pepperoni-soup.html',
@@ -250,7 +256,6 @@ class RecipeDocumentTest < ActiveSupport::TestCase
 
   test "remove link heavy divs" do
     r = RecipeDocument.new(
-        :debug => true,
         :string => <<-eohtml
                 <div class="related-keywords">
                 <h4 class="t6 b4"><a href="http://www.guardian.co.uk/lifeandstyle?INTCMP=ILCNETTXT3487">Life and style</a></h4>
@@ -293,7 +298,7 @@ class RecipeDocumentTest < ActiveSupport::TestCase
   end
 
   test "comments are stripped out blogger" do
-    r = RecipeDocument.newDocument(
+    r = RecipeDocument.new_document(
         :url => 'http://evolvingtastes.blogspot.com/2010/11/insalata-caprese.html',
         :file => fixture_path + 'webpages/Evolving Tastes Insalata Caprese Essential.html')
     lines = r.extract_lines
@@ -303,14 +308,14 @@ class RecipeDocumentTest < ActiveSupport::TestCase
 
 
   test "sidebar is stripped from blogger one" do
-    r = RecipeDocument.newDocument(
+    r = RecipeDocument.new_document(
         :url => 'http://evolvingtastes.blogspot.com/2010/11/insalata-caprese.html',
         :file => fixture_path + 'webpages/Evolving Tastes Insalata Caprese Essential.html')
     does_not_contain(r.extract_lines, "October")
   end
 
   test "sidebar is stripped from blogger two" do
-    r = RecipeDocument.newDocument(
+    r = RecipeDocument.new_document(
             :url => 'http://mildredsrecipes.blogspot.com/2010/12/borlotti-bean-soup-with-pico-de-gallo.html',
             :file => fixture_path + 'webpages/borlotti.html')
     lines = r.extract_lines
@@ -318,7 +323,7 @@ class RecipeDocumentTest < ActiveSupport::TestCase
   end
 
   test "sidebar stripping from blogger does not remove main content" do
-    r = RecipeDocument.newDocument(
+    r = RecipeDocument.new_document(
             :url => 'http://mildredsrecipes.blogspot.com/2010/12/borlotti-bean-soup-with-pico-de-gallo.html',
             :file => fixture_path + 'webpages/borlotti.html')
     lines = r.extract_lines
@@ -326,7 +331,7 @@ class RecipeDocumentTest < ActiveSupport::TestCase
   end
 
   test "sidebar is stripped from wordpress" do
-    r = RecipeDocument.newDocument(
+    r = RecipeDocument.new_document(
         :url => "http://365daysveg.wordpress.com/2008/02/03/aloo-tikki/",
         :file => fixture_path + 'webpages/AlooTikki.html')
     does_not_contain(r.extract_lines, "Cucumber")
@@ -343,8 +348,7 @@ class RecipeDocumentTest < ActiveSupport::TestCase
   test "extract structured foodnetwork" do
     r = RecipeDocument.new(
         :file => fixture_path + 'webpages/Chicken Kiev Recipe   Alton Brown   Food Network.html',
-        :url => "http://www.foodnetwork.com/recipes/alton-brown/chicken-kiev-recipe/index.html",
-        :debug => true
+        :url => "http://www.foodnetwork.com/recipes/alton-brown/chicken-kiev-recipe/index.html"
     )
     assert_lines ["8 tablespoons (1 stick) unsalted butter, room temperature",
                   "1 teaspoon dried parsley",
@@ -509,25 +513,18 @@ class RecipeDocumentTest < ActiveSupport::TestCase
     assert_equal [:url], opts.keys
   end
 
-#
-#  test "extract lines removes header elements" do
-#    r = RecipeDocument.newDocument(
-#        :url => 'http://evolvingtastes.blogspot.com/2010/11/insalata-caprese.html',
-#        :string => <<-eohtml
-#        <h2 class='date-header'><span>Friday, November 12, 2010</span></h2>
-#
-#          <div class="date-posts">
-#
-#<div class='post-outer'>
-#<div class='post hentry'>
-#<a name='4708697586169494724'></a>
-#<h3 class='post-title entry-title'>
-#Insalata Caprese
-#</h3>
-#          eohtml
-#        )
-#    does_not_contain r.extract_lines, "Friday, November 12, 2010"
-#  end
+  test "create recipe for structured document" do
+    r = RecipeDocument.new(
+        :url => 'http://www.epicurious.com/recipes/food/views/Swiss-Chard-Lasagna-with-Ricotta-and-Mushroom-362954',
+        :file => fixture_path + '/webpages/Swiss Chard Lasagna with Ricotta and Mushroom Recipe at Epicurious.com.html')
+    recipe = r.create_recipe(nil)
+    puts recipe.ingredients[0].ordinal
+    prev = -1
+    recipe.ingredients.all? do |ingredient|
+      assert prev+1 == ingredient[:ordinal], "#{ingredient.raw} should have had ordinal #{prev+1}"
+      prev = ingredient[:ordinal]
+    end
+  end
 
   private
   def does_not_contain(lines, s)
