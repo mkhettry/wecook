@@ -12,7 +12,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def site_source
-    url.split('/')[2]
+    url.split('/')[2].gsub('www.', '')
   end
 
   def is_ready?
