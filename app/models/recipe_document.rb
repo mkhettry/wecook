@@ -38,7 +38,7 @@ class RecipeDocument
   # simply pass in a :url in which case the page is loaded from the web.
   # TODO: make this private.
   def initialize(opts={})
-    @url = opts[:url]
+    @url = opts[:url].strip
 
     s = RecipeDocument.read_document(opts)
 
