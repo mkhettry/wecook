@@ -14,7 +14,7 @@ class RecipeDocument
   end
 
   def self.redirect_if_needed(opts)
-    url = opts[:url]
+    url = opts[:url].strip
     if (url =~ /foodbuzz.com/)
       doc = Nokogiri::HTML(read_document(opts))
       iframe = doc.css('iframe#frame')
@@ -29,7 +29,7 @@ class RecipeDocument
     elsif opts[:string]
       s=opts[:string]
     else
-      s = open(opts[:url]).read
+      s = open(opts[:url].strip).read
     end
     s
   end
