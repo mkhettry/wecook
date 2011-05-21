@@ -13,6 +13,7 @@ gem 'will_paginate', '>= 3.0.pre'
 gem 'jquery-rails', '>= 0.2.6'
 gem 'omniauth'
 gem 'aws-s3'
+gem 'bcrypt-ruby', :require => 'bcrypt'
 
 # Use unicorn as the web server
 # gem 'unicorn'

@@ -3,19 +3,24 @@ Cooks::Application.routes.draw do
   resources :bookmarks
 
   controller :sessions do
-    get 'login' => :new
     post 'login' => :create
   end
-  resources :users
 
   resources :recipes
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout
+  get "welcome" => "users#welcome", :as => "welcome"
 
   resources :recipes do
     member do
       get 'show_provisional'
       post 'submit_provisional'
+    end
+  end
+
+  resources :users do
+    member do
+      get 'new'
     end
   end
 

@@ -18,4 +18,10 @@ module RecipesHelper
     end
   end
 
+  def get_user_display_name
+    user = current_user
+    if user
+      return user.name ? user.name : user.email
+    end
+  end
 end

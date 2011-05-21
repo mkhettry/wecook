@@ -8,14 +8,9 @@
 </head>
 <body>
 
-<div id="user_nav">
-  <% if current_user %>
-      Welcome <%= current_user.name %>
-      <%= link_to "Sign Out", signout_path %>
-  <% else %>
-      <%= link_to "Sign in with facebook", "/auth/facebook" %>
-  <% end %>
-</div>
+<% flash.each do |name, message| %>
+    <%= content_tag :div, message, :id => "flash_#{name}" %>
+<% end %>
 
 <%= yield %>
 

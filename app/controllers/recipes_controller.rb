@@ -5,11 +5,18 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.xml
   def index
-    @recipes = Recipe.paginate :page=>params[:page], :order=>'created_at desc', :per_page => 10
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @recipes }
+    user = current_user
+    if user.nil?
+#      @recipes = Recipe.paginate :page=>params[:page], :order=>'created_at desc', :per_page => 10
+      redirect_to welcome_path
+    else
+      Rails.logger.info("user id: " + user.id.to_s)
+      user_recipes = UserRecipe.find_all_by_user_id(user.id)
+      @recipes = user_recipes.collect{|ur| ur.recipe}.paginate :page=>params[:page], :order=>'created_at desc', :per_page => 10
+      respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @recipes }
+      end
     end
   end
 
@@ -85,7 +92,6 @@ class RecipesController < ApplicationController
     model = LibLinearModel.get_model
     recipe_document = RecipeDocument.new_document(params[:recipe])
     @recipe = recipe_document.create_recipe(model)
-
 
     respond_to do |format|
       if @recipe.save
