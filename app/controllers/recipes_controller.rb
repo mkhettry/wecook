@@ -11,11 +11,12 @@ class RecipesController < ApplicationController
       redirect_to welcome_path
     else
       Rails.logger.info("user id: " + user.id.to_s)
-      user_recipes = UserRecipe.find_all_by_user_id(user.id)
-      @recipes = user_recipes.collect{|ur| ur.recipe}.paginate :page=>params[:page], :order=>'created_at desc', :per_page => 10
+      @user_recipes = UserRecipe.paginate :per_page => 10, :page => params[:page], :order => "created_at desc", :conditions => ['user_id = ?', user.id]
+#      user_recipes = UserRecipe.find_all_by_user_id(user.id)
+#      @recipes = user_recipes.collect{|ur| ur.recipe}.paginate :page=>params[:page], :order=>'created_at desc', :per_page => 10
       respond_to do |format|
         format.html # index.html.erb
-        format.xml  { render :xml => @recipes }
+        format.xml  { render :xml => @user_recipes }
       end
     end
   end

@@ -5,16 +5,16 @@
 
 #recipe_list
 
-  - @recipes.each_index do |idx|
-  - recipe = @recipes[idx]
+  - @user_recipes.each_index do |idx|
+  - recipe = @user_recipes[idx].recipe
     %div{:class => get_class_for_inline_recipe(recipe)}
       .recipeimage= image_tag(recipe.sample_image, :class => 'list_image')
       .recipetitle= get_title_link(recipe)
       .recipemeta
-        = render :partial => 'recipe_meta', :locals => {:recipe => recipe}
+        = render :partial => 'recipe_meta', :locals => {:user_recipe => @user_recipes[idx]}
     %div{:class=> "inline_recipe", :id => "r_#{recipe.id}", :style => "display:none"}
 
-.p= will_paginate @recipes
+.p= will_paginate @user_recipes
 
 
 
