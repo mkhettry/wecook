@@ -91,15 +91,16 @@ class RecipesController < ApplicationController
 
     model = LibLinearModel.get_model
     recipe_document = RecipeDocument.new_document(params[:recipe])
-    @recipe = recipe_document.create_recipe(model)
+    recipe = recipe_document.create_recipe(model)
+    user_recipe = UserRecipe.new :recipe => recipe, :user => current_user
 
     respond_to do |format|
-      if @recipe.save
-        format.html { redirect_to(@recipe, :notice => 'Recipe was successfully created.') }
-        format.xml  { render :xml => @recipe, :status => :created, :location => @recipe }
+      if user_recipe.save
+        format.html { redirect_to recipes_path }
+        format.xml  { render :xml => recipe, :status => :created, :location => recipe }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @recipe.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => recipe.errors, :status => :unprocessable_entity }
       end
     end
   end
