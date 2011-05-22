@@ -10,11 +10,19 @@ var w = window;
 
 var x=w.XMLHttpRequest ? new XMLHttpRequest() : (w.ActiveXObject?new ActiveXObject('Microsoft.XMLHTTP'):0);
 x.open('POST', 'http://localhost:3000/bookmarks/', true);
-x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+//x.setRequestHeader('Content-type', 'text/xml');
 //x.setRequestHeader('Content-length', 3);
-x.setRequestHeader('Connection', 'close');
+//x.setRequestHeader('Connection', 'close');
 x.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-x.onreadystatechange=function() { alert('hello!!! from ajax forms'); };
+x.onreadystatechange=function() {
+    if (x.readyState == 4){
+        if (x.status == 0){
+            alert('Recipe saved successfully');
+        } else{
+            alert('Recipe could not be saved ' + x.status);
+        }
+    }
+};
 
 x.send('&foobar=' + document.location + '&authenticity_token=' + '<%= escape_javascript form_authenticity_token %>' +
         '&action=create&controller=bookmarks&user_id='+'<%= session[:user_id] %>');
