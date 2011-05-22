@@ -89,12 +89,7 @@ class RecipesController < ApplicationController
   # POST /recipes.xml
   def create
     Rails.logger.info(" recipe_create #{params}")
-
-    model = LibLinearModel.get_model
-    recipe_document = RecipeDocument.new_document(params[:recipe])
-    recipe = recipe_document.create_recipe(model)
-    user_recipe = UserRecipe.new :recipe => recipe, :user => current_user
-
+    user_recipe = UserRecipe.create(params[:recipe][:url], current_user)
     respond_to do |format|
       if user_recipe.save
         format.html { redirect_to recipes_path }

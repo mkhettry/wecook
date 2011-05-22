@@ -44,13 +44,11 @@ class BookmarksController < ApplicationController
   # POST /bookmarks
   # POST /bookmarks.xml
   def create
-    model = LibLinearModel.get_model
-    recipe_document = RecipeDocument.new_document(:url => params[:foobar])
-    @recipe = recipe_document.create_recipe(model)
-
-    Rails.logger.info("Got this recipe: " + @recipe.url)
+    user = User.find(params[:user_id])
+    user_recipe = UserRecipe.create(params[:foobar], user)
+    Rails.logger.info("Got this recipe: " + user_recipe.recipe.url)
     # TODO: error handling?
-    @recipe.save
+    user_recipe.save
     respond_to do |format|
       format.js
     end

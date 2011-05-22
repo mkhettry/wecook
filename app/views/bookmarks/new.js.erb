@@ -16,4 +16,5 @@ x.setRequestHeader('Connection', 'close');
 x.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 x.onreadystatechange=function() { alert('hello!!! from ajax forms'); };
 
-x.send('&foobar=' + document.location + '&authenticity_token=' + '<%= escape_javascript form_authenticity_token %>' + '&action=create&controller=bookmarks');
+x.send('&foobar=' + document.location + '&authenticity_token=' + '<%= escape_javascript form_authenticity_token %>' +
+        '&action=create&controller=bookmarks&user_id='+'<%= session[:user_id] %>');

@@ -179,21 +179,25 @@ img.center {
 }
 
 #welcome_login{
-    width: 40%;
+    width: 25%;
     /*padding-left: 20%;*/
     text-align:center;
 }
 
 #welcome_or{
-    width: 20%;
+    width: 10%;
     text-align:center;
     font-size:larger;
     font-style:italic;
 }
 
 #welcome_third_party{
-    width: 40%;
+    width: 25%;
     /*padding-right: 10%;*/
     text-align:center;
+}
+
+#welcome_intro{
+    width: 40%;
 }
 
