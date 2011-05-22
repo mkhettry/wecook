@@ -4,7 +4,9 @@
 .add_button= link_to 'Add +', new_recipe_path
 
 #recipe_list
-
+  - if @user_recipes.empty?
+    .p= "Come on. Save some recipes! Use the add link on the right."
+  - else
   - @user_recipes.each_index do |idx|
   - recipe = @user_recipes[idx].recipe
     %div{:class => get_class_for_inline_recipe(recipe)}
