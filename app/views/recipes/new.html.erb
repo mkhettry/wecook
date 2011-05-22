@@ -2,8 +2,8 @@
 
 <% location =  Rails.env.production? ? "http://wecook.heroku.com/" : "http://localhost:3000/" %>
 
-<div id="new_recipe">
   <%= render 'form' %>
+<div id="bookmarklet_content">
   <p>
     Drag this bookmarklet to the bookmarks bar.
     Click on it when you come across an interesting recipe on the web.</p>
@@ -30,5 +30,5 @@
 	iprl5();" class="bookmarklet" title="Cook Later">Cook Later</a>
 
 </div>
-
+<br/>
 <%= link_to 'Back', recipes_path %>

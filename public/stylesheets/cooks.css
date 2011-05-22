@@ -12,7 +12,7 @@
     display: block;
 }
 
-a {
+.recipeline a {
     color: #000;
     text-decoration: none;
 }
@@ -47,7 +47,7 @@ body {
 
 .recipeline .recipetitle {
 /*float: left;*/
-    font-size: medium;
+    font-size: 110%;
 /*float: left;*/
     width: 650px;
     overflow: visible;
@@ -56,8 +56,8 @@ body {
 }
 
 .recipe_provisional{
-    font-weight:bold;
-    background-color:#f8f8ff;
+    background-color:#FFFAF0;
+    font-style:italic;
 }
 
 .recipeline .recipemeta {
@@ -199,6 +199,12 @@ img.center {
 
 #welcome_intro{
     width: 40%;
+}
+
+#bookmarklet_content{
+    width: 500px;
+    margin-top: 30px;
+    border-top: black thin solid;
 }
 
 .bookmarklet {
