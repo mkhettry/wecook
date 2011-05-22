@@ -6,10 +6,12 @@
 //var form_field = document.getElementById("recipe_url");
 //form_field.value=document.location;
 
+<% location =  Rails.env.production? ? "http://wecook.heroku.com/" : "http://localhost:3000/" %>
+
 var w = window;
 
 var x=w.XMLHttpRequest ? new XMLHttpRequest() : (w.ActiveXObject?new ActiveXObject('Microsoft.XMLHTTP'):0);
-x.open('POST', 'http://localhost:3000/bookmarks/', true);
+x.open('POST', '<%= location %>' + 'bookmarks/', true);
 //x.setRequestHeader('Content-type', 'text/xml');
 //x.setRequestHeader('Content-length', 3);
 //x.setRequestHeader('Connection', 'close');
