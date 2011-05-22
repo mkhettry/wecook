@@ -1,7 +1,7 @@
 
 .list_image {
-  width:        50px;
-  height:       50px;
+    width:        50px;
+    height:       50px;
 }
 
 .recipeline {
@@ -46,9 +46,9 @@ body {
 }
 
 .recipeline .recipetitle {
-    /*float: left;*/
+/*float: left;*/
     font-size: medium;
-    /*float: left;*/
+/*float: left;*/
     width: 650px;
     overflow: visible;
     min-height: 38px;
@@ -67,7 +67,7 @@ body {
 
 /* copied from instapaper */
 #recipe_list > div:last-child {
-border-bottom-width: 1px;
+    border-bottom-width: 1px;
 /*-moz-border-radius-bottomleft: 15px;*/
 /*-webkit-border-bottom-left-radius: 15px;*/
 /*border-bottom-left-radius: 15px;*/
@@ -77,19 +77,19 @@ border-bottom-width: 1px;
 }
 
 /*#recipe_list table {*/
-        /*border-collapse: collapse;*/
+/*border-collapse: collapse;*/
 /*}*/
 
 #recipe_list table tr td {
-        padding: 5px;
-        vertical-align: top;
-        border-bottom: 1px;
-        border-style: solid;
+    padding: 5px;
+    vertical-align: top;
+    border-bottom: 1px;
+    border-style: solid;
 }
 
 #recipe_list .recipe_summary dt {
-        color:        #244;
-        font-weight:  bold;
+    color:        #244;
+    font-weight:  bold;
 }
 
 
@@ -180,7 +180,7 @@ img.center {
 
 #welcome_login{
     width: 25%;
-    /*padding-left: 20%;*/
+/*padding-left: 20%;*/
     text-align:center;
 }
 
@@ -193,11 +193,29 @@ img.center {
 
 #welcome_third_party{
     width: 25%;
-    /*padding-right: 10%;*/
+/*padding-right: 10%;*/
     text-align:center;
 }
 
 #welcome_intro{
     width: 40%;
+}
+
+.bookmarklet {
+    display: inline-block;
+    font-family: 'Lucida Grande', Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 11px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    color: white;
+    background-color: #626262;
+    border: 1px solid #626262;
+    padding: 0px 7px 1px 7px;
+    text-shadow: #3B3B3B 1px 1px 0px;
+    min-width: 62px;
+    text-align: center;
+    vertical-align: 2px;
 }
 

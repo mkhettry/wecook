@@ -1,5 +1,34 @@
 <h1>New recipe</h1>
 
-<%= render 'form' %>
+<% location =  Rails.env.production? ? "http://wecook.heroku.com/" : "http://localhost:3000/" %>
+
+<div id="new_recipe">
+  <%= render 'form' %>
+  <p>
+    Drag this bookmarklet to the bookmarks bar.
+    Click on it when you come across an interesting recipe on the web.</p>
+    <a href="javascript:function iprl5(){
+
+	var d=document;
+    var k=d.createElement('div');
+    k.id='saveme';
+	var z=d.createElement('script');
+	var b=d.body;
+	var l=d.location;
+	try{
+			if(!b){
+				throw(0);
+			}
+			d.title='(Saving...) '+d.title;
+			z.setAttribute('src', '<%= location %>' + 'bookmarks/new.js');
+			b.appendChild(z);
+			b.appendChild(k);
+		} catch(e){
+			alert('Please wait until the page has loaded.');
+		}
+	}
+	iprl5();" class="bookmarklet" title="Cook Later">Cook Later</a>
+
+</div>
 
 <%= link_to 'Back', recipes_path %>
