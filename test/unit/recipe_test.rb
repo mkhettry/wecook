@@ -8,6 +8,9 @@ class RecipeTest < ActiveSupport::TestCase
       r = Recipe.new(:url => k)
       assert_equal v, r.site_source
     end
+  end
+
+  test "correct provisional recipe" do
 
   end
 end

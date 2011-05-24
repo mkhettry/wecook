@@ -32,6 +32,7 @@ class Recipe < ActiveRecord::Base
 
   def correct!(corrections)
     Rails.logger.debug("got corrections with: " + corrections.to_s)
+    in_idx = 0
     get_lines_with_prediction.each_with_index do |map, idx|
       if corrections.has_key?(idx)
         prediction = corrections[idx].downcase
@@ -43,7 +44,8 @@ class Recipe < ActiveRecord::Base
 
       line = map[:line]
       if (prediction == "in")
-        self.ingredients << Ingredient.new(:raw => line)
+        self.ingredients << Ingredient.new(:raw => line, :ordinal => in_idx)
+        in_idx += 1
       elsif (prediction == "pr")
         self.directions << Direction.new(:raw_text => line)
       end
