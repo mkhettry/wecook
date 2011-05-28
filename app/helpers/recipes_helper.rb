@@ -24,4 +24,16 @@ module RecipesHelper
       return user.name ? user.name : user.email
     end
   end
+
+  def time_string(date)
+    recipe_save_time = date.localtime
+    now = Time.now.yday
+    if (date.yday == now)
+      "Today"
+    elsif (now - date.yday == 1)
+      "Yesterday"
+    else
+      recipe_save_time.strftime("%b %d, %Y")
+    end
+  end
 end

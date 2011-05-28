@@ -1,3 +1,3 @@
 <%= link_to user_recipe.recipe.site_source,  user_recipe.recipe.url, :target => '_blank'%>
  .
-<%= time_ago_in_words(user_recipe.created_at) + " ago" %>
+<%= time_string user_recipe.created_at  %>
