@@ -14,6 +14,8 @@ gem 'jquery-rails', '>= 0.2.6'
 gem 'omniauth'
 gem 'aws-s3'
 gem 'bcrypt-ruby', :require => 'bcrypt'
+gem 'rake', '0.8.7'
+gem 'silent-postgres'
 
 # Use unicorn as the web server
 # gem 'unicorn'
