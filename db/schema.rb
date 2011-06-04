@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110521190012) do
+ActiveRecord::Schema.define(:version => 20110604192546) do
 
   create_table "bookmarks", :force => true do |t|
     t.datetime "created_at"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20110521190012) do
     t.string   "email"
     t.string   "password_hash"
     t.string   "password_salt"
+    t.boolean  "needs_prov_help", :default => true
   end
 
 end

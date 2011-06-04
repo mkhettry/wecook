@@ -7,10 +7,33 @@
             hide: "fade",
             closeText: "",
             minHeight: 60,
-            minWidth: 350
+            minWidth: 350,
+            resizable: false,
+            draggable: false,
+            dialogClass: 'no_title_dialog'
+        });
+
+        $("#provisional_help_dialog").dialog({
+            autoOpen: "<%= @show %>" == "true",
+            show: "blind",
+            hide: "fade",
+            closeText: "",
+            resizable: false,
+            draggable: false,
+            dialogClass: 'no_title_dialog',
+            buttons: {
+				"Don't show me this again": function() {
+					$('#user_help_field').val(1);
+                    $( this ).dialog( "close" );
+				},
+				"OK": function() {
+					$( this ).dialog( "close" );
+				}
+			}
         });
 
         var code_to_display_map = { "in" : "Ingredient", "pr" : "Direction", "ot" : "Other"};
+
 
         $("div.prov :first-child").click(
                 function(event) {
@@ -64,8 +87,16 @@
   <p>hello</p>
 </div>
 
+<div id="provisional_help_dialog">
+  <p>We have guessed the ingredients and the directions of the recipe you had saved. Click on any mistake to correct it. </p>
+  <p>Don't forget to save the recipe once you are done!</p>
+</div>
+
+
+
 <br/>
 <%= form_tag(submit_provisional_recipe_path(@recipe)) do %>
     <%= text_field_tag :changed, nil, :id => "text_field", :style => "display:none" %>
+    <%= text_field_tag :user_help, nil, :id => "user_help_field", :style => "display:none"%>
     <%= submit_tag 'Save Changes' %>
 <% end %>

@@ -36,7 +36,7 @@ class RecipesController < ApplicationController
 
   def show_provisional
     @recipe = Recipe.find(params[:id])
-
+    @show = current_user.needs_prov_help
     respond_to do |format|
       format.html
       format.js
@@ -47,6 +47,12 @@ class RecipesController < ApplicationController
 
   def submit_provisional
     @recipe = Recipe.find(params[:id])
+    user = current_user
+    if params.has_key?(:user_help) && !params[:user_help].empty?
+      user.needs_prov_help = false
+      user.save
+    end
+
     corrections = {}
     params[:changed].split("|").each do |change|
       next if change.empty?
