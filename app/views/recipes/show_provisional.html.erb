@@ -1,26 +1,47 @@
 <script>
     $(document).ready(function(){
 
-        $("select").change(function(event){
-            //change css class of line
-            var line_id = $(this).attr('id').replace("select","line");
-            var line_class = $('#'+line_id).attr('class');
-            $('#'+line_id).removeClass(line_class);
-            $('#'+line_id).addClass($(this).val());
-            //add changed text
-            $('#text_field').val($('#text_field').val() + '|' + line_id.replace("prov_line","") + '=' + $(this).val());
+        $("#provisional_info_dialog").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "fade",
+            closeText: "",
+            minHeight: 60,
+            minWidth: 350
         });
 
-        $("div.prov").hover(
-                function(event){
-                    var select_id = $(this).attr('id').replace("prov_","prov_select");
-                    $('#'+select_id).show();
-                },
-                function(event){
-                    var select_id = $(this).attr('id').replace("prov_","prov_select");
-                    $('#'+select_id).hide();
+        var code_to_display_map = { "in" : "Ingredient", "pr" : "Direction", "ot" : "Other"};
+
+        $("div.prov :first-child").click(
+                function(event) {
+                    var current_class = $(this).attr('class');
+                    var next_class;
+                    if (current_class == "ot") {
+                        next_class = "in";
+                    } else if (current_class == "in") {
+                        next_class = "pr"
+                    } else {
+                        next_class = "ot";
+                    }
+                    $(this).removeClass(current_class);
+                    $(this).addClass(next_class);
+                    $('#text_field').val($('#text_field').val() + '|' + $(this).attr('id').replace("prov_line","") + '=' + next_class);
+
+                    $("#provisional_info_dialog").dialog("option", "position", 'center');
+                    $("#provisional_info_dialog").dialog("open");
+
+                    $("#provisional_info_dialog p").html("<div id='provisional_info_text'> You changed this line from " +
+                                    code_to_display_map[current_class] +
+                                    " to " +
+                                    code_to_display_map[next_class] +
+                                    "</div>");
+
+
+                    setTimeout(
+                            "$('#provisional_info_dialog').dialog('close')",
+                            1000);
                 }
-        );
+                );
     })
 </script>
 
@@ -35,12 +56,13 @@
         <%=  map[:line] %>
       </div>
 
-      <div>
-        <%= select_tag "prov_select"+id_string, options_for_select(RecipesHelper::CATEGORY_MAP, map[:class]), :style => "display:none", :class => "prov_select" %>
-      </div>
 
     </div>
 <% end %>
+
+<div id="provisional_info_dialog">
+  <p>hello</p>
+</div>
 
 <br/>
 <%= form_tag(submit_provisional_recipe_path(@recipe)) do %>
