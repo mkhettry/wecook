@@ -9,4 +9,4 @@
       link_to "Read original recipe at #{@recipe.site_source()}", @recipe.url, :target => '_blank' %>
 </div>
 
-<%= link_to 'Back', recipes_path %>
+<%= button_to 'Back', recipes_path, :method => "get" %>

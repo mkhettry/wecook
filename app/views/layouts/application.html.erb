@@ -7,10 +7,17 @@
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
+
+<script>
+  $(document).ready(function(){
+    $('.flash').hide(2000);
+  });
+</script>
+
 <body>
 
 <% flash.each do |name, message| %>
-    <%= content_tag :div, message, :id => "flash_#{name}" %>
+    <%= content_tag :div, message, :id => "flash_#{name}", :class => "flash" %>
 <% end %>
 
 <%= yield %>
