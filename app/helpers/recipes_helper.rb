@@ -1,6 +1,7 @@
 module RecipesHelper
 
   CATEGORY_MAP = {:Ingredients => "in", :Directions => "pr", :Other => "ot"}
+  REVERSE_CATEGORY_MAP = {"in" => "Ingredient", "pr" => "Direction", "ot" => "Other"}
 
   def get_class_for_inline_recipe(recipe)
     if recipe.is_ready?
@@ -27,10 +28,10 @@ module RecipesHelper
 
   def time_string(date)
     recipe_save_time = date.localtime
-    now = Time.now.yday
-    if (date.yday == now)
+    day_number = Time.now.yday
+    if (recipe_save_time.yday == day_number)
       "Today"
-    elsif (now - date.yday == 1)
+    elsif (day_number - date.yday == 1)
       "Yesterday"
     else
       recipe_save_time.strftime("%b %d, %Y")
