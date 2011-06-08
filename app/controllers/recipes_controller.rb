@@ -2,22 +2,19 @@ require 'nokogiri'
 
 class RecipesController < ApplicationController
 
+  before_filter :require_login
+
   # GET /recipes
   # GET /recipes.xml
   def index
     user = current_user
-    if user.nil?
-#      @recipes = Recipe.paginate :page=>params[:page], :order=>'created_at desc', :per_page => 10
-      redirect_to welcome_path
-    else
-      Rails.logger.info("user id: " + user.id.to_s)
-      @user_recipes = UserRecipe.paginate :per_page => 10, :page => params[:page], :order => "created_at desc", :conditions => ['user_id = ?', user.id]
+    Rails.logger.info("user id: " + user.id.to_s)
+    @user_recipes = UserRecipe.paginate :per_page => 10, :page => params[:page], :order => "created_at desc", :conditions => ['user_id = ?', user.id]
 #      user_recipes = UserRecipe.find_all_by_user_id(user.id)
 #      @recipes = user_recipes.collect{|ur| ur.recipe}.paginate :page=>params[:page], :order=>'created_at desc', :per_page => 10
-      respond_to do |format|
-        format.html # index.html.erb
-        format.xml  { render :xml => @user_recipes }
-      end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @user_recipes }
     end
   end
 
