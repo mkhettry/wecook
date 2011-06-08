@@ -7,6 +7,15 @@ class Recipe < ActiveRecord::Base
 
   attr :lines
 
+  def self.get_or_create_recipe(url)
+    r = Recipe.find_by_url(url)
+    return r if r
+
+    model = LibLinearModel.get_model
+    recipe_document = RecipeDocument.new_document(:url => url)
+    recipe_document.create_recipe(model)
+  end
+
   def to_s
     "url=#{url}"
   end

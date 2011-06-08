@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class RecipeTest < ActiveSupport::TestCase
+  fixtures(:recipes)
+
   test "site_source" do
     {"http://www.101cookbooks.com/archives/spring-pasta-recipe.html" => "101cookbooks.com",
      "http://www.foodnetwork.com/recipes/alton-brown/chicken-kiev-recipe/index.html" => "foodnetwork.com"
@@ -10,6 +12,7 @@ class RecipeTest < ActiveSupport::TestCase
     end
   end
 
+
   test "correct provisional recipe" do
     recipe = create_provisional_recipe ["IN\ta", "OT\tb", "PR\tc", "OT\td"]
     recipe.correct! 1 => "IN"
@@ -17,6 +20,12 @@ class RecipeTest < ActiveSupport::TestCase
     assert_equal 0, recipe.ingredients[0].ordinal
     assert_equal 1, recipe.ingredients[1].ordinal
 
+  end
+
+  test "get or create fetches from database" do
+    r = Recipe.get_or_create_recipe(recipes(:google).url)
+    assert_equal true, r.persisted?
+    assert_equal recipes(:google)['id'], r['id']
   end
 
   private
