@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   private
   def require_login
-    redirect_to welcome_path, :notice => "You need sign in first!" if current_user.nil?
+    redirect_to welcome_path, :notice => "You need to sign in first!" if current_user.nil?
   end
 
   def current_user
