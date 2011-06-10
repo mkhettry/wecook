@@ -9,18 +9,32 @@
 </head>
 
 <script>
-  $(document).ready(function(){
-    $('.flash').hide(2000);
-  });
+    $(document).ready(function(){
+        $('.flash').hide(2000);
+    });
 </script>
 
 <body>
-
 <% flash.each do |name, message| %>
     <%= content_tag :div, message, :id => "flash_#{name}", :class => "flash" %>
 <% end %>
 
-<%= yield %>
+<div id="title">
+  <div id="welcome_header">
+    <div id="logo">WeCook</div>
+    <div id="userpanel">
+      <% if current_user %>
+          Hello, <%= get_user_display_name %>
+          <%= link_to "Sign Out", signout_path %>
+      <% else %>
+          <%= link_to "Create Account", new_user_path %>
+      <% end %>
+    </div>
+    <div class="clear"></div>
+  </div>
 
+</div>
+
+<%= yield %>
 </body>
 </html>

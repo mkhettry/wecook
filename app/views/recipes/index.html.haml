@@ -1,22 +1,24 @@
-%h1 WeCook
-= get_user_display_name
-= link_to "Sign Out", signout_path
-.add_button= link_to 'Add +', new_recipe_path
+%div{:class => "left_nav", :id => "left_nav_index"}
+  = link_to "My Recipes", recipes_path
+  .br
+  = link_to "All Recipes", recipes_path(:p => 100)
 
-#recipe_list
-  - if @user_recipes.empty?
-    .p= "Come on. Save some recipes! Use the add link on the right."
-  - else
-  - @user_recipes.each_index do |idx|
-  - recipe = @user_recipes[idx].recipe
-    %div{:class => get_class_for_inline_recipe(recipe)}
-      .recipeimage= image_tag(recipe.sample_image, :class => 'list_image')
-      .recipetitle= get_title_link(recipe)
-      .recipemeta
-        = render :partial => 'recipe_meta', :locals => {:user_recipe => @user_recipes[idx]}
-    %div{:class=> "inline_recipe", :id => "r_#{recipe.id}", :style => "display:none"}
+.main_content
+  .add_button= link_to 'Add +', new_recipe_path
+  #recipe_list
+    - if @user_recipes.empty?
+      .p= "Come on. Save some recipes! Use the add link on the right."
+    - else
+    - @user_recipes.each_index do |idx|
+    - recipe = @user_recipes[idx].recipe
+      %div{:class => get_class_for_inline_recipe(recipe)}
+        .recipeimage= image_tag(recipe.sample_image, :class => 'list_image')
+        .recipetitle= get_title_link(recipe)
+        .recipemeta
+          = render :partial => 'recipe_meta', :locals => {:user_recipe => @user_recipes[idx]}
+      %div{:class=> "inline_recipe", :id => "r_#{recipe.id}", :style => "display:none"}
 
-.p= will_paginate @user_recipes
+  .p= will_paginate @user_recipes
 
 
 

@@ -96,10 +96,10 @@ class RecipesController < ApplicationController
     respond_to do |format|
       if user_recipe.save
         format.html { redirect_to recipes_path }
-        format.xml  { render :xml => recipe, :status => :created, :location => recipe }
+        format.xml  { render :xml => user_recipe, :status => :created, :location => user_recipe }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => recipe.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => user_recipe.errors, :status => :unprocessable_entity }
       end
     end
   end

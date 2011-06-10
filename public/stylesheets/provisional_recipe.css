@@ -1,23 +1,13 @@
 .ot{
-    float: left;
-    width: 600px;
 }
 
 .in{
     background-color: #E0EEE0;
-    float: left;
-    width: 600px;
 }
 .pr{
     background-color:#fafad2;
-    float: left;
-    width: 600px;
 }
 
-.prov_select{
-    float: right;
-    width: 100px;
-}
 
 .prov{
     clear: both;
@@ -37,6 +27,16 @@
     margin-bottom: 15px;
     padding-top: 15px;
     text-align:center;
-    border-bottom: black solid 2px;
     /*overflow: visible;*/
+}
+
+#prov_left{
+    margin-top: 200px;
+}
+
+#prov_left > div{
+    width:150px;
+    text-align:center;
+    font-size:115%;
+    padding-bottom:5px;
 }

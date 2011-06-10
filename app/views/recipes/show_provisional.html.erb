@@ -23,20 +23,20 @@
             draggable: false,
             dialogClass: 'no_title_dialog',
             buttons: {
-				"Don't show me this again": function() {
-					$('#user_help_field').val(1);
+                "Don't show me this again": function() {
+                    $('#user_help_field').val(1);
                     $( this ).dialog( "close" );
-				},
-				"OK": function() {
-					$( this ).dialog( "close" );
-				}
-			}
+                },
+                "OK": function() {
+                    $( this ).dialog( "close" );
+                }
+            }
         });
 
         var code_to_display_map = { "in" : "Ingredient", "pr" : "Direction", "ot" : "Other"};
 
 
-        $("div.prov :first-child").click(
+        $(".prov_line").click(
                 function(event) {
                     var current_class = $(this).attr('class');
                     var next_class;
@@ -55,10 +55,10 @@
                     $("#provisional_info_dialog").dialog("open");
 
                     $("#provisional_info_dialog p").html("<div id='provisional_info_text'> You changed this line from " +
-                                    code_to_display_map[current_class] +
-                                    " to " +
-                                    code_to_display_map[next_class] +
-                                    "</div>");
+                            code_to_display_map[current_class] +
+                            " to " +
+                            code_to_display_map[next_class] +
+                            "</div>");
 
 
                     setTimeout(
@@ -69,20 +69,34 @@
     })
 </script>
 
-<%= render :partial => 'recipe_header' %>
 
-<% @recipe.get_lines_with_prediction.each_with_index do |map,idx| %>
-    <% id_string = idx.to_s %>
 
-    <div id= "<%='prov_'+id_string %>" class="prov">
 
-      <div id= "<%= 'prov_line'+id_string %>" class="<%= map[:class]%>" >
+<div id="prov_left" class="left_nav">
+  <div class="in">Ingredients</div>
+  <div class="pr">Directions</div>
+  <div class="ot">Other</div>
+</div>
+
+<div id="prov_middle" class="main_content">
+
+  <%= render :partial => 'recipe_header' %>
+  <% @recipe.get_lines_with_prediction.each_with_index do |map,idx| %>
+      <% id_string = idx.to_s %>
+      <div id= "<%= 'prov_line'+id_string %>" class="<%= map[:class]%> prov_line" >
         <%=  map[:line] %>
       </div>
+  <% end %>
 
+  <br/>
+  <div class="clear"></div>
+  <%= form_tag(submit_provisional_recipe_path(@recipe)) do %>
+      <%= text_field_tag :changed, nil, :id => "text_field", :style => "" %>
+      <%= text_field_tag :user_help, nil, :id => "user_help_field", :style => "display:none"%>
+      <%= submit_tag 'Save Changes' %>
+  <% end %>
 
-    </div>
-<% end %>
+</div>
 
 <div id="provisional_info_dialog">
   <p>hello</p>
@@ -95,9 +109,4 @@
 
 
 
-<br/>
-<%= form_tag(submit_provisional_recipe_path(@recipe)) do %>
-    <%= text_field_tag :changed, nil, :id => "text_field", :style => "display:none" %>
-    <%= text_field_tag :user_help, nil, :id => "user_help_field", :style => "display:none"%>
-    <%= submit_tag 'Save Changes' %>
-<% end %>
+

@@ -1,41 +1,38 @@
 <body>
-<div id="welcome_header">
-  <div id="logo">WeCook</div>
-  <div id="userpanel">
-    <%= link_to "Create Account", new_user_path %>
+<div class="left_nav"></div>
+
+<div class="main_content">
+
+  <div id="welcome_content">
+    <table id="two_options" border="0" cellspacing="0" cellpadding="0">
+      <tbody>
+      <tr>
+        <td id="welome_intro">
+          <p>WeCook is a website that allows you to save recipes from anywhere on the web </p>
+        </td>
+        <td id="welcome_login">
+          <%= form_tag login_path do%>
+              <p>
+                <%= label_tag :email %><br/>
+                <%= text_field_tag :email, params[:email] %><br/>
+              </p>
+
+              <p>
+                <%= label_tag :password %><br/>
+                <%= password_field_tag :password, params[:password] %><br/>
+              </p>
+              <p class="button"> <%= submit_tag "Sign in" %></p>
+          <% end %>
+        </td>
+        <td id="welcome_or">
+          Or
+        </td>
+        <td id="welcome_third_party">
+          <%= link_to image_tag("LoginWithFacebookButton.jpg"),  "/auth/facebook" %>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
-  <div id="welcome_clear"></div>
-</div>
-
-<div id="welcome_content">
-  <table id="two_options" border="0" cellspacing="0" cellpadding="0">
-    <tbody>
-    <tr>
-      <td id="welome_intro">
-        <p>WeCook is a website that allows you to save recipes from anywhere on the web </p>
-      </td>
-      <td id="welcome_login">
-        <%= form_tag login_path do%>
-            <p>
-              <%= label_tag :email %><br/>
-              <%= text_field_tag :email, params[:email] %><br/>
-            </p>
-
-            <p>
-              <%= label_tag :password %><br/>
-              <%= password_field_tag :password, params[:password] %><br/>
-            </p>
-            <p class="button"> <%= submit_tag "Sign in" %></p>
-        <% end %>
-      </td>
-      <td id="welcome_or">
-        Or
-      </td>
-      <td id="welcome_third_party">
-        <%= link_to image_tag("LoginWithFacebookButton.jpg"),  "/auth/facebook" %>
-      </td>
-    </tr>
-    </tbody>
-  </table>
 </div>
 </body>

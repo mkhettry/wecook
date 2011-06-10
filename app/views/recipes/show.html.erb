@@ -1,12 +1,13 @@
-<div id="recipe_detail">
+<div class="left_nav">
 
+</div>
+
+<div id="recipe_detail" class="main_content">
   <%= render :partial => 'recipe_header' %>
-
   <%= render :partial => 'recipe_details' %>
-
   <div class="section_header"></div>
   <%=
       link_to "Read original recipe at #{@recipe.site_source()}", @recipe.url, :target => '_blank' %>
 </div>
-
+<div class="clear"></div>
 <%= button_to 'Back', recipes_path, :method => "get" %>

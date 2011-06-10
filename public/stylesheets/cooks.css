@@ -34,9 +34,24 @@ a:hover {
 }
 
 body {
-    width: 700px;
+    width: 900px;
     position: relative;
     margin: 0 auto 0 auto;
+}
+
+.left_nav {
+    min-width:200px;
+    float: left;
+}
+
+#left_nav_index {
+    margin-top: 20px;
+    font-size: 105%;
+}
+.main_content{
+    padding-top: 10px;
+    width: 600px;
+    float:left;
 }
 
 #recipe_list {
@@ -44,8 +59,8 @@ body {
 
 .recipeline .recipeimage {
     float: left;
-    width: 120px;
-    height: 80px;
+    /*width: 120px;*/
+    /*height: 80px;*/
     padding-right: 15px;
 }
 
@@ -178,7 +193,7 @@ img.center {
     font-size:150%;
 }
 
-#welcome_clear{
+.clear{
     clear:both;
 }
 
