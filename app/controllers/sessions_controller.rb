@@ -9,17 +9,16 @@ class SessionsController < ApplicationController
     end
 
     if not user
-      flash[:notice]  = "Invalid email or password"
-      redirect_to welcome_path
+      redirect_to :controller => 'users', :action => 'welcome', :loginfail => 'true'
     else
       session[:user_id] = user.id
-      redirect_to recipes_path, :notice => "Signed in!"
+      redirect_to recipes_path
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to welcome_path, :notice => "Signed out!"
+    redirect_to welcome_path
   end
 
 end

@@ -21,6 +21,12 @@
                 <%= label_tag :password %><br/>
                 <%= password_field_tag :password, params[:password] %><br/>
               </p>
+
+              <% if params[:loginfail] %>
+              <div id="welcome-invalid-login">
+                Incorrect email or password.
+              </div>
+              <% end %>
               <p class="button"> <%= submit_tag "Sign in" %></p>
           <% end %>
         </td>

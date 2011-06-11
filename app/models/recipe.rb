@@ -40,6 +40,10 @@ class Recipe < ActiveRecord::Base
   end
 
   def correct!(corrections)
+
+    self.ingredients.clear
+    self.directions.clear
+
     Rails.logger.debug("got corrections with: " + corrections.to_s)
     in_idx = 0
     get_lines_with_prediction.each_with_index do |map, idx|

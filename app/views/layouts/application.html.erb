@@ -10,13 +10,13 @@
 
 <script>
     $(document).ready(function(){
-        $('.flash').hide(2000);
+        $('.flash').animate({opacity : 0}, 2000)
     });
 </script>
 
 <body>
 <% flash.each do |name, message| %>
-    <%= content_tag :div, message, :id => "flash_#{name}", :class => "flash" %>
+    <%= content_tag :div, message, :id => "flash_#{name}", :class => "flash", :align => "center" %>
 <% end %>
 
 <div id="title">
