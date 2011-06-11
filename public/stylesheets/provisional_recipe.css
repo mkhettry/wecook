@@ -30,6 +30,10 @@
     /*overflow: visible;*/
 }
 
+.prov_line{
+    padding-top: 5px;
+}
+
 #prov_left{
     margin-top: 200px;
 }
