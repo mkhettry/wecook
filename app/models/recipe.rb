@@ -87,7 +87,7 @@ class Recipe < ActiveRecord::Base
 
   def sample_image()
     if images.empty?
-      'rails.png'
+      'chopstick.jpeg'
     else
       images.sample.jpg.url
     end

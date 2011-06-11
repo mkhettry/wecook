@@ -6,9 +6,12 @@ Cooks::Application.routes.draw do
     post 'login' => :create
   end
 
+  root :to => "recipes#index", :as => "recipes"
+
   resources :recipes
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout
+
   get "welcome" => "users#welcome", :as => "welcome"
 
   resources :recipes do
