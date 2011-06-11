@@ -1,0 +1,93 @@
+.recipeline {
+    min-height: 70px;
+    clear: both;
+    /*padding-top: 10px;*/
+    /*margin: 0px 0px 10px 0px;*/
+    margin-top: 15px;
+    position: relative;
+}
+
+.recipeline a {
+    color: #000;
+    text-decoration: none;
+}
+
+.recipeline .recipe-image {
+    float: left;
+    width: 90px;
+    height: 70px;
+    padding-right: 15px;
+}
+
+.recipeline .recipetitle {
+/*float: left;*/
+    font-size: 110%;
+/*float: left;*/
+    width: 650px;
+    padding-top: 7px;
+    overflow: visible;
+    min-height: 38px;
+/*    width: 54px;*/
+}
+
+
+
+.recipeline .recipemeta {
+    font-size: smaller;
+    position:absolute;
+    bottom: 7px;
+    right:0;
+}
+
+.rindex-left-nav-highlight {
+    background: #dcdcdc;
+
+}
+
+.rindex-left-nav-link {
+   text-decoration: none;
+}
+
+.rindex-left-nav-link:hover {
+   text-decoration: none;
+}
+
+#rindex-left-nav {
+    margin-top: 40px;
+    font-size: 105%;
+}
+
+.inline_recipe{
+    background-color: #FAFAFA;
+
+    padding-left:10px;
+    padding-right:10px;
+    padding-top: 1px;
+    padding-bottom:1px;
+    margin-bottom:15px;
+    margin-top:15px;
+
+    border-style:solid;
+    border-color:black;
+    border-width:1px;
+
+    -moz-border-radius-bottomleft: 15px;
+    -webkit-border-bottom-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    -moz-border-radius-bottomright: 15px;
+    -webkit-border-bottom-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+    -moz-border-radius-topleft: 15px;
+    -webkit-border-top-left-radius: 15px;
+    border-top-left-radius: 15px;
+    -moz-border-radius-topright: 15px;
+    -webkit-border-top-right-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.recipe_provisional{
+    /*background-color:#FFFAF0;*/
+    background-color:#EDEDED;
+    font-style:italic;
+}

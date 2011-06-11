@@ -1,7 +1,5 @@
-%div{:class => "left_nav", :id => "left_nav_index"}
-  = link_to "My Recipes", recipes_path
-  .br
-  = link_to "All Recipes", recipes_path(:p => 100)
+%div{:class => "left_nav", :id => "rindex-left-nav"}
+  = render :partial => 'rindex_left_nav'
 
 .main_content
   .add_button= link_to 'Add +', new_recipe_path
@@ -12,7 +10,7 @@
     - @user_recipes.each_index do |idx|
     - recipe = @user_recipes[idx].recipe
       %div{:class => get_class_for_inline_recipe(recipe)}
-        .recipeimage= image_tag(recipe.sample_image, :class => 'list_image')
+        .recipeimage= image_tag(recipe.sample_image, :class => 'recipe-image')
         .recipetitle= get_title_link(recipe)
         .recipemeta
           = render :partial => 'recipe_meta', :locals => {:user_recipe => @user_recipes[idx]}

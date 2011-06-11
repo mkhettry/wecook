@@ -1,0 +1,7 @@
+<!-- mine,all,myfaves,allfaves -->
+
+<%= link_to "My Recipes", recipes_path,
+            :class => "rindex-left-nav-link #{get_link_class(:mine, params[:p])}" %>
+<br/>
+<%= link_to "All Recipes", recipes_path(:p => "all"),
+            :class => "rindex-left-nav-link #{get_link_class(:all, params[:p])}" %>
