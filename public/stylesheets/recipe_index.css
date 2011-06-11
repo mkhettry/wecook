@@ -39,6 +39,9 @@
     right:0;
 }
 
+.recipeline .recipeoptions {
+     font-size: smaller;
+}
 .rindex-left-nav-highlight {
     background: #dcdcdc;
 
