@@ -6,7 +6,7 @@ Cooks::Application.routes.draw do
     post 'login' => :create
   end
 
-  root :to => "recipes#index", :as => "recipes"
+  root :to => "recipes#index"
 
   resources :recipes
   match "/auth/:provider/callback" => "sessions#create"
@@ -18,6 +18,7 @@ Cooks::Application.routes.draw do
     member do
       get 'show_provisional'
       post 'submit_provisional'
+      post "archive"
     end
   end
 

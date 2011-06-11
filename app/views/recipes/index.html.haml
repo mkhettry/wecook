@@ -8,10 +8,15 @@
       .p= "Come on. Save some recipes! Use the add link on the right."
     - else
     - @user_recipes.each_index do |idx|
-    - recipe = @user_recipes[idx].recipe
-      %div{:class => get_class_for_inline_recipe(recipe)}
+    - user_recipe = @user_recipes[idx]
+    - recipe = user_recipe.recipe
+      %div{:class => get_class_for_inline_recipe(recipe), :id => "ur_#{user_recipe.id}"}
         .recipeimage= image_tag(recipe.sample_image, :class => 'recipe-image')
         .recipetitle= get_title_link(recipe)
+        - if my_recipe(user_recipe, params[:p])
+          .recipeoptions
+            = link_to 'Archive', archive_recipe_path(user_recipe), :method => :post, :remote => true
+
         .recipemeta
           = render :partial => 'recipe_meta', :locals => {:user_recipe => @user_recipes[idx]}
       %div{:class=> "inline_recipe", :id => "r_#{recipe.id}", :style => "display:none"}

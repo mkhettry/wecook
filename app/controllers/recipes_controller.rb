@@ -98,6 +98,7 @@ class RecipesController < ApplicationController
   def create
     Rails.logger.info(" recipe_create #{params}")
     user_recipe = UserRecipe.create(params[:recipe][:url], current_user)
+
     respond_to do |format|
       if user_recipe.save
         format.html { redirect_to recipes_path }
@@ -122,6 +123,16 @@ class RecipesController < ApplicationController
         format.html { render :action => "edit" }
         format.xml  { render :xml => @recipe.errors, :status => :unprocessable_entity }
       end
+    end
+  end
+
+  def archive
+    @user_recipe = UserRecipe.find(params[:id])
+    @user_recipe.destroy
+    respond_to do |format|
+      format.html {redirect_to recipes_url, :notice => "Archived Recipe"}
+      format.xml {head :ok}
+      format.js
     end
   end
 

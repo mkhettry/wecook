@@ -41,4 +41,8 @@ module RecipesHelper
   def get_link_class(choice, params_p)
     "rindex-left-nav-highlight" if choice.to_s == params_p || (choice == :mine && params_p.nil?)
   end
+
+  def my_recipe(user_recipe, params_p)
+    user_recipe.user == current_user
+  end
 end
