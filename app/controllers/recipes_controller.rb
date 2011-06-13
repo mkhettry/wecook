@@ -66,7 +66,7 @@ class RecipesController < ApplicationController
     @recipe.state = :ready
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to(@recipe, :notice => 'Recipe was successfully corrected.') }
+        format.html { redirect_to(recipes_url, :notice => 'Recipe was successfully corrected.') }
         format.xml  { render :xml => @recipe, :status => :created, :location => @recipe }
       else
         format.html { render :action => "new" }
