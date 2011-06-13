@@ -3,8 +3,10 @@
     clear: both;
     /*padding-top: 10px;*/
     /*margin: 0px 0px 10px 0px;*/
-    margin-top: 15px;
+    margin-top: 7px;
     position: relative;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #dcdcdc;
 }
 
 .recipeline a {
