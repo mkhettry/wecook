@@ -32,6 +32,7 @@ body {
     padding-top: 10px;
     width: 600px;
     float:left;
+    padding-bottom: 10px;
 }
 
 #welcome-invalid-login {
@@ -95,10 +96,12 @@ img.center {
 
 #footer {
     border-top: 2px solid;
-    position: fixed;
+    /*position: fixed;*/
+    margin-top: 100px;
     width: inherit;
     font-size: 103%;
     bottom: 15px;
+    padding-bottom: 20px;
 }
 
 #userpanel{
