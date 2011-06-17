@@ -5,11 +5,13 @@ class User < ActiveRecord::Base
   attr_accessor :password
   before_save :encrypt_password
 
-  validates_confirmation_of :password
-  validates_presence_of :password, :on => :create
-  validates_presence_of :email, :on => :create
-  validates_uniqueness_of :email, :on => "create"
+  validates :password, :presence =>true, :confirmation => true, :on => :create, :if => :is_native?
+  validates :email, :presence => true, :uniqueness => {:scope => :uid}, :on => :create, :if => :is_native?
+  validates :provider, :inclusion => {:in => ["native", "facebook"]}
 
+  def is_native?
+    self.provider == "native"
+  end
 
   def encrypt_password
     if password.present?
