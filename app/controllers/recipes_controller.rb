@@ -9,14 +9,15 @@ class RecipesController < ApplicationController
   def index
     user = current_user
     Rails.logger.info("user id: " + user.id.to_s)
-    query_hash = {:per_page => 10, :page => params[:page], :order => "created_at desc"}
+    query_hash = {:page => params[:page], :order => "created_at desc"}
     if (params[:p] == "all")
       query_hash[:joins] = :recipe
       query_hash[:conditions] = ["user_id != ? and recipes.state = ?", user.id, :ready]
+      query_hash[:per_page] = 10
+      @user_recipes = UserRecipe.paginate query_hash
     else
-      query_hash[:conditions] = ['user_id = ?', user.id]
+      @user_recipes = UserRecipe.find_page_for_user(query_hash, user.id)
     end
-    @user_recipes = UserRecipe.paginate query_hash
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @user_recipes }

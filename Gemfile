@@ -17,6 +17,10 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'rake', '0.8.7'
 gem 'silent-postgres'
 
+group :development, :test do
+  gem 'rspec-rails'
+end
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

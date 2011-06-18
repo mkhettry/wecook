@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+google:
+  url: http://google.com
+  title: r1
+
+yahoo:
+  url: http://yahoo.com
+  title: r2

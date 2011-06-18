@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+manish:
+  provider: facebook
+  uid: 1
+  name: manish
+
+srinidhi:
+  provider: native
+  uid: 2
+  name: srinidhi
