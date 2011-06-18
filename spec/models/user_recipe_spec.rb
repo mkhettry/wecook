@@ -11,7 +11,7 @@ describe "UserRecipe" do
     end
     sri_recipes = UserRecipe.find_page_for_user({:page => 1, :order => "created_at desc"}, users(:srinidhi).id)
 
-    sri_recipes.length.should == 1000
+    sri_recipes.length.should == UserRecipe.per_page
     sri_recipes.each do |ur|
       ur.user_id.should == users(:srinidhi).id
     end
