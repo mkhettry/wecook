@@ -7,7 +7,8 @@ class RecipeDocument
   attr :trimmed_doc
 
 
-  DEFAULT_OPTIONS = {:debug => false}
+  DEFAULT_OPTIONS = {:debug => false, :min_lines_for_document => 10}
+
 
   def self.new_document(opts={})
     RecipeDocument.new(redirect_if_needed(opts))
@@ -164,6 +165,10 @@ class RecipeDocument
 
   def extract_lines
     @lines ||= create_lines_from_nodes(@trimmed_doc)
+    if (@lines.length < @options[:min_lines_for_document])
+      @lines = create_lines_from_nodes(@doc)
+    end
+    @lines
   end
 
   def is_structured?
