@@ -53,10 +53,10 @@ class UserTest < ActiveSupport::TestCase
     assert user.valid?, "facebook user without email/password should be valid."
   end
 
-  test "create using omniauth" do
+  test "create with omniauth" do
     auth = {"provider" => "facebook", "user_info" => {"name" => "testname"}, "uid" => '241'}
     user = User.create_with_omniauth(auth)
-    puts user.provider
+    puts "provider: " + user.provider
   end
 
 
