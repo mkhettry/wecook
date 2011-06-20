@@ -17,8 +17,9 @@ class User < ActiveRecord::Base
     if password.present?
       self.password_salt = BCrypt::Engine.generate_salt
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+      # do we need to do this everytime? The controller does set provider to native, right?
+      self.provider = "native"
     end
-    self.provider = "native"
   end
 
   def self.authenticate(email, password)
@@ -35,6 +36,7 @@ class User < ActiveRecord::Base
       user.provider = auth["provider"]
       user.name = auth["user_info"]["name"]
       user.uid = auth["uid"]
+      user.provider = "facebook"
     end
   end
 end

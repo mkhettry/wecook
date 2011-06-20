@@ -68,4 +68,11 @@ class UserTest < ActiveSupport::TestCase
     assert !user.valid?, "unknown provider"
   end
 
+  test "create with omni auth" do
+    auth = {"provider" => "facebook", "uid" => "100", "user_info" => {"name" => "foobar"}}
+    User.create_with_omniauth auth
+    user = User.find_by_provider_and_uid("facebook", auth["uid"])
+    assert !user.nil?
+  end
+
 end
