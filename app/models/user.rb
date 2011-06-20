@@ -36,7 +36,6 @@ class User < ActiveRecord::Base
       user.provider = auth["provider"]
       user.name = auth["user_info"]["name"]
       user.uid = auth["uid"]
-      user.provider = "facebook"
     end
   end
 end
