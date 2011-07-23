@@ -11,8 +11,14 @@ describe RecipeDocument do
         lines.should include('- 1 green pepper')
       end
     end
-
-
   end
+
+  describe "extract_images" do
+    it "where images have backslash in them" do
+      rd = RecipeDocument.new :file => "spec/fixtures/webpages/sanjeev_kapoor_horrible_html.html", :url =>"http://www.sanjeevkapoor.com/maa-chole-di-dal-foodfood.aspx"
+      image_urls = rd.extract_images
+      image_urls.each {|s| s.should_not match(/\\/)}
+      end
+    end
 
 end

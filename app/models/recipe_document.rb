@@ -92,8 +92,8 @@ class RecipeDocument
     end
 
     images = extract_images
-    images.each do |i|
-      image = Image.new(:jpg => open(i))
+    images.each do |image_url|
+      image = Image.new(:jpg => open(image_url))
       recipe.images << image
     end
     recipe
@@ -146,7 +146,8 @@ class RecipeDocument
       # is most likely to be a good one. The more the overlap, the better. Skip 0 overlap images.
       inter = (image['alt'].split) & (@title.split)
       if inter.length > 0
-        possible_images[image['src'].gsub(/\n/,'')] = inter.length
+        # some webpages use a backslash instead of a slash!
+        possible_images[image['src'].gsub(/\n/,'').gsub(/\\/, "/")] = inter.length
       end
     end
 

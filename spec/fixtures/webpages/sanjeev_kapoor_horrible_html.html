@@ -1,0 +1,2221 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="ctl00_Head1"><meta name="keywords" content="maa chole di dal, urad dal, chana dal, spicy dal" /><meta name="description" content="Punjabi speciality dal" /><meta http-equiv="Cache-Control" content="max-age=3600" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
+	MAA CHOLE DI DAL - SKK - FOODFOOD - Recipes by Master Chef Sanjeev Kapoor
+</title><link href="css/style.css" rel="stylesheet" type="text/css" /><link href="favicon.ico" rel="icon" type="image/ico" /><link href="favicon.ico" rel="SHORTCUT ICON" /><link href="css/theme.css" rel="stylesheet" type="text/css" /><link href="css/tab.css" rel="stylesheet" type="text/css" />
+    <script src="js/JQuery.js" type="text/javascript"></script>
+     <script type="text/javascript" src="js/jquery.imagecube.js"></script>
+     <script src="scripts/AC_RunActiveContent.js" type="text/javascript"></script>
+    
+    
+ <style type="text/css">
+ .headerinner
+	{
+		font-family: "ARIAL Narrow" Arial, Helvetica, sans-serif;
+		font-size:20px;
+		text-decoration:none;
+		text-transform:uppercase;
+		line-height:20px;
+		color:#b3ba39;
+		font-weight:normal;
+		
+   }
+ </style>
+  
+      <style type="text/css">
+    #basicCube { width: 179px; height: 41px; }
+    </style>
+ 
+ 
+ 
+ <!-- Test Auto Complete Start -->
+
+  
+  <script type="text/javascript">
+      //  function  searchonclick()
+      //  {          
+      //    document.getElementById("ctl00_cphSearch_txtSearch");
+      //  
+
+      //    return true;
+      //    }
+ </script>
+  
+ <!-- Test Auto Complete End  -->
+ 
+<script type="text/javascript" language="javascript">
+    function F_OnKeydownNewsletter1(e)  // correct name - F_OnKeydownNewsletter
+    {
+        if (e.keyCode == 13) {
+            var btnNewsletter = document.getElementById("ctl00_btnNewsletter")
+            btnNewsletter.focus();
+        }
+    }
+</script>
+
+<script type="text/javascript">
+
+
+    function F_OnKeydown(e) {
+        if (e.keyCode == 13) {
+            var btnSearch = document.getElementById("ctl00_cphSearch_btnSearch")
+            btnSearch.focus();
+        }
+    }
+</script>
+
+ <script type="text/javascript">
+
+
+     var timeout = 0;
+     var closetimer = 0;
+     var ddmenuitem = 0;
+
+
+     function popup_open(id) {
+         popup_canceltimer();
+         popu_close();
+         ddmenuitem = $("#" + id).css('display', 'block');
+     }
+
+     function popu_close()
+     { if (ddmenuitem) ddmenuitem.css('display', 'none'); }
+
+     function popup_timer()
+     { closetimer = window.setTimeout(popu_close, timeout); }
+
+
+     function popup_canceltimer() {
+         if (closetimer) {
+             window.clearTimeout(closetimer);
+             closetimer = null;
+         }
+     }
+        
+    
+    
+    </script>
+
+
+    <script type="text/javascript" language="javascript">
+        function F_OnKeydownLogin(e) {
+            if (e.keyCode == 13) {
+                var BtnLogin = document.getElementById("ctl00_BtnLogin")
+                BtnLogin.focus();
+            }
+        }
+</script>
+    
+    <script type="text/javascript">
+
+        function menu(whichMenu, whatState) {
+            if (document.getElementById) {
+                var chk = document.getElementById('ctl00_HidLoginNew').value;
+
+                if (chk == 0) {
+                    document.getElementById(whichMenu).style.display = whatState;
+                    if (whichMenu == 'popupbox') {
+                        //alert(false);
+                        document.getElementById("lgnPopIfrmae").style.display = whatState;
+                        //alert(true);
+                    }
+                    else if (whichMenu == 'popupboxNewsletter') {
+                        document.getElementById("popupboxNewsletter_iframe").style.display = whatState;
+                      }
+                }
+                else {
+                    document.getElementById(whichMenu).style.display = "none";
+                    document.getElementById("lgnPopIfrmae").style.display = "none";
+                    document.getElementById("popupboxNewsletter_iframe").style.display = "none";
+                }
+            }
+            else {
+                var chk = document.getElementById('ctl00_HidLoginNew').value;
+
+                if (chk == 0) {
+                    document[whichMenu].display = whatState;
+                    if (whichMenu == 'popupbox') {
+                        document.getElementById("lgnPopIfrmae").style.display = whatState;
+                    }
+                      else if (whichMenu == 'popupboxNewsletter') {
+                        document.getElementById("popupboxNewsletter_iframe").style.display = whatState;
+                      }
+                }
+                else {
+                    document[whichMenu].display = "none";
+                    document.getElementById("lgnPopIfrmae").style.display = "none";
+                    document.getElementById("popupboxNewsletter_iframe").style.display = "none";
+                }
+            }
+        }
+       
+
+</script>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        var dinner1 = "1";
+        var Parent1 = "";
+        $.post("Handlers/dinner.ashx", { Dinner: dinner1, Parent: Parent1 }, function(data) {
+            $("#ddlDinner1").html(data);
+        });
+
+        var dinner3 = "3";
+        var Parent3 = "";
+        $.post("Handlers/dinner.ashx", { Dinner: dinner3, Parent: Parent3 }, function(data) {
+            $("#ddlDinner3").html(data);
+        });
+
+        $("#ddlDinner1").change(function(data) {
+            var dinner2 = "2"
+            var parent2 = $(this).val();
+
+            $.post("Handlers/dinner.ashx", { Dinner: dinner2, Parent: parent2 }, function(data) {
+
+                $("#ddlDinner2").html(data);
+            });
+        });
+
+        $("#btnDinner").click(function() {
+            var din1val = $("#ddlDinner1").val();
+            var din2val = $("#ddlDinner2").val();
+            var din3val = $("#ddlDinner3").val();
+
+            if (din1val != "-1" && din2val != "-1" && din3val != "-1") {
+
+                window.location.href = "DinnerReceipes.aspx?d1=" + din1val + "&d2=" + din2val + "&d3=" + din3val;
+            }
+        });
+
+
+        $("#DivVideo").hide();
+        $("#basicCube").show();
+
+        $(function() {
+            $('#basicCube').imagecube({ imagePath: 'images/' });
+        });
+    });
+
+
+</script>
+
+
+<script language="javascript" type="text/javascript">
+
+
+    function Newsletter_OnClick() {
+        var width = 538;
+        var height = 200;
+        var left = parseInt((screen.availWidth / 2) - (width / 2));
+        var top = parseInt((screen.availHeight / 2) - (height / 2));
+        var windowFeatures = "width=" + width + ",height=" + height + ",status =no,resizable=yes,scrollbars=yes,toolbar=no, location=no, menubar=no,left=" + left + ",top=" + top + "screenX=" + left + ",screenY=" + top;
+        window.open('ChangePassword.aspx?Mode=Newsletter', "ImageWindow", windowFeatures);
+        return false;
+
+    }
+
+    function ChangePassword_OnClick() {
+        var width = 538;
+        var height = 230;
+        var left = parseInt((screen.availWidth / 2) - (width / 2));
+        var top = parseInt((screen.availHeight / 2) - (height / 2));
+        var windowFeatures = "width=" + width + ",height=" + height + ",status =no,resizable=yes,scrollbars=yes,toolbar=no, location=no, menubar=no,left=" + left + ",top=" + top + "screenX=" + left + ",screenY=" + top;
+        window.open('ChangePassword.aspx?Mode=Change', "ImageWindow", windowFeatures);
+        return false;
+    }
+
+    function ForgotPassword_OnClick() {
+        var width = 538;
+        var height = 200;
+        var left = parseInt((screen.availWidth / 2) - (width / 2));
+        var top = parseInt((screen.availHeight / 2) - (height / 2));
+        var windowFeatures = "width=" + width + ",height=" + height + ",status =no,resizable=yes,scrollbars=yes,toolbar=no, location=no, menubar=no,left=" + left + ",top=" + top + "screenX=" + left + ",screenY=" + top;
+        window.open('ChangePassword.aspx?Mode=Forgot', "ImageWindow", windowFeatures);
+
+        return false;
+    }
+
+</script>
+ <!-- Generated by OpenX 2.6.1 -->
+
+
+
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'878120af-a4f3-4795-af53-4647b952613e'});</script>
+
+<style>
+.st_twitter_hcount span, .st_facebook_hcount span, .st_email_hcount span, .st_sharethis_hcount span {float:left;}
+.stBubble_hcount, .chicklets {height:16px;}
+</style>
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-2819367-1']);
+  _gaq.push(['_setDomainName', '.sanjeevkapoor.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+<body>
+    <form name="aspnetForm" method="post" action="Recipe.aspx?RecipeId=5549" onsubmit="javascript:return WebForm_OnSubmit();" id="aspnetForm">
+<div>
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTEwMzE0MTQyNDIPFgQeCXN0clZhbGlkMQUgQWRkZWQgVG8gRmF2b3JpdGVzIFN1Y2Nlc3NmdWxseS4eCXN0clZhbGlkMgUcVGhpcyBSZWNpcGUgSXMgQWxyZWFkeSBBZGRlZBYCZg9kFgICAw9kFhQCAQ9kFgICAQ9kFgJmD2QWAgIDD2QWAmYPZBYCAhQPZBYCAgIPZBYCAgEPEA8WBh4NRGF0YVRleHRGaWVsZAUNTDFDb3VudHJ5TmFtZR4ORGF0YVZhbHVlRmllbGQFCUNvdW50cnlJZB4LXyFEYXRhQm91bmRnZBAV9wEKLS1TZWxlY3QtLQtBRkdIQU5JU1RBTg1BTEFORCBJU0xBTkRTB0FMQkFOSUEHQUxHRVJJQQ5BTUVSSUNBTiBTQU1PQQdBTkRPUlJBBkFOR09MQQhBTkdVSUxMQQpBTlRBUkNUSUNBE0FOVElHVUEgQU5EIEJBUkJVREEJQVJHRU5USU5BB0FSTUVOSUEFQVJVQkEJQVVTVFJBTElBB0FVU1RSSUEKQVpFUkJBSUpBTgdCQUhBTUFTB0JBSFJBSU4KQkFOR0xBREVTSAhCQVJCQURPUwdCRUxBUlVTB0JFTEdJVU0GQkVMSVpFBUJFTklOB0JFUk1VREEGQkhVVEFOB0JPTElWSUEWQk9TTklBIEFORCBIRVJaRUdPVklOQQhCT1RTV0FOQQ1CT1VWRVQgSVNMQU5EBkJSQVpJTB5CUklUSVNIIElORElBTiBPQ0VBTiBURVJSSVRPUlkRQlJVTkVJIERBUlVTU0FMQU0IQlVMR0FSSUEMQlVSS0lOQSBGQVNPB0JVUlVOREkIQ0FNQk9ESUEIQ0FNRVJPT04GQ0FOQURBCkNBUEUgVkVSREUOQ0FZTUFOIElTTEFORFMYQ0VOVFJBTCBBRlJJQ0FOIFJFUFVCTElDBENIQUQFQ0hJTEUFQ0hJTkEQQ0hSSVNUTUFTIElTTEFORBdDT0NPUyAoS0VFTElORykgSVNMQU5EUwhDT0xPTUJJQQdDT01PUk9TBUNPTkdPBUNPTkdPDENPT0sgSVNMQU5EUwpDT1NUQSBSSUNBDkPDlFRFIEQnSVZPSVJFB0NST0FUSUEEQ1VCQQZDWVBSVVMOQ1pFQ0ggUkVQVUJMSUMHREVOTUFSSwhESklCT1VUSQhET01JTklDQRJET01JTklDQU4gUkVQVUJMSUMHRUNVQURPUgVFR1lQVAtFTCBTQUxWQURPUhFFUVVBVE9SSUFMIEdVSU5FQQdFUklUUkVBB0VTVE9OSUEIRVRISU9QSUEbRkFMS0xBTkQgSVNMQU5EUyAoTUFMVklOQVMpDUZBUk9FIElTTEFORFMERklKSQdGSU5MQU5EBkZSQU5DRQ1GUkVOQ0ggR1VJQU5BEEZSRU5DSCBQT0xZTkVTSUEbRlJFTkNIIFNPVVRIRVJOIFRFUlJJVE9SSUVTBUdBQk9OBkdBTUJJQQdHRU9SR0lBB0dFUk1BTlkFR0hBTkEJR0lCUkFMVEFSBkdSRUVDRQlHUkVFTkxBTkQHR1JFTkFEQQpHVUFERUxPVVBFBEdVQU0JR1VBVEVNQUxBCEdVRVJOU0VZBkdVSU5FQQ1HVUlORUEtQklTU0FVBkdVWUFOQQVIQUlUSQxIRUFSRCBJU0xBTkQdSE9MWSBTRUUgKFZBVElDQU4gQ0lUWSBTVEFURSkISE9ORFVSQVMJSE9ORyBLT05HB0hVTkdBUlkHSUNFTEFORAVJTkRJQQlJTkRPTkVTSUEZSVJBTiwgSVNMQU1JQyBSRVBVQkxJQyBPRgRJUkFRB0lSRUxBTkQLSVNMRSBPRiBNQU4GSVNSQUVMBUlUQUxZB0pBTUFJQ0EFSkFQQU4GSkVSU0VZBkpPUkRBTgpLQVpBS0hTVEFOBUtFTllBCEtJUklCQVRJBUtPUkVBEktPUkVBLCBSRVBVQkxJQyBPRgZLVVdBSVQKS1lSR1laU1RBTiBMQU8gUEVPUExFJ1MgREVNT0NSQVRJQyBSRVBVQkxJQwZMQVRWSUEHTEVCQU5PTgdMRVNPVEhPB0xJQkVSSUEWTElCWUFOIEFSQUIgSkFNQUhJUklZQQ1MSUVDSFRFTlNURUlOCUxJVEhVQU5JQQpMVVhFTUJPVVJHBU1BQ0FPCU1BQ0VET05JQQpNQURBR0FTQ0FSBk1BTEFXSQhNQUxBWVNJQQhNQUxESVZFUwRNQUxJBU1BTFRBEE1BUlNIQUxMIElTTEFORFMKTUFSVElOSVFVRQpNQVVSSVRBTklBCU1BVVJJVElVUwdNQVlPVFRFBk1FWElDTwpNSUNST05FU0lBFE1PTERPVkEsIFJFUFVCTElDIE9GBk1PTkFDTwhNT05HT0xJQQpNT05URU5FR1JPCk1PTlRTRVJSQVQHTU9ST0NDTwpNT1pBTUJJUVVFB01ZQU5NQVIHTkFNSUJJQQVOQVVSVQVORVBBTAtORVRIRVJMQU5EUxRORVRIRVJMQU5EUyBBTlRJTExFUw1ORVcgQ0FMRURPTklBC05FVyBaRUFMQU5ECU5JQ0FSQUdVQQVOSUdFUgdOSUdFUklBBE5JVUUOTk9SRk9MSyBJU0xBTkQYTk9SVEhFUk4gTUFSSUFOQSBJU0xBTkRTBk5PUldBWQRPTUFOCFBBS0lTVEFOBVBBTEFVH1BBTEVTVElOSUFOIFRFUlJJVE9SWSwgT0NDVVBJRUQGUEFOQU1BEFBBUFVBIE5FVyBHVUlORUEIUEFSQUdVQVkEUEVSVQtQSElMSVBQSU5FUwhQSVRDQUlSTgZQT0xBTkQIUE9SVFVHQUwLUFVFUlRPIFJJQ08FUUFUQVIHUkVVTklPTgdST01BTklBElJVU1NJQU4gRkVERVJBVElPTgZSV0FOREERU0FJTlQgQkFSVEjDiUxFTVkMU0FJTlQgSEVMRU5BFVNBSU5UIEtJVFRTIEFORCBORVZJUwtTQUlOVCBMVUNJQQxTQUlOVCBNQVJUSU4ZU0FJTlQgUElFUlJFIEFORCBNSVFVRUxPTiBTQUlOVCBWSU5DRU5UIEFORCBUSEUgR1JFTkFESU5FUwVTQU1PQQpTQU4gTUFSSU5PFVNBTyBUT01FIEFORCBQUklOQ0lQRQxTQVVESSBBUkFCSUEHU0VORUdBTAZTRVJCSUEKU0VZQ0hFTExFUwxTSUVSUkEgTEVPTkUJU0lOR0FQT1JFCFNMT1ZBS0lBCFNMT1ZFTklBD1NPTE9NT04gSVNMQU5EUwdTT01BTElBDFNPVVRIIEFGUklDQQ1TT1VUSCBHRU9SR0lBBVNQQUlOCVNSSSBMQU5LQQVTVURBTghTVVJJTkFNRRZTVkFMQkFSRCBBTkQgSkFOIE1BWUVOCVNXQVpJTEFORAZTV0VERU4LU1dJVFpFUkxBTkQUU1lSSUFOIEFSQUIgUkVQVUJMSUMZVEFJV0FOLCBQUk9WSU5DRSBPRiBDSElOQQpUQUpJS0lTVEFOHFRBTlpBTklBLCBVTklURUQgUkVQVUJMSUMgT0YIVEhBSUxBTkQLVElNT1ItTEVTVEUEVE9HTwdUT0tFTEFVBVRPTkdBE1RSSU5JREFEIEFORCBUT0JBR08HVFVOSVNJQQZUVVJLRVkMVFVSS01FTklTVEFOGFRVUktTIEFORCBDQUlDT1MgSVNMQU5EUwZUVVZBTFUGVUdBTkRBB1VLUkFJTkUUVU5JVEVEIEFSQUIgRU1JUkFURVMOVU5JVEVEIEtJTkdET00kVU5JVEVEIFNUQVRFUyBNSU5PUiBPVVRMWUlORyBJU0xBTkRTB1VSVUdVQVkDVVNBClVaQkVLSVNUQU4HVkFOVUFUVQlWRU5FWlVFTEEIVklFVCBOQU0XVklSR0lOIElTTEFORFMsIEJSSVRJU0gUVklSR0lOIElTTEFORFMsIFUuUy4RV0FMTElTIEFORCBGVVRVTkEOV0VTVEVSTiBTQUhBUkEFWUVNRU4GWkFNQklBCFpJTUJBQldFFfcBAi0xATMBNAE1ATYBNwE4ATkCMTACMTECMTICMTMCMTQCMTUCMTYCMTcCMTgCMTkCMjACMjECMjICMjMCMjQCMjUCMjYCMjcCMjgCMjkCMzACMzECMzICMzMCMzQCMzUCMzYCMzcCMzgCMzkCNDACNDECNDICNDMCNDQCNDUCNDYCNDcCNDgCNDkCNTACNTECNTICNTMCNTQCNTUCNTYCNTcCNTgCNTkCNjACNjECNjICNjMCNjQCNjUCNjYCNjcCNjgCNjkCNzACNzECNzICNzMCNzQCNzUCNzYCNzcCNzgCNzkCODACODECODICODMCODQCODUCODYCODcCODgCODkCOTACOTECOTICOTMCOTQCOTUCOTYCOTcCOTgCOTkDMTAwAzEwMQMxMDIBMQMxMDMDMTA0AzEwNQMxMDYDMTA3AzEwOAMxMDkDMTEwAzExMQMxMTIDMTEzAzExNAMxMTUDMTE2AzExNwMxMTgDMTE5AzEyMAMxMjEDMTIyAzEyMwMxMjQDMTI1AzEyNgMxMjcDMTI4AzEyOQMxMzADMTMxAzEzMgMxMzMDMTM0AzEzNQMxMzYDMTM3AzEzOAMxMzkDMTQwAzE0MQMxNDIDMTQzAzE0NAMxNDUDMTQ2AzE0NwMxNDgDMTQ5AzE1MAMxNTEDMTUyAzE1MwMxNTQDMTU1AzE1NgMxNTcDMTU4AzE1OQMxNjADMTYxAzE2MgMxNjMDMTY0AzE2NQMxNjYDMTY3AzE2OAMxNjkDMTcwAzE3MQMxNzIDMTczAzE3NAMxNzUDMTc2AzE3NwMxNzgDMTc5AzE4MAMxODEDMTgyAzE4MwMxODQDMTg1AzE4NgMxODcDMTg4AzE4OQMxOTADMTkxAzE5MgMxOTMDMTk0AzE5NQMxOTYDMTk3AzE5OAMxOTkDMjAwAzIwMQMyMDIDMjAzAzIwNAMyMDUDMjA2AzIwNwMyMDgDMjA5AzIxMAMyMTEDMjEyAzIxMwMyMTQDMjE1AzIxNgMyMTcDMjE4AzIxOQMyMjADMjIxAzIyMgMyMjMDMjI0AzIyNQMyMjYDMjI3AzIyOAMyMjkDMjMwAzIzMQMyMzIDMjMzAzIzNAMyMzUBMgMyMzYDMjM3AzIzOAMyMzkDMjQwAzI0MQMyNDIDMjQzAzI0NAMyNDUDMjQ2FCsD9wFnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZGQCAg8WAh4Fc3R5bGUFDWRpc3BsYXk6bm9uZTtkAgMPFgIfBQUNZGlzcGxheTpub25lO2QCBA8WAh8FBTB2aXNpYmlsaXR5OnZpc2libGU7bWFyZ2luLXRvcDo1cHg7ZGlzcGxheTpibG9jaztkAgUPFgIfBQUOZGlzcGxheTpibG9jaztkAgkPZBYCZg8PFgIeBFRleHQFoww8dGFibGUgYm9yZGVyPScwJyBjZWxscGFkZGluZz0nMCcgY2VsbHNwYWNpbmc9JzAnPjx0cj48dGQgIGNsYXNzPSdsZWZ0YmFybGluaycgPjxhIGhyZWY9J2Fib3V0LXVzLmFzcHgnPkFib3V0IFVzPC9hPjwvdGQ+PC90cj48dHI+PHRkIGhlaWdodD0nNyc+PC90ZD4gPC90cj48dHI+PHRkICBjbGFzcz0nbGVmdGJhcmxpbmsnID48YSBocmVmPSdyZWNpcGVzLmFzcHgnPlJlY2lwZXM8L2E+PC90ZD48L3RyPjx0cj48dGQgaGVpZ2h0PSc3Jz48L3RkPiA8L3RyPjx0cj48dGQgIGNsYXNzPSdsZWZ0YmFybGluaycgPjxhIGhyZWY9J3Jlc3RhdXJhbnRzLmFzcHgnPlJlc3RhdXJhbnRzPC9hPjwvdGQ+PC90cj48dHI+PHRkIGhlaWdodD0nNyc+PC90ZD4gPC90cj48dHI+PHRkICBjbGFzcz0nbGVmdGJhcmxpbmsnPjxhIHRhcmdldD0nX2JsYW5rJyBocmVmPSdodHRwOi8vc2hvcC5zYW5qZWV2a2Fwb29yLmNvbS9kZWZhdWx0LmFzcHgnID5TaG9wPC9hPjwvdGQ+PC90cj48dHI+PHRkIGhlaWdodD0nNyc+PC90ZD4gPC90cj48dHI+PHRkICBjbGFzcz0nbGVmdGJhcmxpbmsnID48YSBocmVmPSdpbmZvcm1hdGlvbi1raW9zay5hc3B4Jz5JbmZvcm1hdGlvbiBLaW9zazwvYT48L3RkPjwvdHI+PHRyPjx0ZCBoZWlnaHQ9JzcnPjwvdGQ+IDwvdHI+PHRyPjx0ZCAgY2xhc3M9J2xlZnRiYXJsaW5rJyA+PGEgaHJlZj0ncHJlc3Mtcm9vbS5hc3B4Jz5QcmVzcyBSb29tPC9hPjwvdGQ+PC90cj48dHI+PHRkIGhlaWdodD0nNyc+PC90ZD4gPC90cj48dHI+PHRkICBjbGFzcz0nbGVmdGJhcmxpbmsnID48YSBocmVmPSdudXRyaXRpb24tZ3VpZGUuYXNweCc+TnV0cml0aW9uIEd1aWRlPC9hPjwvdGQ+PC90cj48dHI+PHRkIGhlaWdodD0nNyc+PC90ZD4gPC90cj48dHI+PHRkICBjbGFzcz0nbGVmdGJhcmxpbmsnID48YSBocmVmPSdhc2stc2FuamVldi1rYXBvb3IuYXNweCc+QXNrIFNhbmplZXYgS2Fwb29yPC9hPjwvdGQ+PC90cj48dHI+PHRkIGhlaWdodD0nNyc+PC90ZD4gPC90cj48dHI+PHRkICBjbGFzcz0nbGVmdGJhcmxpbmsnID48YSBocmVmPSdzaGFyZS15b3VyLXJlY2lwZXMuYXNweCc+U2hhcmUgWW91ciBSZWNpcGVzPC9hPjwvdGQ+PC90cj48dHI+PHRkIGhlaWdodD0nNyc+PC90ZD4gPC90cj48dHI+PHRkICBjbGFzcz0nbGVmdGJhcmxpbmsnID48YSBocmVmPSdyZWNpcGUtY29udGVzdC5hc3B4Jz5SZWNpcGUgQ29udGVzdDwvYT48L3RkPjwvdHI+PHRyPjx0ZCBoZWlnaHQ9JzcnPjwvdGQ+IDwvdHI+PHRyPjx0ZCAgY2xhc3M9J2xlZnRiYXJsaW5rJyA+PGEgaHJlZj0nZ2xvc3NhcnkuYXNweCc+R2xvc3Nhcnk8L2E+PC90ZD48L3RyPjx0cj48dGQgaGVpZ2h0PSc3Jz48L3RkPiA8L3RyPjx0cj48dGQgIGNsYXNzPSdsZWZ0YmFybGluaycgPjxhIGhyZWY9J2ZyYW5jaGlzZS5hc3B4Jz5GcmFuY2hpc2UgPC9hPjwvdGQ+PC90cj48dHI+PHRkIGhlaWdodD0nNyc+PC90ZD4gPC90cj48dHI+PHRkICBjbGFzcz0nbGVmdGJhcmxpbmtXaGl0ZScgPjwvdGQ+PC90cj48dHI+PHRkIGhlaWdodD0nMCc+PC90ZD4gPC90cj48dHI+PHRkIGhlaWdodD0nMCc+PC90ZD4gPC90cj48L3RhYmxlPmRkAgoPZBYCAgEPDxYCHwYFIzxhIGhyZWY9RGVmYXVsdC5hc3B4PkhvbWU8L2E+Jm5ic3A7ZGQCCw9kFhhmDxYCHgNzcmMFLHVwbG9hZFxNYWEtQ2hvbGUtRGktRGFsLVNLSzIzMzExNTMzMzg3NjMuanBnZAIBDxYCHgdWaXNpYmxlaGQCFg8PFgIfBgUhTUFBIENIT0xFIERJIERBTCAtIFNLSyAtIEZPT0RGT09EZGQCFw8PFgIfBgUpVXJhZCBhbmQgY2hhbmEgZGFsIGNvb2tlZCBpbiBzcGljeSBtYXNhbGFkZAIYDw8WAh8GBWE8Zm9udCBjb2xvcj0nI2IzYmEzOSc+PHN0cm9uZz5QcmVwYXJhdGlvbiBUaW1lIDogPC9zdHJvbmc+PC9mb250PjxzcGFuIGNsYXNzPSdwcmVwdGltZSc+MS0yIGhvdXJzZGQCGQ8PFgIfBgX5ATxmb250IGNvbG9yPScjYjNiYTM5Jz48c3Ryb25nPkNvb2tpbmcgVGltZSA6IDwvc3Ryb25nPjwvZm9udD4gPHNwYW4gY2xhc3M9J2Nvb2t0aW1lJz48c3BhbiBjbGFzcz0nbWluJz48c3BhbiBjbGFzcz0ndmFsdWUtdGl0bGUnIHRpdGxlPSdQVDMwTSc+PC9zcGFuPjxzcGFuIGNsYXNzPSdtYXgnPjxzcGFuIGNsYXNzPSd2YWx1ZS10aXRsZScgdGl0bGU9J1BUNDBNJz48L3NwYW4+PC9zcGFuPjMwLTQwIG1pbnV0ZXM8L3NwYW4+PC9zcGFuPmRkAhoPDxYCHwYFVjxmb250IGNvbG9yPScjYjNiYTM5Jz48c3Ryb25nPlNlcnZpbmdzIDogPC9zdHJvbmc+PC9mb250PiA8c3BhbiBjbGFzcz0ieWllbGQiPjQ8L3NwYW4+ZGQCGw8PFgIfBgWBGzxkaXYgc3R5bGU9J2Zsb2F0OmxlZnQ7Jz48c3BhbiBjbGFzcz0iaW5ncmVkaWVudCI+U3BsaXQgYmxhY2sgZ3JhbSB3aXRoIHNraW4gKGNoaWxrZXdhbGkgdXJhZCBkYWwpLCBzb2FrZWQgPC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9J2Zsb2F0OnJpZ2h0OyBwYWRkaW5nLXJpZ2h0OjUwcHg7Jz48c3BhbiBjbGFzcz0idmFsdWUiPiAxLzIgIGN1cDwvc3Bhbj48L2Rpdj48ZGl2IGFsaWduPSdsZWZ0Jz48aW1nIHNyYz0naW1hZ2VzL3JlY2lwZWxpbmVuZXcuZ2lmJyBoZWlnaHQ9JzEnIHdpZHRoPSc0ODInIGFsdD0nJy8+PC9kaXY+PGRpdiBzdHlsZT0nZmxvYXQ6bGVmdDsnPjxzcGFuIGNsYXNzPSJpbmdyZWRpZW50Ij5TcGxpdCBCZW5nYWwgZ3JhbSAoY2hhbmEgZGFsKSwgc29ha2VkIDwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSdmbG9hdDpyaWdodDsgcGFkZGluZy1yaWdodDo1MHB4Oyc+PHNwYW4gY2xhc3M9InZhbHVlIj4gMS8yICBjdXA8L3NwYW4+PC9kaXY+PGRpdiBhbGlnbj0nbGVmdCc+PGltZyBzcmM9J2ltYWdlcy9yZWNpcGVsaW5lbmV3LmdpZicgaGVpZ2h0PScxJyB3aWR0aD0nNDgyJyBhbHQ9JycvPjwvZGl2PjxkaXYgc3R5bGU9J2Zsb2F0OmxlZnQ7Jz48c3BhbiBjbGFzcz0iaW5ncmVkaWVudCI+U2FsdCAgPC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9J2Zsb2F0OnJpZ2h0OyBwYWRkaW5nLXJpZ2h0OjUwcHg7Jz48c3BhbiBjbGFzcz0idmFsdWUiPiAgIHRvIHRhc3RlPC9zcGFuPjwvZGl2PjxkaXYgYWxpZ249J2xlZnQnPjxpbWcgc3JjPSdpbWFnZXMvcmVjaXBlbGluZW5ldy5naWYnIGhlaWdodD0nMScgd2lkdGg9JzQ4MicgYWx0PScnLz48L2Rpdj48ZGl2IHN0eWxlPSdmbG9hdDpsZWZ0Oyc+PHNwYW4gY2xhc3M9ImluZ3JlZGllbnQiPlR1cm1lcmljIHBvd2RlciAgPC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9J2Zsb2F0OnJpZ2h0OyBwYWRkaW5nLXJpZ2h0OjUwcHg7Jz48c3BhbiBjbGFzcz0idmFsdWUiPiAxLzQgIHRlYXNwb29uPC9zcGFuPjwvZGl2PjxkaXYgYWxpZ249J2xlZnQnPjxpbWcgc3JjPSdpbWFnZXMvcmVjaXBlbGluZW5ldy5naWYnIGhlaWdodD0nMScgd2lkdGg9JzQ4MicgYWx0PScnLz48L2Rpdj48ZGl2IHN0eWxlPSdmbG9hdDpsZWZ0Oyc+PHNwYW4gY2xhc3M9ImluZ3JlZGllbnQiPkdpbmdlciwgY2hvcHBlZCA8L3NwYW4+PC9kaXY+PGRpdiBzdHlsZT0nZmxvYXQ6cmlnaHQ7IHBhZGRpbmctcmlnaHQ6NTBweDsnPjxzcGFuIGNsYXNzPSJ2YWx1ZSI+IDEgIGluY2ggcGllY2U8L3NwYW4+PC9kaXY+PGRpdiBhbGlnbj0nbGVmdCc+PGltZyBzcmM9J2ltYWdlcy9yZWNpcGVsaW5lbmV3LmdpZicgaGVpZ2h0PScxJyB3aWR0aD0nNDgyJyBhbHQ9JycvPjwvZGl2PjxkaXYgc3R5bGU9J2Zsb2F0OmxlZnQ7Jz48c3BhbiBjbGFzcz0iaW5ncmVkaWVudCI+R3JlZW4gY2hpbGxpZXMsIGNob3BwZWQgPC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9J2Zsb2F0OnJpZ2h0OyBwYWRkaW5nLXJpZ2h0OjUwcHg7Jz48c3BhbiBjbGFzcz0idmFsdWUiPiAzICAgICA8L3NwYW4+PC9kaXY+PGRpdiBhbGlnbj0nbGVmdCc+PGltZyBzcmM9J2ltYWdlcy9yZWNpcGVsaW5lbmV3LmdpZicgaGVpZ2h0PScxJyB3aWR0aD0nNDgyJyBhbHQ9JycvPjwvZGl2PjxkaXYgc3R5bGU9J2Zsb2F0OmxlZnQ7Jz48c3BhbiBjbGFzcz0iaW5ncmVkaWVudCI+UHVyZSBnaGVlICA8L3NwYW4+PC9kaXY+PGRpdiBzdHlsZT0nZmxvYXQ6cmlnaHQ7IHBhZGRpbmctcmlnaHQ6NTBweDsnPjxzcGFuIGNsYXNzPSJ2YWx1ZSI+IDItMyAgdGFibGVzcG9vbnM8L3NwYW4+PC9kaXY+PGRpdiBhbGlnbj0nbGVmdCc+PGltZyBzcmM9J2ltYWdlcy9yZWNpcGVsaW5lbmV3LmdpZicgaGVpZ2h0PScxJyB3aWR0aD0nNDgyJyBhbHQ9JycvPjwvZGl2PjxkaXYgc3R5bGU9J2Zsb2F0OmxlZnQ7Jz48c3BhbiBjbGFzcz0iaW5ncmVkaWVudCI+QnV0dGVyICA8L3NwYW4+PC9kaXY+PGRpdiBzdHlsZT0nZmxvYXQ6cmlnaHQ7IHBhZGRpbmctcmlnaHQ6NTBweDsnPjxzcGFuIGNsYXNzPSJ2YWx1ZSI+IDEgIHRhYmxlc3Bvb248L3NwYW4+PC9kaXY+PGRpdiBhbGlnbj0nbGVmdCc+PGltZyBzcmM9J2ltYWdlcy9yZWNpcGVsaW5lbmV3LmdpZicgaGVpZ2h0PScxJyB3aWR0aD0nNDgyJyBhbHQ9JycvPjwvZGl2PjxkaXYgc3R5bGU9J2Zsb2F0OmxlZnQ7Jz48c3BhbiBjbGFzcz0iaW5ncmVkaWVudCI+Q3VtaW4gc2VlZHMgIDwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSdmbG9hdDpyaWdodDsgcGFkZGluZy1yaWdodDo1MHB4Oyc+PHNwYW4gY2xhc3M9InZhbHVlIj4gMSAgdGVhc3Bvb248L3NwYW4+PC9kaXY+PGRpdiBhbGlnbj0nbGVmdCc+PGltZyBzcmM9J2ltYWdlcy9yZWNpcGVsaW5lbmV3LmdpZicgaGVpZ2h0PScxJyB3aWR0aD0nNDgyJyBhbHQ9JycvPjwvZGl2PjxkaXYgc3R5bGU9J2Zsb2F0OmxlZnQ7Jz48c3BhbiBjbGFzcz0iaW5ncmVkaWVudCI+T25pb24gLCBjaG9wcGVkIDwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSdmbG9hdDpyaWdodDsgcGFkZGluZy1yaWdodDo1MHB4Oyc+PHNwYW4gY2xhc3M9InZhbHVlIj4gMSAgc21hbGw8L3NwYW4+PC9kaXY+PGRpdiBhbGlnbj0nbGVmdCc+PGltZyBzcmM9J2ltYWdlcy9yZWNpcGVsaW5lbmV3LmdpZicgaGVpZ2h0PScxJyB3aWR0aD0nNDgyJyBhbHQ9JycvPjwvZGl2PjxkaXYgc3R5bGU9J2Zsb2F0OmxlZnQ7Jz48c3BhbiBjbGFzcz0iaW5ncmVkaWVudCI+VG9tYXRvLCBjaG9wcGVkIDwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSdmbG9hdDpyaWdodDsgcGFkZGluZy1yaWdodDo1MHB4Oyc+PHNwYW4gY2xhc3M9InZhbHVlIj4gMiAgc21hbGw8L3NwYW4+PC9kaXY+PGRpdiBhbGlnbj0nbGVmdCc+PGltZyBzcmM9J2ltYWdlcy9yZWNpcGVsaW5lbmV3LmdpZicgaGVpZ2h0PScxJyB3aWR0aD0nNDgyJyBhbHQ9JycvPjwvZGl2PjxkaXYgc3R5bGU9J2Zsb2F0OmxlZnQ7Jz48c3BhbiBjbGFzcz0iaW5ncmVkaWVudCI+UmVkIGNoaWxsaSBwb3dkZXIgICA8L3NwYW4+PC9kaXY+PGRpdiBzdHlsZT0nZmxvYXQ6cmlnaHQ7IHBhZGRpbmctcmlnaHQ6NTBweDsnPjxzcGFuIGNsYXNzPSJ2YWx1ZSI+IDEvMiAgdGVhc3Bvb248L3NwYW4+PC9kaXY+PGRpdiBhbGlnbj0nbGVmdCc+PGltZyBzcmM9J2ltYWdlcy9yZWNpcGVsaW5lbmV3LmdpZicgaGVpZ2h0PScxJyB3aWR0aD0nNDgyJyBhbHQ9JycvPjwvZGl2PjxkaXYgc3R5bGU9J2Zsb2F0OmxlZnQ7Jz48c3BhbiBjbGFzcz0iaW5ncmVkaWVudCI+RnJlc2ggY29yaWFuZGVyIGxlYXZlcywgY2hvcHBlZCA8L3NwYW4+PC9kaXY+PGRpdiBzdHlsZT0nZmxvYXQ6cmlnaHQ7IHBhZGRpbmctcmlnaHQ6NTBweDsnPjxzcGFuIGNsYXNzPSJ2YWx1ZSI+IDIgIHRhYmxlc3Bvb25zPC9zcGFuPjwvZGl2PjxkaXYgYWxpZ249J2xlZnQnPjxpbWcgc3JjPSdpbWFnZXMvcmVjaXBlbGluZW5ldy5naWYnIGhlaWdodD0nMScgd2lkdGg9JzQ4MicgYWx0PScnLz48L2Rpdj5kZAIcDw8WAh8GBe0FUGxhY2UgdGhlIHNvYWtlZCBkYWxzIGluIGEgcHJlc3N1cmUgY29va2VyIHdpdGggZm91ciBjdXBzIG9mIHdhdGVyLCBoYWxmIG9mIHRoZSBnaW5nZXIsIGhhbGYgdGhlIGdyZWVuIGNoaWxsaWVzLCBzYWx0IGFuZCB0dXJtZXJpYyBwb3dkZXIuICBDb3ZlciB3aXRoIHRoZSBsaWQgYW5kIGNvb2sgdW5kZXIgcHJlc3N1cmUgZm9yIGVpZ2h0IHRvIHRlbiB3aGlzdGxlcyBvciB0aWxsIHRoZSBkYWxzIGFyZSB0ZW5kZXIuICAJIEhlYXQgdGhlIGdoZWUgYW5kIGJ1dHRlciBpbiBhIG5vbi1zdGljayBmcnlpbmcgcGFuLiBBZGQgdGhlIGN1bWluIHNlZWRzLCByZW1haW5pbmcgZ2luZ2VyIGFuZCBjaGlsbGllcy4gV2hlbiB0aGUgc2VlZHMgYmVnaW4gdG8gY2hhbmdlIGNvbG91ciwgYWRkIHRoZSBvbmlvbiBhbmQgc2F1dMOpIHRpbGwgdGhlIG9uaW9uIHR1cm5zIGEgbGlnaHQgYnJvd24uICANCkFkZCB0aGUgdG9tYXRvZXMgYW5kIHNhdXTDqSB0aWxsIHRoZSB0b21hdG9lcyBzb2Z0ZW4uIEFkZCB0aGUgY2hpbGxpIHBvd2RlciBhbmQgc2F1dMOpIHRpbGwgdGhlIGdoZWUgc2VwYXJhdGVzLg0KQWRkIHRoZSB0ZW1wZXJpbmcgdG8gdGhlIGRhbCBhbmQgbWl4IHdlbGwuIFBsYWNlIHRoZSBwYW4gd2l0aCB0aGUgZGFscyBvbiBtZWRpdW0gaGVhdCBhbmQgc2ltbWVyIGZvciBmaXZlIG1pbnV0ZXMgb3IgdGlsbCB0aGUgbWFzYWxhIGJsZW5kcyB3ZWxsIHdpdGggdGhlIGRhbHMuIA0KU2VydmUgaG90LiAgDQoNCiAgDQo8L2Rpdj5kZAIeDxYCHgRocmVmBRhEaW5uZXJSZWNlaXBlcy5hc3B4P2QxPTFkAh8PZBYOAgEPDxYCHwYFSUZpbmQgc2ltaWxhciByZWNpcGVzIGluIDogPGJyPicgMTAwIEZhdm91cml0ZSBSZWNpcGVzIC0gQXV0b2dyYXBoZWQgQ29weSdkZAIDDxYCHwkFOWh0dHA6Ly9zaG9wLnNhbmplZXZrYXBvb3IuY29tLy9Qcm9kdWN0LmFzcHg/UHJvZHVjdElkPTI3MhYCZg8WAh8HBTdodHRwOi8vd3d3LnNhbmplZXZrYXBvb3IuY29tLy9VcGxvYWRcMTAwIEZhdm91cml0ZTEuanBnZAIHDw8WBh8GBQogUnMuNTk1LjAwHg5Gb250X1N0cmlrZW91dGgeBF8hU0ICgIACZGQCCQ8PFgIfCGhkZAILDw8WAh8IaGRkAg0PDxYCHwhoZGQCDw8PFgIfCGhkZAIgDw8WAh8GBdwuPGRpdiBzdHlsZT0nd2lkdGg6NTAxcHg7JzEnPjxkaXYgY2xhc3M9J3RodW1iaG9sZGVyJz48ZGl2IHN0eWxlPSdkaXNwbGF5OiBub25lOycgaWQ9J3RodW1iMSc+PGEgIGhyZWY9J2FjaGFyaS1taXJjaGktbXVyZ2gtdGVlbnBhdHRpLWZvb2Rmb29kLmFzcHgnPjxkaXY+QUNIQVJJIE1JUkNISSBNVVJHSCAtIFRFRU5QQVRUSSAtIEZPT0RGT09EPC9kaXY+PC9hPjwvZGl2PjxhIGhyZWY9J2FjaGFyaS1taXJjaGktbXVyZ2gtdGVlbnBhdHRpLWZvb2Rmb29kLmFzcHgnPjxpbWcgc3JjPSdodHRwOi8vc2FuamVldmthcG9vci5jb20vdXBsb2FkXEFjaGFyaS1NdXJnaC0tLVNLLVRQLmpwZycgdGl0bGU9J1tBQ0hBUkkgTUlSQ0hJIE1VUkdIIC0gVEVFTlBBVFRJIC0gRk9PREZPT0RdIENoaWNrZW4gY29va2VkIHdpdGggb25pb24gc2VlZHMsIGZlbm5lbCBhbmQgZmVudWdyZWVrIHNlZWRzLicgYWx0PSdbQUNIQVJJIE1JUkNISSBNVVJHSCAtIFRFRU5QQVRUSSAtIEZPT0RGT09EXSBDaGlja2VuIGNvb2tlZCB3aXRoIG9uaW9uIHNlZWRzLCBmZW5uZWwgYW5kIGZlbnVncmVlayBzZWVkcy4nICB3aWR0aD0nMTIwJyBoZWlnaHQ9JzgwJyBib3JkZXI9JzAnICAvPjwvYT48L2Rpdj48ZGl2IGNsYXNzPSd0aHVtYmhvbGRlcic+PGRpdiBzdHlsZT0nZGlzcGxheTogbm9uZTsnIGlkPSd0aHVtYjInPjxhICBocmVmPSdhbG9vLWdvYmhpLWFkcmFraS5hc3B4Jz48ZGl2PkFMT08gR09CSEkgQURSQUtJPC9kaXY+PC9hPjwvZGl2PjxhIGhyZWY9J2Fsb28tZ29iaGktYWRyYWtpLmFzcHgnPjxpbWcgc3JjPSdodHRwOi8vc2FuamVldmthcG9vci5jb20vdXBsb2FkXEFsb28gR29iaGkgQWRyYWtpLS1UdXJiYW4gVGFka2FUTi5qcGcnIHRpdGxlPSdbQUxPTyBHT0JISSBBRFJBS0ldIEFsb28gR29iaSBzaW1wbHkgbWVhbnMgcG90YXRvLWNhdWxpZmxvd2VyLCBhIGNvbWJpbmF0aW9uIG9mIHR3byBiZWxvdmVkIHZlZ2V0YWJsZXMgY29va2VkIHRvZ2V0aGVyIHdpdGggc29tZSBzaW1wbGUgc3BpY2VzLicgYWx0PSdbQUxPTyBHT0JISSBBRFJBS0ldIEFsb28gR29iaSBzaW1wbHkgbWVhbnMgcG90YXRvLWNhdWxpZmxvd2VyLCBhIGNvbWJpbmF0aW9uIG9mIHR3byBiZWxvdmVkIHZlZ2V0YWJsZXMgY29va2VkIHRvZ2V0aGVyIHdpdGggc29tZSBzaW1wbGUgc3BpY2VzLicgIHdpZHRoPScxMjAnIGhlaWdodD0nODAnIGJvcmRlcj0nMCcgIC8+PC9hPjwvZGl2PjxkaXYgY2xhc3M9J3RodW1iaG9sZGVyJz48ZGl2IHN0eWxlPSdkaXNwbGF5OiBub25lOycgaWQ9J3RodW1iMyc+PGEgIGhyZWY9J3Blbm5lLXdpdGgtaGVyYi1hbmQtdG9tYXRvLXNhdWNlLmFzcHgnPjxkaXY+UEVOTkUgV0lUSCBIRVJCIEFORCBUT01BVE8gU0FVQ0U8L2Rpdj48L2E+PC9kaXY+PGEgaHJlZj0ncGVubmUtd2l0aC1oZXJiLWFuZC10b21hdG8tc2F1Y2UuYXNweCc+PGltZyBzcmM9J2h0dHA6Ly9zYW5qZWV2a2Fwb29yLmNvbS91cGxvYWRcUGVubmUtd2l0aC1oZXJiLWFuZC10b21hdG8tLmpwZycgdGl0bGU9J1tQRU5ORSBXSVRIIEhFUkIgQU5EIFRPTUFUTyBTQVVDRV0gUGVubmUgc2VydmVkIHdpdGggZnJlc2ggdG9tYXRvIHNhdWNlIGZsYXZvdXJlZCB3aXRoIG1peGVkIGhlcmJzLicgYWx0PSdbUEVOTkUgV0lUSCBIRVJCIEFORCBUT01BVE8gU0FVQ0VdIFBlbm5lIHNlcnZlZCB3aXRoIGZyZXNoIHRvbWF0byBzYXVjZSBmbGF2b3VyZWQgd2l0aCBtaXhlZCBoZXJicy4nICB3aWR0aD0nMTIwJyBoZWlnaHQ9JzgwJyBib3JkZXI9JzAnICAvPjwvYT48L2Rpdj48ZGl2IGNsYXNzPSd0aHVtYmhvbGRlcic+PGRpdiBzdHlsZT0nZGlzcGxheTogbm9uZTsnIGlkPSd0aHVtYjQnPjxhICBocmVmPSd2ZWdldGFibGUtc3ByaW5nLXJvbGxzLmFzcHgnPjxkaXY+VkVHRVRBQkxFIFNQUklORyBST0xMUzwvZGl2PjwvYT48L2Rpdj48YSBocmVmPSd2ZWdldGFibGUtc3ByaW5nLXJvbGxzLmFzcHgnPjxpbWcgc3JjPSdodHRwOi8vc2FuamVldmthcG9vci5jb20vdXBsb2FkXFZlZ2V0YWJsZS1TcHJpbmctUm9sbC0tV3JhcDEwMzEwMDIxNTk0OTUuanBnJyB0aXRsZT0nW1ZFR0VUQUJMRSBTUFJJTkcgUk9MTFNdIEEgY29tbW9uIGFuZCBhIGRlbGljaW91cyBkaXNoIGZyb20gdGhlIHN0cmVldHMgb2YgQ2hpbmEuJyBhbHQ9J1tWRUdFVEFCTEUgU1BSSU5HIFJPTExTXSBBIGNvbW1vbiBhbmQgYSBkZWxpY2lvdXMgZGlzaCBmcm9tIHRoZSBzdHJlZXRzIG9mIENoaW5hLicgIHdpZHRoPScxMjAnIGhlaWdodD0nODAnIGJvcmRlcj0nMCcgIC8+PC9hPjwvZGl2PjwvZGl2PjxkaXYgc3R5bGU9J3dpZHRoOjUwMXB4OycyJz48ZGl2IGNsYXNzPSd0aHVtYmhvbGRlcic+PGRpdiBzdHlsZT0nZGlzcGxheTogbm9uZTsnIGlkPSd0aHVtYjUnPjxhICBocmVmPSd1cmFkLWRhbC1raS1rYWNob3JpLmFzcHgnPjxkaXY+VVJBRCBEQUwgS0kgS0FDSE9SSTwvZGl2PjwvYT48L2Rpdj48YSBocmVmPSd1cmFkLWRhbC1raS1rYWNob3JpLmFzcHgnPjxpbWcgc3JjPSdodHRwOi8vc2FuamVldmthcG9vci5jb20vdXBsb2FkXFVyYWQgRGFsIGtpIGthY2hvcmkgVE4uanBnJyB0aXRsZT0nW1VSQUQgREFMIEtJIEtBQ0hPUkldIEthY2hvcmkgc3R1ZmZlZCB3aXRoIHVyYWQgZGFsLicgYWx0PSdbVVJBRCBEQUwgS0kgS0FDSE9SSV0gS2FjaG9yaSBzdHVmZmVkIHdpdGggdXJhZCBkYWwuJyAgd2lkdGg9JzEyMCcgaGVpZ2h0PSc4MCcgYm9yZGVyPScwJyAgLz48L2E+PC9kaXY+PGRpdiBjbGFzcz0ndGh1bWJob2xkZXInPjxkaXYgc3R5bGU9J2Rpc3BsYXk6IG5vbmU7JyBpZD0ndGh1bWI2Jz48YSAgaHJlZj0na2hhdHRlLW1lZXRoZS12ZWdldGFibGUtc2Vla2hzLmFzcHgnPjxkaXY+S0hBVFRFIE1FRVRIRSBWRUdFVEFCTEUgU0VFS0hTICAgPC9kaXY+PC9hPjwvZGl2PjxhIGhyZWY9J2toYXR0ZS1tZWV0aGUtdmVnZXRhYmxlLXNlZWtocy5hc3B4Jz48aW1nIHNyYz0naHR0cDovL3NhbmplZXZrYXBvb3IuY29tL3VwbG9hZFxLaGF0dGVtZWV0aGV2ZWdldGFibGVzZWVraFROOTMxMDQyOTU1NzMuanBnJyB0aXRsZT0nW0tIQVRURSBNRUVUSEUgVkVHRVRBQkxFIFNFRUtIUyAgIF0gVGFuZ3ksIFN3ZWV0IHZlZ2V0YWJsZSBza2V3ZXJzIGNvb2tlZCBvbiB0YXdhLicgYWx0PSdbS0hBVFRFIE1FRVRIRSBWRUdFVEFCTEUgU0VFS0hTICAgXSBUYW5neSwgU3dlZXQgdmVnZXRhYmxlIHNrZXdlcnMgY29va2VkIG9uIHRhd2EuJyAgd2lkdGg9JzEyMCcgaGVpZ2h0PSc4MCcgYm9yZGVyPScwJyAgLz48L2E+PC9kaXY+PGRpdiBjbGFzcz0ndGh1bWJob2xkZXInPjxkaXYgc3R5bGU9J2Rpc3BsYXk6IG5vbmU7JyBpZD0ndGh1bWI3Jz48YSAgaHJlZj0nVkVHRVRBQkxFLUJJUllBTkkuYXNweCc+PGRpdj5WRUdFVEFCTEUgQklSWUFOSTwvZGl2PjwvYT48L2Rpdj48YSBocmVmPSdWRUdFVEFCTEUtQklSWUFOSS5hc3B4Jz48aW1nIHNyYz0naHR0cDovL3NhbmplZXZrYXBvb3IuY29tL3VwbG9hZFxWZWdldGFibGUtQmlyeWFuaTUuanBnJyB0aXRsZT0nW1ZFR0VUQUJMRSBCSVJZQU5JXSBBIGhlYWx0aHkgYW5kIGRlbGljaW91cyBiaXJ5YW5pIHdpdGggdmVnZXRhYmxlcyBhbmQgcmljZS4nIGFsdD0nW1ZFR0VUQUJMRSBCSVJZQU5JXSBBIGhlYWx0aHkgYW5kIGRlbGljaW91cyBiaXJ5YW5pIHdpdGggdmVnZXRhYmxlcyBhbmQgcmljZS4nICB3aWR0aD0nMTIwJyBoZWlnaHQ9JzgwJyBib3JkZXI9JzAnICAvPjwvYT48L2Rpdj48ZGl2IGNsYXNzPSd0aHVtYmhvbGRlcic+PGRpdiBzdHlsZT0nZGlzcGxheTogbm9uZTsnIGlkPSd0aHVtYjgnPjxhICBocmVmPSdQQUxBSy1QQU5FRVIuYXNweCc+PGRpdj5QQUxBSyBQQU5FRVI8L2Rpdj48L2E+PC9kaXY+PGEgaHJlZj0nUEFMQUstUEFORUVSLmFzcHgnPjxpbWcgc3JjPSdodHRwOi8vc2FuamVldmthcG9vci5jb20vdXBsb2FkXFBhbGFrIHBhbmVlci0tT2xpdmUgT2lsIEJvb2sgIFROLmpwZycgdGl0bGU9J1tQQUxBSyBQQU5FRVJdIENvdHRhZ2UgY2hlZXNlIGNvb2tlZCBpbiBzcGluYWNoIGJhc2VkIGdyYXZ5IGFuZCBmcmVzaCBpbmRpYW4gc3BpY2VzLicgYWx0PSdbUEFMQUsgUEFORUVSXSBDb3R0YWdlIGNoZWVzZSBjb29rZWQgaW4gc3BpbmFjaCBiYXNlZCBncmF2eSBhbmQgZnJlc2ggaW5kaWFuIHNwaWNlcy4nICB3aWR0aD0nMTIwJyBoZWlnaHQ9JzgwJyBib3JkZXI9JzAnICAvPjwvYT48L2Rpdj48L2Rpdj48ZGl2IHN0eWxlPSd3aWR0aDo1MDFweDsnMyc+PGRpdiBjbGFzcz0ndGh1bWJob2xkZXInPjxkaXYgc3R5bGU9J2Rpc3BsYXk6IG5vbmU7JyBpZD0ndGh1bWI5Jz48YSAgaHJlZj0nY29ybi1jYXBzaWN1bS1tYXNhbGEuYXNweCc+PGRpdj5DT1JOIENBUFNJQ1VNIE1BU0FMQTwvZGl2PjwvYT48L2Rpdj48YSBocmVmPSdjb3JuLWNhcHNpY3VtLW1hc2FsYS5hc3B4Jz48aW1nIHNyYz0naHR0cDovL3NhbmplZXZrYXBvb3IuY29tL3VwbG9hZFxDb3JuLUNhcHNpY3VtLU1hc2FsYTQzMTAyMTI4NTAyMTguanBnJyB0aXRsZT0nW0NPUk4gQ0FQU0lDVU0gTUFTQUxBXSBDb3JucyBhbmQgY2Fwc2ljdW0gd2l0aCBvbmlvbi10b21hdG8gbWFzYWxhJyBhbHQ9J1tDT1JOIENBUFNJQ1VNIE1BU0FMQV0gQ29ybnMgYW5kIGNhcHNpY3VtIHdpdGggb25pb24tdG9tYXRvIG1hc2FsYScgIHdpZHRoPScxMjAnIGhlaWdodD0nODAnIGJvcmRlcj0nMCcgIC8+PC9hPjwvZGl2PjxkaXYgY2xhc3M9J3RodW1iaG9sZGVyJz48ZGl2IHN0eWxlPSdkaXNwbGF5OiBub25lOycgaWQ9J3RodW1iMTAnPjxhICBocmVmPSdNSVJDSEktS0EtU0FMQU4uYXNweCc+PGRpdj5NSVJDSEkgS0EgU0FMQU48L2Rpdj48L2E+PC9kaXY+PGEgaHJlZj0nTUlSQ0hJLUtBLVNBTEFOLmFzcHgnPjxpbWcgc3JjPSdodHRwOi8vc2FuamVldmthcG9vci5jb20vdXBsb2FkXE1pcmNoaS1rYS1zYWxhbi1PbGl2ZS1PaWwtQm9vay5qcGcnIHRpdGxlPSdbTUlSQ0hJIEtBIFNBTEFOXSBncmVlbiBjaGlsbGlzIGNvb2tlZCBpbiBhIHRhbmd5IHRhbXJpbmQgZ3JhdnkuJyBhbHQ9J1tNSVJDSEkgS0EgU0FMQU5dIGdyZWVuIGNoaWxsaXMgY29va2VkIGluIGEgdGFuZ3kgdGFtcmluZCBncmF2eS4nICB3aWR0aD0nMTIwJyBoZWlnaHQ9JzgwJyBib3JkZXI9JzAnICAvPjwvYT48L2Rpdj48ZGl2IGNsYXNzPSd0aHVtYmhvbGRlcic+PGRpdiBzdHlsZT0nZGlzcGxheTogbm9uZTsnIGlkPSd0aHVtYjExJz48YSAgaHJlZj0ncmFzYWthbGFuLmFzcHgnPjxkaXY+UkFTQUtBTEFOPC9kaXY+PC9hPjwvZGl2PjxhIGhyZWY9J3Jhc2FrYWxhbi5hc3B4Jz48aW1nIHNyYz0naHR0cDovL3NhbmplZXZrYXBvb3IuY29tL3VwbG9hZFxSYXNha2FsYW4tLS1Tb3V0aEluZGlhbi1Cb28uanBnJyB0aXRsZT0nW1JBU0FLQUxBTl0gQXNoIGdvdXJkIGluIGEgeW9ndXJ0IGdyYXZ5JyBhbHQ9J1tSQVNBS0FMQU5dIEFzaCBnb3VyZCBpbiBhIHlvZ3VydCBncmF2eScgIHdpZHRoPScxMjAnIGhlaWdodD0nODAnIGJvcmRlcj0nMCcgIC8+PC9hPjwvZGl2PjxkaXYgY2xhc3M9J3RodW1iaG9sZGVyJz48ZGl2IHN0eWxlPSdkaXNwbGF5OiBub25lOycgaWQ9J3RodW1iMTInPjxhICBocmVmPSdjaGlsbGVkLWN1Y3VtYmVyLWJ1dHRlcm1pbGstc291cC5hc3B4Jz48ZGl2PkNISUxMRUQgQ1VDVU1CRVIgJiBCVVRURVJNSUxLIFNPVVA8L2Rpdj48L2E+PC9kaXY+PGEgaHJlZj0nY2hpbGxlZC1jdWN1bWJlci1idXR0ZXJtaWxrLXNvdXAuYXNweCc+PGltZyBzcmM9J2h0dHA6Ly9zYW5qZWV2a2Fwb29yLmNvbS91cGxvYWRcQ0hJTExFREJVVFRFUk1JTEtBTkRDVUNVTUJFUlNPVVBUTjMzMTA0NDAyOTU0Ni5qcGcnIHRpdGxlPSdbQ0hJTExFRCBDVUNVTUJFUiAmIEJVVFRFUk1JTEsgU09VUF0gQ0hJTExFRCBDVUNVTUJFUiAmIEJVVFRFUk1JTEsgU09VUCcgYWx0PSdbQ0hJTExFRCBDVUNVTUJFUiAmIEJVVFRFUk1JTEsgU09VUF0gQ0hJTExFRCBDVUNVTUJFUiAmIEJVVFRFUk1JTEsgU09VUCcgIHdpZHRoPScxMjAnIGhlaWdodD0nODAnIGJvcmRlcj0nMCcgIC8+PC9hPjwvZGl2PjwvZGl2PmRkAhEPZBYCZg8PFgIfBgX/CjxkaXYgYWxpZ249J2NlbnRlcic+PGEgaHJlZj1pbmRpYW4tcmVjaXBlcy5hc3B4IGNsYXNzPSdib3R0b21iYXInPkluZGlhbiBSZWNpcGVzPC9hPiB8IDxhIGhyZWY9d29ybGQtcmVjaXBlcy5hc3B4IGNsYXNzPSdib3R0b21iYXInPldvcmxkIFJlY2lwZXM8L2E+IHwgPGEgaHJlZj1oZWFsdGh5LXJlY2lwZXMuYXNweCBjbGFzcz0nYm90dG9tYmFyJz5IZWFsdGh5IFJlY2lwZXM8L2E+IHwgPGEgaHJlZj10b3AtMTAtcmVjaXBlcy5hc3B4IGNsYXNzPSdib3R0b21iYXInPlRvcCAxMCBSZWNpcGVzPC9hPiB8IDxhIGhyZWY9c2Vhc29uYWwtcmVjaXBlcy5hc3B4IGNsYXNzPSdib3R0b21iYXInPlNlYXNvbmFsIFJlY2lwZXM8L2E+IHwgPGEgaHJlZj1mZXN0aXZhbC1yZWNpcGVzLmFzcHggY2xhc3M9J2JvdHRvbWJhcic+RmVzdGl2YWwgUmVjaXBlczwvYT4gfCA8YSBocmVmPW1lbnUtb2YtdGhlLXdlZWsuYXNweCBjbGFzcz0nYm90dG9tYmFyJz5NZW51IE9mIFRoZSBXZWVrPC9hPiB8IDxhIGhyZWY9ZmVzdGl2YWwtb2YtdGhlLW1vbnRoLmFzcHggY2xhc3M9J2JvdHRvbWJhcic+RmVzdGl2YWwgT2YgVGhlIE1vbnRoPC9hPiB8IDxhIGhyZWY9cGFuZWVyLXJlY2lwZXMuYXNweCBjbGFzcz0nYm90dG9tYmFyJz5QYW5lZXIgUmVjaXBlczwvYT4gfCA8L2JyPjxhIGhyZWY9cG90YXRvLXJlY2lwZXMuYXNweCBjbGFzcz0nYm90dG9tYmFyJz5Qb3RhdG8gcmVjaXBlczwvYT4gfCA8YSBocmVmPW1pY3Jvd2F2ZS1yZWNpcGVzLmFzcHggY2xhc3M9J2JvdHRvbWJhcic+TWljcm93YXZlIHJlY2lwZXM8L2E+IHwgPGEgaHJlZj1xdWljay1lYXN5LmFzcHggY2xhc3M9J2JvdHRvbWJhcic+UXVpY2sgJiBFYXN5PC9hPiB8IDxhIGhyZWY9Y2h1dG5leS1hbmQtY2h1dG5leS1yZWNpcGVzLmFzcHggY2xhc3M9J2JvdHRvbWJhcic+Q2h1dG5leSBhbmQgY2h1dG5leSByZWNpcGVzPC9hPiB8IDxhIGhyZWY9Z3JhdnktZGlzaGVzLmFzcHggY2xhc3M9J2JvdHRvbWJhcic+R3JhdnkgZGlzaGVzPC9hPiB8IDxhIGhyZWY9bXV0dG9uLXJlY2lwZXMuYXNweCBjbGFzcz0nYm90dG9tYmFyJz5NdXR0b24gcmVjaXBlczwvYT4gfCA8YSBocmVmPXRpcHMtYWR2aWNlLmFzcHggY2xhc3M9J2JvdHRvbWJhcic+VGlwcyAmIEFkdmljZTwvYT4gfCA8YSBocmVmPSdodHRwOi8vc2hvcC5zYW5qZWV2a2Fwb29yLmNvbS9EZWZhdWx0LmFzcHgnIGNsYXNzPSdib3R0b21iYXInPkNvb2tib29rczwvYT4gfCA8YSBocmVmPXNlYWZvb2QuYXNweCBjbGFzcz0nYm90dG9tYmFyJz5TZWFmb29kPC9hPiB8IDwvYnI+PGEgaHJlZj1wYXN0YS5hc3B4IGNsYXNzPSdib3R0b21iYXInPlBhc3RhPC9hPiB8IDxhIGhyZWY9Y2hpY2tlbi1yZWNpcGVzLmFzcHggY2xhc3M9J2JvdHRvbWJhcic+Q2hpY2tlbiBSZWNpcGVzPC9hPjwvZGl2PmRkAhIPDxYCHwYFzQM8YSBocmVmPWFib3V0LXVzLmFzcHggY2xhc3M9J2JvdHRvbWJhcic+QWJvdXQgVXM8L2E+IHwgPGEgaHJlZj1jb250YWN0LXVzLmFzcHggY2xhc3M9J2JvdHRvbWJhcic+Q29udGFjdCBVczwvYT4gfCA8YSBocmVmPWNhcmVlcnMuYXNweCBjbGFzcz0nYm90dG9tYmFyJz5DYXJlZXJzPC9hPiB8IDxhIGhyZWY9UHJpdmFjeVBvbGljeS5hc3B4IGNsYXNzPSdib3R0b21iYXInPlByaXZhY3kgUG9saWN5PC9hPiB8IDxhIGhyZWY9c2l0ZW1hcC5hc3B4IGNsYXNzPSdib3R0b21iYXInPlNpdGUgTWFwPC9hPiB8IDxhIGhyZWY9QWR2ZXJ0aXNlV2l0aFVzLmFzcHggY2xhc3M9J2JvdHRvbWJhcic+QWR2ZXJ0aXNlIHdpdGggdXM8L2E+IHwgPGEgaHJlZj1wcmVzcy1yb29tLmFzcHggY2xhc3M9J2JvdHRvbWJhcic+UHJlc3Mgcm9vbTwvYT4gfCA8YSBocmVmPWZhcS5hc3B4IGNsYXNzPSdib3R0b21iYXInPkZBUSdzPC9hPmRkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYDBRNjdGwwMCRidG5OZXdzbGV0dGVyBRljdGwwMCRjcGhTZWFyY2gkYnRuU2VhcmNoBSRjdGwwMCRjcGhNaWRkbGVTZWN0aW9uJEJ0bk5ld3NTdWJtaXRMrtnjNRQVz8uZkNGf/JcuHg2Vug==" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=8Z5MitnnkV_ZLMIAclgBTWqmUj5-OsF_OJaIuWa6DTbj1dZLDxbelUIOswl9WM9tQP1312I_1XwF35boUHA8BmtCV441&amp;t=634436939908805000" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=fkkLJS7OTwvRgHx4YpEKg2sHtBK8gP-dtvIvx8XiELyM5aJxDWnEWoulyF7jApbnayjwWxv1MBP_GWZMj_2tEapVoyeJF1hibPY28p-PPPlcShGmzxsWjPGFqQCSMAVHhyrgQbjw-vZ3t02E34Uhj_5SP601&amp;t=1b693d24" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=hi9KburviD9YlWX8SfhXV2j_m7fs2nMeCtoeNrVaTcndVM_OMGUMSpg5y8oTrkmMZI8pAz5aR9gYd8HgTPB8oeot3RfXhz_wMeFakCBe0SnXJDL7WHBYwEf5vP99QSboS_ZIGbUVpfrjTTAgXPN20L21w0rYkwDtrKmZPsNRKXFnx4Rp0&amp;t=ffffffff91acd513" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="/ScriptResource.axd?d=LUy0GJ-Csu08yD2eoF3z_BjbYQhY3ratzWO85Mm0XqyuLEucKaiIy2YiuwDGUX1y7TpIp3XsauwU-R-Lvl_zEGwypQqiSsDns9yv7SUHNa4qK4BzgkMCOWZzJ45lo_PDMZ23IfiHRnOyLPHIWSwsCcB2ZAZe_TbWeYOTuABkPVdEmd2g0&amp;t=ffffffff91acd513" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=GpxgzQT0kDVr9sd-0YCHlntIq7eYwPtGbha1nl_vs2kKIjQhnFb6TXsHbJql1vad9zWVivdFx-tBFrWNaBt8vGAA_Jjct8KLkEH4r9jbo6H8HN_Wk2iK7KK5EYkEMBlWZCQ21UDHpM6j4lApDL5Icr2a_oQ1&amp;t=ffffffffae8d28d3" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=v7QNBLiwC3fvgOrPdU3yUv7IRY6KzNTC43skIN6J8hgwacRWwUlhfYoAAeKbRL5tC3lRnmFKD2ZpnrrC-p4YsYE66PXHMAPTzjPr4DHPVkukzqUM1djwdPBLOA595Zk9e2wiSFFD4MtvwkK92psV-YxDgNc1&amp;t=ffffffffae8d28d3" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=zJ4Dml6LdgpbtYlhTfZq_094Cnl28d3c1vBPngPRNe5WWLIICW_GmQ-VpSpI6IkO7tHTfanSTz8p4lQr-49TzXJXBKg2yuZLQz5z65xysaSUiouNvpJvzPlhDUR6QWj7qZUrezb423kiuucEBim9A2u5a1s1&amp;t=ffffffffae8d28d3" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=0G3N06R0tBONOtzv2652InS8mSZO_fCZVQP52QgGe0hIYowZzKey1Bxt42c2UoWbkXanzWUfcjNYTAD2MFntOu8sgK9X8G8HQYKv3gtoQmn2c-S3Q6mHJTWNnd66AKzhQHLu6BtpIkvPyewbsrXduDOEmI01&amp;t=ffffffffae8d28d3" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=r0-V84xyYyASx6tMj-Qf2LSvSCTrTiN1FKLvVvCexQL9fJeTpJCh9JQzq6aXgn49NJSKedXr_DGRZ-S5SSRBwAhxnhMcb2d_TPinI0DngVAnMy28mMVvLWThNRjZD9kVM9SLc9Qm_4VQgReu9ZVOm_eKJDg1&amp;t=ffffffffae8d28d3" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=CtYyAxKgvswOl4Y73630-PYeBvB1zMr-uXUDmxmjvtLSpdS-jEnc4rS0VFTHv1YUwM9DIusESDAtRoMz797z8LfA836F0WYx6t5VzhAi5A7EKFdY7-x60KsfN6ikpbgmfUciyR_BS8nG-8ZPmhOIjn2ike9XQJShhuXlqsnfAl_e3vjX0&amp;t=ffffffffae8d28d3" type="text/javascript"></script>
+<script src="AutoComplete.asmx/jsdebug" type="text/javascript"></script>
+<script src="/WebResource.axd?d=RIGYM-rGzCA2RIZ8bh15x1qeo5Eqq4jymw12bB0U--bxi6kNd7z0jld1AFpvgywUJ7AJQ76tp34YBlREIqJXh1oRaIY1&amp;t=634436939908805000" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div>
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWiwICqrbYvQkC5fD/2gwC0vHb8wMCtaairwUCpuiFgA0CqOjJgw0CqejJgw0CrujJgw0Cr+jJgw0CrOjJgw0CvejJgw0CsujJgw0CquiJgA0CquiFgA0CquiBgA0Cqui9gA0Cqui5gA0Cqui1gA0CquixgA0CquitgA0Cqujpgw0Cqujlgw0Cq+iJgA0Cq+iFgA0Cq+iBgA0Cq+i9gA0Cq+i5gA0Cq+i1gA0Cq+ixgA0Cq+itgA0Cq+jpgw0Cq+jlgw0CqOiJgA0CqOiFgA0CqOiBgA0CqOi9gA0CqOi5gA0CqOi1gA0CqOixgA0CqOitgA0CqOjpgw0CqOjlgw0CqeiJgA0CqeiFgA0CqeiBgA0Cqei9gA0Cqei5gA0Cqei1gA0CqeixgA0CqeitgA0Cqejpgw0Cqejlgw0CruiJgA0CruiFgA0CruiBgA0Crui9gA0Crui5gA0Crui1gA0CruixgA0CruitgA0Crujpgw0Crujlgw0Cr+iJgA0Cr+iFgA0Cr+iBgA0Cr+i9gA0Cr+i5gA0Cr+i1gA0Cr+ixgA0Cr+itgA0Cr+jpgw0Cr+jlgw0CrOiJgA0CrOiFgA0CrOiBgA0CrOi9gA0CrOi5gA0CrOi1gA0CrOixgA0CrOitgA0CrOjpgw0CrOjlgw0CveiJgA0CveiFgA0CveiBgA0Cvei9gA0Cvei5gA0Cvei1gA0CveixgA0CveitgA0Cvejpgw0Cvejlgw0CsuiJgA0CsuiFgA0CsuiBgA0Csui9gA0Csui5gA0Csui1gA0CsuixgA0CsuitgA0Csujpgw0Csujlgw0CjKnu1woC4ZDIogQC+oeqiQ4CqujJgw0C3+6FlAgCsNTn4gUClbvByQ8C7qKj1AkCw4m9owMC9OP9/QsCycrfyAUCjKnq1woC4ZDEogQC+oemiQ4C3+6BlAgCsNTj4gUClbv9yQ8C7qLf1AkCw4m5owMC9OP5/QsCycrbyAUCjKnm1woC4ZDAogQC+oeiiQ4C3+69lAgCsNSf4wUClbv5yQ8C7qLb1AkCw4m1owMC9OP1/QsCycrXyAUCjKni1woC4ZD8ogQC+ofeiQ4C3+65lAgCsNSb4wUClbv1yQ8C7qLX1AkCw4mxowMC9OPx/QsCycrTyAUCjKme1AoC4ZD4ogQC+ofaiQ4C3+61lAgCsNSX4wUClbvxyQ8C7qLT1AkCw4mtowMC9OPt/QsCycrPyAUCjKma1AoC4ZD0ogQC+ofWiQ4C3+6xlAgCsNST4wUClbvtyQ8C7qLP1AkCw4mpowMC9OPp/QsCycrLyAUCjKmW1AoC4ZDwogQC+ofSiQ4C3+6tlAgCsNSP4wUClbvpyQ8C7qLL1AkCw4mlowMC9OPl/QsCycrHyAUCjKmS1AoC4ZDsogQC+ofOiQ4C3+6plAgCsNSL4wUClbvlyQ8C7qLH1AkCw4mhowMC9OPh/QsCycrDyAUCjKnO1woC4ZCoogQC+oeKiQ4C3+7llwgCsNTH4gUClbuhyQ8C7qKD1AkCw4mdowMC9OPd/QsCycq/yAUCjKnK1woC4ZCkogQC+oeGiQ4C3+7hlwgCsNTD4gUClbvdyQ8C7qK/1AkCw4mZowMC9OPZ/QsCycq7yAUCjanu1woC5pDIogQC+4eqiQ4C3O6FlAgCsdTn4gUCirvByQ8C76Kj1AkCwIm9owMC9eP9/QsCzsrfyAUCjanq1woC5pDEogQC+4emiQ4C3O6BlAgCsdTj4gUCirv9yQ8C76Lf1AkCwIm5owMC9eP5/QsCzsrbyAUCjanm1woC5pDAogQC+4eiiQ4C3O69lAgCsdSf4wUCirv5yQ8C76Lb1AkCwIm1owMC9eP1/QsCzsrXyAUCjani1woC5pD8ogQC+4feiQ4C3O65lAgCsdSb4wUCirv1yQ8Cq+jJgw0C76LX1AkCwImxowMC9ePx/QsCzsrTyAUCjame1AoC5pD4ogQC+4faiQ4C3O61lAgCsdSX4wUCirvxyQ8C76LT1AkCrvfilw8CxuGj9wcC99vz8gsCge3LtQUCx/v/0QoCn//jtg4CttqXmAgCquTZ2gcC6MqSogsC/6rhFALorJD2BgK/vLfkDgLfjNKyDwKVx9zbCQLLwtesDAKzjp3WA6MsIWQJxcoHXmvyX+XpmYKobyXx" />
+</div>
+    
+    
+     
+      
+     
+    
+
+    
+    
+   
+    
+    <table align="center" cellpadding="0" cellspacing="0" border="0">
+        
+        <tr>
+        
+        
+            
+            
+            
+            <td width="10" valign="top">&nbsp;</td>
+            
+            <td width="989" valign="top">
+            
+                     
+            
+   <table width="989" border="0" align="center" class="middleinnerarea" cellspacing="0" cellpadding="0">
+    <tr>
+            <td>
+            
+            
+            
+           
+
+
+
+           </td>
+        </tr>
+        <tr><td height="7"></td></tr>  
+    
+   <tr>
+        <td>
+
+<div align="center" style="margin-bottom:7px;">
+   <table width="100%" border="0" class="topbarmain" cellspacing="0" cellpadding="0">
+      <tr>
+        <td style="padding-left:12px";><font color="white">Sanjeev Kapoor : “The most 
+            celebrated face of Indian cuisine”</font> </td>
+        
+        <td><div align="right">
+        <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+                
+            <td><a href="Default.aspx" class="toptextlink2">Home</a></td>
+            <td><img src="images/whiteline.gif" hspace="2" alt="" border="0"/></td>
+            <td><a href="ContactUs.aspx" class="toptextlink2">Contact Us</a></td>
+            <td><img src="images/whiteline.gif" hspace="2" alt="" border="0"/></td>
+            
+            <td>
+            <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td><a href="#" id="ctl00_A1" title="NewsLetter" class="toptextlink2" style="visibility:visible;" onmouseover="menu('popupboxNewsletter','block');" onmouseout="menu('popupboxNewsletter','none');">
+                        NewsLetter</a></td>
+                    
+                    <td>
+                    <div id="ctl00_pnlNews" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'ctl00_btnNewsletter')">
+	
+              <iframe id="popupboxNewsletter_iframe" frameborder="0" style="z-index:999; margin-left:-263px; margin-top:7px; padding-right:5px; padding-left:10px; text-align:left;display:none;position:absolute;"></iframe>
+              <div id="popupboxNewsletter" style="z-index:1000; margin-left:-263px; margin-top:7px; padding-right:5px; padding-left:10px; text-align:left;display:none;position:absolute;background-color:#ffffff; border:1px solid #cccccc;"  onmouseover="menu('popupboxNewsletter','block');" >
+                <table border="0" class="popupdiv" align="center" cellspacing="0" cellpadding="0">
+                <tr id="ctl00_tr1">
+		<td>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                   <tr ><td height="12"></td></tr>
+                       <tr><td><span id="ctl00_Label1" style="font-weight:bold;">NewsLetter</span></td>                       
+                       
+                       <td><img src="images/CloseButton.gif" alt="" border="0" onclick="javascript:menu('popupboxNewsletter','none');s" /></td>
+                       </tr>                       
+                       <tr ><td height="10"></td></tr>
+                       <tr id="ctl00_tr2">
+			<td valign="top">
+                                <table border="0" align="left" cellspacing="0" cellpadding="0"> 
+                                    <tr>
+                                        <td><span id="ctl00_Label2">First Name</span></td>
+                                        <td width="5">&nbsp;</td>                                     
+                                        <td><input name="ctl00$txtFirstName" type="text" id="ctl00_txtFirstName" class="textbox2" onkeydown="F_OnKeydownNewsletter(event);" style="height:13px;width:143px;" />
+                                        <span id="ctl00_RequiredFieldValidator4" style="color:Red;display:none;"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td height="8" colspan="3"></td>
+                                    </tr>                         
+                                    <tr>                     
+                                        <td><span id="ctl00_Label3">Last Name</span></td>
+                                        <td width="5">&nbsp;</td> 
+                                        <td><input name="ctl00$txtLName" type="text" id="ctl00_txtLName" class="textbox2" onkeydown="F_OnKeydownNewsletter(event);" style="height:13px;width:143px;" />
+                                        <span id="ctl00_RequiredFieldValidator5" style="color:Red;display:none;"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td height="8" colspan="3"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span id="ctl00_Label4">Email Address</span></td>
+                                        <td width="5">&nbsp;</td> 
+                                        <td><input name="ctl00$txtEmailAdd" type="text" id="ctl00_txtEmailAdd" class="textbox2" onkeydown="F_OnKeydownNewsletter(event);" style="height:13px;width:143px;" />
+                                            &nbsp;<span id="ctl00_RegularExpressionValidator2" style="color:Red;display:none;"></span><span id="ctl00_RequiredFieldValidator8" style="color:Red;display:none;"></span></td>
+                                  </tr>                        
+                                  <tr>
+                                      <td height="8" colspan="3"></td>
+                                  </tr>
+                                  <tr id="ctl00_trCountry">
+				<td><span id="ctl00_lblCountry">Country</span> </td>
+				<td><div  align="left">&nbsp;</div></td>
+				<td>
+                                          
+                                          <select name="ctl00$drpCountry" id="ctl00_drpCountry" class="selectdrp" onkeydown="F_OnKeydownNewsletter(event);">
+					<option value="-1">--Select--</option>
+					<option value="3">AFGHANISTAN</option>
+					<option value="4">ALAND ISLANDS</option>
+					<option value="5">ALBANIA</option>
+					<option value="6">ALGERIA</option>
+					<option value="7">AMERICAN SAMOA</option>
+					<option value="8">ANDORRA</option>
+					<option value="9">ANGOLA</option>
+					<option value="10">ANGUILLA</option>
+					<option value="11">ANTARCTICA</option>
+					<option value="12">ANTIGUA AND BARBUDA</option>
+					<option value="13">ARGENTINA</option>
+					<option value="14">ARMENIA</option>
+					<option value="15">ARUBA</option>
+					<option value="16">AUSTRALIA</option>
+					<option value="17">AUSTRIA</option>
+					<option value="18">AZERBAIJAN</option>
+					<option value="19">BAHAMAS</option>
+					<option value="20">BAHRAIN</option>
+					<option value="21">BANGLADESH</option>
+					<option value="22">BARBADOS</option>
+					<option value="23">BELARUS</option>
+					<option value="24">BELGIUM</option>
+					<option value="25">BELIZE</option>
+					<option value="26">BENIN</option>
+					<option value="27">BERMUDA</option>
+					<option value="28">BHUTAN</option>
+					<option value="29">BOLIVIA</option>
+					<option value="30">BOSNIA AND HERZEGOVINA</option>
+					<option value="31">BOTSWANA</option>
+					<option value="32">BOUVET ISLAND</option>
+					<option value="33">BRAZIL</option>
+					<option value="34">BRITISH INDIAN OCEAN TERRITORY</option>
+					<option value="35">BRUNEI DARUSSALAM</option>
+					<option value="36">BULGARIA</option>
+					<option value="37">BURKINA FASO</option>
+					<option value="38">BURUNDI</option>
+					<option value="39">CAMBODIA</option>
+					<option value="40">CAMEROON</option>
+					<option value="41">CANADA</option>
+					<option value="42">CAPE VERDE</option>
+					<option value="43">CAYMAN ISLANDS</option>
+					<option value="44">CENTRAL AFRICAN REPUBLIC</option>
+					<option value="45">CHAD</option>
+					<option value="46">CHILE</option>
+					<option value="47">CHINA</option>
+					<option value="48">CHRISTMAS ISLAND</option>
+					<option value="49">COCOS (KEELING) ISLANDS</option>
+					<option value="50">COLOMBIA</option>
+					<option value="51">COMOROS</option>
+					<option value="52">CONGO</option>
+					<option value="53">CONGO</option>
+					<option value="54">COOK ISLANDS</option>
+					<option value="55">COSTA RICA</option>
+					<option value="56">C&#212;TE D'IVOIRE</option>
+					<option value="57">CROATIA</option>
+					<option value="58">CUBA</option>
+					<option value="59">CYPRUS</option>
+					<option value="60">CZECH REPUBLIC</option>
+					<option value="61">DENMARK</option>
+					<option value="62">DJIBOUTI</option>
+					<option value="63">DOMINICA</option>
+					<option value="64">DOMINICAN REPUBLIC</option>
+					<option value="65">ECUADOR</option>
+					<option value="66">EGYPT</option>
+					<option value="67">EL SALVADOR</option>
+					<option value="68">EQUATORIAL GUINEA</option>
+					<option value="69">ERITREA</option>
+					<option value="70">ESTONIA</option>
+					<option value="71">ETHIOPIA</option>
+					<option value="72">FALKLAND ISLANDS (MALVINAS)</option>
+					<option value="73">FAROE ISLANDS</option>
+					<option value="74">FIJI</option>
+					<option value="75">FINLAND</option>
+					<option value="76">FRANCE</option>
+					<option value="77">FRENCH GUIANA</option>
+					<option value="78">FRENCH POLYNESIA</option>
+					<option value="79">FRENCH SOUTHERN TERRITORIES</option>
+					<option value="80">GABON</option>
+					<option value="81">GAMBIA</option>
+					<option value="82">GEORGIA</option>
+					<option value="83">GERMANY</option>
+					<option value="84">GHANA</option>
+					<option value="85">GIBRALTAR</option>
+					<option value="86">GREECE</option>
+					<option value="87">GREENLAND</option>
+					<option value="88">GRENADA</option>
+					<option value="89">GUADELOUPE</option>
+					<option value="90">GUAM</option>
+					<option value="91">GUATEMALA</option>
+					<option value="92">GUERNSEY</option>
+					<option value="93">GUINEA</option>
+					<option value="94">GUINEA-BISSAU</option>
+					<option value="95">GUYANA</option>
+					<option value="96">HAITI</option>
+					<option value="97">HEARD ISLAND</option>
+					<option value="98">HOLY SEE (VATICAN CITY STATE)</option>
+					<option value="99">HONDURAS</option>
+					<option value="100">HONG KONG</option>
+					<option value="101">HUNGARY</option>
+					<option value="102">ICELAND</option>
+					<option value="1">INDIA</option>
+					<option value="103">INDONESIA</option>
+					<option value="104">IRAN, ISLAMIC REPUBLIC OF</option>
+					<option value="105">IRAQ</option>
+					<option value="106">IRELAND</option>
+					<option value="107">ISLE OF MAN</option>
+					<option value="108">ISRAEL</option>
+					<option value="109">ITALY</option>
+					<option value="110">JAMAICA</option>
+					<option value="111">JAPAN</option>
+					<option value="112">JERSEY</option>
+					<option value="113">JORDAN</option>
+					<option value="114">KAZAKHSTAN</option>
+					<option value="115">KENYA</option>
+					<option value="116">KIRIBATI</option>
+					<option value="117">KOREA</option>
+					<option value="118">KOREA, REPUBLIC OF</option>
+					<option value="119">KUWAIT</option>
+					<option value="120">KYRGYZSTAN</option>
+					<option value="121">LAO PEOPLE'S DEMOCRATIC REPUBLIC</option>
+					<option value="122">LATVIA</option>
+					<option value="123">LEBANON</option>
+					<option value="124">LESOTHO</option>
+					<option value="125">LIBERIA</option>
+					<option value="126">LIBYAN ARAB JAMAHIRIYA</option>
+					<option value="127">LIECHTENSTEIN</option>
+					<option value="128">LITHUANIA</option>
+					<option value="129">LUXEMBOURG</option>
+					<option value="130">MACAO</option>
+					<option value="131">MACEDONIA</option>
+					<option value="132">MADAGASCAR</option>
+					<option value="133">MALAWI</option>
+					<option value="134">MALAYSIA</option>
+					<option value="135">MALDIVES</option>
+					<option value="136">MALI</option>
+					<option value="137">MALTA</option>
+					<option value="138">MARSHALL ISLANDS</option>
+					<option value="139">MARTINIQUE</option>
+					<option value="140">MAURITANIA</option>
+					<option value="141">MAURITIUS</option>
+					<option value="142">MAYOTTE</option>
+					<option value="143">MEXICO</option>
+					<option value="144">MICRONESIA</option>
+					<option value="145">MOLDOVA, REPUBLIC OF</option>
+					<option value="146">MONACO</option>
+					<option value="147">MONGOLIA</option>
+					<option value="148">MONTENEGRO</option>
+					<option value="149">MONTSERRAT</option>
+					<option value="150">MOROCCO</option>
+					<option value="151">MOZAMBIQUE</option>
+					<option value="152">MYANMAR</option>
+					<option value="153">NAMIBIA</option>
+					<option value="154">NAURU</option>
+					<option value="155">NEPAL</option>
+					<option value="156">NETHERLANDS</option>
+					<option value="157">NETHERLANDS ANTILLES</option>
+					<option value="158">NEW CALEDONIA</option>
+					<option value="159">NEW ZEALAND</option>
+					<option value="160">NICARAGUA</option>
+					<option value="161">NIGER</option>
+					<option value="162">NIGERIA</option>
+					<option value="163">NIUE</option>
+					<option value="164">NORFOLK ISLAND</option>
+					<option value="165">NORTHERN MARIANA ISLANDS</option>
+					<option value="166">NORWAY</option>
+					<option value="167">OMAN</option>
+					<option value="168">PAKISTAN</option>
+					<option value="169">PALAU</option>
+					<option value="170">PALESTINIAN TERRITORY, OCCUPIED</option>
+					<option value="171">PANAMA</option>
+					<option value="172">PAPUA NEW GUINEA</option>
+					<option value="173">PARAGUAY</option>
+					<option value="174">PERU</option>
+					<option value="175">PHILIPPINES</option>
+					<option value="176">PITCAIRN</option>
+					<option value="177">POLAND</option>
+					<option value="178">PORTUGAL</option>
+					<option value="179">PUERTO RICO</option>
+					<option value="180">QATAR</option>
+					<option value="181">REUNION</option>
+					<option value="182">ROMANIA</option>
+					<option value="183">RUSSIAN FEDERATION</option>
+					<option value="184">RWANDA</option>
+					<option value="185">SAINT BARTH&#201;LEMY</option>
+					<option value="186">SAINT HELENA</option>
+					<option value="187">SAINT KITTS AND NEVIS</option>
+					<option value="188">SAINT LUCIA</option>
+					<option value="189">SAINT MARTIN</option>
+					<option value="190">SAINT PIERRE AND MIQUELON</option>
+					<option value="191">SAINT VINCENT AND THE GRENADINES</option>
+					<option value="192">SAMOA</option>
+					<option value="193">SAN MARINO</option>
+					<option value="194">SAO TOME AND PRINCIPE</option>
+					<option value="195">SAUDI ARABIA</option>
+					<option value="196">SENEGAL</option>
+					<option value="197">SERBIA</option>
+					<option value="198">SEYCHELLES</option>
+					<option value="199">SIERRA LEONE</option>
+					<option value="200">SINGAPORE</option>
+					<option value="201">SLOVAKIA</option>
+					<option value="202">SLOVENIA</option>
+					<option value="203">SOLOMON ISLANDS</option>
+					<option value="204">SOMALIA</option>
+					<option value="205">SOUTH AFRICA</option>
+					<option value="206">SOUTH GEORGIA</option>
+					<option value="207">SPAIN</option>
+					<option value="208">SRI LANKA</option>
+					<option value="209">SUDAN</option>
+					<option value="210">SURINAME</option>
+					<option value="211">SVALBARD AND JAN MAYEN</option>
+					<option value="212">SWAZILAND</option>
+					<option value="213">SWEDEN</option>
+					<option value="214">SWITZERLAND</option>
+					<option value="215">SYRIAN ARAB REPUBLIC</option>
+					<option value="216">TAIWAN, PROVINCE OF CHINA</option>
+					<option value="217">TAJIKISTAN</option>
+					<option value="218">TANZANIA, UNITED REPUBLIC OF</option>
+					<option value="219">THAILAND</option>
+					<option value="220">TIMOR-LESTE</option>
+					<option value="221">TOGO</option>
+					<option value="222">TOKELAU</option>
+					<option value="223">TONGA</option>
+					<option value="224">TRINIDAD AND TOBAGO</option>
+					<option value="225">TUNISIA</option>
+					<option value="226">TURKEY</option>
+					<option value="227">TURKMENISTAN</option>
+					<option value="228">TURKS AND CAICOS ISLANDS</option>
+					<option value="229">TUVALU</option>
+					<option value="230">UGANDA</option>
+					<option value="231">UKRAINE</option>
+					<option value="232">UNITED ARAB EMIRATES</option>
+					<option value="233">UNITED KINGDOM</option>
+					<option value="234">UNITED STATES MINOR OUTLYING ISLANDS</option>
+					<option value="235">URUGUAY</option>
+					<option value="2">USA</option>
+					<option value="236">UZBEKISTAN</option>
+					<option value="237">VANUATU</option>
+					<option value="238">VENEZUELA</option>
+					<option value="239">VIET NAM</option>
+					<option value="240">VIRGIN ISLANDS, BRITISH</option>
+					<option value="241">VIRGIN ISLANDS, U.S.</option>
+					<option value="242">WALLIS AND FUTUNA</option>
+					<option value="243">WESTERN SAHARA</option>
+					<option value="244">YEMEN</option>
+					<option value="245">ZAMBIA</option>
+					<option value="246">ZIMBABWE</option>
+
+				</select>
+                                          <span id="ctl00_RequiredFieldValidator6" style="color:Red;display:none;"></span>
+                                      </td>
+			</tr>
+			
+                                  <tr>
+                                      <td height="8" colspan="3"></td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          &nbsp;<div id="ctl00_ValidationSummary4" style="color:Red;display:none;">
+
+			</div>
+                                      </td>  
+                                      <td width="5">&nbsp;</td>
+                                      <td><div align="left"><input type="image" name="ctl00$btnNewsletter" id="ctl00_btnNewsletter" src="images/submitbttn.gif" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$btnNewsletter&quot;, &quot;&quot;, true, &quot;NewsVG&quot;, &quot;&quot;, false, false))" style="border-width:0px;" /></div></td>
+                                  </tr>
+                                  
+                                <tr>
+                                      <td height="14" colspan="3"></td>
+                                  </tr>
+                                  
+                                </table>
+                            </td>
+		</tr>
+		                             
+                       
+                    </table>
+                </td>
+	</tr>
+	
+             
+        </table> 
+              </div> 
+              
+</div>
+              </td>
+                    
+                 </tr>            
+            </table>
+            </td>
+            
+            
+            <td>&nbsp;</td>
+            
+            <td valign="middle">            
+            <table align="right" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td><a href="MemberRegisterFull.aspx" id="ctl00_HyperLink1" class="myaclink" style="display:none;">
+                        My Account</a></td>
+                    <td width="15">&nbsp;</td>
+                    <td id="ctl00_trLogout" style="display:none;"><div align="right"><a id="ctl00_BtnSignOut" class="rightlink2" href="javascript:__doPostBack('ctl00$BtnSignOut','')">Logout</a></div></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;</td>
+                     <td>
+                     
+                    
+                    
+                    </td>
+                 </tr>
+            </table>
+               
+          </td>
+          <td>&nbsp;</td>
+             </tr>
+              </table>        
+              </div>
+              </td>        
+              </tr>
+            
+        </table>
+</div>
+</td>
+  </tr>
+    
+      <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="225"><a href="default.aspx"><img src="images/Sklogo.gif" alt="" border="0" /></a></td>
+            <td>&nbsp;</td>
+            <td>
+            
+            
+            <div align="center" style="z-index:-1000;">
+
+<!--JavaScript Tag // Tag for network 1001: Komli Media // Website: SanjeevKapoor  // Page: Recipies // Placement: Recipies 728x90 North (2891279) // created at: Oct 12, 2010 2:04:30 PM-->
+<script language="javascript"><!--
+document.write('<scr'+'ipt language="javascript1.1" src="http://adserver.adtech.de/addyn/3.0/1001/2891279/0/225/ADTECH;loc=100;target=_blank;grp=[group];misc='+new Date().getTime()+';rdclick="></scri'+'pt>');
+//-->
+</script><noscript><a href="http://adserver.adtech.de/adlink/3.0/1001/2891279/0/225/ADTECH;loc=300;grp=[group];rdclick=" target="_blank"><img src="http://adserver.adtech.de/adserv/3.0/1001/2891279/0/225/ADTECH;loc=300;grp=[group]" border="0" width="728" height="90"></a></noscript>
+<!-- End of JavaScript Tag -->
+
+
+
+
+
+			</div>
+			</td>
+          </tr>
+        </table></td>
+      </tr>
+      
+      <tr>
+        <td height="7"></td>
+      </tr>  
+      
+      <tr bgcolor="#fff200">
+        <td height="56" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="10">&nbsp;</td>
+            
+            <td class="logintextbg"><a href="#" id="ctl00_hlLogin" title="LOGIN OR REGISTER HERE" class="logintext" style="visibility:visible;margin-top:5px;display:block;" onmouseover="popup_open('popupbox');" onmouseout="popup_timer('popupbox');">
+                LOGIN OR REGISTER HERE</a>
+            
+            <iframe id="lgnPopIfrmae" frameborder="2" style=" margin-left:40px;z-index:9;display:none;width:253px;height:207px;position:absolute;"></iframe>
+<div style="z-index:10; margin-left:40px; padding-left:8px; text-align:left;display:none;width:245px;height:207px;position:absolute;background-color:#ffffff; border:1px solid #cccccc;" id="popupbox" onmouseover="popup_open('popupbox');" onmouseout="popup_timer('popupbox');">
+    <table border="0" class="popupdiv" align="left" cellspacing="0" cellpadding="0">
+        <tr id="ctl00_trLogin" style="display:block;">
+	<td>
+                <table border="0" cellspacing="0" cellpadding="0">
+                    <tr ><td height="12"></td></tr>
+                    <tr><td><span id="ctl00_lblHeader" class="loginheader" style="font-weight:bold;">MEMBER LOGIN</span></td></tr>
+                    <tr ><td height="12"></td></tr>
+                    <tr><td>Please login if you have already registered.</td></tr>
+                    <tr><td height="10"></td></tr>
+                    <tr id="ctl00_trSignIn">
+		<td valign="top">
+                            <table border="0" align="left" cellspacing="0" cellpadding="0"> 
+                                <tr>
+                                    <td><span id="ctl00_lblUserName">User Name</span></td>
+                                    <td width="5">&nbsp;</td> 
+                                    <td><input name="ctl00$txtUserName" type="text" id="ctl00_txtUserName" class="textbox2" onkeydown="F_OnKeydownLogin(event);" style="height:13px;width:143px;" /><span id="ctl00_RequiredFieldValidator2" style="color:Red;display:none;"></span></td>
+                                </tr>  
+                                <tr ><td height="10" colspan="3"></td></tr>                               
+                                <tr>                      
+                                    <td><span id="ctl00_lblPassword">Password</span></td>
+                                    <td width="5">&nbsp;</td> 
+                                    <td><input name="ctl00$txtPassword" type="password" id="ctl00_txtPassword" class="textbox2" onkeydown="F_OnKeydownLogin(event);" style="height:13px;width:143px;" /><span id="ctl00_RequiredFieldValidator3" style="color:Red;display:none;"></span></td>
+                                </tr>
+                                <tr ><td height="10" colspan="3"></td></tr> 
+                                <tr>
+                                    <td>&nbsp;</td>  
+                                    <td width="5">&nbsp;</td>  
+                                    <td><div align="left"><input type="submit" name="ctl00$BtnLogin" value="LOGIN" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$BtnLogin&quot;, &quot;&quot;, true, &quot;MLogin&quot;, &quot;&quot;, false, false))" id="ctl00_BtnLogin" class="submitbut" /></div></td>
+                                </tr> 
+                                <tr ><td height="10" colspan="3"></td></tr> 
+                                <tr>                                      
+                                    <td colspan="3"><img src="images/lock.gif" alt="" />&nbsp;&nbsp;Forgot Password? <a href="#" target="_self" onclick = "javascript:ForgotPassword_OnClick();" >
+                                        click here</a></td> 
+                                </tr>
+                            </table>
+                        </td>
+	</tr>
+	          
+                    <tr><td height="10"></td></tr>  
+                    <tr>
+                        <td><b><font color="#ef7a22">New Member?</font></b> Please <a href="MemberRegister.aspx" target="_self">
+                            click here</a> to register.</td> 
+                    </tr> 
+                </table>
+            </td>
+</tr>
+
+</table> 
+</div>
+<input type="hidden" name="ctl00$HidLoginNew" id="ctl00_HidLoginNew" value="0" />
+
+        
+        
+        
+       <div class="yourcartheader"><span id="ctl00_lblUser"></span></div>
+        
+       
+        </td>
+            
+            <td width="5">&nbsp;</td>
+            
+            <td valign="top">
+            
+            <div id="ctl00_cphSearch_pnlSearch" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'ctl00_cphSearch_btnSearch')">
+	
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>   
+              <td class="searchbox1" style="padding-top:8px;" valign="top">
+              
+                <table border="0" align="left" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td width="10">&nbsp;</td>
+                    <td class="searchboxtext">SEARCH RECIPES</td>
+                    <td width="20">&nbsp;</td>
+                    <td class="textboxbgbox" style="padding-left:6px;">
+                        <table border="0" align="left" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td valign="top">
+                                
+                                 <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$cphSearch$ScriptManager1', document.getElementById('aspnetForm'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls([], [], [], 90);
+	//]]>
+</script>
+
+                        
+                                <div>            
+                                   
+                                    <input name="ctl00$cphSearch$txtSearch" type="text" value="Search Recipes" id="ctl00_cphSearch_txtSearch" class="textboxnew" onkeydown="F_OnKeydownSearch(event);" AutoComplete="off" onblur="javascript:if (this.value=='') this.value='Search Recipes';" onClick="javascript:this.value='';" /><span id="ctl00_cphSearch_rqv" style="color:Red;display:none;"></span><div id="ctl00_cphSearch_ValidationSummary3" style="color:Red;display:none;">
+
+	</div>
+                                    
+                                   </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    </tr>
+                </table></td>
+                <td width="4">&nbsp;</td>
+                  
+                <td width="40" valign="top" class="imgBtn"><input type="image" name="ctl00$cphSearch$btnSearch" id="ctl00_cphSearch_btnSearch" alt="" align="right" src="images/gobtn.gif" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphSearch$btnSearch&quot;, &quot;&quot;, true, &quot;VG_Search&quot;, &quot;&quot;, false, false))" style="border-width:0px;" /></td>
+                <td width="4">&nbsp;</td>
+                <td width="50" valign="top" class="imgBtn">
+                
+                
+                                                                                      <div id="DivVideo"> 
+                                         <a href="http://www.sanjeevkapoor.com/NewRecipes.aspx" target="_blank"><img src="images/newrecipe.gif" alt="New Recipe" border="" /> </a>
+                                         </div> 
+                                                                        <div id="basicCube" style="display:none;"> 
+
+	<a href="http://www.sanjeevkapoor.com/NewRecipes.aspx" target="_blank"><img src="images/newrecipe.gif" alt="New Recipe" border="" /> </a>
+
+	<a href="http://video.sanjeevkapoor.com/" target="_blank"><img src="images/videoreceipes.gif" border="" alt="Video Recipe" /> </a>
+
+</div> 
+                </td>
+                <td width="4">&nbsp;</td>
+                <td>&nbsp;</td>
+                </tr>
+            </table>
+            
+</div>
+            
+            </td>
+            
+           
+            
+          </tr>
+        </table></td>
+      </tr>
+      
+      <tr>
+        <td height="7"></td>
+      </tr>
+      
+      <tr>
+        <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="219" valign="top">
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td valign="top" class="leftbararea" style="margin-top:-3px;">
+                <!--menu -->
+                <div class="leftbarcontainer">
+                <span id="ctl00_cphLeftMenu_lblLeftMenu"><table border='0' cellpadding='0' cellspacing='0'><tr><td  class='leftbarlink' ><a href='about-us.aspx'>About Us</a></td></tr><tr><td height='7'></td> </tr><tr><td  class='leftbarlink' ><a href='recipes.aspx'>Recipes</a></td></tr><tr><td height='7'></td> </tr><tr><td  class='leftbarlink' ><a href='restaurants.aspx'>Restaurants</a></td></tr><tr><td height='7'></td> </tr><tr><td  class='leftbarlink'><a target='_blank' href='http://shop.sanjeevkapoor.com/default.aspx' >Shop</a></td></tr><tr><td height='7'></td> </tr><tr><td  class='leftbarlink' ><a href='information-kiosk.aspx'>Information Kiosk</a></td></tr><tr><td height='7'></td> </tr><tr><td  class='leftbarlink' ><a href='press-room.aspx'>Press Room</a></td></tr><tr><td height='7'></td> </tr><tr><td  class='leftbarlink' ><a href='nutrition-guide.aspx'>Nutrition Guide</a></td></tr><tr><td height='7'></td> </tr><tr><td  class='leftbarlink' ><a href='ask-sanjeev-kapoor.aspx'>Ask Sanjeev Kapoor</a></td></tr><tr><td height='7'></td> </tr><tr><td  class='leftbarlink' ><a href='share-your-recipes.aspx'>Share Your Recipes</a></td></tr><tr><td height='7'></td> </tr><tr><td  class='leftbarlink' ><a href='recipe-contest.aspx'>Recipe Contest</a></td></tr><tr><td height='7'></td> </tr><tr><td  class='leftbarlink' ><a href='glossary.aspx'>Glossary</a></td></tr><tr><td height='7'></td> </tr><tr><td  class='leftbarlink' ><a href='franchise.aspx'>Franchise </a></td></tr><tr><td height='7'></td> </tr><tr><td  class='leftbarlinkWhite' ></td></tr><tr><td height='0'></td> </tr><tr><td height='0'></td> </tr></table></span></div><!--menu --></td>
+              </tr>
+              
+              <tr><td height="10"></td></tr>
+              
+              <tr>
+                <td valign="top">
+                
+               <table width="219" style="border:1px solid #cccccc; padding-left:5px; padding-top:7px; padding-bottom:7px;" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td valign="top">
+                         <!--Poll-->
+                           <span class="productheadertext"></span><br />                                    
+                                    <div align="center"><br /><a href="http://pages.brandthunder.com/sanjeevkapoor/download/ff" target="_blank"><img src="images/fireboxlogo.jpg" alt="" border="0" title="Theme"/></a></div>
+                                    <br /><br />
+                                    <a href="http://chefsanjeevkapoor.blogspot.com/" target="_blank"><img src="images/blogicon.gif" alt="" border="0" title="BLOGSPOT"/></a>&nbsp;&nbsp;
+                                    <a href="http://www.youtube.com/user/sanjeevkapoorkhazana#p/a" target="_blank"><img src="images/youtubeicon2.gif" alt="" border="0" title="YOU TUBE"/></a><br />
+                                    
+                            <!--Poll-->
+                        </td>
+                    </tr>
+                </table>
+                
+                
+                
+                </td>
+              </tr>
+              
+              <tr><td height="10"></td></tr>
+			  
+			  <tr style="display:none;"><td></td></tr>
+
+<tr ><td></td></tr>
+
+
+			  
+			  <tr><td height="10"></td></tr>
+			  
+			  
+              
+              
+              
+              
+            </table></td>
+            
+            <td width="7" valign="top">&nbsp;</td>
+            
+            <td valign="top" width="525"><!--middlesection-->
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td height="796" valign="top" class="middlesection2">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">                    
+                    <tr>
+                      <td height="13"></td>
+                    </tr>
+                    <tr>
+                      <td height="30" valign="top" class="breadcrumbcontainer">
+                      
+                      <span id="ctl00_CphBreadCrumb_lblBreadCrumb" class="breadtry"><a href=Default.aspx>Home</a>&nbsp;</span></td>
+                    </tr>
+                    <tr>
+                      <td class="middleline">&nbsp;</td>
+                    </tr>
+                   
+                    <tr>
+                      <td valign="top" height="700">
+<style>.leftbarcontainer {padding-right:0px;}</style>
+
+
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'878120af-a4f3-4795-af53-4647b952613e'});</script>
+
+
+<script language="javascript"  type="text/javascript" >
+<!--
+    function SendToFriend_OnClick() {
+        var width = 540;
+        var height = 380;
+        var left = parseInt((screen.availWidth / 2) - (width / 2));
+        var top = parseInt((screen.availHeight / 2) - (height / 2));
+        var windowFeatures = "width=" + width + ",height=" + height + ",status =no,resizable=no,scrollbars=no,toolbar=no, location=no, menubar=no,left=" + left + ",top=" + top + "screenX=" + left + ",screenY=" + top;
+        window.open('SendToFriend.aspx', "ImageWindow", windowFeatures);
+        return false;
+    }
+
+
+
+    function makenew()
+    { window.open("testwindow4.htm", "blank", "toolbar=no,width=250,height=250") }
+
+
+
+    function OpenVideo(status) {
+        if (status == 1) {
+            document.getElementById("popupboxOpenVedio").style.display = "block";
+        }
+        else {
+            document.getElementById("popupboxOpenVedio").style.display = "none";
+        }
+    }
+
+    function PrintRecipe() {
+        window.open(document.getElementById('ctl00_cphMiddleSection_hdnPrintRecipe').value);
+    }
+
+    function SendToFriend(status) {
+        if (status == 1) {
+            document.getElementById("divSendTofriend").style.display = "block";
+        }
+        else {
+            document.getElementById("divSendTofriend").style.display = "none";
+        }
+    }
+
+    function echeck(str) {
+
+        var at = "@";
+        var dot = ".";
+        var lat = str.indexOf(at);
+        var lstr = str.length;
+        var ldot = str.indexOf(dot);
+        if (str.indexOf(at) == -1) {
+            alert('Please Enter Valid Email Address');
+
+            return false;
+        }
+
+        if (str.indexOf(at) == -1 || str.indexOf(at) == 0 || str.indexOf(at) == lstr) {
+            alert('Please Enter Valid Email Address');
+
+            return false;
+        }
+
+        if (str.indexOf(dot) == -1 || str.indexOf(dot) == 0 || str.indexOf(dot) == lstr) {
+            alert('Please Enter Valid Email Address');
+
+            return false;
+        }
+
+        if (str.indexOf(at, (lat + 1)) != -1) {
+            alert('Please Enter Valid Email Address');
+
+            return false;
+        }
+
+        if (str.substring(lat - 1, lat) == dot || str.substring(lat + 1, lat + 2) == dot) {
+            alert('Please Enter Valid Email Address');
+
+            return false;
+        }
+
+        if (str.indexOf(dot, (lat + 2)) == -1) {
+            alert('Please Enter Valid Email Address');
+
+            return false;
+        }
+
+        if (str.indexOf(" ") != -1) {
+            alert('Please Enter Valid Email Address');
+
+            return false;
+        }
+
+        return true;
+    }
+
+
+    function CheckData() {
+        if (document.getElementById("ctl00_cphMiddleSection_txtReferToEmail").value == "") {
+            alert('Please Enter Email Address');
+            document.getElementById("ctl00_cphMiddleSection_txtReferToEmail").focus();
+            return false;
+        }
+
+        if (document.getElementById("ctl00_cphMiddleSection_txtReferToEmail").value != "") {
+            var emailID = document.getElementById("ctl00_cphMiddleSection_txtReferToEmail");
+
+            if (echeck(emailID.value) == false) {
+                emailID.select();
+                emailID.focus();
+                return false;
+            }
+        }
+
+        if (document.getElementById("ctl00_cphMiddleSection_txtYourEmail").value == "") {
+            alert('Please Enter Email Address');
+            document.getElementById("ctl00_cphMiddleSection_txtYourEmail").focus();
+            return false;
+        }
+
+        if (document.getElementById("ctl00_cphMiddleSection_txtYourEmail").value != "") {
+            var MemberemailID = document.getElementById("ctl00_cphMiddleSection_txtYourEmail");
+
+            if (echeck(MemberemailID.value) == false) {
+                MemberemailID.select();
+                MemberemailID.focus();
+                return false;
+            }
+        }
+    }
+
+
+
+//-->
+</script>  
+<style>
+.st_twitter_hcount span, .st_facebook_hcount span, .st_email_hcount span, .st_sharethis_hcount span {float:left;}
+.stBubble_hcount, .chicklets {height:16px;}
+</style>
+<style type="text/css" >
+
+    .hrecipe { }
+    .item{}
+
+    .fn 
+    {
+    	color :#b3ba39;
+    	font-size:18px;
+    	font-family:  ARIAL Narrow, Arial, Helvetica, sans-serif;
+  	 }
+
+    .author { }
+
+    .photo { }
+
+    .summary { }
+
+    .recipeType { }
+
+    .tag { }
+
+    .yield { }
+
+    .prepTime { }
+
+    .cookTime { }
+
+    .duration { }
+
+    .ingredient { }
+
+    .instructions { }
+
+    .published { }
+
+    .review hreview-aggregate { }
+
+    .nutrition { }
+
+    .servingSize { }
+
+    .calories { }
+
+    .fat { }
+
+    .saturatedFat { }
+
+    .unsaturatedFat { }
+
+    .carbohydrates { }
+
+    .sugar { }
+
+    .fiber { }
+
+    .protein { }
+
+    .cholesterol { }
+
+</style> 
+
+<div class="hrecipe">
+<table align="center" border="0" cellspacing="0" cellpadding="0" class="spc">
+
+<tr>
+    <td valign="top">         
+    
+   
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    
+      <tr>
+        
+        <td width="310" valign="top"><img src="upload\Maa-Chole-Di-Dal-SKK2331153338763.jpg" id="ctl00_cphMiddleSection_imgMainImage" class="photo" width="246" height="209" border="0" /></td>
+        
+        <td valign="top">
+        <div align="left">
+        
+        <div style="width:160px; height:135px; padding-left:14px;padding-top:10px;padding-bottom:10px;border-top:2px solid #f8f83e; border-bottom:2px solid #f8f83e;border-left:2px solid #f8f83e;border-right:2px solid #f8f83e;" id="DIV1" language="javascript">
+            <table cellpadding="0" cellspacing="0" border="0">
+                
+                
+                <tr><td>
+                
+               <div id="popupboxOpenVedio" style="display:none;position:absolute; width:240px; height:200px; margin-left:-80px; background-color:#ffffff;" language="javascript" >
+               <table cellpadding="0" cellspacing="0" border="0">
+               <tr><td height="5"></td></tr>
+                   <tr><td align="center"><div align="right"><a class="recipelink" href="#" onclick="javascript:OpenVideo(0);"><img src="images/closebttn2.gif" alt="" border="0"/></a>&nbsp;</div></td></tr>
+                   
+                   <tr><td><span id="ctl00_cphMiddleSection_lblOpenVideo"></span></td></tr>
+               </table>
+               </div>
+                
+                </td></tr>
+                
+                <tr><td style="height: 19px"></td></tr>
+                
+                <tr>
+                    <td><img src="images/mailiconm.gif" align="absmiddle" /> <a href="#" class="recipelink" onclick="javascript:SendToFriend(1);">Mail a Friend</a></td>
+                </tr>
+                
+                <tr><td>
+                <div id="divSendTofriend" style="padding-right:10px; padding-left:10px; margin-left:-155px; width:293px; background-color:#ffffff;text-align:left;display:none;position:absolute;border:1px solid #cccccc;">
+                <table width="293" align="center" border="0" cellspacing="0" cellpadding="0">
+                
+                    <tr><td height="7"></td></tr>
+                
+                    <tr><td><div align="right"><a class="recipelink" href="#" onclick="javascript:SendToFriend(0);" ><img src="images/closebttn2.gif" alt="" border="0"/></a></div></td></tr>
+                    
+                    <tr><td height="7"></td></tr>
+                    
+                    <tr><td valign="top">
+                    <table align="center" border="0" cellspacing="0" cellpadding="0">       
+                  
+                  <tr>
+                    <td height="25" valign="top"><span id="ctl00_cphMiddleSection_lblYourName" style="font-weight:bold;">Your Name:</span></td>
+                    <td height="25" valign="top">&nbsp;</td>
+                    <td height="25" valign="top"><span id="ctl00_cphMiddleSection_lblRefetToName" style="font-weight:bold;">ReferTo Name:</span></td>
+                  </tr>
+                  
+                  
+                  <tr>
+                    <td><input name="ctl00$cphMiddleSection$txtYourName" type="text" id="ctl00_cphMiddleSection_txtYourName" class="textbox2" style="height:13px;width:130px;" />
+                        <span id="ctl00_cphMiddleSection_RequiredFieldValidator6" style="color:Red;display:none;"></span>
+                        
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>                  
+                       <input name="ctl00$cphMiddleSection$txtReferToName" type="text" id="ctl00_cphMiddleSection_txtReferToName" class="textbox2" style="height:13px;width:130px;" />
+                        <span id="ctl00_cphMiddleSection_RequiredFieldValidator1" style="color:Red;display:none;"></span>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td colspan="3" height="7"></td>
+                  </tr>
+                  
+                  <tr>
+                    <td><span id="ctl00_cphMiddleSection_lblYourEmail" style="font-weight:bold;">Your Email :</span></td>
+                    <td>&nbsp;</td>
+                    <td><span id="ctl00_cphMiddleSection_lblReferToEmail" style="font-weight:bold;">ReferTo Email :</span></td>
+                  </tr>
+                  
+                  <tr>
+                    <td><span id="ctl00_cphMiddleSection_RequiredFieldValidator2" style="color:Red;display:none;"></span>  
+                         <input name="ctl00$cphMiddleSection$txtYourEmail" type="text" id="ctl00_cphMiddleSection_txtYourEmail" class="textbox2" style="height:13px;width:130px;" />
+                        <span id="ctl00_cphMiddleSection_RegularExpressionValidator3" style="color:Red;display:none;"></span>
+                   </td>
+                    <td>&nbsp;</td>
+                    <td><span id="ctl00_cphMiddleSection_RequiredFieldValidator3" style="color:Red;display:none;"></span>  
+                        <input name="ctl00$cphMiddleSection$txtReferToEmail" type="text" id="ctl00_cphMiddleSection_txtReferToEmail" class="textbox2" style="height:13px;width:130px;" />
+                        <span id="ctl00_cphMiddleSection_RegularExpressionValidator1" style="color:Red;display:none;"></span>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td colspan="3"><div id="ctl00_cphMiddleSection_ValidationSummary3" style="color:Red;display:none;">
+
+</div></td>
+                  </tr>
+                  
+                  <tr>
+                    <td colspan="3" height="7"></td>
+                  </tr>
+                  
+                  <tr>
+                    <td colspan="3"><div align="center"><input type="image" name="ctl00$cphMiddleSection$BtnNewsSubmit" id="ctl00_cphMiddleSection_BtnNewsSubmit" src="images/submitbttn.gif" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$cphMiddleSection$BtnNewsSubmit&quot;, &quot;&quot;, true, &quot;NewsLetter&quot;, &quot;&quot;, false, false))" style="border-width:0px;" /></div></td>
+                  </tr>
+                  
+                  <tr>
+                    <td colspan="3" height="7"></td>
+                  </tr>
+                  
+                  <tr>
+                        <td colspan="3"><span id="Span3" style="color: red">*</span> mandatory information </td>
+                  </tr>
+                  
+                  <tr>
+                    <td colspan="3" height="7"></td>
+                  </tr>
+                  
+                </table></td></tr>
+                    
+                </table>
+               </div>
+                 </td></tr>
+                
+                <tr><td height="19"></td></tr>
+                
+                <tr>
+                    <td><img src="images/favoritesicon.gif" align="absmiddle" /> <a id="ctl00_cphMiddleSection_lnkAddFavorites" class="recipelink" href="javascript:__doPostBack('ctl00$cphMiddleSection$lnkAddFavorites','')">Add To My Favourites</a></td>
+                </tr>
+                 
+                
+                 
+                
+                <tr><td height="19"></td></tr>
+                
+                <tr>
+                    <td><img src="images/printicon.gif" align="absmiddle" /> <a href="#" class="recipelink" onclick="javascript:PrintRecipe();">Print This Recipes</a> <input type="hidden" name="ctl00$cphMiddleSection$hdnPrintRecipe" id="ctl00_cphMiddleSection_hdnPrintRecipe" value="http://www.sanjeevkapoor.com//PrintRecipes.aspx?RecipeId=5549&amp;Culture=L1" /></td>
+                </tr>
+                
+                <tr><td height="19"></td></tr>
+                
+                
+                
+            </table>
+            </div>
+                
+        </div>
+        </td>
+        
+      </tr>
+      <tr><td colspan="2"><br />
+        <div style="width:468px; height:22px; padding-left:14px;padding-top:10px;padding-bottom:10px;border-top:2px solid #f8f83e; border-bottom:2px solid #f8f83e;border-left:2px solid #f8f83e;border-right:2px solid #f8f83e;" id="DIV2" language="javascript">
+            <span class="st_twitter_hcount" displayText="Tweet"></span><span class="st_facebook_hcount" displayText="Share"></span><span class="st_email_hcount" displayText="Email"></span><span class="st_sharethis_hcount" displayText="Share"></span>
+        </div>
+      </td></tr>
+      <tr><td colspan="2"></td></tr>
+    </table>
+    
+    
+    </td>
+</tr>
+
+<tr>
+    <td valign="top" height="20"></td>
+</tr>
+
+<tr>
+    <td valign="top">
+    
+    <div >
+    <table cellpadding="0" cellspacing="0" border="0">
+    
+        <tr><td style="text-transform:uppercase;">
+        
+        <span class="item">
+         
+          <span id="ctl00_cphMiddleSection_lblRecipeName" class="fn">MAA CHOLE DI DAL - SKK - FOODFOOD</span>
+        
+        </span>
+        <br /></td></tr>
+        
+        <tr><td><span class="summary"><span id="ctl00_cphMiddleSection_lblDesc" class="summary">Urad and chana dal cooked in spicy masala</span> </span><br /></td></tr>
+        
+        <tr><td><span id="ctl00_cphMiddleSection_lblPreparationTime"><font color='#b3ba39'><strong>Preparation Time : </strong></font><span class='preptime'>1-2 hours</span><br /></td></tr>
+        
+        <tr>
+        <td>
+         <span id="ctl00_cphMiddleSection_lblCookingTime"><font color='#b3ba39'><strong>Cooking Time : </strong></font> <span class='cooktime'><span class='min'><span class='value-title' title='PT30M'></span><span class='max'><span class='value-title' title='PT40M'></span></span>30-40 minutes</span></span></span>
+        </td>
+        </tr>
+        
+        <tr><td><span id="ctl00_cphMiddleSection_lblServings"><font color='#b3ba39'><strong>Servings : </strong></font> <span class="yield">4</span></span></td></tr>
+        
+     </table>
+    </div>
+    
+    </td>
+</tr>
+
+<tr>
+    <td valign="top" height="28"></td>
+</tr>
+
+<tr>
+    <td valign="top">
+    
+     <table cellpadding="0" cellspacing="0" border="0">
+    
+        <tr><td style="color:#b3ba39; font-weight:bold;">INGREDIENTS</td></tr>
+        
+        <tr><td height="7"></td></tr>
+        
+        <tr><td><span id="ctl00_cphMiddleSection_lblINGREDIENTS"><div style='float:left;'><span class="ingredient">Split black gram with skin (chilkewali urad dal), soaked </span></div><div style='float:right; padding-right:50px;'><span class="value"> 1/2  cup</span></div><div align='left'><img src='images/recipelinenew.gif' height='1' width='482' alt=''/></div><div style='float:left;'><span class="ingredient">Split Bengal gram (chana dal), soaked </span></div><div style='float:right; padding-right:50px;'><span class="value"> 1/2  cup</span></div><div align='left'><img src='images/recipelinenew.gif' height='1' width='482' alt=''/></div><div style='float:left;'><span class="ingredient">Salt  </span></div><div style='float:right; padding-right:50px;'><span class="value">   to taste</span></div><div align='left'><img src='images/recipelinenew.gif' height='1' width='482' alt=''/></div><div style='float:left;'><span class="ingredient">Turmeric powder  </span></div><div style='float:right; padding-right:50px;'><span class="value"> 1/4  teaspoon</span></div><div align='left'><img src='images/recipelinenew.gif' height='1' width='482' alt=''/></div><div style='float:left;'><span class="ingredient">Ginger, chopped </span></div><div style='float:right; padding-right:50px;'><span class="value"> 1  inch piece</span></div><div align='left'><img src='images/recipelinenew.gif' height='1' width='482' alt=''/></div><div style='float:left;'><span class="ingredient">Green chillies, chopped </span></div><div style='float:right; padding-right:50px;'><span class="value"> 3     </span></div><div align='left'><img src='images/recipelinenew.gif' height='1' width='482' alt=''/></div><div style='float:left;'><span class="ingredient">Pure ghee  </span></div><div style='float:right; padding-right:50px;'><span class="value"> 2-3  tablespoons</span></div><div align='left'><img src='images/recipelinenew.gif' height='1' width='482' alt=''/></div><div style='float:left;'><span class="ingredient">Butter  </span></div><div style='float:right; padding-right:50px;'><span class="value"> 1  tablespoon</span></div><div align='left'><img src='images/recipelinenew.gif' height='1' width='482' alt=''/></div><div style='float:left;'><span class="ingredient">Cumin seeds  </span></div><div style='float:right; padding-right:50px;'><span class="value"> 1  teaspoon</span></div><div align='left'><img src='images/recipelinenew.gif' height='1' width='482' alt=''/></div><div style='float:left;'><span class="ingredient">Onion , chopped </span></div><div style='float:right; padding-right:50px;'><span class="value"> 1  small</span></div><div align='left'><img src='images/recipelinenew.gif' height='1' width='482' alt=''/></div><div style='float:left;'><span class="ingredient">Tomato, chopped </span></div><div style='float:right; padding-right:50px;'><span class="value"> 2  small</span></div><div align='left'><img src='images/recipelinenew.gif' height='1' width='482' alt=''/></div><div style='float:left;'><span class="ingredient">Red chilli powder   </span></div><div style='float:right; padding-right:50px;'><span class="value"> 1/2  teaspoon</span></div><div align='left'><img src='images/recipelinenew.gif' height='1' width='482' alt=''/></div><div style='float:left;'><span class="ingredient">Fresh coriander leaves, chopped </span></div><div style='float:right; padding-right:50px;'><span class="value"> 2  tablespoons</span></div><div align='left'><img src='images/recipelinenew.gif' height='1' width='482' alt=''/></div></span>
+        
+        </td></tr>
+    
+    </table>
+    
+    </td>
+</tr>
+
+<tr><td height="18"></td></tr>
+
+<tr>
+    <td valign="top">
+    
+    <div align="left"><strong><font color="#b3ba39">METHOD</font></strong><br />
+    <span class="instructions">
+    <span id="ctl00_cphMiddleSection_lblMethod">Place the soaked dals in a pressure cooker with four cups of water, half of the ginger, half the green chillies, salt and turmeric powder.  Cover with the lid and cook under pressure for eight to ten whistles or till the dals are tender.  	 Heat the ghee and butter in a non-stick frying pan. Add the cumin seeds, remaining ginger and chillies. When the seeds begin to change colour, add the onion and sauté till the onion turns a light brown.  
+Add the tomatoes and sauté till the tomatoes soften. Add the chilli powder and sauté till the ghee separates.
+Add the tempering to the dal and mix well. Place the pan with the dals on medium heat and simmer for five minutes or till the masala blends well with the dals. 
+Serve hot.  
+
+  
+</div></span>
+    </span>
+    </div>
+        
+    </td>
+</tr>
+
+<tr><td height="20"></td></tr>
+<tr><td >&nbsp;</td></tr>
+
+
+<tr><td style="text-align:right;"><a href="DinnerReceipes.aspx?d1=1" id="ctl00_cphMiddleSection_aToDinner">See More such receipes</a></td></tr>
+<tr><td height="20"></td></tr>
+
+<tr><td><img src="images/recipelinemain.gif" alt="" border="0"/></td></tr>
+
+<tr><td height="20"></td></tr>
+
+<tr><td valign="top">
+
+<table align="center" cellpadding="0" cellspacing="0" width="100%" style="background-color:#ffffff;">
+                <tr>
+                    <td valign="top" height="7"></td>
+                </tr>
+                
+                <tr>
+                <td valign="bottom" style="text-transform:uppercase;"><span id="ctl00_cphMiddleSection_Books1_lblTitle" style="color:#B3BA39;font-weight:bold;">Find similar recipes in : <br>' 100 Favourite Recipes - Autographed Copy'</span></td>
+                </tr>
+                <tr>
+                    <td valign="top" height="7"></td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                     <tr>
+                        <td valign="top" width="98"><a href="http://shop.sanjeevkapoor.com//Product.aspx?ProductId=272" id="ctl00_cphMiddleSection_Books1_ankBook" target="_blank"><img src="http://www.sanjeevkapoor.com//Upload\100 Favourite1.jpg" id="ctl00_cphMiddleSection_Books1_img" border="0" /></a></td>
+                        <td width="15">&nbsp;</td>
+                        <td valign="top">
+                        <table cellpadding="0" cellspacing="0" border="0">                            
+                               <tr>
+                                    <td><span id="ctl00_cphMiddleSection_Books1_lblPriceL">MRP :</span> <span id="ctl00_cphMiddleSection_Books1_lblPrice" style="text-decoration:none;"> Rs.595.00</span></td> 
+                                </tr>
+                                
+
+                                <tr>
+                                    <td> </td>
+                                </tr> 
+
+                                
+                                <tr>
+                                    <td> </td>
+                                </tr>
+                                
+                                <tr id="ctl00_cphMiddleSection_Books1_trbuynow">
+	<td><img src="../images/buynowrightnew.gif" alt="" border="0" /></td>
+</tr>
+
+                                  <tr><td height="20"><br /></td></tr>                  
+                        </table>
+                        
+                        
+                        </td>
+                    </tr>
+                    </table>
+                    
+                   </td>
+                </tr>
+
+               
+                
+                
+
+               
+ 
+ </table>
+ 
+ 
+</td></tr>
+<tr><td height="20"></td></tr>
+
+
+<tr><td height="20"></td></tr>
+
+<tr>
+    <td valign="top">
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td class="header">RECENTLY SEARCHED RECIPES</td>
+      </tr>
+      
+      <tr><td height="10"></td></tr>
+      
+      <tr>
+        <td>
+        <div id="recentlythumbs"><span id="ctl00_cphMiddleSection_lblrecent"><div style='width:501px;'1'><div class='thumbholder'><div style='display: none;' id='thumb1'><a  href='achari-mirchi-murgh-teenpatti-foodfood.aspx'><div>ACHARI MIRCHI MURGH - TEENPATTI - FOODFOOD</div></a></div><a href='achari-mirchi-murgh-teenpatti-foodfood.aspx'><img src='http://sanjeevkapoor.com/upload\Achari-Murgh---SK-TP.jpg' title='[ACHARI MIRCHI MURGH - TEENPATTI - FOODFOOD] Chicken cooked with onion seeds, fennel and fenugreek seeds.' alt='[ACHARI MIRCHI MURGH - TEENPATTI - FOODFOOD] Chicken cooked with onion seeds, fennel and fenugreek seeds.'  width='120' height='80' border='0'  /></a></div><div class='thumbholder'><div style='display: none;' id='thumb2'><a  href='aloo-gobhi-adraki.aspx'><div>ALOO GOBHI ADRAKI</div></a></div><a href='aloo-gobhi-adraki.aspx'><img src='http://sanjeevkapoor.com/upload\Aloo Gobhi Adraki--Turban TadkaTN.jpg' title='[ALOO GOBHI ADRAKI] Aloo Gobi simply means potato-cauliflower, a combination of two beloved vegetables cooked together with some simple spices.' alt='[ALOO GOBHI ADRAKI] Aloo Gobi simply means potato-cauliflower, a combination of two beloved vegetables cooked together with some simple spices.'  width='120' height='80' border='0'  /></a></div><div class='thumbholder'><div style='display: none;' id='thumb3'><a  href='penne-with-herb-and-tomato-sauce.aspx'><div>PENNE WITH HERB AND TOMATO SAUCE</div></a></div><a href='penne-with-herb-and-tomato-sauce.aspx'><img src='http://sanjeevkapoor.com/upload\Penne-with-herb-and-tomato-.jpg' title='[PENNE WITH HERB AND TOMATO SAUCE] Penne served with fresh tomato sauce flavoured with mixed herbs.' alt='[PENNE WITH HERB AND TOMATO SAUCE] Penne served with fresh tomato sauce flavoured with mixed herbs.'  width='120' height='80' border='0'  /></a></div><div class='thumbholder'><div style='display: none;' id='thumb4'><a  href='vegetable-spring-rolls.aspx'><div>VEGETABLE SPRING ROLLS</div></a></div><a href='vegetable-spring-rolls.aspx'><img src='http://sanjeevkapoor.com/upload\Vegetable-Spring-Roll--Wrap1031002159495.jpg' title='[VEGETABLE SPRING ROLLS] A common and a delicious dish from the streets of China.' alt='[VEGETABLE SPRING ROLLS] A common and a delicious dish from the streets of China.'  width='120' height='80' border='0'  /></a></div></div><div style='width:501px;'2'><div class='thumbholder'><div style='display: none;' id='thumb5'><a  href='urad-dal-ki-kachori.aspx'><div>URAD DAL KI KACHORI</div></a></div><a href='urad-dal-ki-kachori.aspx'><img src='http://sanjeevkapoor.com/upload\Urad Dal ki kachori TN.jpg' title='[URAD DAL KI KACHORI] Kachori stuffed with urad dal.' alt='[URAD DAL KI KACHORI] Kachori stuffed with urad dal.'  width='120' height='80' border='0'  /></a></div><div class='thumbholder'><div style='display: none;' id='thumb6'><a  href='khatte-meethe-vegetable-seekhs.aspx'><div>KHATTE MEETHE VEGETABLE SEEKHS   </div></a></div><a href='khatte-meethe-vegetable-seekhs.aspx'><img src='http://sanjeevkapoor.com/upload\KhattemeethevegetableseekhTN93104295573.jpg' title='[KHATTE MEETHE VEGETABLE SEEKHS   ] Tangy, Sweet vegetable skewers cooked on tawa.' alt='[KHATTE MEETHE VEGETABLE SEEKHS   ] Tangy, Sweet vegetable skewers cooked on tawa.'  width='120' height='80' border='0'  /></a></div><div class='thumbholder'><div style='display: none;' id='thumb7'><a  href='VEGETABLE-BIRYANI.aspx'><div>VEGETABLE BIRYANI</div></a></div><a href='VEGETABLE-BIRYANI.aspx'><img src='http://sanjeevkapoor.com/upload\Vegetable-Biryani5.jpg' title='[VEGETABLE BIRYANI] A healthy and delicious biryani with vegetables and rice.' alt='[VEGETABLE BIRYANI] A healthy and delicious biryani with vegetables and rice.'  width='120' height='80' border='0'  /></a></div><div class='thumbholder'><div style='display: none;' id='thumb8'><a  href='PALAK-PANEER.aspx'><div>PALAK PANEER</div></a></div><a href='PALAK-PANEER.aspx'><img src='http://sanjeevkapoor.com/upload\Palak paneer--Olive Oil Book  TN.jpg' title='[PALAK PANEER] Cottage cheese cooked in spinach based gravy and fresh indian spices.' alt='[PALAK PANEER] Cottage cheese cooked in spinach based gravy and fresh indian spices.'  width='120' height='80' border='0'  /></a></div></div><div style='width:501px;'3'><div class='thumbholder'><div style='display: none;' id='thumb9'><a  href='corn-capsicum-masala.aspx'><div>CORN CAPSICUM MASALA</div></a></div><a href='corn-capsicum-masala.aspx'><img src='http://sanjeevkapoor.com/upload\Corn-Capsicum-Masala4310212850218.jpg' title='[CORN CAPSICUM MASALA] Corns and capsicum with onion-tomato masala' alt='[CORN CAPSICUM MASALA] Corns and capsicum with onion-tomato masala'  width='120' height='80' border='0'  /></a></div><div class='thumbholder'><div style='display: none;' id='thumb10'><a  href='MIRCHI-KA-SALAN.aspx'><div>MIRCHI KA SALAN</div></a></div><a href='MIRCHI-KA-SALAN.aspx'><img src='http://sanjeevkapoor.com/upload\Mirchi-ka-salan-Olive-Oil-Book.jpg' title='[MIRCHI KA SALAN] green chillis cooked in a tangy tamrind gravy.' alt='[MIRCHI KA SALAN] green chillis cooked in a tangy tamrind gravy.'  width='120' height='80' border='0'  /></a></div><div class='thumbholder'><div style='display: none;' id='thumb11'><a  href='rasakalan.aspx'><div>RASAKALAN</div></a></div><a href='rasakalan.aspx'><img src='http://sanjeevkapoor.com/upload\Rasakalan---SouthIndian-Boo.jpg' title='[RASAKALAN] Ash gourd in a yogurt gravy' alt='[RASAKALAN] Ash gourd in a yogurt gravy'  width='120' height='80' border='0'  /></a></div><div class='thumbholder'><div style='display: none;' id='thumb12'><a  href='chilled-cucumber-buttermilk-soup.aspx'><div>CHILLED CUCUMBER & BUTTERMILK SOUP</div></a></div><a href='chilled-cucumber-buttermilk-soup.aspx'><img src='http://sanjeevkapoor.com/upload\CHILLEDBUTTERMILKANDCUCUMBERSOUPTN331044029546.jpg' title='[CHILLED CUCUMBER & BUTTERMILK SOUP] CHILLED CUCUMBER & BUTTERMILK SOUP' alt='[CHILLED CUCUMBER & BUTTERMILK SOUP] CHILLED CUCUMBER & BUTTERMILK SOUP'  width='120' height='80' border='0'  /></a></div></div></span>
+        </div>
+        <input name="ctl00$cphMiddleSection$tempbreadfinal" type="hidden" id="ctl00_cphMiddleSection_tempbreadfinal" class="tempbreadfinal" value="Main Course - Vegetarian" />
+        </td>
+      </tr>
+      
+      <tr><td height="10"></td></tr>
+      
+      <tr>
+        <td valign="Top"><a href="javascript:history.go(-1);"><b>Back <<</b></a>
+        
+        <script language="javascript" type="text/javascript">
+            function F_Block(thlr) {
+                alert(thir.id);
+                thlr.style.display = 'block';
+
+            }
+            function F_None(thlr) {
+                alert(thir.id);
+                thlr.style.display = 'none';
+            }            
+            </script>
+            
+        </td>
+      </tr>
+      
+    </table>
+    
+    </td>
+</tr>
+</table>
+</div>  
+<div id="popUpImg"  style="display:none; position:absolute;"><img id="ImgSugarFree" src="images/SugarFree.gif" /></div>
+<div class="MyAmulDisplay" style="display:none; position:absolute; border:solid 2px Gray; background-color:#fff; height:320px; width:300px;"></div>
+</td>
+                    </tr>
+                    <tr>
+                      <td height="12"></td>
+                    </tr>
+                  
+                  </table></td>
+                </tr>
+              </table>
+              <!--middlesection--></td>
+            <td width="7" valign="top">&nbsp;</td>
+            <td valign="top" width="227">
+            <table style="z-index:10;" width="100%" border="0" cellspacing="0" cellpadding="0" id="tblRightHolder">
+                
+               
+              
+               <tr>
+                <td valign="top">
+                
+                    
+
+
+
+            <div  align="center">
+	<!--29 dec 2010-->
+	<!--JavaScript Tag // Tag for network 1001: Komli Media // Website: SanjeevKapoor  // Page: Recipies // Placement: Recipies 200x200 (2891280) // created at: Oct 12, 2010 2:04:30 PM-->
+<script language="javascript"><!--
+document.write('<scr'+'ipt language="javascript1.1" src="http://adserver.adtech.de/addyn/3.0/1001/2891280/0/105/ADTECH;loc=100;target=_blank;grp=[group];misc='+new Date().getTime()+';rdclick="></scri'+'pt>');
+//-->
+</script><noscript><a href="http://adserver.adtech.de/adlink/3.0/1001/2891280/0/105/ADTECH;loc=300;grp=[group];rdclick=" target="_blank"><img src="http://adserver.adtech.de/adserv/3.0/1001/2891280/0/105/ADTECH;loc=300;grp=[group]" border="0" width="200" height="200"></a></noscript>
+<!-- End of JavaScript Tag -->
+
+
+<!--29 dec 2010-->
+
+			              
+            </div>
+            
+            
+                </td>
+              </tr>
+                      
+                       
+              
+              
+              <tr>
+                <td height="15"></td>
+              </tr>
+              
+              <tr>
+                <td>
+                
+                
+                    
+                
+                <div class="wht4din" >
+				 <div class="curvebg">What's for dinner tonight?</div>
+                    <table cellpadding="4" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td width="80">Cuisine:</td>
+                            <td>
+                                <select id="ddlDinner1" style="width:100px">
+                                    <option selected="selected" value="-1">--select--</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> Ingredients: </td>
+                            <td>
+                                <select id="ddlDinner2" style="width:100px">
+                                    <option selected="selected" value="-1">--select--</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> Taste: </td>
+                            <td>
+                                <select id="ddlDinner3" style="width:100px">
+                                    <option selected="selected" value="-1">--select--</option>                                    
+                                </select>
+                            </td>
+                        </tr>
+                        <tr><td hieght="4"></td></tr>
+                        <tr><td colspan="2" align="center" style="text-align:center">
+                        
+                        <img src="images/submitbttn.gif" alt="Submit" id="btnDinner" />
+                        </td></tr>
+                    </table></div>
+                    <br />
+                    <br />
+                <div align="center">				
+          
+          
+          <!--JavaScript Tag // Tag for network 1001: Komli Media // Website: SanjeevKapoor  // Page: Recipies // Placement: Recipies 160x600 (2891278) // created at: Dec 29, 2010 1:05:50 PM-->
+<script language="javascript"><!--
+document.write('<scr'+'ipt language="javascript1.1" src="http://adserver.adtech.de/addyn/3.0/1001/2891278/0/154/ADTECH;loc=100;target=_blank;grp=[group];misc='+new Date().getTime()+';rdclick="></scri'+'pt>');
+//-->
+</script><noscript><a href="http://adserver.adtech.de/adlink/3.0/1001/2891278/0/154/ADTECH;loc=300;grp=[group];rdclick=" target="_blank"><img src="http://adserver.adtech.de/adserv/3.0/1001/2891278/0/154/ADTECH;loc=300;grp=[group]" border="0" width="160" height="600"></a></noscript>
+<!-- End of JavaScript Tag -->
+
+
+
+            </div>
+                
+                </div>
+                
+                </td>
+              </tr>
+              
+              <tr>
+                <td height="15"></td>
+              </tr>
+             
+              <tr>
+                <td height="15"></td>
+              </tr>
+           <tr>
+                <td>
+                
+                <div align="center">
+                
+<iframe src="http://www.facebook.com/plugins/recommendations.php?site=www.sanjeevkapoor.com&amp;width=225&amp;height=600&amp;header=true&amp;colorscheme=light" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:225px; height:600px;" allowTransparency="true" ></iframe> 
+                
+            </div>
+                
+                
+                
+                </td>
+              </tr>
+                           
+            <tr>
+                <td height="15"></td>
+              </tr>
+              
+              <tr>
+                <td></td>
+              </tr> 
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td valign="top" height="12"></td>
+      </tr>
+      <tr>
+        <td valign="top">
+       
+       
+    <table width="992" cellpadding="0" cellspacing="0" border="0">
+        <tr><td height="18"></td></tr>
+        <tr><td style="padding-top:4px; padding-bottom:4px;">
+        
+        
+            
+            <div align="center" >
+            
+       <!--bottom-->     
+    
+<!--JavaScript Tag // Tag for network 1001: Komli Media // Website: SanjeevKapoor  // Page: Recipies // Placement: Recipies 728x90 South (2891281) // created at: Oct 12, 2010 2:04:30 PM-->
+<script language="javascript"><!--
+document.write('<scr'+'ipt language="javascript1.1" src="http://adserver.adtech.de/addyn/3.0/1001/2891281/0/225/ADTECH;loc=100;target=_blank;grp=[group];misc='+new Date().getTime()+';rdclick="></scri'+'pt>');
+//-->
+</script><noscript><a href="http://adserver.adtech.de/adlink/3.0/1001/2891281/0/225/ADTECH;loc=300;grp=[group];rdclick=" target="_blank"><img src="http://adserver.adtech.de/adserv/3.0/1001/2891281/0/225/ADTECH;loc=300;grp=[group]" border="0" width="728" height="90"></a></noscript>
+<!-- End of JavaScript Tag -->
+
+
+
+<!--bottom-->
+    
+            </div>
+        </td></tr>
+    </table>
+        
+        </td>
+      </tr>
+      
+     <!--Bottom PowerBy  -->  
+  <tr>
+    <td height="97" valign="top"><table width="957" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td height="13"></td>
+      </tr>
+      <tr>
+        <td><span id="ctl00_cphBottomMenu_lblQuickMenu"><div align='center'><a href=indian-recipes.aspx class='bottombar'>Indian Recipes</a> | <a href=world-recipes.aspx class='bottombar'>World Recipes</a> | <a href=healthy-recipes.aspx class='bottombar'>Healthy Recipes</a> | <a href=top-10-recipes.aspx class='bottombar'>Top 10 Recipes</a> | <a href=seasonal-recipes.aspx class='bottombar'>Seasonal Recipes</a> | <a href=festival-recipes.aspx class='bottombar'>Festival Recipes</a> | <a href=menu-of-the-week.aspx class='bottombar'>Menu Of The Week</a> | <a href=festival-of-the-month.aspx class='bottombar'>Festival Of The Month</a> | <a href=paneer-recipes.aspx class='bottombar'>Paneer Recipes</a> | </br><a href=potato-recipes.aspx class='bottombar'>Potato recipes</a> | <a href=microwave-recipes.aspx class='bottombar'>Microwave recipes</a> | <a href=quick-easy.aspx class='bottombar'>Quick & Easy</a> | <a href=chutney-and-chutney-recipes.aspx class='bottombar'>Chutney and chutney recipes</a> | <a href=gravy-dishes.aspx class='bottombar'>Gravy dishes</a> | <a href=mutton-recipes.aspx class='bottombar'>Mutton recipes</a> | <a href=tips-advice.aspx class='bottombar'>Tips & Advice</a> | <a href='http://shop.sanjeevkapoor.com/Default.aspx' class='bottombar'>Cookbooks</a> | <a href=seafood.aspx class='bottombar'>Seafood</a> | </br><a href=pasta.aspx class='bottombar'>Pasta</a> | <a href=chicken-recipes.aspx class='bottombar'>Chicken Recipes</a></div></span></td>
+      </tr>
+      <tr>
+        <td height="30"><div align="center"><strong>Copyright © 2010 Sanjeev Kapoor</strong></div></td>
+      </tr>
+      <tr>
+        <td><div align="center">
+        <span id="ctl00_lblbottomlink"><a href=about-us.aspx class='bottombar'>About Us</a> | <a href=contact-us.aspx class='bottombar'>Contact Us</a> | <a href=careers.aspx class='bottombar'>Careers</a> | <a href=PrivacyPolicy.aspx class='bottombar'>Privacy Policy</a> | <a href=sitemap.aspx class='bottombar'>Site Map</a> | <a href=AdvertiseWithUs.aspx class='bottombar'>Advertise with us</a> | <a href=press-room.aspx class='bottombar'>Press room</a> | <a href=faq.aspx class='bottombar'>FAQ's</a></span>
+        
+        </div></td>
+      </tr>
+            <tr>
+        <td height="13"></td>
+      </tr>
+      <tr>
+        <td height="30"><div align="center">Powered by <a href="http://sysconnect.co.in/" class="bottombar" target="_blank">
+            Sysconnect</a></div></td>
+      </tr>
+      <span  id="recipepage" style="display:none"></span>
+      <span  id="recipepage2" style="display:none"></span>
+    </table></td>
+  </tr>
+  
+  <!--Bottom PowerBy  -->
+    </table>
+    
+
+<!-- Start Quantcast tag -->
+<script type="text/javascript">
+    _qoptions = {
+        qacct: "p-6d-qu-S5jrD-Y"
+    };
+</script>
+<script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script>
+<noscript>
+<img src="http://pixel.quantserve.com/pixel/p-6d-qu-S5jrD-Y.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+</noscript>
+<!-- End Quantcast tag -->
+
+<!-- vzSense -->
+
+<script type="text/javascript" src="http://vizisense.net/pixel.js"></script>
+<script type="text/javascript">    _vz_accountID = "Zq0IgNpYdRZjXAAbSh7d0Q=="; if (typeof (_vz_sense) == "function") _vz_sense();</script>
+
+<noscript>
+  <img src="http://vizisense.net/cgi-bin/trail.fcgi?accountID=Zq0IgNpYdRZjXAAbSh7d0Q==&isScript=false" style="display: none;" border="0" height="1" width="1" alt="vzSense"/>
+</noscript>
+<!-- /vzSense -->     
+
+
+
+
+
+    
+    
+    <!-- START Nielsen Online SiteCensus V6.0 -->
+<!-- COPYRIGHT 2010 Nielsen Online -->
+<script type="text/javascript" src="//secure-in.imrworldwide.com/v60.js">
+</script>
+<script type="text/javascript">
+    var pvar = { cid: "in-sanjeevkapoor", content: "0", server: "secure-in" };
+    var trac = nol_t(pvar);
+    trac.record().post();
+</script>
+<noscript>
+ <div>
+ <img src="//secure-in.imrworldwide.com/cgi-bin/m?ci=in-sanjeevkapoor&amp;cg=0&amp;cc=1&amp;ts=noscript"
+ width="1" height="1" alt="" />
+ </div>
+</noscript>
+<!-- END Nielsen Online SiteCensus V6.0 -->
+
+    
+
+
+
+
+<script type="text/javascript">
+//breadcumscript
+    //Trim Function
+    function trim(str, chars) {
+        return ltrim(rtrim(str, chars), chars);
+    }
+
+    function ltrim(str, chars) {
+        chars = chars || "\\s";
+        return str.replace(new RegExp("^[" + chars + "]+", "g"), "");
+    }
+
+    function rtrim(str, chars) {
+        chars = chars || "\\s";
+        return str.replace(new RegExp("[" + chars + "]+$", "g"), "");
+    }
+    //Trim Function over 
+
+
+
+    breadcum();
+
+    function breadcum() {
+        var sPath = window.location.pathname;
+
+        var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+
+        var newpage = $(".breadcrumbcontainer").find("span").html();
+        
+        //alert("newpage1=" + newpage);
+        
+        var pagename = newpage.split("&gt;");
+
+        var newpagebname = pagename[2];
+
+        var dateh1;
+        // alert("newpagebname=" + newpagebname);
+
+         if (newpagebname != "" && newpagebname != "undefined") {
+             //alert("hi1");
+             $.post("Handlers/Breadcum.ashx", { tagname: newpagebname }, function(data) {
+
+                 dateh1 = data + ".aspx";
+
+                 var userbread2 = $(".tempbreaddiv").find("span").text();
+
+                 userbread = trim(userbread2, " ");
+                // alert("userbread=" + userbread);
+
+                 var v1 = 'http://www.sanjeevkapoor.com'
+
+                 var indianrecipepage = "<a style=\"cursor:pointer;\" href=\"" + v1 + "/" + dateh1 + "\">" + pagename[2] + "</a>";
+
+                 if (userbread != "" && userbread != "NoHeader") {
+
+                     //alert("hi3");
+                     var finalbread = pagename[0] + " >" + pagename[1] + " >" + indianrecipepage + " > " + userbread;
+
+
+                     $(".breadcrumbcontainer").find("span").html(finalbread);
+
+                 }
+
+
+             });
+        }
+
+
+        var nextbreadcumFinal = $(".tempbreadfinal").val();
+
+        // alert("nextbreadcumFinal=" + nextbreadcumFinal)
+
+        var newpage = $(".breadcrumbcontainer").find("span").html();
+
+        //alert("newpage=" + newpage);
+
+
+
+        //alert("newpagebnameIndian=" + newpagebnameIndian)
+
+        //           var URL11 = newpagebnameIndian.split(" ");                   
+
+        //            
+        //            var AnchorVal1 = v11 + "/" + URL11[1].toLowerCase() + "-" + URL11[2].toLowerCase() + ".aspx";
+
+        //            var indianrecipepageNew = "<a style=\"cursor:pointer;\" href=\""+AnchorVal1+"\"" +userbreadancher+">" + newpagebnameIndian + "</a>";
+        //            //var indianrecipepageNew = "<a style=\"cursor:pointer;\"  onClick=\"history.back();\">" + newpagebnameIndian + "</a>";
+
+        //           var userbread = "";
+
+        //userbread = $(".tempbreaddiv").find("span").text();
+
+        var pagename = newpage.split("&gt;");
+        var sPathNew = window.location.href;
+        //alert(sPathNew.indexOf("?"));
+        if (sPathNew.indexOf("?") == "-1") {
+
+            if ((nextbreadcumFinal != "" && nextbreadcumFinal != undefined) && (pagename[2] != undefined)) {
+
+                //alert("hi2");
+                if (pagename.length > 2) {
+
+
+                    var newpagebnameIndian = pagename[2];
+
+                    $.post("Handlers/Breadcum.ashx", { Tagname: newpagebnameIndian }, function(data) {
+
+                        dateh1 = data + ".aspx";
+
+
+
+                        var v11 = 'http://www.sanjeevkapoor.com'
+
+                        var indianrecipepageNew = "<a style=\"cursor:pointer;\" href=\"" + v11 + "/" + dateh1 + "\">" + pagename[2] + "</a>";
+
+
+                        nextbreadcumFinal = "<a style=\"cursor:pointer;\"  onClick=\"history.back();\">" + nextbreadcumFinal + "</a>";
+
+                        var finalbread = pagename[0] + " >" + pagename[1] + " >" + indianrecipepageNew + " >" + nextbreadcumFinal;
+                        $(".breadcrumbcontainer").find("span").html(finalbread);
+
+                    });
+
+                }
+            }
+        }
+
+
+    }
+         
+</script>
+
+            </td>
+            
+            <td width="10" valign="top">&nbsp;</td>
+            
+       
+
+            
+            </tr>
+            </table>   
+            
+
+<script type="text/javascript">
+//<![CDATA[
+var Page_ValidationSummaries =  new Array(document.getElementById("ctl00_ValidationSummary4"), document.getElementById("ctl00_cphSearch_ValidationSummary3"), document.getElementById("ctl00_cphMiddleSection_ValidationSummary3"));
+var Page_Validators =  new Array(document.getElementById("ctl00_RequiredFieldValidator4"), document.getElementById("ctl00_RequiredFieldValidator5"), document.getElementById("ctl00_RegularExpressionValidator2"), document.getElementById("ctl00_RequiredFieldValidator8"), document.getElementById("ctl00_RequiredFieldValidator6"), document.getElementById("ctl00_RequiredFieldValidator2"), document.getElementById("ctl00_RequiredFieldValidator3"), document.getElementById("ctl00_cphSearch_rqv"), document.getElementById("ctl00_cphMiddleSection_RequiredFieldValidator6"), document.getElementById("ctl00_cphMiddleSection_RequiredFieldValidator1"), document.getElementById("ctl00_cphMiddleSection_RequiredFieldValidator2"), document.getElementById("ctl00_cphMiddleSection_RegularExpressionValidator3"), document.getElementById("ctl00_cphMiddleSection_RequiredFieldValidator3"), document.getElementById("ctl00_cphMiddleSection_RegularExpressionValidator1"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var ctl00_RequiredFieldValidator4 = document.all ? document.all["ctl00_RequiredFieldValidator4"] : document.getElementById("ctl00_RequiredFieldValidator4");
+ctl00_RequiredFieldValidator4.controltovalidate = "ctl00_txtFirstName";
+ctl00_RequiredFieldValidator4.focusOnError = "t";
+ctl00_RequiredFieldValidator4.errormessage = "Please Enter Name";
+ctl00_RequiredFieldValidator4.display = "None";
+ctl00_RequiredFieldValidator4.validationGroup = "NewsVG";
+ctl00_RequiredFieldValidator4.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_RequiredFieldValidator4.initialvalue = "";
+var ctl00_RequiredFieldValidator5 = document.all ? document.all["ctl00_RequiredFieldValidator5"] : document.getElementById("ctl00_RequiredFieldValidator5");
+ctl00_RequiredFieldValidator5.controltovalidate = "ctl00_txtLName";
+ctl00_RequiredFieldValidator5.focusOnError = "t";
+ctl00_RequiredFieldValidator5.errormessage = "Please Enter Last Name";
+ctl00_RequiredFieldValidator5.display = "None";
+ctl00_RequiredFieldValidator5.validationGroup = "NewsVG";
+ctl00_RequiredFieldValidator5.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_RequiredFieldValidator5.initialvalue = "";
+var ctl00_RegularExpressionValidator2 = document.all ? document.all["ctl00_RegularExpressionValidator2"] : document.getElementById("ctl00_RegularExpressionValidator2");
+ctl00_RegularExpressionValidator2.controltovalidate = "ctl00_txtEmailAdd";
+ctl00_RegularExpressionValidator2.focusOnError = "t";
+ctl00_RegularExpressionValidator2.errormessage = "Please Enter Valid Email Address";
+ctl00_RegularExpressionValidator2.display = "None";
+ctl00_RegularExpressionValidator2.validationGroup = "VG";
+ctl00_RegularExpressionValidator2.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+ctl00_RegularExpressionValidator2.validationexpression = "\\w+([-+.\']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+var ctl00_RequiredFieldValidator8 = document.all ? document.all["ctl00_RequiredFieldValidator8"] : document.getElementById("ctl00_RequiredFieldValidator8");
+ctl00_RequiredFieldValidator8.controltovalidate = "ctl00_txtEmailAdd";
+ctl00_RequiredFieldValidator8.focusOnError = "t";
+ctl00_RequiredFieldValidator8.errormessage = "Please Enter Valid Email Address";
+ctl00_RequiredFieldValidator8.display = "None";
+ctl00_RequiredFieldValidator8.validationGroup = "NewsVG";
+ctl00_RequiredFieldValidator8.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_RequiredFieldValidator8.initialvalue = "";
+var ctl00_RequiredFieldValidator6 = document.all ? document.all["ctl00_RequiredFieldValidator6"] : document.getElementById("ctl00_RequiredFieldValidator6");
+ctl00_RequiredFieldValidator6.controltovalidate = "ctl00_drpCountry";
+ctl00_RequiredFieldValidator6.errormessage = "Please Select Country";
+ctl00_RequiredFieldValidator6.display = "None";
+ctl00_RequiredFieldValidator6.validationGroup = "NewsVG";
+ctl00_RequiredFieldValidator6.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_RequiredFieldValidator6.initialvalue = "-1";
+var ctl00_ValidationSummary4 = document.all ? document.all["ctl00_ValidationSummary4"] : document.getElementById("ctl00_ValidationSummary4");
+ctl00_ValidationSummary4.showmessagebox = "True";
+ctl00_ValidationSummary4.showsummary = "False";
+ctl00_ValidationSummary4.validationGroup = "NewsVG";
+var ctl00_RequiredFieldValidator2 = document.all ? document.all["ctl00_RequiredFieldValidator2"] : document.getElementById("ctl00_RequiredFieldValidator2");
+ctl00_RequiredFieldValidator2.controltovalidate = "ctl00_txtUserName";
+ctl00_RequiredFieldValidator2.focusOnError = "t";
+ctl00_RequiredFieldValidator2.errormessage = "Please Enter User Name";
+ctl00_RequiredFieldValidator2.display = "None";
+ctl00_RequiredFieldValidator2.validationGroup = "MLogin";
+ctl00_RequiredFieldValidator2.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_RequiredFieldValidator2.initialvalue = "";
+var ctl00_RequiredFieldValidator3 = document.all ? document.all["ctl00_RequiredFieldValidator3"] : document.getElementById("ctl00_RequiredFieldValidator3");
+ctl00_RequiredFieldValidator3.controltovalidate = "ctl00_txtPassword";
+ctl00_RequiredFieldValidator3.focusOnError = "t";
+ctl00_RequiredFieldValidator3.errormessage = "Please Enter Password";
+ctl00_RequiredFieldValidator3.display = "None";
+ctl00_RequiredFieldValidator3.validationGroup = "MLogin";
+ctl00_RequiredFieldValidator3.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_RequiredFieldValidator3.initialvalue = "";
+var ctl00_cphSearch_rqv = document.all ? document.all["ctl00_cphSearch_rqv"] : document.getElementById("ctl00_cphSearch_rqv");
+ctl00_cphSearch_rqv.controltovalidate = "ctl00_cphSearch_txtSearch";
+ctl00_cphSearch_rqv.focusOnError = "t";
+ctl00_cphSearch_rqv.errormessage = "Please Enter Search Text.";
+ctl00_cphSearch_rqv.display = "None";
+ctl00_cphSearch_rqv.validationGroup = "VG_Search";
+ctl00_cphSearch_rqv.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_cphSearch_rqv.initialvalue = "";
+var ctl00_cphSearch_ValidationSummary3 = document.all ? document.all["ctl00_cphSearch_ValidationSummary3"] : document.getElementById("ctl00_cphSearch_ValidationSummary3");
+ctl00_cphSearch_ValidationSummary3.showmessagebox = "True";
+ctl00_cphSearch_ValidationSummary3.showsummary = "False";
+ctl00_cphSearch_ValidationSummary3.validationGroup = "VG_Search";
+var ctl00_cphMiddleSection_RequiredFieldValidator6 = document.all ? document.all["ctl00_cphMiddleSection_RequiredFieldValidator6"] : document.getElementById("ctl00_cphMiddleSection_RequiredFieldValidator6");
+ctl00_cphMiddleSection_RequiredFieldValidator6.controltovalidate = "ctl00_cphMiddleSection_txtYourName";
+ctl00_cphMiddleSection_RequiredFieldValidator6.focusOnError = "t";
+ctl00_cphMiddleSection_RequiredFieldValidator6.errormessage = "Please Enter Your Name";
+ctl00_cphMiddleSection_RequiredFieldValidator6.display = "None";
+ctl00_cphMiddleSection_RequiredFieldValidator6.validationGroup = "NewsLetter";
+ctl00_cphMiddleSection_RequiredFieldValidator6.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_cphMiddleSection_RequiredFieldValidator6.initialvalue = "";
+var ctl00_cphMiddleSection_RequiredFieldValidator1 = document.all ? document.all["ctl00_cphMiddleSection_RequiredFieldValidator1"] : document.getElementById("ctl00_cphMiddleSection_RequiredFieldValidator1");
+ctl00_cphMiddleSection_RequiredFieldValidator1.controltovalidate = "ctl00_cphMiddleSection_txtReferToName";
+ctl00_cphMiddleSection_RequiredFieldValidator1.focusOnError = "t";
+ctl00_cphMiddleSection_RequiredFieldValidator1.errormessage = "Please Enter Refer To Name";
+ctl00_cphMiddleSection_RequiredFieldValidator1.display = "None";
+ctl00_cphMiddleSection_RequiredFieldValidator1.validationGroup = "NewsLetter";
+ctl00_cphMiddleSection_RequiredFieldValidator1.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_cphMiddleSection_RequiredFieldValidator1.initialvalue = "";
+var ctl00_cphMiddleSection_RequiredFieldValidator2 = document.all ? document.all["ctl00_cphMiddleSection_RequiredFieldValidator2"] : document.getElementById("ctl00_cphMiddleSection_RequiredFieldValidator2");
+ctl00_cphMiddleSection_RequiredFieldValidator2.controltovalidate = "ctl00_cphMiddleSection_txtYourEmail";
+ctl00_cphMiddleSection_RequiredFieldValidator2.focusOnError = "t";
+ctl00_cphMiddleSection_RequiredFieldValidator2.errormessage = "Please Enter Your Proper Email Address";
+ctl00_cphMiddleSection_RequiredFieldValidator2.display = "None";
+ctl00_cphMiddleSection_RequiredFieldValidator2.validationGroup = "NewsLetter";
+ctl00_cphMiddleSection_RequiredFieldValidator2.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_cphMiddleSection_RequiredFieldValidator2.initialvalue = "";
+var ctl00_cphMiddleSection_RegularExpressionValidator3 = document.all ? document.all["ctl00_cphMiddleSection_RegularExpressionValidator3"] : document.getElementById("ctl00_cphMiddleSection_RegularExpressionValidator3");
+ctl00_cphMiddleSection_RegularExpressionValidator3.controltovalidate = "ctl00_cphMiddleSection_txtYourEmail";
+ctl00_cphMiddleSection_RegularExpressionValidator3.focusOnError = "t";
+ctl00_cphMiddleSection_RegularExpressionValidator3.errormessage = "Please Enter Your Proper Email Address";
+ctl00_cphMiddleSection_RegularExpressionValidator3.display = "None";
+ctl00_cphMiddleSection_RegularExpressionValidator3.validationGroup = "NewsLetter";
+ctl00_cphMiddleSection_RegularExpressionValidator3.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+ctl00_cphMiddleSection_RegularExpressionValidator3.validationexpression = "\\w+([-+.\']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+var ctl00_cphMiddleSection_RequiredFieldValidator3 = document.all ? document.all["ctl00_cphMiddleSection_RequiredFieldValidator3"] : document.getElementById("ctl00_cphMiddleSection_RequiredFieldValidator3");
+ctl00_cphMiddleSection_RequiredFieldValidator3.controltovalidate = "ctl00_cphMiddleSection_txtReferToEmail";
+ctl00_cphMiddleSection_RequiredFieldValidator3.focusOnError = "t";
+ctl00_cphMiddleSection_RequiredFieldValidator3.errormessage = "Please Enter Proper Refer To Email Address";
+ctl00_cphMiddleSection_RequiredFieldValidator3.display = "None";
+ctl00_cphMiddleSection_RequiredFieldValidator3.validationGroup = "NewsLetter";
+ctl00_cphMiddleSection_RequiredFieldValidator3.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_cphMiddleSection_RequiredFieldValidator3.initialvalue = "";
+var ctl00_cphMiddleSection_RegularExpressionValidator1 = document.all ? document.all["ctl00_cphMiddleSection_RegularExpressionValidator1"] : document.getElementById("ctl00_cphMiddleSection_RegularExpressionValidator1");
+ctl00_cphMiddleSection_RegularExpressionValidator1.controltovalidate = "ctl00_cphMiddleSection_txtReferToEmail";
+ctl00_cphMiddleSection_RegularExpressionValidator1.focusOnError = "t";
+ctl00_cphMiddleSection_RegularExpressionValidator1.errormessage = "Please Enter Proper Refer To Email Address";
+ctl00_cphMiddleSection_RegularExpressionValidator1.display = "None";
+ctl00_cphMiddleSection_RegularExpressionValidator1.validationGroup = "NewsLetter";
+ctl00_cphMiddleSection_RegularExpressionValidator1.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+ctl00_cphMiddleSection_RegularExpressionValidator1.validationexpression = "\\w+([-+.\']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+var ctl00_cphMiddleSection_ValidationSummary3 = document.all ? document.all["ctl00_cphMiddleSection_ValidationSummary3"] : document.getElementById("ctl00_cphMiddleSection_ValidationSummary3");
+ctl00_cphMiddleSection_ValidationSummary3.showmessagebox = "True";
+ctl00_cphMiddleSection_ValidationSummary3.showsummary = "False";
+ctl00_cphMiddleSection_ValidationSummary3.validationGroup = "NewsLetter";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        
+document.getElementById('ctl00_ValidationSummary4').dispose = function() {
+    Array.remove(Page_ValidationSummaries, document.getElementById('ctl00_ValidationSummary4'));
+}
+
+document.getElementById('ctl00_cphSearch_ValidationSummary3').dispose = function() {
+    Array.remove(Page_ValidationSummaries, document.getElementById('ctl00_cphSearch_ValidationSummary3'));
+}
+
+document.getElementById('ctl00_cphMiddleSection_ValidationSummary3').dispose = function() {
+    Array.remove(Page_ValidationSummaries, document.getElementById('ctl00_cphMiddleSection_ValidationSummary3'));
+}
+WebForm_AutoFocus('ctl00_cphMiddleSection_txtReferToName');
+document.getElementById('ctl00_RequiredFieldValidator4').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_RequiredFieldValidator4'));
+}
+
+document.getElementById('ctl00_RequiredFieldValidator5').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_RequiredFieldValidator5'));
+}
+
+document.getElementById('ctl00_RegularExpressionValidator2').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_RegularExpressionValidator2'));
+}
+
+document.getElementById('ctl00_RequiredFieldValidator8').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_RequiredFieldValidator8'));
+}
+
+document.getElementById('ctl00_RequiredFieldValidator6').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_RequiredFieldValidator6'));
+}
+
+document.getElementById('ctl00_RequiredFieldValidator2').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_RequiredFieldValidator2'));
+}
+
+document.getElementById('ctl00_RequiredFieldValidator3').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_RequiredFieldValidator3'));
+}
+Sys.Application.initialize();
+
+document.getElementById('ctl00_cphSearch_rqv').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_cphSearch_rqv'));
+}
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.AutoCompleteBehavior, {"completionSetCount":12,"id":"ctl00_cphSearch_autoComplete1","minimumPrefixLength":1,"serviceMethod":"LoadKeyword","servicePath":"AutoComplete.asmx"}, null, null, $get("ctl00_cphSearch_txtSearch"));
+});
+
+document.getElementById('ctl00_cphMiddleSection_RequiredFieldValidator6').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_cphMiddleSection_RequiredFieldValidator6'));
+}
+
+document.getElementById('ctl00_cphMiddleSection_RequiredFieldValidator1').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_cphMiddleSection_RequiredFieldValidator1'));
+}
+
+document.getElementById('ctl00_cphMiddleSection_RequiredFieldValidator2').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_cphMiddleSection_RequiredFieldValidator2'));
+}
+
+document.getElementById('ctl00_cphMiddleSection_RegularExpressionValidator3').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_cphMiddleSection_RegularExpressionValidator3'));
+}
+
+document.getElementById('ctl00_cphMiddleSection_RequiredFieldValidator3').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_cphMiddleSection_RequiredFieldValidator3'));
+}
+
+document.getElementById('ctl00_cphMiddleSection_RegularExpressionValidator1').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_cphMiddleSection_RegularExpressionValidator1'));
+}
+//]]>
+</script>
+</form>
+
+</body>
+</html>

@@ -19,6 +19,7 @@ class RecipeTest < ActiveSupport::TestCase
     assert_equal 2, recipe.ingredients.length
     assert_equal 0, recipe.ingredients[0].ordinal
     assert_equal 1, recipe.ingredients[1].ordinal
+    assert_equal "b", recipe.ingredients[1].raw
 
   end
 
