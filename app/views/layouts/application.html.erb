@@ -21,7 +21,9 @@
 
 <div id="title">
   <div id="welcome_header">
-    <div id="logo">WeCook</div>
+    <div id="logo">
+      <%= link_to "WeCook", root_path %>
+    </div>
     <div id="userpanel">
       <% if current_user %>
           Hello, <%= get_user_display_name %>

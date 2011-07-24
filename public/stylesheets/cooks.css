@@ -113,6 +113,11 @@ img.center {
     font-size:150%;
 }
 
+#logo a {
+    text-decoration:none;
+    color: inherit;
+}
+
 .clear{
     clear:both;
 }

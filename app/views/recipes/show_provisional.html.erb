@@ -87,7 +87,7 @@
 <div id="prov_middle" class="main_content">
 
   <%= render :partial => 'recipe_header' %>
-  <% @recipe.get_lines_with_prediction.each_with_index do |map,idx| %>
+  <% @recipe.get_lines_with_corrected_prediction(@recipe.corrections).each_with_index do |map,idx| %>
       <% id_string = idx.to_s %>
       <div id= "<%= 'prov_line'+id_string %>" class="<%= map[:class]%> prov_line" >
         &mdash; <%=  map[:line] %>

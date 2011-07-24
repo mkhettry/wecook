@@ -66,11 +66,12 @@ class RecipeDocument
     recipe.url = @url
 
     recipe.title = @title
-    if (is_structured?)
+    recipe.structured = is_structured?
+    if (recipe.structured?)
       recipe.state = :ready
       ingredients = extract_ingredients
       ingredients.each_with_index do |txt, i|
-        ingredient = Ingredient.new(:raw => txt, :ordinal => i)
+        ingredient = Ingredient.new(:raw_text => txt, :ordinal => i)
         recipe.ingredients << ingredient
       end
 

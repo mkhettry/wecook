@@ -522,9 +522,10 @@ class RecipeDocumentTest < ActiveSupport::TestCase
     puts recipe.ingredients[0].ordinal
     prev = -1
     recipe.ingredients.all? do |ingredient|
-      assert prev+1 == ingredient[:ordinal], "#{ingredient.raw} should have had ordinal #{prev+1}"
+      assert prev+1 == ingredient[:ordinal], "#{ingredient.raw_text} should have had ordinal #{prev+1}"
       prev = ingredient[:ordinal]
     end
+    assert recipe.structured?, "Recipe should be structured"
   end
 
   private

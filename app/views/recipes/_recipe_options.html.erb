@@ -1,0 +1,5 @@
+<%= link_to 'Archive', archive_recipe_path(user_recipe), :method => :post, :remote => true %>
+<% if user_recipe.recipe.editable? %>
+&bull;
+<%= link_to 'Edit', show_provisional_recipe_path(user_recipe.recipe) %>
+<% end %>

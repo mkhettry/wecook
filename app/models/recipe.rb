@@ -16,6 +16,10 @@ class Recipe < ActiveRecord::Base
     recipe_document.create_recipe(model)
   end
 
+  def editable?
+    (not structured?) and (state == 'ready')
+  end
+
   def to_s
     "url=#{url}"
   end
@@ -28,24 +32,10 @@ class Recipe < ActiveRecord::Base
     self[:state].intern == :ready
   end
 
-  def get_lines_with_prediction
+  def get_lines_with_corrected_prediction(correction_string)
     out = []
-    self[:page].split("\n").each do |line|
-      parts = line.split("\t")
-      category = parts[0].downcase
-      category = "ot" unless category == "in" or category == "pr"
-      out << {:class => category, :line => parts[1]}
-    end
-    out
-  end
+    corrections = corrections_to_hash(correction_string)
 
-  def correct!(corrections)
-
-    self.ingredients.clear
-    self.directions.clear
-
-    Rails.logger.debug("got corrections with: " + corrections.to_s)
-    in_idx = 0
     get_lines_with_prediction.each_with_index do |map, idx|
       if corrections.has_key?(idx)
         prediction = corrections[idx].downcase
@@ -53,11 +43,29 @@ class Recipe < ActiveRecord::Base
       else
         prediction = map[:class].downcase
       end
+      out << {:class => prediction, :line => map[:line]}
+    end
+    out
+  end
+
+  def correct!(correction_string)
+    Rails.logger.debug("Got correction string: " + correction_string)
+
+    self.ingredients.clear
+    self.directions.clear
+    self.corrections = "" if self.corrections.nil?
+    self.corrections += "|" + correction_string
+    self.state = :ready
+
+    Rails.logger.debug("got corrections with: " + self.corrections)
+    in_idx = 0
+    get_lines_with_corrected_prediction(self.corrections).each do |map|
+      line = map[:line]
+      prediction = map[:class]
       next if prediction == "ot"
 
-      line = map[:line]
       if (prediction == "in")
-        self.ingredients << Ingredient.new(:raw => line, :ordinal => in_idx)
+        self.ingredients << Ingredient.new(:raw_text => line, :ordinal => in_idx)
         in_idx += 1
       elsif (prediction == "pr")
         self.directions << Direction.new(:raw_text => line)
@@ -91,6 +99,31 @@ class Recipe < ActiveRecord::Base
     else
       images.sample.jpg.url
     end
+  end
+
+  private
+
+  def corrections_to_hash(correction_string)
+    corrections = {}
+    return corrections if correction_string.nil?
+
+    correction_string.split("|").each do |change|
+      next if change.empty?
+      idx, category = change.split("=")
+      corrections[Integer(idx)] = category
+    end
+    corrections
+  end
+
+  def get_lines_with_prediction
+    out = []
+    self[:page].split("\n").each do |line|
+      parts = line.split("\t")
+      category = parts[0].downcase
+      category = "ot" unless category == "in" or category == "pr"
+      out << {:class => category, :line => parts[1]}
+    end
+    out
   end
 
 end

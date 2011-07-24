@@ -15,12 +15,42 @@ class RecipeTest < ActiveSupport::TestCase
 
   test "correct provisional recipe" do
     recipe = create_provisional_recipe ["IN\ta", "OT\tb", "PR\tc", "OT\td"]
-    recipe.correct! 1 => "IN"
+    correction_string = "1=IN|3=PR"
+    recipe.correct! correction_string
     assert_equal 2, recipe.ingredients.length
     assert_equal 0, recipe.ingredients[0].ordinal
     assert_equal 1, recipe.ingredients[1].ordinal
-    assert_equal "b", recipe.ingredients[1].raw
+    assert_equal "a", recipe.ingredients[0].raw_text
+    assert_equal "b", recipe.ingredients[1].raw_text
 
+    assert_equal 2, recipe.directions.length
+    assert_equal "c", recipe.directions[0].raw_text
+    assert_equal "d", recipe.directions[1].raw_text
+
+    assert_equal "|" + correction_string, recipe.corrections
+  end
+
+
+  test "correct provisional recipe second time" do
+    recipe = create_provisional_recipe ["IN\ta", "OT\tb", "PR\tc", "OT\td", "OT\te"]
+
+    puts recipe.corrections
+    puts recipe
+
+    recipe.correct! "1=PR"
+    recipe.correct! "3=IN"
+
+    assert_equal 2, recipe.ingredients.length
+    assert_equal 0, recipe.ingredients[0].ordinal
+    assert_equal 1, recipe.ingredients[1].ordinal
+    assert_equal "a", recipe.ingredients[0].raw_text
+    assert_equal "d", recipe.ingredients[1].raw_text
+
+    assert_equal 2, recipe.directions.length
+    assert_equal "b", recipe.directions[0].raw_text
+    assert_equal "c", recipe.directions[1].raw_text
+
+    assert_equal "|1=PR|3=IN", recipe.corrections
   end
 
   test "get or create fetches from database" do
