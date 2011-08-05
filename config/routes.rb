@@ -1,5 +1,6 @@
 Cooks::Application.routes.draw do
 
+
   resources :bookmarks
 
   controller :sessions do
@@ -14,11 +15,14 @@ Cooks::Application.routes.draw do
 
   get "welcome" => "users#welcome", :as => "welcome"
 
+
   resources :recipes do
     member do
       get 'show_provisional'
       post 'submit_provisional'
       post "archive"
+      post "add_tag"
+      post "delete_tag"
     end
   end
 

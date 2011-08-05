@@ -37,18 +37,22 @@
 .recipeline .recipemeta {
     font-size: smaller;
     position:absolute;
-    bottom: 7px;
+    bottom: 5px;
     right:0;
 }
 
 .recipeline .recipeoptions {
-     font-size: smaller;
+    font-size: smaller;
+    /*padding-top: 10px;*/
 }
 .rindex-left-nav-highlight {
     background: #dcdcdc;
 
 }
 
+.recipeline .recipetags {
+    font-size: 0.75em;
+}
 .rindex-left-nav-link {
    text-decoration: none;
 }

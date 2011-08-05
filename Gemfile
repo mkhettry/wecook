@@ -14,8 +14,10 @@ gem 'jquery-rails', '>= 0.2.6'
 gem 'omniauth'
 gem 'aws-s3'
 gem 'bcrypt-ruby', :require => 'bcrypt'
-gem 'rake', '0.8.7'
+gem 'rake'
 gem 'silent-postgres'
+
+gem 'acts-as-taggable-on'
 
 group :development, :test do
   gem 'rspec-rails'

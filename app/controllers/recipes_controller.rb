@@ -120,6 +120,28 @@ class RecipesController < ApplicationController
     end
   end
 
+  def add_tag
+    ur = UserRecipe.find(params[:id])
+    ur.tag_list << params[:tag]
+    ur.save
+    Rails.logger.debug "Added tag: " + params[:tag]
+  end
+
+  def delete_tag
+    ur = UserRecipe.find(params[:id])
+    tag_to_delete = params[:tag].strip
+    ur.tag_list.delete(tag_to_delete)
+    Rails.logger.debug "deleted tag: " + tag_to_delete
+    respond_to do |format|
+      if ur.save
+        format.json {render :status => 200, :nothing => true}
+      else
+        format.json {render :status => 500, :nothing => true}
+      end
+    end
+
+  end
+
   def archive
     @user_recipe = UserRecipe.find(params[:id])
     @user_recipe.destroy

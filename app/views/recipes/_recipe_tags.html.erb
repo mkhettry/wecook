@@ -1,0 +1,13 @@
+
+
+<!--<ul title="tags:" id="rtag" display="none"></ul>-->
+
+<div id="<%= 'tag_user_recipe_' + user_recipe.id.to_s %>">
+  Tags:
+  <% user_recipe.tag_list.each do |tag| %>
+    <span class="tag">
+      <%=tag.to_s%>
+      <span class="tag_x"></span>
+    </span>
+<% end %>
+</div>

@@ -1,0 +1,18 @@
+.tag {
+    margin-right: 4px;
+    margin-left:4px;
+    background-color: #ffebcd;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+}
+
+.tag_x {
+    background-image: url("../images/del8.png");
+    background-repeat: no-repeat;
+    /*background-size: 8px 8px;*/
+    min-height: 8px;
+    min-width: 8px;
+    display: inline-block;
+    background-position: center;
+}

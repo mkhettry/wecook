@@ -4,6 +4,7 @@ class UserRecipe < ActiveRecord::Base
   @@per_page = 10
   belongs_to :user
   belongs_to :recipe
+  acts_as_taggable
 
 
   def self.create(url, user)
