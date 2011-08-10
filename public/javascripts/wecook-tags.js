@@ -38,8 +38,10 @@ $(document).ready(function(){
             data: 'tag=' + tag,
             dataType: 'json',
             statusCode: {
-                200: function(){
-                    add_tag(tag, $(this).prev());
+                200: function(data){
+                    if (data['added']) {
+                        add_tag(tag, $(this).prev());
+                    }
                     $(this).val('');
                 },
                 500: function() {

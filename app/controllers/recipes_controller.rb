@@ -122,11 +122,17 @@ class RecipesController < ApplicationController
 
   def add_tag
     ur = UserRecipe.find(params[:id])
-    ur.tag_list << params[:tag]
+    tag = params[:tag].strip
+    added = false
+    if (not ur.tag_list.include?(tag))
+      added = true
+      ur.tag_list << tag
+    end
+
     respond_to do |format|
       if ur.save
         Rails.logger.debug "Added tag: " + params[:tag]
-        format.json {render :status => 200, :nothing => true}
+        format.json {render :status => 200, :json => "{\"added\": #{added}}"}
       else
         format.json {render :status => 500, :nothing => true}
       end
