@@ -5,14 +5,28 @@
     border-radius: 2px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
+    display: inline-block;
 }
 
 .tag_x {
+    display: inline-block;
     background-image: url("../images/del8.png");
     background-repeat: no-repeat;
-    /*background-size: 8px 8px;*/
     min-height: 8px;
     min-width: 8px;
     display: inline-block;
     background-position: center;
+}
+
+.tag_plus {
+    display: inline-block;
+    font-size: 120%;
+    padding-left: 5px;
+}
+
+.tag_text_box {
+    display: inline-block;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
 }

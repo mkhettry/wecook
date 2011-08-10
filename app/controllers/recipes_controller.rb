@@ -123,8 +123,14 @@ class RecipesController < ApplicationController
   def add_tag
     ur = UserRecipe.find(params[:id])
     ur.tag_list << params[:tag]
-    ur.save
-    Rails.logger.debug "Added tag: " + params[:tag]
+    respond_to do |format|
+      if ur.save
+        Rails.logger.debug "Added tag: " + params[:tag]
+        format.json {render :status => 200, :nothing => true}
+      else
+        format.json {render :status => 500, :nothing => true}
+      end
+    end
   end
 
   def delete_tag
