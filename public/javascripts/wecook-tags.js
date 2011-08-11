@@ -64,7 +64,20 @@ $(document).ready(function(){
         $(this).hide();
     });
 
+    // The dom looks like this:
+    // <span>
+    // <span>summer<span>x</span></span>
+    // <span>salad<span>x</span></span>
+    // </span>
+    // element points to the parent span.
     function add_tag(tag, element){
-        element.append('<span class="tag"> ' + tag + ' <span class="tag_x"></span></span>');
+        var new_node = element.children().last().clone(true);
+        // at this point new node is pointing to <span>oldtag<span>x</span></span>
+        // I dive into the native dom element (new_node.get(0))
+        // then get the first child (the text node 'oldtag') and replace it with a new tag + a ' '!
+        // is this really a kosher way of changing the text of the span?
+        new_node.get(0).childNodes[0].data = tag + ' ';
+        element.append(new_node);
+        //element.append('<span class="tag"> ' + tag + ' <span class="tag_x"></span></span>');
     }
 });
