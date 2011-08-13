@@ -1,2 +1,4 @@
 var div_id='#ur_' + <%= @user_recipe.id %>;
 $(div_id).remove();
+var inline_recipe_id='#r_' + <%= @user_recipe.recipe.id %>;
+$(inline_recipe_id).remove();
