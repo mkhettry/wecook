@@ -5,6 +5,8 @@
 
 .main_content
   .add_button= link_to 'Add +', new_recipe_path
+  = render :partial => 'recipe_tags_selected', :locals => {:url => request.fullpath}
+
   #recipe_list
     - if @user_recipes.empty?
       .p= "Come on. Save some recipes! Use the add link on the right."

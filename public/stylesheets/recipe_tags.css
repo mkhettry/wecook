@@ -20,6 +20,16 @@
     background-position: center;
 }
 
+.tag_remove {
+    display: inline-block;
+    background-image: url("../images/del8.png");
+    background-repeat: no-repeat;
+    min-height: 8px;
+    min-width: 8px;
+    display: inline-block;
+    background-position: center;
+}
+
 .tag_plus {
     display: inline-block;
     font-size: 120%;

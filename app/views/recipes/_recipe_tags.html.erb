@@ -4,10 +4,16 @@
 
 <div id="<%= 'tag_user_recipe_' + user_recipe.id.to_s %>">
   Tags:
+  <!-- an empty one if the recipe doesn't have any tags to support clone in wecook-tag.js -->
   <span>
+    <span class="tag tag_hide">
+      <span class="tag_name">blank</span>
+      <span class="tag_x"></span>
+    </span>
+
   <% user_recipe.tag_list.each do |tag| %>
     <span class="tag">
-      <%=tag.to_s%>
+      <span class="tag_name"> <%= tag.to_s %></span>
       <span class="tag_x"></span>
     </span>
 <% end %>

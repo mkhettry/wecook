@@ -45,4 +45,49 @@ module RecipesHelper
   def my_recipe(user_recipe, params_p)
     user_recipe.user == current_user
   end
+
+
+
+  def remove_tag(url, new_tag)
+    query_hash, uri = get_query_hash(url)
+
+
+    tags = remove_tags_from_uri(query_hash)
+    tags.delete(new_tag)
+
+    query_hash['tag'] = tags.join(',') unless tags.empty?
+    query_hash.delete 'page' # we want to hit the recipes controller starting with page=0
+
+    # CGI puts every query param in array and to_query turns it into a param with a []!
+    nqh = {}
+    query_hash.each_pair { |k, v| nqh[k] = v.length == 1 ? v[0] : v}
+
+    uri.query = nqh.to_query
+    uri.to_s
+  end
+
+  def get_tags(url)
+    query_hash, uri = get_query_hash(url)
+    return query_hash["tag"][0].split(",") if query_hash.has_key? 'tag'
+    []
+  end
+
+  private
+  def get_query_hash(url)
+    uri = URI::parse(url)
+
+    query_hash = {}
+    query_hash = CGI::parse(CGI::unescape(uri.query)) unless uri.query.nil?
+    return query_hash, uri
+  end
+
+  def remove_tags_from_uri(query_hash)
+    tags = query_hash.delete("tag")
+
+    if tags.nil?
+      []
+    else
+      tags[0].split(",")
+    end
+  end
 end

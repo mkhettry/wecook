@@ -1,3 +1,7 @@
+.selected-tags {
+    min-height: 20px;
+}
+
 .recipeline {
     min-height: 70px;
     clear: both;
@@ -57,12 +61,17 @@
    text-decoration: none;
 }
 
+.rindex-left-tag {
+    margin-right: 20px;
+    border-top: 1px solid #dcdcdc;
+}
+
 .rindex-left-nav-link:hover {
-   text-decoration: none;
+    text-decoration: none;
 }
 
 #rindex-left-nav {
-    margin-top: 40px;
+    margin-top: 60px;
     font-size: 105%;
     min-width: 150px;
     min-height: 400px;

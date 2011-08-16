@@ -1,0 +1,10 @@
+<% tags = get_tags(url) %>
+<div class="selected-tags">
+<%= 'Selected Tags:' unless tags.empty? %>
+<% tags.each do |tag| %>
+    <span class="tag">
+      <%= tag %>
+      <%= link_to '', remove_tag(request.fullpath, tag.to_s), :class => 'tag_remove' %>
+    </span>
+<% end %>
+</div>
