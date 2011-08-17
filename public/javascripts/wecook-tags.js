@@ -1,13 +1,18 @@
 $(document).ready(function(){
 
+//    $('.tag').button();
+
     $('.tag_name').click(function(event) {
-        var tag = $(this).text();
+        var tag = $(this).text().trim();
         var uri = new jsUri(document.URL);
         var tagParams = uri.getQueryParamValue('tag');
         if (tagParams) {
-            tagParams += (',' + tag.trim());
+            var tagParamArray = tagParams.split(',');
+            if ($.inArray(tag, tagParamArray) === -1) {
+                tagParams += (',' + tag);
+            }
         } else {
-            tagParams = tag.trim();
+            tagParams = tag;
         }
         uri.deleteQueryParam('page');
         uri.deleteQueryParam('tag');
@@ -84,6 +89,10 @@ $(document).ready(function(){
         $(this).hide();
     });
 
+    $('.tag-button-text').button();
+
+
+
     // The dom looks like this:
     // <span>
     // <span>summer<span>x</span></span>
@@ -92,18 +101,8 @@ $(document).ready(function(){
     // element points to the parent span.
     function add_tag(tag, element){
         var new_node = element.children().last().clone(true);
-
         new_node.show();
-
-        // at this point new node is pointing to <span>oldtag<span>x</span></span>
-        // I dive into the native dom element (new_node.get(0))
-        // then get the first child (the text node 'oldtag') and replace it with a new tag + a ' '!
-        // is this really a kosher way of changing the text of the span?
-        //new_node.get(0).childNodes[0].data = tag + ' ';
-
         new_node.children().first().text(tag);
-
         element.append(new_node);
-        //element.append('<span class="tag"> ' + tag + ' <span class="tag_x"></span></span>');
     }
 });

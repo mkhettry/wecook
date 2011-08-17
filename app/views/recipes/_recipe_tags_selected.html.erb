@@ -2,9 +2,9 @@
 <div class="selected-tags">
 <%= 'Selected Tags:' unless tags.empty? %>
 <% tags.each do |tag| %>
-    <span class="tag">
+    <button class="tag-button-text">
       <%= tag %>
       <%= link_to '', remove_tag(request.fullpath, tag.to_s), :class => 'tag_remove' %>
-    </span>
+    </button>
 <% end %>
 </div>
