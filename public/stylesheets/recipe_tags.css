@@ -10,6 +10,7 @@
     border-radius: 2px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
+    padding: 0 6px;
     display: inline-block;
 }
 
