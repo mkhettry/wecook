@@ -103,10 +103,13 @@ if __FILE__ == $PROGRAM_NAME
   if ARGV.length != 1
     puts "Usage: ruby create_lib_svm_data.rb identifier [-s]"
   else
-    ll_home = `echo $LL_HOME`
-    puts ll_home
-    if ll_home.strip.empty?
+    ll_home = `echo $LL_HOME`.strip
+    puts "Liblinear found in #{ll_home}"
+
+    if ll_home.empty?
       puts "You must set LL_HOME environment variable."
+    elsif Dir.glob("#{ll_home}/train").empty?
+      puts "Could not find \"train\" in #{ll_home}. Perhaps you need to build it first?"
     else
       main(ARGV[0], !use_svm.nil?)
     end
