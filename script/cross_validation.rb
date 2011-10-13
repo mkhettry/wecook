@@ -40,8 +40,8 @@ def in_range(ranges, idx)
 end
 
 
-def predict(test_files, logfile)
-  model = LibLinearModel.new(:dir => `pwd`.strip)
+def predict(model_dir, test_files, logfile)
+  model = LibLinearModel.new(:dir => model_dir)
   m2 = HueresticLibLinearModel.new(model)
   tot_bad_errors = 0
   tot_length = 0
@@ -62,10 +62,20 @@ def predict(test_files, logfile)
 end
 
 def create_run(run_name)
-  Dir.mkdir(run_name)
-  log = File.new(run_name + "/run.log", 'w')
-  summary = File.new(run_name + "/run.sum", 'w')
-  [log, summary]
+  Dir.mkdir("runs") if Dir.glob("runs").empty?
+  dir = "runs/#{run_name}"
+
+  unless Dir.glob(dir).empty?
+    alternate_run_name = "#{run_name}_#{Time.now.to_i}"
+    puts "#{run_name} is taken. Using #{alternate_run_name}"
+    dir = "runs/#{alternate_run_name}"
+  end
+
+  Dir.mkdir(dir)
+
+  log = File.new("#{dir}/run.log", 'w')
+  summary = File.new("#{dir}/run.sum", 'w')
+  [dir, log, summary]
 end
 
 def main(run_name, use_svm)
@@ -75,15 +85,15 @@ def main(run_name, use_svm)
   total_length = 0
   dir = Dir.new('config/training')
 
-  logfile, summaryfile = create_run(run_name)
+  output_dir, logfile, summaryfile = create_run(run_name)
 
   files = dir.select {|f| f if f =~ /\.tr[su]$/}
   files.sort! {|a,b| a.hash <=> b.hash}
   for i in 0...files.length
     ranges = get_training_range(files.length, i)
     test_files, train_files = split_files(files, ranges)
-    ModelBuilder.build_model_from_training_files(train_files, use_svm)
-    cur_error, cur_length, no_errors = predict(test_files, logfile)
+    ModelBuilder.build_model_from_training_files(output_dir, train_files, use_svm)
+    cur_error, cur_length, no_errors = predict(output_dir, test_files, logfile)
 
     run_summary = "#{i}:{#{no_errors}/#{test_files.length}}(#{cur_error}/#{cur_length})=#{"%0.3f" % (100*cur_error/Float(cur_length))}%"
     puts(run_summary)

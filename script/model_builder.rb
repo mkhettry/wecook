@@ -1,3 +1,4 @@
+
 class ModelBuilder
   @@feature_selector = FeatureSelector.new
 
@@ -15,18 +16,17 @@ class ModelBuilder
       files = opt[:files]
     end
 
-    puts files[0]
-    build_model_from_training_files(files, opt[:use_svm])
+    build_model_from_training_files(Dir.pwd, files, opt[:use_svm])
   end
 
-  def self.build_model_from_training_files(train_files, use_svm = true)
+  def self.build_model_from_training_files(output_dir, train_files, use_svm = true)
 
       lines = []
       train_files.each do |f|
         lines += f.get_lines
       end
 
-      training_file = File.new('training.txt', 'w')
+      training_file = File.new("#{output_dir}/training.txt", "w")
 
       word_feature_extractor = FeatureExtractor::WordFeatureExtractor.new(lines)
       #length_feature_extractor = FeatureExtractor::LengthFeatureExtractor.new(lines)
@@ -48,8 +48,12 @@ class ModelBuilder
           fv += cur_fv unless cur_fv.nil?
         end
         class_id = LibLinearModel.from_class_str_to_ids(line.class)
+        if class_id
+          train_data << [class_id, fv]
+        else
+          puts "found one line with no class: #{line.inspect}"
+        end
         #@@feature_selector.update(LibLinearModel.from_class_str(line.class), fv)
-        train_data << [class_id, fv]
       end
 
       @@feature_selector.compute
@@ -62,21 +66,22 @@ class ModelBuilder
         training_file.puts("#{class_id} #{feature_vector_str}")
       end
 
-      feature_id_file = File.new('feature_ids.txt', 'w')
+      feature_id_file = File.new("#{output_dir}/feature_ids.txt", "w")
       feature_id_file.puts(extractors.collect{|extractor| extractor.class}.join(","))
       Feature.write_feature_ids_to_file(feature_id_file)
-      train(use_svm)
+      train(output_dir, use_svm)
   end
 
-  def self.train(use_svm)
+  def self.train(output_dir, use_svm)
     if (use_svm)
-      `$LL_HOME/train -c 0.1 training.txt`
+      cmd = "$LL_HOME/train -c 0.1 training.txt"
     else
-      `$LL_HOME/train -s 0 training.txt`
+      cmd = "$LL_HOME/train -s 0 training.txt"
     end
-    model_size=`ls -l training.txt.model`
-    #puts "Adding model file: #{model_size}"
+
+    `cd #{output_dir}; #{cmd}`
+
+    model_size=`(cd #{output_dir}; ls -l training.txt.model)`
+    puts "Adding model file: #{model_size}"
   end
-
-
 end
