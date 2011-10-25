@@ -41,6 +41,7 @@ test:
   pool: 5
   username: cooks 
   password:
+  min_messages: WARNING
 
 production:
   adapter: postgresql
