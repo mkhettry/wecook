@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110604192546) do
+ActiveRecord::Schema.define(:version => 20110727181158) do
 
   create_table "bookmarks", :force => true do |t|
     t.datetime "created_at"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20110604192546) do
   end
 
   create_table "ingredients", :force => true do |t|
-    t.string  "raw"
+    t.string  "raw_text"
     t.integer "recipe_id"
     t.integer "ordinal"
   end
@@ -41,9 +41,28 @@ ActiveRecord::Schema.define(:version => 20110604192546) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title",      :null => false
+    t.string   "title",                       :null => false
     t.text     "page"
     t.string   "state"
+    t.boolean  "structured"
+    t.string   "corrections", :default => ""
+  end
+
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context"
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
   end
 
   create_table "user_recipes", :force => true do |t|
