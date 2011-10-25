@@ -51,7 +51,7 @@ class LibLinearModel
         model_file_lines << line
       end
     else
-      model_file_lines = opt[:model_lines]
+      model_file_lines = opt[:model_lines].split("\n")
     end
 
     #TODO ignoring bias for now
