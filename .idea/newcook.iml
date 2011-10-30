@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="RUBY_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="RailsFacetType" name="Ruby on Rails">
+      <configuration>
+        <RAILS_FACET_CONFIG_ID NAME="RAILS_FACET_SUPPORT_REMOVED" VALUE="false" />
+        <RAILS_FACET_CONFIG_ID NAME="RAILS_TESTS_SOURCES_PATCHED" VALUE="true" />
+        <RAILS_FACET_CONFIG_ID NAME="RAILS_FACET_APPLICATION_ROOT" VALUE="$MODULE_DIR$" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="addressable (v2.2.4, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="i18n (v0.6.0, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="builder (v2.1.2, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-mocks (v2.6.0, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bcrypt-ruby (v2.1.4, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="railties (v3.0.3, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="ruby-openid (v2.1.8, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tzinfo (v0.3.28, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mime-types (v1.16, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-core (v2.6.4, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.4.5, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec (v2.6.0, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-rails (v2.6.1, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bundler (v1.0.10, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="thor (v0.14.6, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="treetop (v1.4.9, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="silent-postgres (v0.0.8, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faraday (v0.6.1, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actionpack (v3.0.3, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="pg (v0.11.0, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actionmailer (v3.0.3, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="oa-openid (v0.2.6, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack-test (v0.5.7, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="oa-oauth (v0.2.6, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="oa-basic (v0.2.6, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rake (v0.9.2, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="oa-more (v0.2.6, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="polyglot (v0.3.1, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activerecord (v3.0.3, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="multipart-post (v1.1.2, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rest-client (v1.6.3, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="oauth2 (v0.4.1, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activemodel (v3.0.3, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="arel (v2.0.10, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="will_paginate (v3.0.pre2, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-expectations (v2.6.0, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="paperclip (v2.3.11, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activeresource (v3.0.3, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="acts-as-taggable-on (v2.0.6, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rails (v3.0.3, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.1.2, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack (v1.2.3, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rubyntlm (v0.1.1, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="net-ldap (v0.2.2, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="multi_xml (v0.2.2, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack-mount (v0.6.14, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mail (v2.2.19, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activesupport (v3.0.3, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="omniauth (v0.2.6, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="xml-simple (v1.1.0, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="aws-s3 (v0.6.2, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="oauth (v0.4.4, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="jquery-rails (v1.0.11, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="haml (v3.1.2, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="erubis (v2.6.6, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="abstract (v1.0.0, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="oa-core (v0.2.6, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="ruby-openid-apps-discovery (v1.2.0, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="oa-enterprise (v0.2.6, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="pyu-ruby-sasl (v0.0.3.3, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack-openid (v1.3.1, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="multi_json (v1.0.3, Ruby SDK 1.9.2-p180) [gem]" level="application" />
+  </component>
+  <component name="RModuleSettingsStorage">
+    <LOAD_PATH number="0" />
+    <I18N_FOLDERS number="1" string0="$MODULE_DIR$/config/locales" />
+  </component>
+</module>
+
