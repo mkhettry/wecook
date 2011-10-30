@@ -103,12 +103,19 @@ class FeatureExtractor
     end
 
     def extract_features(line)
-      [Feature.new("fraction")] if line =~ /\b\d+\/\d+\b/
+      return [Feature.new("fraction")] if line =~ /\b\d+\/\d+\b/
       # http://www.fileformat.info/info/unicode/char/2153/index.htm
       # if we were on 1.9 we could directly use the unicode value instead of giving
       # hex values for utf-8.
       # 1/2, 1/3/, 1/4, 3/4
-      [Feature.new("fraction")] if line =~ /\xc2\xbd|\xe2\x85\x93|\xc2\xbc|\xc2\xbe/
+      #[Feature.new("fraction")] if line =~ /\xc2\xbd|\xe2\x85\x93|\xc2\xbc|\xc2\xbe/
+      #
+      # should we add more fractions?
+      # many more http://tlt.its.psu.edu/suggestions/international/bylanguage/mathchart.html
+      #             1/3 | 2/3  | 1/4  | 1/2  | 3/4
+      if line =~ /\u2153|\u2154|\u00BC|\u00BD|\u00BE/
+        [Feature.new("fraction")]
+      end
     end
   end
 
