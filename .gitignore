@@ -2,3 +2,5 @@ log/*
 *.log
 runs/*
 .idea/*
+public/system/jpgs/*
+tmp/*
