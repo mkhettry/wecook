@@ -56,7 +56,6 @@ class UserTest < ActiveSupport::TestCase
   test "create with omniauth" do
     auth = {"provider" => "facebook", "user_info" => {"name" => "testname"}, "uid" => '241'}
     user = User.create_with_omniauth(auth)
-    puts "provider: " + user.provider
   end
 
 
@@ -64,7 +63,6 @@ class UserTest < ActiveSupport::TestCase
     user = User.new
     user.provider = "twitter"
     user.name = 'manish khettry'
-    puts user.errors
     assert !user.valid?, "unknown provider"
   end
 

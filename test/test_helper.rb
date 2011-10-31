@@ -13,7 +13,6 @@ class ActiveSupport::TestCase
   def assert_lines(array, lines)
     i=0
     assert_equal array.length, lines.length, "length mismatch"
-    puts array.length
     lines.each do |line|
       assert_equal array[i], line, "error in line #{i}"
       i += 1

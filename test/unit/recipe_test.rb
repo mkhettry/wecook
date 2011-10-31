@@ -34,9 +34,6 @@ class RecipeTest < ActiveSupport::TestCase
   test "correct provisional recipe second time" do
     recipe = create_provisional_recipe ["IN\ta", "OT\tb", "PR\tc", "OT\td", "OT\te"]
 
-    puts recipe.corrections
-    puts recipe
-
     recipe.correct! "1=PR"
     recipe.correct! "3=IN"
 

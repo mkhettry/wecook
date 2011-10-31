@@ -145,8 +145,6 @@ class RecipeDocument
     possible_images = {}
     all_images.each do |image|
       next unless image['src'].downcase =~ /jpg|jpeg/
-      # Use the overlap between the 'alt' tag and the title of the post to try and guess which image
-      # is most likely to be a good one. The more the overlap, the better. Skip 0 overlap images.
       image_score = calculate_image_score(image)
       if image_score >= 0
         possible_images[image['src'].gsub(/\n/,'').gsub(/\\/, "/")] = image_score
@@ -255,6 +253,9 @@ class RecipeDocument
 
   def calculate_alt_score(image)
     return 0 unless image['alt']
+
+    # Use the overlap between the 'alt' tag and the title of the post to try and guess which image
+    # is most likely to be a good one. The more the overlap, the better. Skip 0 overlap images.
     alt_words = (image['alt'].downcase.split)
     title_words = @title.downcase.split
     min_words = [alt_words.length,title_words.length].min.to_f

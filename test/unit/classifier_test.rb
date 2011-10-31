@@ -18,6 +18,5 @@ class ClassifierTest <  ActiveSupport::TestCase
   test "feature extractor handles 3x5 correctly" do
     nb = NaiveBayes.new
     features = nb.entryfeatures("3x5 card")
-    puts features
   end
 end

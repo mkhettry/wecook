@@ -501,7 +501,6 @@ class RecipeDocumentTest < ActiveSupport::TestCase
         :url => 'http://www.epicurious.com/recipes/food/views/Swiss-Chard-Lasagna-with-Ricotta-and-Mushroom-362954',
         :file => fixture_path + '/webpages/Swiss Chard Lasagna with Ricotta and Mushroom Recipe at Epicurious.com.html')
     recipe = r.create_recipe(nil)
-    puts recipe.ingredients[0].ordinal
     prev = -1
     recipe.ingredients.all? do |ingredient|
       assert prev+1 == ingredient[:ordinal], "#{ingredient.raw_text} should have had ordinal #{prev+1}"
