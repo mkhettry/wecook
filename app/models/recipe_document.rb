@@ -139,16 +139,17 @@ class RecipeDocument
     end
   end
 
-  def extract_images
-    all_images = @doc.xpath('//img[@alt][contains(@src, "jpg")]')
+  def extract_images(num_images=2)
+    all_images = @trimmed_doc.xpath('//img')
+    all_images = @doc.xpath("//img") if all_images.empty?
     possible_images = {}
     all_images.each do |image|
+      next unless image['src'].downcase =~ /jpg|jpeg/
       # Use the overlap between the 'alt' tag and the title of the post to try and guess which image
       # is most likely to be a good one. The more the overlap, the better. Skip 0 overlap images.
-      inter = (image['alt'].split) & (@title.split)
-      if inter.length > 0
-        # some webpages use a backslash instead of a slash!
-        possible_images[image['src'].gsub(/\n/,'').gsub(/\\/, "/")] = inter.length
+      image_score = calculate_image_score(image)
+      if image_score >= 0
+        possible_images[image['src'].gsub(/\n/,'').gsub(/\\/, "/")] = image_score
       end
     end
 
@@ -160,7 +161,7 @@ class RecipeDocument
       # then take the last two elements in the pair and then throw away
       # the value, retaining the key. Then prepend domain name if its a
       # relative path.
-      x=possible_images.sort_by { |k,v| v}.pop(2).collect { |pair| create_absolute_url(pair[0]) }
+      x=possible_images.sort_by { |k,v| v}.pop(num_images).collect { |pair| create_absolute_url(pair[0]) }
       x
     end
   end
@@ -238,6 +239,41 @@ class RecipeDocument
     return true if n.name == 'title'
 
     false
+  end
+
+
+  #image is a Nokogiri document element
+  def calculate_image_score(image)
+    alt_score = calculate_alt_score(image)
+    return alt_score if alt_score < 0
+
+    img_dim_score = calculate_img_dim_score(image)
+    return img_dim_score if img_dim_score < 0
+
+    img_dim_score + alt_score
+  end
+
+  def calculate_alt_score(image)
+    return 0 unless image['alt']
+    alt_words = (image['alt'].downcase.split)
+    title_words = @title.downcase.split
+    min_words = [alt_words.length,title_words.length].min.to_f
+    min_words > 0 ? (alt_words & title_words).length/min_words : 0
+  end
+
+  def calculate_img_dim_score(image)
+    return 0 if image['width'].nil? || image['height'].nil?
+
+    width = get_image_size(image['width'])
+    height = get_image_size(image['height'])
+    return 0 if width == 0 || height == 0
+
+    score = height > width ? width/height.to_f : height/width.to_f
+    score > 0.3 ? score : -1 #for weeding out banner ads or skewed images
+  end
+
+  def get_image_size(size_string)
+    (size_string.gsub("px","").to_i) rescue 0
   end
 
   def remove_start_numbering(line)

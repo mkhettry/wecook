@@ -194,16 +194,6 @@ class RecipeDocumentTest < ActiveSupport::TestCase
                  r.extract_ingredients_structured
   end
 
-  test "extract images from epicurious com one" do
-
-    r = RecipeDocument.new(
-        :url => 'http://www.epicurious.com/recipes/food/views/Swiss-Chard-Lasagna-with-Ricotta-and-Mushroom-362954',
-        :file => fixture_path + '/webpages/Swiss Chard Lasagna with Ricotta and Mushroom Recipe at Epicurious.com.html')
-    images = r.extract_images
-    # TODO: Image handling is not great! Not sure if we should be picking up the first image.
-    assert_equal ["http://www.epicurious.com/images/articlesguides/holidays/passover/spring-navpromo-RM.jpg", "http://www.epicurious.com/images/recipesmenus/2011/2011_january/362954_116.jpg" ], images
-  end
-
   test "deal with nbsp" do
     s = <<-eothml
       <span style="color: #FF6600;">Ingredients (use <a href="http://vegweb.com/index.php?topic=15403.0">vegan versions</a>):</span><br /><br />&nbsp; &nbsp; 14 oz. lite coconut milk<br />

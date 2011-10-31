@@ -15,10 +15,61 @@ describe RecipeDocument do
 
   describe "extract_images" do
     it "where images have backslash in them" do
-      rd = RecipeDocument.new :file => "spec/fixtures/webpages/sanjeev_kapoor_horrible_html.html", :url =>"http://www.sanjeevkapoor.com/maa-chole-di-dal-foodfood.aspx"
+      rd = RecipeDocument.new :file => "spec/fixtures/webpages/sanjeev_kapoor_horrible_html.html",
+                              :url =>"http://www.sanjeevkapoor.com/maa-chole-di-dal-foodfood.aspx"
       image_urls = rd.extract_images
       image_urls.each {|s| s.should_not match(/\\/)}
-      end
     end
+
+    it "evolving tastes" do
+      rd = RecipeDocument.new :file => "spec/fixtures/webpages/evolving_tastes.html",
+                              :url =>"http://evolvingtastes.blogspot.com/2009/12/shevayachi-kheer.html"
+      image_urls = rd.extract_images
+      image_urls.should_not include("http://photos1.blogger.com/x/blogger2/5207/2825/1600/z/665227/gse_multipart50612.jpg")
+      image_urls.should include("http://farm3.static.flickr.com/2738/4172868824_70393f2e39.jpg")
+    end
+
+    it "the cooker gets images without alt text" do
+      rd = RecipeDocument.new :file => "spec/fixtures/webpages/the_cooker.html",
+                              :url =>"http://the-cooker.blogspot.com/2008/12/quinoa-carrot-pulao.html"
+      image_urls = rd.extract_images
+      image_urls.length.should == 1
+    end
+
+    it "guacamole hummus" do
+      rd = RecipeDocument.new :file => "spec/fixtures/webpages/guacamole_hummus.html",
+                              :url =>"http://www.shutterbean.com/guacamole-hummus/"
+      image_urls = rd.extract_images(10)
+      image_urls.length.should == 9
+      image_urls.each {|s| s.should_not match(/ads|banner/) }
+    end
+
+    it "spice spoon" do
+      rd = RecipeDocument.new :file => "spec/fixtures/webpages/spice_spoon.html",
+                              :url =>"http://www.thespicespoon.com/blog/strawberry-yoghurt-parfait-in-the-persian-manner/"
+      image_urls = rd.extract_images(10)
+      image_urls.length.should == 4
+      image_urls.should include("http://www.thespicespoon.com/blog/wp-content/uploads/2011/06/strawberry-parfait.jpg")
+
+    end
+
+    pending "extract images from epicurious com one" do
+      r = RecipeDocument.new(
+          :url => 'http://www.epicurious.com/recipes/food/views/Swiss-Chard-Lasagna-with-Ricotta-and-Mushroom-362954',
+          :file => 'spec/fixtures/webpages/Swiss Chard Lasagna with Ricotta and Mushroom Recipe at Epicurious.com.html')
+      images = r.extract_images
+      puts images
+      assert_equal ["http://www.epicurious.com/images/articlesguides/holidays/passover/spring-navpromo-RM.jpg", "http://www.epicurious.com/images/recipesmenus/2011/2011_january/362954_116.jpg" ], images
+    end
+
+
+    pending "nandyala should pick image" do
+      rd = RecipeDocument.new :file => "spec/fixtures/webpages/nandyala.html",
+                              :url =>"http://www.nandyala.org/mahanandi/archives/2007/05/10/mirchi-ka-salan-from-hyderabad/"
+      image_urls = rd.extract_images(10)
+      image_urls.length.should == 3
+    end
+
+  end
 
 end
