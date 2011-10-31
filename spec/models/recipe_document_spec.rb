@@ -6,7 +6,8 @@ describe RecipeDocument do
 
     describe "where extract_lines returns nothing" do
       it "http://www.theworldwidegourmet.com/recipes/grilled-sardines-with-tomato-sorbet-and-parmesan-tuile/ should return " do
-        rd = RecipeDocument.new :file => "spec/fixtures/webpages/GrilledSardinesFromAbe.html", :url => "http://www.theworldwidegourmet.com/recipes/grilled-sardines-with-tomato-sorbet-and-parmesan-tuile/"
+        rd = RecipeDocument.new :file => "spec/fixtures/webpages/GrilledSardinesFromAbe.html",
+                                :url => "http://www.theworldwidegourmet.com/recipes/grilled-sardines-with-tomato-sorbet-and-parmesan-tuile/"
         lines = rd.extract_lines
         lines.should include('- 1 green pepper')
       end
@@ -66,6 +67,24 @@ describe RecipeDocument do
                               :url =>"http://www.nandyala.org/mahanandi/archives/2007/05/10/mirchi-ka-salan-from-hyderabad/"
       image_urls = rd.extract_images(10)
       image_urls.length.should == 3
+      end
+  end
+
+  describe "sites with iframes" do
+    it "gojee" do
+      opts = RecipeDocument.redirect_if_needed(
+          :url => "http://www.gojee.com/links/1094",
+          :file => fixture_path + '/webpages/Gojee - Spice-Roasted Chickpeas.html')
+      opts[:url].should eql "http://www.whatwouldcathyeat.com/2010/12/heart-loving-holiday-recipe-spice-roasted-chickpeas/"
+      opts.keys.should eql [:url]
+    end
+
+    it "foodbuzz" do
+        opts = RecipeDocument.redirect_if_needed(
+                  :url => 'http://www.foodbuzz.com/blogs/3623585-triple-berry-orange-glazed-shortbread',
+                  :file => fixture_path + '/webpages/foodbuzz-triple-berry.html')
+        opts[:url].should eql "http://www.sprinkledwithflour.com/2011/05/triple-berry-orange-shortbread.html"
+        opts.keys.should eql [:url]
     end
   end
 end

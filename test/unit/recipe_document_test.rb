@@ -496,14 +496,6 @@ class RecipeDocumentTest < ActiveSupport::TestCase
     assert_lines ["1. ingredient"], r.extract_lines_for_category(predictions, :IN)
   end
 
-  test "check opts are modified for foodbuzz" do
-    opts = RecipeDocument.redirect_if_needed(
-              :url => 'http://www.foodbuzz.com/blogs/3623585-triple-berry-orange-glazed-shortbread',
-              :file => fixture_path + 'webpages/foodbuzz-triple-berry.html')
-    assert_equal('http://www.sprinkledwithflour.com/2011/05/triple-berry-orange-shortbread.html', opts[:url])
-    assert_equal [:url], opts.keys
-  end
-
   test "create recipe for structured document" do
     r = RecipeDocument.new(
         :url => 'http://www.epicurious.com/recipes/food/views/Swiss-Chard-Lasagna-with-Ricotta-and-Mushroom-362954',
