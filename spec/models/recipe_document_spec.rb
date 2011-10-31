@@ -50,7 +50,6 @@ describe RecipeDocument do
       image_urls = rd.extract_images(10)
       image_urls.length.should == 4
       image_urls.should include("http://www.thespicespoon.com/blog/wp-content/uploads/2011/06/strawberry-parfait.jpg")
-
     end
 
     pending "extract images from epicurious com one" do
@@ -62,14 +61,11 @@ describe RecipeDocument do
       assert_equal ["http://www.epicurious.com/images/articlesguides/holidays/passover/spring-navpromo-RM.jpg", "http://www.epicurious.com/images/recipesmenus/2011/2011_january/362954_116.jpg" ], images
     end
 
-
     pending "nandyala should pick image" do
       rd = RecipeDocument.new :file => "spec/fixtures/webpages/nandyala.html",
                               :url =>"http://www.nandyala.org/mahanandi/archives/2007/05/10/mirchi-ka-salan-from-hyderabad/"
       image_urls = rd.extract_images(10)
       image_urls.length.should == 3
     end
-
   end
-
 end
