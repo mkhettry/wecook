@@ -21,6 +21,8 @@ gem 'acts-as-taggable-on'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 # Use unicorn as the web server
