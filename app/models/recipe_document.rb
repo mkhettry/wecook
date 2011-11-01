@@ -6,9 +6,7 @@ class RecipeDocument
   attr :title
   attr :trimmed_doc
 
-
   DEFAULT_OPTIONS = {:debug => false, :min_lines_for_document => 10}
-
 
   def self.new_document(opts={})
     RecipeDocument.new(redirect_if_needed(opts))

@@ -3,28 +3,49 @@ require 'spec_helper'
 
 describe "Logins" do
 
-  def remove_user(name = "me")
-    user = User.find_by_name(name)
-    user.destroy if user
-  end
-
   describe "create user" do
-    it "create native user that does not exist successfully" do
-      remove_user
 
-      visit new_user_path
+    def fill_form(user, email, password, password_confirmation)
+      fill_in "user_name", :with => user
+      fill_in "user_email", :with => email
+      fill_in "user_password", :with => password
+      fill_in "user_password_confirmation", :with => password_confirmation
+    end
 
-      fill_in "user_name", :with => "me"
-      fill_in "user_email", :with => "me@m"
-      fill_in "user_password", :with => "test"
-      fill_in "user_password_confirmation", :with => "test"
-
+    def submit_form
       click_button "user_submit"
+    end
 
+    it "create native user that does not exist successfully" do
+      visit new_user_path
+      fill_form("me", "me@m", "test", "test")
+      submit_form
       page.should have_content "Hello, me"
 
       # Is it a good idea to mix direct model assets in integration tests like this?
       User.find_by_name("me").provider.should == "native"
+    end
+
+    it "does not create native user when password does not match" do
+      visit new_user_path
+
+      fill_form("me", "me@m", "pw", "pw2")
+      submit_form
+
+      current_path.should == "/users"
+      page.should have_content "Password doesn't match confirmation"
+    end
+
+    it "does not create user when email exists" do
+      User.create! :name => "w", :email => "me@m", :password => "m", :provider => "native"
+
+      visit new_user_path
+
+      fill_form("me", "me@m", "test", "test''")
+      submit_form
+
+      current_path.should == "/users"
+      page.should have_content "Email has already been taken"
     end
   end
 end

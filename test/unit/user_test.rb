@@ -72,5 +72,4 @@ class UserTest < ActiveSupport::TestCase
     user = User.find_by_provider_and_uid("facebook", auth["uid"])
     assert !user.nil?
   end
-
 end
