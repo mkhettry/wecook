@@ -41,7 +41,7 @@ describe "Logins" do
 
       visit new_user_path
 
-      fill_form("me", "me@m", "test", "test''")
+      fill_form("me", "me@m", "test", "test")
       submit_form
 
       current_path.should == "/users"
