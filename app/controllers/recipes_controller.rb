@@ -9,7 +9,7 @@ class RecipesController < ApplicationController
   def index
     user = current_user
     Rails.logger.info("user id: " + user.id.to_s)
-    query_hash = {:page => params[:page], :order => "created_at desc", :per_page => UserRecipe.per_page}
+    query_hash = {:page => params[:page], :order => "updated_at desc", :per_page => UserRecipe.per_page}
     if (params[:p] == "all")
       query_hash[:joins] = :recipe
       query_hash[:conditions] = ["user_id != ? and recipes.state = ?", user.id, :ready]

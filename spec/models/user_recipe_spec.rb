@@ -24,4 +24,14 @@ describe "UserRecipe" do
     sri_google.should be_persisted
   end
 
+  it "updates modified time if user saves same recipe" do
+    sri_google = UserRecipe.create(recipes(:google).url, users(:srinidhi))
+    sri_google.save
+    first_updated_at = sri_google.updated_at
+
+    sri_google = UserRecipe.create(recipes(:google).url, users(:srinidhi))
+    sri_google.save
+    assert sri_google.updated_at.should > first_updated_at
+  end
+
 end

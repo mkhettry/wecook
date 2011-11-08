@@ -10,10 +10,11 @@ class UserRecipe < ActiveRecord::Base
   def self.create(url, user)
     recipe = Recipe.get_or_create_recipe(url)
     if (recipe.persisted?)
-      ur = UserRecipe.first :include => :recipe, :conditions => {:user_id => user, :recipes => {:url => url}}
+      user_recipe = UserRecipe.first :include => :recipe, :conditions => {:user_id => user, :recipes => {:url => url}}
+      user_recipe.touch if user_recipe
     end
-    ur ||= UserRecipe.new :recipe => recipe, :user => user
-    ur
+    user_recipe ||= UserRecipe.new :recipe => recipe, :user => user
+    user_recipe
   end
 
   def self.find_by_url_and_user(url, user)
