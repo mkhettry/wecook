@@ -144,7 +144,7 @@ class LibLinearModel
       fv = get_feature_vector(line)
       p = predict(fv)
       predictions << p
-      puts "#{p.top_class}\t#{p.top_two}\t#{line[0..256]}"
+      #puts "#{p.top_class}\t#{p.top_two}\t#{line[0..256]}"
     end
     {:lines => lines, :predictions => predictions}
   end
