@@ -18,6 +18,13 @@ class RecipeDocument
       doc = Nokogiri::HTML(read_document(opts))
       iframe = doc.css('iframe')
       return :url => iframe[0]['src'] if iframe and iframe[0]
+    elsif (url =~ /file:\/\//)
+      # this path is only used by integration tests. The format for passing in files is
+      # file://spec/fixtures/webpages/evolving_tastes.html#http://evolvingtastes.blogspotcom/2009/12/shevayachi-kheer.html
+      # the file path is a relative path from the project root.
+      file_path, actual_url = url.split("#")
+      opts[:file] = file_path.gsub("file://", "")
+      opts[:url] = actual_url
     end
     opts
   end
