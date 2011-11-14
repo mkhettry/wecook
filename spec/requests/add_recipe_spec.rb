@@ -58,6 +58,11 @@ describe "create recipes" do
 
     actual_link = meta.find("a")
     actual_link[:href].should == "http://evolvingtastes.blogspot.com/2009/12/shevayachi-kheer.html"
+
+    inline_recipes = page.all(:css, "div.inline_recipe")
+    inline_recipes.each do |ir|
+      ir.should_not be_visible
+    end
   end
 
   it "should create structured recipe" do
