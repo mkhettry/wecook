@@ -25,7 +25,7 @@
 
         .recipemeta
           = render :partial => 'recipe_meta', :locals => {:user_recipe => @user_recipes[idx]}
-      %div{:class=> "inline_recipe", :id => "r_#{recipe.id}", :style => "display:none"}
+        %div{:class=> "inline_recipe", :id => "r_#{recipe.id}", :style => "display:none"}
 
   .p= will_paginate @user_recipes
 
