@@ -23,6 +23,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
+  gem 'database_cleaner'
 end
 
 # Use unicorn as the web server

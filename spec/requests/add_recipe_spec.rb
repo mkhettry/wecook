@@ -1,27 +1,10 @@
 require 'spec_helper'
 
-EMAIL = "int_test@localhost"
-
 describe "create recipes" do
 
   before(:each) do
     ensure_user_exists EMAIL
     login_as_user EMAIL
-  end
-
-  def ensure_user_exists(email)
-    user = User.find_by_email(email)
-    unless user
-      User.create!(:email => EMAIL, :provider => "native", :password => "test")
-    end
-  end
-
-  def login_as_user(email)
-    visit welcome_path
-    #save_and_open_page
-    fill_in "email", :with => email
-    fill_in "password", :with => "test"
-    click_button "Sign in"
   end
 
   def add_recipe(url, file)

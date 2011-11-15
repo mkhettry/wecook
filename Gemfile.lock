@@ -46,6 +46,7 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.2.2)
       ffi (~> 1.0.6)
+    database_cleaner (0.7.0)
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -180,6 +181,7 @@ DEPENDENCIES
   aws-s3
   bcrypt-ruby
   capybara
+  database_cleaner
   haml
   jquery-rails (>= 0.2.6)
   launchy
