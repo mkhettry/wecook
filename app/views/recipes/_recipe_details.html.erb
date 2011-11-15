@@ -1,11 +1,10 @@
 <div class="ingredient_and_prep">
 
-
   <div class="section_header">Ingredients</div>
   <ul>
     <% @recipe.ingredients.each do |i| %>
         <li> <%=  i.raw_text %> </li>
-  <% end %>
+    <% end %>
   </ul>
 
 
@@ -13,7 +12,7 @@
   <ol>
     <% @recipe.directions.each do |p| %>
         <li><%= p.raw_text %></li>
-  <% end %>
+    <% end %>
   </ol>
 
 </div>
