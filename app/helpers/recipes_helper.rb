@@ -72,6 +72,10 @@ module RecipesHelper
     []
   end
 
+  def remove_start_numbering(line)
+    line.sub(/^\d+[\.\)]/,"")
+  end
+
   private
   def get_query_hash(url)
     uri = URI::parse(url)

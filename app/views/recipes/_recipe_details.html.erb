@@ -3,7 +3,7 @@
   <div class="section_header">Ingredients</div>
   <ul>
     <% @recipe.ingredients.each do |i| %>
-        <li> <%=  i.raw_text %> </li>
+      <li> <%=  i.raw_text %> </li>
     <% end %>
   </ul>
 
@@ -11,7 +11,7 @@
   <div class="section_header">Directions</div>
   <ol>
     <% @recipe.directions.each do |p| %>
-        <li><%= p.raw_text %></li>
+      <li><%= remove_start_numbering(p.raw_text) %></li>
     <% end %>
   </ol>
 
