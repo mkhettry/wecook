@@ -43,7 +43,6 @@ class FeatureExtractor
     end
   end
 
-
   class IngredientFeatureExtractor
     @@ingredients = Set.new
     def initialize(lines)
@@ -61,7 +60,6 @@ class FeatureExtractor
       []
     end
   end
-
 
   class PosFeatureExtractor
     @@tagger = Tagger.new
@@ -128,11 +126,11 @@ class FeatureExtractor
 
       length = FeatureExtractor.get_words(line).length
       case
-        when length <=5
+        when length <= 5
           return [Feature.new("word_length_5")]
-        when length <=10
+        when length <= 10
           return [Feature.new("word_length_10")]
-        when length <=20
+        when length <= 20
           return [Feature.new("word_length_20")]
         else
           return [Feature.new("word_length_>20")]
@@ -148,7 +146,7 @@ class FeatureExtractor
 
     def extract_features(line)
       if (line.include?(":"))
-        return [Feature.new("colon_")]
+        [Feature.new("colon_")]
       end
     end
   end
