@@ -446,56 +446,6 @@ class RecipeDocumentTest < ActiveSupport::TestCase
                  r.extract_prep_structured
   end
 
-
-  test "extract_lines_for_category removes numbering at start for PR category" do
-    r = RecipeDocument.new(
-        :url => "foo",
-        :string => <<-eohtml
-    <div class="something" style="margin-top: 10px;">
-                    <p> 1. normal prep </p>
-                    <p> 2. prep with 1. a number </p>
-                    <p> 3. 5 minutes of heating - prep with number, but not a prep-number </p>
-                    <p> 4) prep with number-paran </p>
-                    <p> 10. two digit prep</p>
-                    <p> 11) two digit prep-paran</p>
-        </div>
-    eohtml
-    )
-    predictions = []
-    predictions << LibLinearModel::Prediction.new(:map => {:PR => 1.0, :OT => 0.0})
-    predictions << LibLinearModel::Prediction.new(:map => {:PR => 1.0, :OT => 0.0})
-    predictions << LibLinearModel::Prediction.new(:map => {:PR => 1.0, :OT => 0.0})
-    predictions << LibLinearModel::Prediction.new(:map => {:PR => 1.0, :OT => 0.0})
-    predictions << LibLinearModel::Prediction.new(:map => {:PR => 1.0, :OT => 0.0})
-    predictions << LibLinearModel::Prediction.new(:map => {:PR => 1.0, :OT => 0.0})
-
-    assert_lines ["normal prep",
-                  "prep with 1. a number",
-                  "5 minutes of heating - prep with number, but not a prep-number",
-                  "prep with number-paran",
-                  "two digit prep",
-                  "two digit prep-paran"],
-                 r.extract_lines_for_category(predictions, :PR)
-  end
-
-
-  test "extract_lines_for_category does not remove numbering unless PR category" do
-    r = RecipeDocument.new(
-        :url => "foo",
-        :string => <<-eohtml
-    <div class="something" style="margin-top: 10px;">
-                    <p> 1. ingredient </p>
-                    <p> 2. prep </p>
-        </div>
-    eohtml
-    )
-    predictions = []
-    predictions << LibLinearModel::Prediction.new(:map => {:IN => 1.0, :OT => 0.0})
-    predictions << LibLinearModel::Prediction.new(:map => {:PR => 1.0, :OT => 0.0})
-
-    assert_lines ["1. ingredient"], r.extract_lines_for_category(predictions, :IN)
-  end
-
   test "create recipe for structured document" do
     r = RecipeDocument.new(
         :url => 'http://www.epicurious.com/recipes/food/views/Swiss-Chard-Lasagna-with-Ricotta-and-Mushroom-362954',
@@ -506,6 +456,7 @@ class RecipeDocumentTest < ActiveSupport::TestCase
       assert prev+1 == ingredient[:ordinal], "#{ingredient.raw_text} should have had ordinal #{prev+1}"
       prev = ingredient[:ordinal]
     end
+    # TODO: more asserts here? -- 11/15 mk
     assert recipe.structured?, "Recipe should be structured"
   end
 

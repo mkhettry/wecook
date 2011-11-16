@@ -74,13 +74,13 @@ class RecipeDocument
     recipe.structured = is_structured?
     if (recipe.structured?)
       recipe.state = :ready
-      ingredients = extract_ingredients
+      ingredients = extract_ingredients_structured
       ingredients.each_with_index do |txt, i|
         ingredient = Ingredient.new(:raw_text => txt, :ordinal => i)
         recipe.ingredients << ingredient
       end
 
-      directions = extract_prep
+      directions = extract_prep_structured
       directions.each do |d|
         direction = Direction.new(:raw_text => d)
         recipe.directions << direction
@@ -107,41 +107,6 @@ class RecipeDocument
   
   def to_s
     @url
-  end
-
-  def extract_lines_for_category(predictions, category)
-    category_lines = []
-    predictions.each_index do |idx|
-      if predictions[idx].top_class == category
-        line = extract_lines[idx]
-        line = remove_start_numbering(line) if category == :PR
-        category_lines << line
-      end
-    end
-    category_lines
-  end
-
-  def extract_ingredients(predictions=nil)
-    if is_structured?
-      extract_ingredients_structured
-    elsif predictions
-      Rails.logger.info("Using model to predict for #{@url}")
-      extract_lines_for_category(predictions, :IN)
-    else
-      raise "no model for unstructured site: #{@url}"
-    end
-
-  end
-
-  def extract_prep(predictions=nil)
-      if (is_structured?)
-        extract_prep_structured
-      elsif predictions
-        Rails.logger.info("Using model to predict for #{@url}")
-        extract_lines_for_category(predictions, :PR)
-      else
-        raise "No predictions passed in"
-    end
   end
 
   def extract_images(num_images=2)
