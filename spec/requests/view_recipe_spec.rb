@@ -37,5 +37,17 @@ describe "recipe viewing" do
     first_inline_recipe.should have_css("div.ingredient_and_prep")
     sections = first_inline_recipe.all(:css, "div.section_header")
     sections.size.should == 2
+
+    # now click the link again
+    page.first(:css, "div.recipetitle").first('a').click
+
+    first_inline_recipe = page.first(:css, "div.recipeline").first(:css, "div.inline_recipe")
+    first_inline_recipe.should_not be_visible
+
   end
+
+  pending "should show other peoples recipes for all recipes" do
+
+  end
+
 end
