@@ -1,3 +1,4 @@
+# encoding: utf-8
 require "spec_helper"
 
 describe RecipeDocument do
@@ -84,6 +85,21 @@ describe RecipeDocument do
                   :file => fixture_path + '/webpages/foodbuzz-triple-berry.html')
         opts[:url].should eql "http://www.sprinkledwithflour.com/2011/05/triple-berry-orange-shortbread.html"
         opts.keys.should eql [:url]
+    end
+  end
+
+  describe "structured sites" do
+    it "should extract ingredients/prep for nytimes the minimalist" do
+      r = RecipeDocument.new(
+          :url => "http://dinersjournal.blogs.nytimes.com/2011/09/30/the-minimalist-pasta-with-cauliflower/",
+          :file => "spec/fixtures/webpages/PastaWithCauliflowerNYTimes.html")
+      prep = r.extract_prep_structured
+      prep[1].should match(/2. Meanwhile, in a large deep skillet over medium-low heat/)
+
+      ingredients = r.extract_ingredients_structured
+      ingredients.first.should == "1 head cauliflower, about 1 pound"
+      ingredients[1].should == "Salt and black pepper"
+      ingredients.last.should == "1 cup coarse bread crumbs."
     end
   end
 end

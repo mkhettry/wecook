@@ -153,6 +153,10 @@ class RecipeDocument
     ingredients = @doc.xpath("//div[contains(@class, 'ingredients')]//li").collect { |s| clean_text(s.text)}
     ingredients = @doc.xpath("//div[contains(@id, 'ingredients')]//li").collect { |s| clean_text(s.text)} if ingredients.empty?
 
+    # READ READ READ READ: a lot of these patterns have no test. You can take two or three of these
+    # patterns and the test will still pass. In the future if you add a pattern, document the website
+    # or page for which you are adding the pattern
+
     ingredients = @doc.xpath("//li[contains(@class,'ingredient')]").collect { |s| clean_text(s.text)} if ingredients.empty?
     ingredients = @doc.xpath("//li[contains(@itemprop,'ingredient')]").collect { |s| clean_text(s.text)} if ingredients.empty?
     ingredients = @doc.xpath("//span[contains(@class, 'ingredient')]").collect { |s| clean_text(s.text)} if ingredients.empty?
@@ -174,12 +178,16 @@ class RecipeDocument
     prep_text_nodes = @doc.xpath("//span[contains(@class, 'instructions')]/div[contains(@class,'section')]") if prep_text_nodes.empty?
 
     prep_text_nodes = @doc.css("div.procedure-text p") if prep_text_nodes.empty?
+    # NOTE manish 11/18/11 Mark Bittman's columns have this markup
+    # http://dinersjournal.blogs.nytimes.com/2011/10/28/the-minimalist-free-form-apple-or-pear-tart/
+    # http://dinersjournal.blogs.nytimes.com/2011/09/30/the-minimalist-pasta-with-cauliflower/
+    prep_text_nodes = @doc.css("div.recipe-process li") if prep_text_nodes.empty?
 
     prep_text_nodes.each do |p|
       new_lines = create_lines_from_nodes(p)
       next if new_lines.empty?
       new_lines.each do |line|
-        prep_lines << remove_start_numbering(line)
+          prep_lines << line
       end
     end
 
