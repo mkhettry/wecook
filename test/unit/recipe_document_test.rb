@@ -167,7 +167,7 @@ class RecipeDocumentTest < ActiveSupport::TestCase
     params:{}});
 </script>
 
-<!--alias link is https://w1.buysub.com/loc/BNA/ba_recipe_link-->
+<!--alias link is https://w1.buysub.com/loc/BNA/ba_olink-->
             <h2>Ingredients</h2>
         </div>
             <ul class="ingredientsList">
@@ -404,7 +404,7 @@ class RecipeDocumentTest < ActiveSupport::TestCase
         :url => 'http://www.recipe.com/company-pleasing-crab-cakes/'
     )
     prep =  r.extract_prep_structured
-    assert_equal 'In a large skillet, melt 2 tablespoons of the butter or margarine over medium-high heat. Add sweet pepper, celery, and onion. Cook and stir about 5 minutes or until tender, but not brown.',
+    assert_equal '1. In a large skillet, melt 2 tablespoons of the butter or margarine over medium-high heat. Add sweet pepper, celery, and onion. Cook and stir about 5 minutes or until tender, but not brown.',
                  prep[0]
   end
 
@@ -421,30 +421,6 @@ class RecipeDocumentTest < ActiveSupport::TestCase
   end
 
 
-  test "extract_prep_structured removes numbering of directions at the beginning" do
-    r = RecipeDocument.new(
-        :url => "foo",
-        :string => <<-eohtml
-    <div class="instructions" style="margin-top: 10px;">
-            <h3>
-                Directions</h3>
-                    <p> 1. normal prep </p>
-                    <p> 2. prep with 1. a number </p>
-                    <p> 3. 5 minutes of heating - prep with number, but not a prep-number </p>
-                    <p> 4) prep with number-paran </p>
-                    <p> 10. two digit prep</p>
-                    <p> 11) two digit prep-paran</p>
-        </div>
-    eohtml
-    )
-    assert_lines ["normal prep",
-                  "prep with 1. a number",
-                  "5 minutes of heating - prep with number, but not a prep-number",
-                  "prep with number-paran",
-                  "two digit prep",
-                  "two digit prep-paran"],
-                 r.extract_prep_structured
-  end
 
   test "create recipe for structured document" do
     r = RecipeDocument.new(
