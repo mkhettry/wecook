@@ -9,7 +9,6 @@
   <%= javascript_include_tag 'jquery.min.js' %>
   <%= javascript_include_tag 'jquery-ui.min.js' %>
   <%= javascript_include_tag 'rails' %>
-  <%= javascript_include_tag 'tag-it' %>
   <%= javascript_include_tag 'jsuri-1.1.0.min' %>
   <%= csrf_meta_tag %>
 </head>
@@ -29,15 +28,17 @@
   <div id="welcome_header">
     <div id="logo">
       <%= link_to "WeCook", root_path %>
+     </div>
+    <div id="welcome_right" class="welcome_nav">
+        <%= get_user_display_name.strip %>
+        <%= link_to "Sign Out", signout_path %>
     </div>
-    <div id="userpanel">
-      <% if current_user %>
-          Hello, <%= get_user_display_name %>
-          <%= link_to "Sign Out", signout_path %>
-      <% else %>
-          <%= link_to "Create Account", new_user_path %>
-      <% end %>
-    </div>
+
+    <div id="welcome_left" class="welcome_nav">
+      <%= link_to "Discover", recipes_path(:p => "all") %>
+      <%= link_to "Saved Recipes", recipes_path %>
+      <%= link_to 'Add Recipe', new_recipe_path %>
+     </div>
     <div class="clear"></div>
   </div>
 

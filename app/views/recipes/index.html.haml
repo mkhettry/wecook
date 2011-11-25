@@ -1,10 +1,9 @@
 %script{:type => "text/javascript", :src => 'javascripts/wecook-tags.js'}
 
-%div{:class => "left_nav", :id => "rindex-left-nav"}
-  = render :partial => 'rindex_left_nav'
+-#%div{:class => "left_nav", :id => "rindex-left-nav"}
+-#  = render :partial => 'rindex_left_nav'
 
 .main_content
-  .add_button= link_to 'Add +', new_recipe_path
   = render :partial => 'recipe_tags_selected', :locals => {:url => request.fullpath}
 
   #recipe_list
