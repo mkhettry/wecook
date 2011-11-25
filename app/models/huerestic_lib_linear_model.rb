@@ -111,7 +111,6 @@ class HueresticLibLinearModel
 
   end
 
-
   def convert_range_to_second(original_predictions, cr)
     #puts "Trying to convert #{cr.range}"
     #puts "Original predictions are: #{original_predictions}"

@@ -92,10 +92,13 @@ img.center {
 }
 
 #welcome_header a {
-    color: #fffafa;
+    color: #dcdcdc;
     /*text-decoration: none;*/
 }
 
+.welcome_nav {
+    color: #dcdcdc;
+}
 .welcome_nav a:link {
     text-decoration: none;
 }
@@ -106,7 +109,6 @@ img.center {
 
 .welcome_nav a:hover {
     text-decoration: underline;
-    color: green;
 }
 
 #welcome_left {
@@ -134,7 +136,7 @@ img.center {
     border-top: 2px solid;
     /*position: fixed;*/
     margin-top: 100px;
-    padding-left: 20px;
+    padding-left: 100px;
     width: inherit;
     font-size: 103%;
     bottom: 15px;
