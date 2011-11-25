@@ -19,7 +19,7 @@ body {
 
 .main_content{
     padding-left: 100px;
-    padding-top: 10px;
+    padding-top: 80px;
     width: 700px;
     float:left;
     padding-bottom: 10px;
@@ -77,6 +77,7 @@ img.center {
 }
 /*http://www.december.com/html/spec/colorhex.html*/
 #welcome_header{
+    position: absolute;
     padding-top:10px;
     padding-bottom:10px;
     border-bottom: 2px transparent;
@@ -133,6 +134,7 @@ img.center {
     border-top: 2px solid;
     /*position: fixed;*/
     margin-top: 100px;
+    padding-left: 20px;
     width: inherit;
     font-size: 103%;
     bottom: 15px;
@@ -203,9 +205,20 @@ img.center {
     text-align: center;
     vertical-align: 2px;
 }
-.flash { background-color: #A4E7A0; border: 1px solid #26722D; }
+.flash {
+    top: 40px;
+    left: 100px;
+    position: absolute;
+    background-color: #A4E7A0;
+    border: 1px solid #26722D
+}
+
 #error { background-color: #F0A8A8; border: 1px solid #900; }
-.flash, #error { width: 50%; margin: 0 auto 10px auto; padding: 5px; }
+.flash, #error {
+    width: 50%;
+    margin: 0 auto 10px auto;
+}
+
 .flash p, #error p { margin-left: 20px; padding: 0; font-size: .75em; color: #000; }
 .flash a, #error a { text-decoration: none; padding: 0 3px; }
 .flash a { border: 1px solid #26722D; color: #26722D; }
