@@ -20,7 +20,8 @@ describe "Logins" do
       visit new_user_path
       fill_form("me", "me@m", "test", "test")
       submit_form
-      page.should have_content "Hello, me"
+      page.should have_content "me"
+      page.should have_content "Sign Out"
 
       # Is it a good idea to mix direct model assets in integration tests like this?
       User.find_by_name("me").provider.should == "native"

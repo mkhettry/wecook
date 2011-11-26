@@ -92,13 +92,23 @@ img.center {
 }
 
 #welcome_header a {
-    color: #dcdcdc;
+    /*color: #dcdcdc;*/
     /*text-decoration: none;*/
 }
 
 .welcome_nav {
     color: #dcdcdc;
 }
+
+.welcome_nav_link {
+    color: #dcdcdc;
+}
+
+.welcome_nav_link_highlighted {
+    color: white;
+    font-weight: bold;
+}
+
 .welcome_nav a:link {
     text-decoration: none;
 }

@@ -15,7 +15,7 @@
 
 <script>
     $(document).ready(function(){
-        $('.flash').animate({opacity : 0}, 2000)
+        $('.flash').animate({opacity : 0}, 2000);
     });
 </script>
 
@@ -28,16 +28,18 @@
     <div id="welcome_right" class="welcome_nav">
       <% if current_user %>
           <%= get_user_display_name.strip %>
-          <%= link_to "Sign Out", signout_path %>
+          <%= link_to "Sign Out", signout_path, :class => "welcome_nav_link" %>
       <% else %>
-          <%= link_to "Create Account", new_user_path %>
+          <%= link_to "Create Account", new_user_path, :class => "welcome_nav_link" %>
       <% end %>
     </div>
     <% if current_user %>
     <div id="welcome_left" class="welcome_nav">
-      <%= link_to "Discover", recipes_path(:p => "all") %>
-      <%= link_to "Saved Recipes", recipes_path %>
-      <%= link_to 'Add Recipe', new_recipe_path %>
+      <%= link_to "Discover", recipes_path(:p => "all"),
+                  :class => "welcome_nav_link #{get_link_class :all, params[:p]}" %>
+      <%= link_to "Saved Recipes", recipes_path,
+                  :class => "welcome_nav_link #{get_link_class :mine, params[:p]} "%>
+      <%= link_to 'Add Recipe', new_recipe_path, :class => "welcome_nav_link" %>
      </div>
      <% end %>
     <div class="clear"></div>

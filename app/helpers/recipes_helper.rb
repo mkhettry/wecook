@@ -38,15 +38,9 @@ module RecipesHelper
     end
   end
 
-  def get_link_class(choice, params_p)
-    "rindex-left-nav-highlight" if choice.to_s == params_p || (choice == :mine && params_p.nil?)
-  end
-
   def my_recipe(user_recipe, params_p)
     user_recipe.user == current_user
   end
-
-
 
   def remove_tag(url, new_tag)
     query_hash, uri = get_query_hash(url)
