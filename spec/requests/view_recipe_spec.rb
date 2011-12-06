@@ -26,12 +26,12 @@ describe "recipe viewing" do
     visit recipes_path
     #save_and_open_page
 
-    first_inline_recipe = page.first(:css, "div.recipeline").first(:css, "div.inline_recipe")
+    first_inline_recipe = page.first(:css, "div.inline_recipe")
     first_inline_recipe.should_not be_visible
 
     page.first(:css, "div.recipetitle").first('a').click
 
-    first_inline_recipe = page.first(:css, "div.recipeline").first(:css, "div.inline_recipe")
+    first_inline_recipe = page.first(:css, "div.inline_recipe")
     #puts "***** first_inline_recipe=#{first_inline_recipe.inspect}"
 
     first_inline_recipe.should be_visible
@@ -43,7 +43,7 @@ describe "recipe viewing" do
     # now click the link again
     page.first(:css, "div.recipetitle").first('a').click
 
-    first_inline_recipe = page.first(:css, "div.recipeline").first(:css, "div.inline_recipe")
+    first_inline_recipe = page.first(:css, "div.inline_recipe")
     first_inline_recipe.should_not be_visible
 
   end

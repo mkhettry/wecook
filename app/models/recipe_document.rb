@@ -111,7 +111,7 @@ class RecipeDocument
 
   def extract_images(num_images=2)
     all_images = @trimmed_doc.xpath('//img')
-    all_images = @doc.xpath("//img") if all_images.empty?
+    all_images = @doc.xpath("//img")  if all_images.empty?
     possible_images = {}
     all_images.each do |image|
       next unless image['src'].downcase =~ /jpg|jpeg/
@@ -226,7 +226,9 @@ class RecipeDocument
     img_dim_score = calculate_img_dim_score(image)
     return img_dim_score if img_dim_score < 0
 
-    img_dim_score + alt_score
+    total_score = img_dim_score + alt_score
+    Rails.logger.debug("#{image} has score #{total_score}")
+    total_score
   end
 
   def calculate_alt_score(image)
@@ -364,27 +366,22 @@ class RecipeDocument
 
   def create_lines_from_nodes(doc)
     lines = []
+    div_ids = []
+
     current_line = ""
 
     doc.traverse do |n|
-#      next if inside_ignorable_element(n)
-#      puts "#{n.name}--#{n.next_sibling.name if n.next_sibling}"
-#      if (n.text?)
-#        puts "#{n.text.lstrip.rstrip.empty?}"
-#      end
-
       if n.text? and not n.text.lstrip.rstrip.empty?
-        #puts "appending #{n.text.lstrip.rstrip} because of #{n.name}"
         current_line = current_line + " " + n.text.lstrip.rstrip
       elsif split_line(n)
-
-        #puts "skipping line: #{current_line} because of #{n.name}"
         clean_text = clean_text current_line
         lines << clean_text if not clean_text.empty?
+        div_ids << n['id'] if not clean_text.empty?
         current_line = ""
       end
     end
     lines << current_line if current_line != ""
+
     clean_lines(lines)
   end
 

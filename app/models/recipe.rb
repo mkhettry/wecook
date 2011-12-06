@@ -97,7 +97,12 @@ class Recipe < ActiveRecord::Base
     if images.empty?
       'chopstick.jpeg'
     else
-      images.sample.jpg.url
+      image = images.sample
+
+      Rails.logger.info ">>>> image content type =#{image.jpg.url}"
+      Rails.logger.info ">>>> image=#{image.jpg.url(:thumb).inspect}"
+
+      image.jpg.url
     end
   end
 

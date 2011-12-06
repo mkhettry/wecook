@@ -55,6 +55,11 @@ describe RecipeDocument do
     end
 
     pending "extract images from epicurious com one" do
+      # small image on page:
+      #   <img src="/images/recipesmenus/2011/2011_january/362954_116.jpg" class="photo scale_down" alt="Swiss Chard Lasagna with Ricotta and Mushroom">
+      # big image on different page
+      #   <img src="/images/recipesmenus/2011/2011_january/362954.jpg" alt="Swiss Chard Lasagna with Ricotta and Mushroom">
+      # same image is used with different css.
       r = RecipeDocument.new(
           :url => 'http://www.epicurious.com/recipes/food/views/Swiss-Chard-Lasagna-with-Ricotta-and-Mushroom-362954',
           :file => 'spec/fixtures/webpages/Swiss Chard Lasagna with Ricotta and Mushroom Recipe at Epicurious.com.html')
