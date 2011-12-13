@@ -29,6 +29,12 @@ body {
     color: red;
 }
 
+#new_recipe {
+    padding-left: 20px;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    width: 600px;
+}
 /*#recipe_list table {*/
 /*border-collapse: collapse;*/
 /*}*/
@@ -195,9 +201,10 @@ img.center {
 }
 
 #bookmarklet_content{
-    width: 500px;
+    width: 600px;
     margin-top: 30px;
     border-top: black thin solid;
+    display: block;
 }
 
 .bookmarklet {

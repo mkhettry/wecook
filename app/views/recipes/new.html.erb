@@ -1,7 +1,5 @@
-<h1>New recipe</h1>
-
+<div id="new_recipe">
 <% location =  Rails.env.production? ? "http://wecook.heroku.com/" : "http://localhost:3000/" %>
-
   <%= render 'form' %>
 <div id="bookmarklet_content">
   <p>
@@ -32,3 +30,4 @@
 </div>
 <br/>
 <%= link_to 'Back', recipes_path %>
+</div>

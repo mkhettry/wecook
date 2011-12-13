@@ -31,9 +31,10 @@ describe "recipe viewing" do
 
     page.first(:css, "div.recipetitle").first('a').click
 
-    first_inline_recipe = page.first(:css, "div.inline_recipe")
     #puts "***** first_inline_recipe=#{first_inline_recipe.inspect}"
 
+    #save_and_open_page
+    first_inline_recipe = page.first(:css, "div.inline_recipe")
     first_inline_recipe.should be_visible
 
     first_inline_recipe.should have_css("div.ingredient_and_prep")
