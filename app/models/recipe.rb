@@ -93,16 +93,16 @@ class Recipe < ActiveRecord::Base
     @lines = extract_lines_internal(doc)
   end
 
-  def sample_image()
+  def sample_image(style=:thumb)
     if images.empty?
       'chopstick.jpeg'
     else
       image = images.sample
 
-      Rails.logger.info ">>>> image content type =#{image.jpg.url}"
-      Rails.logger.info ">>>> image=#{image.jpg.url(:thumb).inspect}"
+      puts "***** image=#{image.inspect}"
+      puts "***** image.has_styles=#{image.has_styles.inspect}"
 
-      image.jpg.url
+      image.has_styles ? image.jpg.url(style) : image.jpg.url
     end
   end
 

@@ -26,6 +26,8 @@ group :development, :test do
   gem 'database_cleaner'
 end
 
+gem 'rmagick'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

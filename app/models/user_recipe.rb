@@ -9,6 +9,7 @@ class UserRecipe < ActiveRecord::Base
 
   def self.create(url, user)
     recipe = Recipe.get_or_create_recipe(url)
+
     if (recipe.persisted?)
       user_recipe = UserRecipe.first :include => :recipe, :conditions => {:user_id => user, :recipes => {:url => url}}
       user_recipe.touch if user_recipe

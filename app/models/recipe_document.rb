@@ -114,7 +114,9 @@ class RecipeDocument
     all_images = @doc.xpath("//img")  if all_images.empty?
     possible_images = {}
     all_images.each do |image|
-      next unless image['src'].downcase =~ /jpg|jpeg/
+
+
+      next unless image['src'] && image['src'].downcase =~ /jpg|jpeg/
       image_score = calculate_image_score(image)
       if image_score >= 0
         possible_images[image['src'].gsub(/\n/,'').gsub(/\\/, "/")] = image_score

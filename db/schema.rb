@@ -10,12 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110727181158) do
-
-  create_table "bookmarks", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20111217182352) do
 
   create_table "directions", :force => true do |t|
     t.text    "raw_text"
@@ -29,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20110727181158) do
     t.string   "jpg_content_type"
     t.integer  "jpg_file_size"
     t.datetime "jpg_updated_at"
+    t.boolean  "has_styles"
   end
 
   create_table "ingredients", :force => true do |t|

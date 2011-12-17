@@ -17,6 +17,8 @@ describe "recipe viewing" do
     @user = ensure_user_exists EMAIL
   end
 
+  # This test fails intermittently. To make it pass, uncomment the 'save_and_open_page' link in
+  # just before the assert for the first recipe being visible
   it "should open ready recipe on click", :js => true do
     login_as_user EMAIL
 
