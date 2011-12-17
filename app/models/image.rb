@@ -13,9 +13,6 @@ class Image < ActiveRecord::Base
   # thumbnail and medium were introduced in dec 2011. remember that this image has styles so that for older
   # images we don't try to dereference styles that don't exit.
   def set_styles
-    if self.has_styles.nil?
-      self.has_styles = true
-    end
+    self.has_styles = true
   end
-
 end
