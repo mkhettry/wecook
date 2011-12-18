@@ -4,8 +4,14 @@ class Image < ActiveRecord::Base
   before_create :set_styles
 
   if Rails.env.production?
-    has_attached_file :jpg, :storage => :s3, :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
-      :styles => STYLES
+    has_attached_file :jpg,
+                      :storage => :s3,
+                      :bucket => "wecook-production-us",
+                      :s3_credentials => {
+                          :access_key_id => ENV['S3_KEY'],
+                          :secret_access_key => ENV['S3_SECRET']
+                      },
+                      :styles => STYLES
   else
     has_attached_file :jpg, :styles => STYLES
   end
