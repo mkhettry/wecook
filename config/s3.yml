@@ -1,5 +1,0 @@
-production:
-  bucket: wecook-production-us
-  access_key_id: AKIAIILFXS4XDBASO4IA
-  secret_access_key: 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
-  AWS_CALLING_FORMAT: SUBDOMAIN
