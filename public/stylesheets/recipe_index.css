@@ -83,17 +83,18 @@
   .pagination .disabled {
     color: #aaaaaa; }
   .pagination .current {
+    background-color: #0063dc;
+    color: #fffafa;
+    border: 1px solid #dddddd;
     font-style: normal;
-    font-weight: bold;
-    color: #ff0084; }
+     }
   .pagination a {
     border: 1px solid #dddddd;
     color: #0063dc;
     text-decoration: none; }
     .pagination a:hover, .pagination a:focus {
-      border-color: #003366;
-      background: #0063dc;
-      color: white; }
+      border: 1px solid #2f4f4f;
+      }
   .pagination .page_info {
     color: #aaaaaa;
     padding-top: 0.8em; }
