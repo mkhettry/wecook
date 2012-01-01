@@ -93,13 +93,13 @@
     color: #0063dc;
     text-decoration: none; }
     .pagination a:hover, .pagination a:focus {
-      border: 1px solid #2f4f4f;
+      border: solid 1px blue;
       }
   .pagination .page_info {
     color: #aaaaaa;
     padding-top: 0.8em; }
   .pagination .previous_page, .pagination .next_page {
-    border-width: 2px; }
+    border-width: 1px; }
   .pagination .previous_page {
     margin-right: 1em; }
   .pagination .next_page {
