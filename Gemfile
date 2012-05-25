@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '~> 3.2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -12,10 +12,10 @@ gem 'haml'
 gem 'will_paginate', '>= 3.0.pre'
 gem 'jquery-rails', '>= 0.2.6'
 gem 'omniauth'
+gem 'omniauth-facebook'
 gem 'aws-s3'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'rake'
-gem 'silent-postgres'
 
 gem 'acts-as-taggable-on'
 
