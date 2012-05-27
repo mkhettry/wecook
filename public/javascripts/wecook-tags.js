@@ -102,6 +102,9 @@ $(document).ready(function(){
     function add_tag(tag, element){
         var new_node = element.children().last().clone(true);
         new_node.show();
+        // the height of the added tag was slightly less than the other tabs. Not sure why but this
+        // little hack fixes it :(
+        new_node.css("display", "");
         new_node.children().first().text(tag);
         element.append(new_node);
     }

@@ -3,7 +3,11 @@
 <head>
   <title>Cooks</title>
   <%= stylesheet_link_tag "themes/smoothness/jquery-ui-1.8.13.custom" %>
-  <%= stylesheet_link_tag "cooks", "recipe_index" %>
+
+  <% %w(cooks recipe_index provisional_recipe recipe_details recipe_tags).each do |css_file| %>
+    <%= stylesheet_link_tag css_file %>
+  <% end %>
+
   <%= javascript_include_tag 'application.js' %>
   <%= javascript_include_tag 'rails.js' %>
   <%= javascript_include_tag 'jquery.min.js' %>

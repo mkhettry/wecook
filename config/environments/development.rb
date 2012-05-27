@@ -21,5 +21,11 @@ Cooks::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
+
+  # Note(manish): Taken from http://guides.rubyonrails.org/asset_pipeline.html.
+  # Section 9 (Upgrading from older version of rails)
+  config.assets.compress = false
+
+  config.assets.debug = true
 end
 
