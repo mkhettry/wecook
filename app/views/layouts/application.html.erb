@@ -3,7 +3,7 @@
 <head>
   <title>Cooks</title>
   <%= stylesheet_link_tag "themes/smoothness/jquery-ui-1.8.13.custom" %>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag "cooks", "recipe_index" %>
   <%= javascript_include_tag 'application.js' %>
   <%= javascript_include_tag 'rails.js' %>
   <%= javascript_include_tag 'jquery.min.js' %>
@@ -11,11 +11,17 @@
   <%= javascript_include_tag 'rails' %>
   <%= javascript_include_tag 'jsuri-1.1.0.min' %>
   <%= csrf_meta_tag %>
+
 </head>
 
 <script>
     $(document).ready(function(){
         $('.flash').animate({opacity : 0}, 2000);
+    });
+
+    $(document).ajaxSend(function(e, xhr, options) {
+        var token = $("meta[name='csrf-token']").attr("content");
+        xhr.setRequestHeader("X-CSRF-Token", token);
     });
 </script>
 

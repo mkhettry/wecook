@@ -26,7 +26,12 @@ group :development, :test do
   gem 'database_cleaner'
 end
 
+group :assets do
+  gem 'twitter-bootstrap-rails'
+end
+
 gem 'rmagick'
+gem "twitter-bootstrap-rails"
 
 # Use unicorn as the web server
 # gem 'unicorn'
