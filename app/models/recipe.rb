@@ -98,10 +98,6 @@ class Recipe < ActiveRecord::Base
       'chopstick.jpeg'
     else
       image = images.sample
-
-      puts "***** image=#{image.inspect}"
-      puts "***** image.has_styles=#{image.has_styles.inspect}"
-
       image.has_styles ? image.jpg.url(style) : image.jpg.url
     end
   end
