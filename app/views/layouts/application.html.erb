@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Cooks</title>
+      <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:title) ? yield(:title) : "Cooks" %></title>
+
   <%= stylesheet_link_tag "themes/smoothness/jquery-ui-1.8.13.custom" %>
 
   <% %w(cooks recipe_index provisional_recipe recipe_details recipe_tags).each do |css_file| %>
@@ -9,12 +12,13 @@
   <% end %>
 
   <%= javascript_include_tag 'application.js' %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag 'rails.js' %>
   <%= javascript_include_tag 'jquery.min.js' %>
   <%= javascript_include_tag 'jquery-ui.min.js' %>
   <%= javascript_include_tag 'rails' %>
   <%= javascript_include_tag 'jsuri-1.1.0.min' %>
-  <%= csrf_meta_tag %>
+  <%= csrf_meta_tags %>
 
 </head>
 
@@ -30,32 +34,54 @@
 </script>
 
 <body>
-<div id="title">
-  <div id="welcome_header">
-    <div id="logo">
-      <%= link_to "WeCook", root_path %>
-     </div>
-    <div id="welcome_right" class="welcome_nav">
-      <% if current_user %>
-          <%= get_user_display_name.strip %>
-          <%= link_to "Sign Out", signout_path, :class => "welcome_nav_link" %>
-      <% else %>
-          <%= link_to "Create Account", new_user_path, :class => "welcome_nav_link" %>
-      <% end %>
-    </div>
-    <% if current_user %>
-    <div id="welcome_left" class="welcome_nav">
-      <%= link_to "Discover", recipes_path(:p => "all"),
-                  :class => "welcome_nav_link #{get_link_class :all, params[:p]}" %>
-      <%= link_to "Saved Recipes", recipes_path,
-                  :class => "welcome_nav_link #{get_link_class :mine, params[:p]} "%>
-      <%= link_to 'Add Recipe', new_recipe_path, :class => "welcome_nav_link" %>
-     </div>
-     <% end %>
-    <div class="clear"></div>
-  </div>
 
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "WeCook", root_path, :class => "brand" %>
+
+      <div class="nav-collapse">
+
+        <% if current_user %>
+            <ul class="nav">
+              <li><%= link_to "Discover", recipes_path(:p => "all") %></li>
+              <li><%= link_to "Saved Recipes", recipes_path %></li>
+              <li><%= link_to 'Add Recipe', new_recipe_path %></li>
+            </ul>
+        <% end %>
+
+        <ul class="nav pull-right">
+          <% if current_user %>
+              <li><%= link_to get_user_display_name.strip.capitalize, "#" %></li>
+              <li class="divider-vertical"></li>
+              <li><%= link_to "Sign Out", signout_path %></li>
+          <% else %>
+              <li><%= link_to "Create Account", new_user_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+<!--<div id="title">-->
+  <!--<div id="welcome_header" class="navbar navbar-fixed-top">-->
+    <!--<div id="logo">-->
+      <!--<%= link_to "WeCook", root_path %>-->
+     <!--</div>-->
+    <!--<div id="welcome_right" class="welcome_nav">-->
+      <!--<% if current_user %>-->
+          <!--<%= get_user_display_name.strip %>-->
+          <!--<%= link_to "Sign Out", signout_path, :class => "welcome_nav_link" %>-->
+      <!--<% else %>-->
+          <!--<%= link_to "Create Account", new_user_path, :class => "welcome_nav_link" %>-->
+      <!--<% end %>-->
+    <!--</div>-->
+    <!--<div class="clear"></div>-->
+  <!--</div>-->
+
+<!--</div>-->
 
 <% flash.each do |name, message| %>
     <%= content_tag :div, message, :id => "flash_#{name}", :class => "flash", :align => "center" %>
