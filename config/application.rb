@@ -43,5 +43,9 @@ module Cooks
     config.assets.enabled = true
 
     config.assets.version = "1.0"
+
+    # https://devcenter.heroku.com/articles/rails3x-asset-pipeline-cedar#troubleshooting
+    config.assets.initialize_on_precompile = false
+
   end
 end
