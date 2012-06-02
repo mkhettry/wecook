@@ -65,24 +65,6 @@
 </div>
 
 
-<!--<div id="title">-->
-  <!--<div id="welcome_header" class="navbar navbar-fixed-top">-->
-    <!--<div id="logo">-->
-      <!--<%= link_to "WeCook", root_path %>-->
-     <!--</div>-->
-    <!--<div id="welcome_right" class="welcome_nav">-->
-      <!--<% if current_user %>-->
-          <!--<%= get_user_display_name.strip %>-->
-          <!--<%= link_to "Sign Out", signout_path, :class => "welcome_nav_link" %>-->
-      <!--<% else %>-->
-          <!--<%= link_to "Create Account", new_user_path, :class => "welcome_nav_link" %>-->
-      <!--<% end %>-->
-    <!--</div>-->
-    <!--<div class="clear"></div>-->
-  <!--</div>-->
-
-<!--</div>-->
-
 <% flash.each do |name, message| %>
     <%= content_tag :div, message, :id => "flash_#{name}", :class => "flash", :align => "center" %>
 <% end %>
