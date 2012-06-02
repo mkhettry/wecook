@@ -15,7 +15,6 @@ gem 'will_paginate', '>= 3.0.pre'
 gem 'jquery-rails', '>= 0.2.6'
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'aws-s3'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'rake'
 
