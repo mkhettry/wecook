@@ -1,48 +1,72 @@
 <body>
-<div class="left_nav"></div>
 
-<div class="main_content">
+<script type="text/javascript">
+    $(function() {
+        $("#email").focus();
+    });
+</script>
 
-  <div id="welcome_content">
-    <table id="two_options" border="0" cellspacing="0" cellpadding="0">
-      <tbody>
-      <tr>
-        <td id="welome_intro">
-          <p>WeCook is a website that allows you to save recipes from anywhere on the web </p>
-        </td>
-        <td id="welcome_login">
-          <%= form_tag login_path do%>
-              <p>
-                <%= label_tag :email %><br/>
-                <%= text_field_tag :email, params[:email] %><br/>
-              </p>
+<div class="container">
+  <div class="row">
 
-              <p>
-                <%= label_tag :password %><br/>
-                <%= password_field_tag :password, params[:password] %><br/>
-              </p>
+    <!--Column 1-->
+    <div class="span5 offset2">
+      <object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/3US0-bdZ3G0?hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/3US0-bdZ3G0?hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>
+    </div>
 
-              <% if params[:loginfail] %>
-              <div id="welcome-invalid-login">
-                Incorrect email or password.
-              </div>
+    <!--Column 2-->
+    <div class="span3">
+
+      <div class="row"> <!-- Login form -->
+        <div class="span3">
+          <div class="well">
+            <%= link_to image_tag("LoginWithFacebookButton.jpg"),  "/auth/facebook" %> <br/><br/>
+            <div align="center">
+              <p id="welcome_or" align="center" style="text-align:center;">Or</p>
+            </div>
+
+            <div>
+              <%= form_tag login_path do%>
+                  <% control_group_class = "control-group" %>
+                  <% if params[:loginfail] %>
+                      <% control_group_class += " error" %>
+                  <% end %>
+
+                  <div class="<%=control_group_class%>">
+                    <%= label_tag :email, "", :class=>"control-label"%>
+                    <div class="controls">
+                      <%= text_field_tag :email, params[:email], :class=>"input-medium", :placeholder => "Email"%>
+                    </div>
+                  </div>
+
+                  <div class="<%=control_group_class%>">
+                    <%= label_tag :password, "", :class=>"control-label" %>
+                    <div class="controls">
+                      <%= password_field_tag :password, params[:password], :class=>"input-medium", :placeholder => "Password"%>
+                      <% if params[:loginfail] %>
+                          <div class="help-inline">
+                            Incorrect email or password.
+                          </div>
+                      <% end %>
+
+                    </div>
+                  </div>
+                  <%= submit_tag "Sign in", :class=>"btn btn-primary" %>
               <% end %>
-              <p class="button"> <%= submit_tag "Sign in" %></p>
-          <% end %>
-        </td>
-        <td id="welcome_or">
-          Or
-        </td>
-        <td id="welcome_third_party">
-          <%= link_to image_tag("LoginWithFacebookButton.jpg"),  "/auth/facebook" %>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- End Login form -->
 
-  <div align="center">
-    <object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/3US0-bdZ3G0?hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/3US0-bdZ3G0?hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>
+
+      <div class="row">
+        <div class="span3">
+          <strong>Welcome to WeCook. <br/> </strong>
+          Save and share any recipe. Discover what others are cooking.
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </div>
