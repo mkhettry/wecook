@@ -20,12 +20,14 @@
       <div class="row"> <!-- Login form -->
         <div class="span3">
           <div class="well">
-            <%= link_to image_tag("LoginWithFacebookButton.jpg"),  "/auth/facebook" %> <br/><br/>
             <div align="center">
+              <%= link_to image_tag("LoginWithFacebookButton.jpg"), "/auth/facebook" %> <br/><br/>
+            </div>
+              <div align="center">
               <p id="welcome_or" align="center" style="text-align:center;">Or</p>
             </div>
 
-            <div>
+            <div align="center">
               <%= form_tag login_path do%>
                   <% control_group_class = "control-group" %>
                   <% if params[:loginfail] %>
