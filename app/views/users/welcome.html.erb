@@ -19,13 +19,9 @@
 
       <div class="row"> <!-- Login form -->
         <div class="span3">
-          <div class="well">
-            <div align="center">
-              <%= link_to image_tag("LoginWithFacebookButton.jpg"), "/auth/facebook" %> <br/><br/>
-            </div>
-              <div align="center">
-              <p id="welcome_or" align="center" style="text-align:center;">Or</p>
-            </div>
+          <div class="well" align="center">
+            <%= link_to image_tag("LoginWithFacebookButton.jpg"),  "/auth/facebook" %> <br/><br/>
+            <p id="welcome_or" align="center" style="text-align:center;">Or</p>
 
             <div align="center">
               <%= form_tag login_path do%>
@@ -68,7 +64,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
 </div>
