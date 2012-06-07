@@ -1,25 +1,8 @@
-
-
-<!--<ul title="tags:" id="rtag" display="none"></ul>-->
-
-<div id="<%= 'tag_user_recipe_' + user_recipe.id.to_s %>">
-  Tags:
-  <!-- an empty one if the recipe doesn't have any tags to support clone in wecook-tag.js -->
-  <span>
-    <span class="tag tag_hide">
-      <span class="tag_name">blank</span>
-      <span class="tag_x"></span>
-    </span>
-
-  <% user_recipe.tag_list.each do |tag| %>
-    <span class="tag">
-      <span class="tag_name"> <%= tag.to_s %></span>
-      <span class="tag_x"></span>
+<% user_recipe.tag_list.each do |tag| %>
+    <span class="tag label label-info">
+    <%= tag.to_s %>
+    <span class="tag_x" user_recipe_id="<%=user_recipe.id%>">x</span>
     </span>
 <% end %>
-    </span>
 
-  <input class="tag_text_box" type="text">
-  </input>
-  <span class="tag_plus">+</span>
-</div>
+

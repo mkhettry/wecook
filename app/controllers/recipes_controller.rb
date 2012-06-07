@@ -146,7 +146,8 @@ class RecipesController < ApplicationController
 
   def delete_tag
     ur = UserRecipe.find(params[:id])
-    tag_to_delete = params[:tag].strip
+    #remove the 'x' at the end TODO move this into javaScript
+    tag_to_delete = params[:tag].strip[0..-2].strip
     ur.tag_list.delete(tag_to_delete)
     Rails.logger.debug "deleted tag: " + tag_to_delete
     respond_to do |format|

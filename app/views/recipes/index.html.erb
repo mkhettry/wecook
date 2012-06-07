@@ -1,23 +1,15 @@
+<%= javascript_include_tag 'wecook-tags.js' %>
+
 <ul class="thumbnails">
-
-<% @user_recipes.each_index do |index| %>
-<% user_recipe = @user_recipes[index] %>
-<% recipe = user_recipe.recipe %>
-    <!--<% if (index % 4 == 0) %>-->
-        <!--<div class="row">-->
-        <!--<% end %>-->
-
-    <li class="span3">
-    <div class="thumbnail" style="height:240px">
-    <%=image_tag(recipe.sample_image(:medium), :size => "260x180") %>
-    <h5><%= recipe.title[0..40] %></h5>
-    <span class="label">tag1</span>
-    <span class="label">tag2</span>
-    </div>
-    </li>
-
-    <!--<% if (index % 4 == 3) %>-->
-        <!--</div>-->
-    <!--<% end %>-->
-<% end %>
+  <% @user_recipes.each_index do |index| %>
+      <% user_recipe = @user_recipes[index] %>
+      <% recipe = user_recipe.recipe %>
+      <li class="span3">
+        <div class="thumbnail" style="height:240px">
+          <%=image_tag(recipe.sample_image(:medium), :size => "260x180") %>
+          <h5><%= recipe.title[0..40] %></h5>
+          <%= render :partial => 'recipe_tags', :locals => {:user_recipe => user_recipe} %>
+        </div>
+      </li>
+  <% end %>
 </ul>

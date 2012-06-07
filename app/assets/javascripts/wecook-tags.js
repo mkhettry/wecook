@@ -24,7 +24,7 @@ $(document).ready(function(){
 
     $('.tag_x').click(function(event) {
         var tag = $(this).parent().text();
-        var user_recipe_id = $(this).parent().parent().parent().attr('id').replace("tag_user_recipe_","");
+        var user_recipe_id = $(this).attr('user_recipe_id');
         // fix this later. this will break if we ever change routes.
         var url = "/recipes/" +user_recipe_id + "/delete_tag";
         $.ajax({
