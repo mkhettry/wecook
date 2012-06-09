@@ -1,3 +1,11 @@
 .tag {
     margin-right: 2px;
 }
+
+.tag_text_box {
+    line-height:10px;
+    padding:0;
+    margin-bottom:0;
+    vertical-align:middle;
+    font-size:10px;
+}
