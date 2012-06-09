@@ -1,8 +1,13 @@
+<span id = "tags">
 <% user_recipe.tag_list.each do |tag| %>
     <span class="tag label label-info">
-    <%= tag.to_s %>
-    <span class="tag_x" user_recipe_id="<%=user_recipe.id%>">x</span>
+      <span><%= tag.to_s %></span>
+      <span class="tag_x" user_recipe_id="<%=user_recipe.id%>">x</span>
     </span>
 <% end %>
+</span>
+
+<%= text_field_tag :add_tag, "", :class=>"input-small tag_text_box", :user_recipe_id=>user_recipe.id, :placeholder => "tag name"%>
+<span class="tag_plus">+</span>
 
 

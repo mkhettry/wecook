@@ -23,7 +23,8 @@ $(document).ready(function(){
 
 
     $('.tag_x').click(function(event) {
-        var tag = $(this).parent().text();
+        var tag = $.trim($(this).parent().text());
+        tag = $.trim(tag.substring(0, tag.length - 1));//to remove the x at the end
         var user_recipe_id = $(this).attr('user_recipe_id');
         // fix this later. this will break if we ever change routes.
         var url = "/recipes/" +user_recipe_id + "/delete_tag";
@@ -51,7 +52,8 @@ $(document).ready(function(){
             if (tag == ''){
                 return;
             }
-            var user_recipe_id = $(this).parent().attr('id').replace("tag_user_recipe_","");
+//            var user_recipe_id = $(this).parent().attr('id').replace("tag_user_recipe_","");
+            var user_recipe_id = $(this).attr('user_recipe_id');
             var url = "/recipes/" +user_recipe_id + "/add_tag";
             $.ajax({
             type: 'POST',
@@ -104,7 +106,7 @@ $(document).ready(function(){
         new_node.show();
         // the height of the added tag was slightly less than the other tabs. Not sure why but this
         // little hack fixes it :(
-        new_node.css("display", "");
+//        new_node.css("display", ""); //9-june-2012 - after moving to Boostrapuser: I think we no longer need this hack. It seems to be working fine without it
         new_node.children().first().text(tag);
         element.append(new_node);
     }
