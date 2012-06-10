@@ -14,9 +14,9 @@
 
           <%= render :partial => 'recipe_details', :locals => {:recipe => recipe} %>
 
-          <div class="thumbnail" style="height:240px" data-toggle="modal"
-               data-target="<%= '#recipe_' + recipe.id.to_s %>">
-            <%=image_tag(recipe.sample_image(:medium), :size => "260x180") %>
+          <div class="thumbnail" style="height:240px">
+            <%=image_tag(recipe.sample_image(:medium), :size => "260x180", :"data-toggle" => "modal",
+               :"data-target" => "#recipe_" + recipe.id.to_s) %>
             <h5><%= recipe.title[0..40] %></h5>
 
             <div class="recipe-footer">
