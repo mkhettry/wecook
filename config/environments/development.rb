@@ -26,6 +26,7 @@ Cooks::Application.configure do
   # Section 9 (Upgrading from older version of rails)
   config.assets.compress = false
 
-  config.assets.debug = true
+  config.assets.logger = false
+
 end
 
