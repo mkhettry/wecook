@@ -1,5 +1,9 @@
-<%= link_to 'Archive', archive_recipe_path(user_recipe), :method => :post, :remote => true %>
+<%= link_to archive_recipe_path(user_recipe), :method => :post, :remote => true do %>
+    <i class="icon-trash"></i>
+<% end %>
+
 <% if user_recipe.recipe.editable? %>
-&bull;
-<%= link_to 'Edit', show_provisional_recipe_path(user_recipe.recipe) %>
+    <%= link_to show_provisional_recipe_path(user_recipe.recipe)  do%>
+        <i class="icon-edit"></i>
+    <%end%>
 <% end %>

@@ -5,11 +5,19 @@
     <% @user_recipes.each_index do |index| %>
         <% user_recipe = @user_recipes[index] %>
         <% recipe = user_recipe.recipe %>
-        <li class="span3">
+        <li class="span3" id="ur_<%=user_recipe.id%>">
           <div class="thumbnail" style="height:240px">
             <%=image_tag(recipe.sample_image(:medium), :size => "260x180") %>
             <h5><%= recipe.title[0..40] %></h5>
-            <%= render :partial => 'recipe_tags', :locals => {:user_recipe => user_recipe} %>
+
+            <div class="recipe-footer">
+              <div class="recipe-meta">
+                <%= render :partial => 'recipe_meta', :locals => {:user_recipe => user_recipe} %>
+              </div>
+              <div class="recipe-options">
+                <%= render :partial => 'recipe_options', :locals => {:user_recipe => user_recipe} %>
+              </div>
+            </div>
           </div>
         </li>
     <% end %>

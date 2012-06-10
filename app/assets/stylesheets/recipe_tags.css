@@ -1,11 +1,21 @@
 .tag {
-    margin-right: 2px;
+    /*margin-right: 2px;*/
+    padding-right: 5px;
+    line-height:18px;
 }
 
-.tag_text_box {
+.tag-text-box {
     line-height:10px;
     padding:0;
     margin-bottom:0;
     vertical-align:middle;
     font-size:10px;
+}
+
+.tag-section {
+    padding-top:5px;
+}
+
+.tag_x {
+    cursor: pointer;
 }

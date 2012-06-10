@@ -46,7 +46,7 @@ $(document).ready(function(){
 
     });
 
-    $('.tag_text_box').keypress(function(e) {
+    $('.tag-text-box').keypress(function(e) {
         if(e.which == 13) {
             var tag = $(this).val();
             if (tag == ''){
@@ -83,11 +83,11 @@ $(document).ready(function(){
 //    $('.tag_text_box').tagit();
 //    $('.tag_text_box').hide();
 
-    $('.tag_text_box').hide();
+    $('.tag-text-box').hide();
 
     $('.tag_hide').hide();
 
-    $('.tag_text_box').focusout(function(){
+    $('.tag-text-box').focusout(function(){
         $(this).hide();
     });
 
@@ -104,9 +104,6 @@ $(document).ready(function(){
     function add_tag(tag, element){
         var new_node = element.children().last().clone(true);
         new_node.show();
-        // the height of the added tag was slightly less than the other tabs. Not sure why but this
-        // little hack fixes it :(
-//        new_node.css("display", ""); //9-june-2012 - after moving to Boostrapuser: I think we no longer need this hack. It seems to be working fine without it
         new_node.children().first().text(tag);
         element.append(new_node);
     }
