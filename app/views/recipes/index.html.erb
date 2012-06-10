@@ -1,12 +1,21 @@
 <%= javascript_include_tag 'wecook-tags.js' %>
+<%= javascript_include_tag 'wecook-index.js' %>
 
 <div class="container">
+  <div id="myModal" class="modal hide fade">
+    This is random text in the modal
+  </div>
+
   <ul class="thumbnails">
     <% @user_recipes.each_index do |index| %>
         <% user_recipe = @user_recipes[index] %>
         <% recipe = user_recipe.recipe %>
         <li class="span3" id="ur_<%=user_recipe.id%>">
-          <div class="thumbnail" style="height:240px">
+
+          <%= render :partial => 'recipe_details', :locals => {:recipe => recipe} %>
+
+          <div class="thumbnail" style="height:240px" data-toggle="modal"
+               data-target="<%= '#recipe_' + recipe.id.to_s %>">
             <%=image_tag(recipe.sample_image(:medium), :size => "260x180") %>
             <h5><%= recipe.title[0..40] %></h5>
 
