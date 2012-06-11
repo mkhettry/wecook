@@ -19,6 +19,7 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'rake'
 
 gem 'acts-as-taggable-on'
+gem 'less-rails-bootstrap'
 
 group :development, :test do
   gem 'rspec-rails'

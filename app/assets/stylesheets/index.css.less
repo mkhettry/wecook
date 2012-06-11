@@ -1,12 +1,14 @@
+@import "twitter/bootstrap/variables";
+@import "twitter/bootstrap/mixins";
+
 @color: black;
-@bg: gray;
 
 .recipe-footer a {
   color: @color;
 }
 
 .provisional {
-  background-color: lighten(@bg, 44%);
+  background-color: darken(@bodyBackground, 10%);
 }
 
 .thumbnail {
