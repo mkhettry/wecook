@@ -26,6 +26,16 @@ module RecipesHelper
     end
   end
 
+  def get_image(recipe)
+    if (recipe.is_ready?)
+      image_tag(recipe.sample_image(:medium), :size => "260x180", :"data-toggle" => "modal",
+         :"data-target" => "#recipe_" + recipe.id.to_s)
+    else
+      link_to(image_tag(recipe.sample_image(:medium), :size => "260x180"),
+              show_provisional_recipe_path(recipe))
+    end
+  end
+
   def time_string(date)
     recipe_save_time = date.localtime
     day_number = Time.now.yday

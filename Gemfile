@@ -35,6 +35,9 @@ end
 gem 'rmagick'
 gem "twitter-bootstrap-rails"
 
+# make will_paginate play nice with bootstrap
+gem "bootstrap-will_paginate"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

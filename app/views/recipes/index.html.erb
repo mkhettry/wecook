@@ -15,8 +15,7 @@
           <%= render :partial => 'recipe_details', :locals => {:recipe => recipe} %>
 
           <div class="thumbnail" style="height:240px">
-            <%=image_tag(recipe.sample_image(:medium), :size => "260x180", :"data-toggle" => "modal",
-               :"data-target" => "#recipe_" + recipe.id.to_s) %>
+            <%= get_image recipe %>
             <h5><%= recipe.title[0..40] %></h5>
 
             <div class="recipe-footer">
@@ -31,4 +30,6 @@
         </li>
     <% end %>
   </ul>
+
+  <%= will_paginate(@user_recipes) %>
 </div>

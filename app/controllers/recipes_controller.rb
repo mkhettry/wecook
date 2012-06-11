@@ -13,7 +13,7 @@ class RecipesController < ApplicationController
     if (params[:p] == "all")
       query_hash[:joins] = :recipe
       query_hash[:conditions] = ["user_id != ? and recipes.state = ?", user.id, :ready]
-      query_hash[:per_page] = 10
+      query_hash[:per_page] = UserRecipe.per_page
       @user_recipes = UserRecipe.paginate query_hash
     else
       tags = params[:tag]

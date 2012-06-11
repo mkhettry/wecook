@@ -5,6 +5,7 @@
   </div>
   <div class="modal-body">
       <h4>Ingredients</h4>
+      <br/>
       <ul>
         <% recipe.ingredients.each do |i| %>
           <li> <%=  i.raw_text %> </li>
@@ -13,9 +14,11 @@
 
       <hr>
       <h4>Directions</h4>
+      <br/>
       <ol>
         <% recipe.directions.each do |p| %>
           <li><%= remove_start_numbering(p.raw_text) %></li>
+          <br/>
         <% end %>
       </ol>
     </div>

@@ -1,7 +1,7 @@
 class UserRecipe < ActiveRecord::Base
 
   cattr_reader :per_page
-  @@per_page = 10
+  @@per_page = 20
   belongs_to :user
   belongs_to :recipe
   acts_as_taggable
