@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-  STYLES = {:medium => "330x330#", :thumb => "100x100#"}
+  STYLES = {:medium => "330x330#", :thumb => "260x180#"}
   belongs_to :recipe
   before_create :set_styles
 
