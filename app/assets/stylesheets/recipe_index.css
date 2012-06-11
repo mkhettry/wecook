@@ -2,14 +2,12 @@
     padding-top: 2px;
 }
 
-.recipe-footer a {
-    color:black;
-}
+/*.recipe-footer a {*/
+    /*color:black;*/
+/*}*/
 
 .recipe-meta {
     padding-top: 2px;
     padding-bottom: 4px;
     font-size:smaller;
-
 }
-
