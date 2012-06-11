@@ -17,7 +17,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def editable?
-    (not structured?) and (state == 'ready')
+    !structured?
   end
 
   def to_s

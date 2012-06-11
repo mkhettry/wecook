@@ -14,7 +14,8 @@
 
           <%= render :partial => 'recipe_details', :locals => {:recipe => recipe} %>
 
-          <div class="thumbnail" style="height:240px">
+          <% provisional = recipe.is_ready? ? "thumbnail" : "thumbnail provisional" %>
+          <div class="<%= provisional %>" style="height:240px">
             <%= get_image recipe %>
             <h5><%= recipe.title[0..40] %></h5>
 
