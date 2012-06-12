@@ -33,86 +33,73 @@
             }
         });
 
-        var code_to_display_map = { "in" : "Ingredient", "pr" : "Direction", "ot" : "Other"};
+        var codeToDisplayMap = { "in" : "Ingredient", "pr" : "Direction", "ot" : "Other"};
 
 
-        $(".prov_line").click(
+        $(".prov-line").click(
                 function(event) {
-                    var current_class_array = $(this).attr('class').split(/\s+/);
-                    var current_class;
-                    if (current_class_array[0] == "prov_line") {
-                        current_class = current_class_array[1];
+                    var currentClass = $(this).attr('recipe-class');
+                    var nextClass;
+                    if (currentClass == "ot") {
+                        nextClass = "in";
+                    } else if (currentClass == "in") {
+                        nextClass = "pr"
                     } else {
-                        current_class = current_class_array[0];
+                        nextClass = "ot";
                     }
-                    var next_class;
-                    if (current_class == "ot") {
-                        next_class = "in";
-                    } else if (current_class == "in") {
-                        next_class = "pr"
-                    } else {
-                        next_class = "ot";
-                    }
-                    $(this).removeClass(current_class);
-                    $(this).addClass(next_class);
-                    $('#text_field').val($('#text_field').val() + '|' + $(this).attr('id').replace("prov_line","") + '=' + next_class);
+                    $(this).attr('recipe-class', nextClass);
 
-                    $("#provisional_info_dialog").dialog("option", "position", 'center');
-                    $("#provisional_info_dialog").dialog("open");
+                    //change class of label and recipe-text
+                    $(this).children().removeClass(currentClass);
+                    $(this).children().addClass(nextClass);
 
-                    $("#provisional_info_dialog p").html("<div id='provisional_info_text'> You changed this line from " +
-                            code_to_display_map[current_class] +
-                            " to " +
-                            code_to_display_map[next_class] +
-                            "</div>");
-
-
-                    setTimeout(
-                            "$('#provisional_info_dialog').dialog('close')",
-                            1000);
+                    $('#text_field').val($('#text_field').val() + '|' + $(this).attr('recipe-line') + '=' + nextClass);
                 }
-                );
+        );
     })
 </script>
 
 
 
+<% class_to_display = {"pr" => "Direction", "ot" => "Other", "in" => "Ingredient"} %>
 
-<div id="prov_left" class="left_nav">
-  <div class="in">Ingredients</div>
-  <div class="pr">Directions</div>
-  <div class="ot">Other</div>
+<div class="container">
+  <div>
+    <h4><%= render :partial => 'recipe_header' %></h4>
+
+    <% @recipe.get_lines_with_corrected_prediction(@recipe.corrections).each_with_index do |map,idx| %>
+        <% id_string = idx.to_s %>
+        <% recipe_class = map[:class] %>
+
+        <div class = "row prov-line" recipe-class="<%= recipe_class %>" recipe-line="<%= id_string %>">
+            <div class="span1 offset1 label <%= recipe_class %>">
+                <%= class_to_display[recipe_class] %>
+            </div>
+
+            <div class="span6 prov-text <%= recipe_class %>" >
+            <%= map[:line] %>
+            </div>
+        </div>
+    <% end %>
+
+    <br/>
+    <div class="clear"></div>
+    <%= form_tag(submit_provisional_recipe_path(@recipe)) do %>
+        <%= text_field_tag :changed, nil, :id => "text_field", :style => "display:none" %>
+        <%= text_field_tag :user_help, nil, :id => "user_help_field", :style => "display:none"%>
+        <%= submit_tag 'Save Changes' %>
+    <% end %>
+  </div>
+
+  <div id="provisional_info_dialog">
+    <p>hello</p>
+  </div>
+
+  <div id="provisional_help_dialog">
+    <p>We have guessed the ingredients and the directions of the recipe you had saved. Click on any mistake to correct it. </p>
+    <p>Don't forget to save the recipe once you are done!</p>
+  </div>
 </div>
-
-<div id="prov_middle" class="main_content">
-
-  <%= render :partial => 'recipe_header' %>
-  <% @recipe.get_lines_with_corrected_prediction(@recipe.corrections).each_with_index do |map,idx| %>
-      <% id_string = idx.to_s %>
-      <div id= "<%= 'prov_line'+id_string %>" class="<%= map[:class]%> prov_line" >
-        &mdash; <%=  map[:line] %>
-      </div>
-  <% end %>
-
-  <br/>
-  <div class="clear"></div>
-  <%= form_tag(submit_provisional_recipe_path(@recipe)) do %>
-      <%= text_field_tag :changed, nil, :id => "text_field", :style => "display:none" %>
-      <%= text_field_tag :user_help, nil, :id => "user_help_field", :style => "display:none"%>
-      <%= submit_tag 'Save Changes' %>
-  <% end %>
-
-</div>
-
-<div id="provisional_info_dialog">
-  <p>hello</p>
-</div>
-
-<div id="provisional_help_dialog">
-  <p>We have guessed the ingredients and the directions of the recipe you had saved. Click on any mistake to correct it. </p>
-  <p>Don't forget to save the recipe once you are done!</p>
-</div>
-
 
 
 

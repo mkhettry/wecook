@@ -1,10 +1,12 @@
 @import "twitter/bootstrap/variables";
 @import "twitter/bootstrap/mixins";
 
-@color: black;
+@black: black;
+@inBackground: #E0EEE0;
+@prBackground: #fafad2;
 
 .recipe-footer a {
-  color: @color;
+  color: @black;
 }
 
 .provisional {
@@ -15,4 +17,28 @@
   img {
     cursor: pointer;
   }
+}
+
+.label {
+    text-align: center;
+}
+
+.label.in {
+    background-color: darken(@inBackground, 50%);
+}
+
+.prov-text.in {
+    background-color:@inBackground;
+}
+
+.label.pr {
+    background-color: darken(@prBackground, 50%);
+}
+
+.prov-text.pr {
+    background-color:@prBackground;
+}
+
+.prov-line {
+    padding-bottom: 4px;
 }
