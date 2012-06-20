@@ -1,3 +1,33 @@
+@import "twitter/bootstrap/variables";
+@import "twitter/bootstrap/mixins";
+
+@inBackground: #E0EEE0;
+@prBackground: #fafad2;
+
+.label {
+    text-align: center;
+}
+
+.label.in {
+    background-color: darken(@inBackground, 50%);
+}
+
+.prov-text.in {
+    background-color:@inBackground;
+}
+
+.label.pr {
+    background-color: darken(@prBackground, 50%);
+}
+
+.prov-text.pr {
+    background-color:@prBackground;
+}
+
+.prov-line {
+    padding-bottom: 4px;
+}
+
 .prov-title {
     margin-bottom: 50px;
     border-bottom: 3px solid #EEE;

@@ -2,8 +2,6 @@
 @import "twitter/bootstrap/mixins";
 
 @black: black;
-@inBackground: #E0EEE0;
-@prBackground: #fafad2;
 
 .recipe-footer a {
   color: @black;
@@ -19,26 +17,12 @@
   }
 }
 
-.label {
-    text-align: center;
+.recipe-footer {
+    padding-top: 2px;
 }
 
-.label.in {
-    background-color: darken(@inBackground, 50%);
-}
-
-.prov-text.in {
-    background-color:@inBackground;
-}
-
-.label.pr {
-    background-color: darken(@prBackground, 50%);
-}
-
-.prov-text.pr {
-    background-color:@prBackground;
-}
-
-.prov-line {
+.recipe-meta {
+    padding-top: 2px;
     padding-bottom: 4px;
+    font-size:smaller;
 }
