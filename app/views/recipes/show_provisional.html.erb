@@ -9,6 +9,12 @@
             $('#user_help_field').val(1);
         });
 
+        $(".label").tooltip({
+            "title": "Click to change",
+            "placement": "left",
+            "delay": {"show": 1000, "hide": 100}
+        });
+
         var codeToDisplayMap = { "in" : "Ingredient", "pr" : "Direction", "ot" : "Other"};
 
         $(".prov-line").click(
