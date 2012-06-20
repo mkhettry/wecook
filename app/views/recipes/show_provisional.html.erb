@@ -48,7 +48,12 @@
 
 <div class="container">
   <div>
-    <h4><%= render :partial => 'recipe_header' %></h4>
+
+    <div class="row">
+      <span class="span7 offset1 prov-title">
+        <h3><%= @recipe.title %></h3>
+      </span>
+    </div>
 
     <% @recipe.get_lines_with_corrected_prediction(@recipe.corrections).each_with_index do |map,idx| %>
         <% id_string = idx.to_s %>
