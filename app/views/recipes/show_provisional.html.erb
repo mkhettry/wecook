@@ -39,23 +39,32 @@
         $(".prov-line").click(
                 function(event) {
                     var currentClass = $(this).attr('recipe-class');
-                    var nextClass;
-                    if (currentClass == "ot") {
-                        nextClass = "in";
-                    } else if (currentClass == "in") {
-                        nextClass = "pr"
-                    } else {
-                        nextClass = "ot";
-                    }
-                    $(this).attr('recipe-class', nextClass);
-
-                    //change class of label and recipe-text
-                    $(this).children().removeClass(currentClass);
-                    $(this).children().addClass(nextClass);
-
+                    var nextClass = getNextLineType(currentClass);
+                    switchLineType($(this),nextClass, currentClass);
                     $('#text_field').val($('#text_field').val() + '|' + $(this).attr('recipe-line') + '=' + nextClass);
                 }
         );
+
+        function getNextLineType(currentClass) {
+            var nextClass;
+            if (currentClass == "ot") {
+                nextClass = "in";
+            } else if (currentClass == "in") {
+                nextClass = "pr"
+            } else {
+                nextClass = "ot";
+            }
+            return nextClass;
+        };
+
+        function switchLineType(lineElement,nextClass, currentClass) {
+            lineElement.attr('recipe-class', nextClass);
+            //change class of label and recipe-text
+            lineElement.children().removeClass(currentClass);
+            lineElement.children().addClass(nextClass);
+
+            lineElement.children(":first").text(codeToDisplayMap[nextClass]);
+        }
     })
 </script>
 
