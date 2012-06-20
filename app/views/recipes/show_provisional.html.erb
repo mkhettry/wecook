@@ -1,48 +1,23 @@
 
 <script>
     $(document).ready(function(){
+        if ("<%= @show %>" == "true") {
+            $('#provisional-help-modal').modal();
+        }
 
-        $("#provisional_info_dialog").dialog({
-            autoOpen: false,
-            show: "blind",
-            hide: "fade",
-            closeText: "",
-            minHeight: 60,
-            minWidth: 350,
-            resizable: false,
-            draggable: false,
-            dialogClass: 'no_title_dialog'
-        });
-
-        $("#provisional_help_dialog").dialog({
-            autoOpen: "<%= @show %>" == "true",
-            show: "blind",
-            hide: "fade",
-            closeText: "",
-            resizable: false,
-            draggable: false,
-            dialogClass: 'no_title_dialog',
-            buttons: {
-                "Don't show me this again": function() {
-                    $('#user_help_field').val(1);
-                    $( this ).dialog( "close" );
-                },
-                "OK": function() {
-                    $( this ).dialog( "close" );
-                }
-            }
+        $("#button-user-help").click(function(){
+            $('#user_help_field').val(1);
         });
 
         var codeToDisplayMap = { "in" : "Ingredient", "pr" : "Direction", "ot" : "Other"};
 
-
         $(".prov-line").click(
-                function(event) {
-                    var currentClass = $(this).attr('recipe-class');
-                    var nextClass = getNextLineType(currentClass);
-                    switchLineType($(this),nextClass, currentClass);
-                    $('#text_field').val($('#text_field').val() + '|' + $(this).attr('recipe-line') + '=' + nextClass);
-                }
+            function(event) {
+                var currentClass = $(this).attr('recipe-class');
+                var nextClass = getNextLineType(currentClass);
+                switchLineType($(this),nextClass, currentClass);
+                $('#text_field').val($('#text_field').val() + '|' + $(this).attr('recipe-line') + '=' + nextClass);
+            }
         );
 
         function getNextLineType(currentClass) {
@@ -55,7 +30,7 @@
                 nextClass = "ot";
             }
             return nextClass;
-        };
+        }
 
         function switchLineType(lineElement,nextClass, currentClass) {
             lineElement.attr('recipe-class', nextClass);
@@ -67,7 +42,6 @@
         }
     })
 </script>
-
 
 
 <% class_to_display = {"pr" => "Direction", "ot" => "Other", "in" => "Ingredient"} %>
@@ -100,14 +74,22 @@
     <% end %>
   </div>
 
-  <div id="provisional_info_dialog">
-    <p>hello</p>
+  <div class="modal hide fade in" id="provisional-help-modal">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Correct the recipe</h3>
+    </div>
+    <div class="modal-body">
+      <p>We have guessed the ingredients and the directions of the recipe you had saved.
+        Click on any recipe line to correct it. </p>
+      <p>Don't forget to save the recipe once you are done!</p>
+    </div>
+    <div class="modal-footer">
+      <a id="button-user-help" href="#" class="btn" data-dismiss="modal">Don't show this again</a>
+      <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+    </div>
   </div>
 
-  <div id="provisional_help_dialog">
-    <p>We have guessed the ingredients and the directions of the recipe you had saved. Click on any mistake to correct it. </p>
-    <p>Don't forget to save the recipe once you are done!</p>
-  </div>
 </div>
 
 
