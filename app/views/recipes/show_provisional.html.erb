@@ -87,7 +87,7 @@
     <%= form_tag(submit_provisional_recipe_path(@recipe)) do %>
         <%= text_field_tag :changed, nil, :id => "text_field", :style => "display:none" %>
         <%= text_field_tag :user_help, nil, :id => "user_help_field", :style => "display:none"%>
-        <%= submit_tag 'Save Changes' %>
+        <%= submit_tag 'Save Changes', :class => "btn btn-primary" %>
     <% end %>
   </div>
 
