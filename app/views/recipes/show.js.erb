@@ -1,8 +1,0 @@
-//page["r_#{@recipe.id}"].toggle
-//#page.replace_html "r_#{@recipe.id}".intern, :partial => 'recipe_details', :object => @recipe
-//##page["r_#{@recipe.id}"].removeClassName("hidden_recipe")
-
-var div_id='#r_' +  <%= @recipe.id %>
-$(div_id).toggle();
-$(div_id).html('<%= escape_javascript render(:partial => "recipe_details", :object => @recipe) %>')
-
