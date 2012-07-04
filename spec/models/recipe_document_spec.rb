@@ -16,6 +16,16 @@ describe RecipeDocument do
   end
 
   describe "extract_images" do
+
+    describe "imaging scoring" do
+      it "sesame balls, images are scored by position" do
+        rd = RecipeDocument.new :file => "spec/fixtures/webpages/SesameAlmondBrownRiceBallsRecipe.html",
+                                :url =>"http://www.101cookbooks.com/archives/sesame-almond-brown-rice-balls-recipe.html"
+        image_urls = rd.score_images
+        image_urls.sort_by { |k, v| v}.pop(1)[0][0].should == "/mt-static/images/food/brown_rice_balls.jpg"
+      end
+    end
+
     it "where images have backslash in them" do
       rd = RecipeDocument.new :file => "spec/fixtures/webpages/sanjeev_kapoor_horrible_html.html",
                               :url =>"http://www.sanjeevkapoor.com/maa-chole-di-dal-foodfood.aspx"

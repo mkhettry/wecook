@@ -8,6 +8,11 @@ class RecipeDocument
 
   DEFAULT_OPTIONS = {:debug => false, :min_lines_for_document => 10}
 
+  # Image decay. The smaller the number the higher the first image in the document scores. Using a value
+  # of 0.9, the score for the first image will be 1.0, the second 0.9, the third 0.81 and so on. This is used
+  # to score images, giving higher weight to the images higher up in the page.
+  IMAGE_DECAY = 0.90
+
   def self.new_document(opts={})
     RecipeDocument.new(redirect_if_needed(opts))
   end
@@ -110,18 +115,7 @@ class RecipeDocument
   end
 
   def extract_images(num_images=2)
-    all_images = @trimmed_doc.xpath('//img')
-    all_images = @doc.xpath("//img")  if all_images.empty?
-    possible_images = {}
-    all_images.each do |image|
-
-
-      next unless image['src'] && image['src'].downcase =~ /jpg|jpeg/
-      image_score = calculate_image_score(image)
-      if image_score >= 0
-        possible_images[image['src'].gsub(/\n/,'').gsub(/\\/, "/")] = image_score
-      end
-    end
+    possible_images = score_images
 
     if (possible_images.empty?)
       possible_images
@@ -135,6 +129,22 @@ class RecipeDocument
       x
     end
   end
+
+  def score_images
+    all_images = @doc.xpath('//img')
+    possible_images = {}
+    index = 0
+    all_images.each do |image|
+      next unless image['src'] && image['src'].downcase =~ /jpg|jpeg/
+      image_score = calculate_image_score(image, index)
+      if image_score >= 0
+        possible_images[image['src'].gsub(/\n/, '').gsub(/\\/, "/")] = image_score
+      end
+      index += 1
+    end
+    possible_images
+  end
+
 
   def extract_lines
     @lines ||= create_lines_from_nodes(@trimmed_doc)
@@ -198,6 +208,7 @@ class RecipeDocument
 
 
   private
+
   def ignorable_element(n)
     # widget profile/label/blogarchive are blogger widgets on the sidebar. they are not
     # the main content and often the food tags that bloggers put there tend to confuse the
@@ -220,16 +231,22 @@ class RecipeDocument
   end
 
 
-  #image is a Nokogiri document element
-  def calculate_image_score(image)
+  # image is a Nokogiri document element. Each component of the score contributes a value between
+  # 0.0 and 1.0. The final score for the image is the sum of the individual components. If any component
+  # score is < 0, we don't consider the image as a candidate image
+  def calculate_image_score(image, position)
     alt_score = calculate_alt_score(image)
-    return alt_score if alt_score < 0
+    return -1 if alt_score < 0
 
     img_dim_score = calculate_img_dim_score(image)
-    return img_dim_score if img_dim_score < 0
+    return -1 if img_dim_score < 0
 
-    total_score = img_dim_score + alt_score
-    Rails.logger.debug("#{image} has score #{total_score}")
+    positional_score = IMAGE_DECAY ** position
+
+    Rails.logger.debug("#{image} has img_dim #{img_dim_score}, alt_score = #{alt_score}, " +
+        "positional score = #{positional_score}")
+
+    total_score = img_dim_score + alt_score + positional_score
     total_score
   end
 
@@ -241,7 +258,7 @@ class RecipeDocument
     alt_words = (image['alt'].downcase.split)
     title_words = @title.downcase.split
     min_words = [alt_words.length,title_words.length].min.to_f
-    min_words > 0 ? (alt_words & title_words).length/min_words : 0
+    min_words > 0 ? (alt_words & title_words).length / min_words : 0
   end
 
   def calculate_img_dim_score(image)
@@ -251,7 +268,7 @@ class RecipeDocument
     height = get_image_size(image['height'])
     return 0 if width == 0 || height == 0
 
-    score = height > width ? width/height.to_f : height/width.to_f
+    score = height > width ? width / height.to_f : height / width.to_f
     score > 0.3 ? score : -1 #for weeding out banner ads or skewed images
   end
 
