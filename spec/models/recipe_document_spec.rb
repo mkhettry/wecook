@@ -24,6 +24,13 @@ describe RecipeDocument do
         image_urls = rd.score_images
         image_urls.sort_by { |k, v| v}.pop(1)[0][0].should == "/mt-static/images/food/brown_rice_balls.jpg"
       end
+
+      it "weeds out smaller images" do
+        rd = RecipeDocument.new :file => "spec/fixtures/webpages/SesameAlmondBrownRiceBallsRecipe.html",
+                                :url =>"http://www.101cookbooks.com/archives/sesame-almond-brown-rice-balls-recipe.html"
+        image_urls = rd.score_images
+        image_urls.should_not =~ /pancakes/
+      end
     end
 
     it "where images have backslash in them" do
