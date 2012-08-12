@@ -18,7 +18,9 @@ class Image < ActiveRecord::Base
 
   # thumbnail and medium were introduced in dec 2011. remember that this image has styles so that for older
   # images we don't try to dereference styles that don't exist.
+  # twitter style was introduced in may/june 2012 and changed the thumb style to be larger.
   def set_styles
     self.has_styles = true
+    self.twitter_style = true
   end
 end

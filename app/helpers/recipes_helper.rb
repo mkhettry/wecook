@@ -28,10 +28,10 @@ module RecipesHelper
 
   def get_image(recipe)
     if (recipe.is_ready?)
-      image_tag(recipe.sample_image(:thumb), :"data-toggle" => "modal",
-         :"data-target" => "#recipe_" + recipe.id.to_s)
+      image_tag(recipe.sample_image, :"data-toggle" => "modal",
+                :"data-target" => "#recipe_" + recipe.id.to_s, :size => "260x180")
     else
-      link_to(image_tag(recipe.sample_image(:thumb)), show_provisional_recipe_path(recipe))
+      link_to(image_tag(recipe.sample_image, :size => "260x180"), show_provisional_recipe_path(recipe))
     end
   end
 

@@ -93,12 +93,15 @@ class Recipe < ActiveRecord::Base
     @lines = extract_lines_internal(doc)
   end
 
-  def sample_image(style=:thumb)
+  def sample_image
     if images.empty?
       'chopstick.jpeg'
     else
       image = images.sample
-      image.has_styles ? image.jpg.url(style) : image.jpg.url
+      # when we stared we would save only the original, then we started saving thumb and medium (has_styles)
+      # and then we switched thumb to be slightly bigger after the twitter bootstrap change
+      image.twitter_style ? image.jpg(:thumb) :
+          (image.has_styles ? image.jpg.url(:medium) : image.jpg.url)
     end
   end
 

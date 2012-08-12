@@ -14,7 +14,7 @@
     - user_recipe = @user_recipes[idx]
     - recipe = user_recipe.recipe
       %div{:class => get_class_for_inline_recipe(recipe), :id => "ur_#{user_recipe.id}"}
-        .recipeimage= image_tag(recipe.sample_image(:thumb), :class => 'recipe-image')
+        .recipeimage= image_tag(recipe.sample_thumbnail, :class => 'recipe-image')
         .recipetitle= get_title_link(recipe)
         - if my_recipe(user_recipe, params[:p])
           .recipetags

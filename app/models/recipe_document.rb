@@ -269,7 +269,7 @@ class RecipeDocument
     return 0 if width == 0 || height == 0
 
     # discard small images
-    return -1 if width <= 150 || height <= 150
+    return -1 if width <= 180 || height <= 180
 
     score = height > width ? width / height.to_f : height / width.to_f
     score > 0.3 ? score : -1 #for weeding out banner ads or skewed images

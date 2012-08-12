@@ -11,11 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111217182352) do
+ActiveRecord::Schema.define(:version => 20120812124936) do
 
   create_table "directions", :force => true do |t|
     t.text    "raw_text"
     t.integer "recipe_id"
+  end
+
+  create_table "icons", :force => true do |t|
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
+    t.integer  "recipe_id"
   end
 
   create_table "images", :force => true do |t|
@@ -26,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20111217182352) do
     t.integer  "jpg_file_size"
     t.datetime "jpg_updated_at"
     t.boolean  "has_styles"
+    t.boolean  "twitter_style"
   end
 
   create_table "ingredients", :force => true do |t|
@@ -43,6 +52,18 @@ ActiveRecord::Schema.define(:version => 20111217182352) do
     t.string   "state"
     t.boolean  "structured"
     t.string   "corrections", :default => ""
+    t.integer  "site_id"
+  end
+
+  create_table "sites", :force => true do |t|
+    t.string   "name"
+    t.string   "url",               :limit => 63
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
   end
 
   create_table "taggings", :force => true do |t|
