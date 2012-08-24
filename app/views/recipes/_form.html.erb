@@ -1,10 +1,10 @@
 <%= form_tag({:controller => "recipes", :action => "create"}) do %>
     <div class="field">
       <%= label_tag("recipe[url]", "URL for new Recipe") %><br />
-      <%= text_field_tag("recipe[url]", nil, :size => 105) %>
+      <%= text_field_tag("recipe[url]", nil, :size => 105, :placeholder => "Enter Recipe URL") %>
     </div>
     <div class="actions">
-      <%= submit_tag("Save Recipe", :id => "recipe_submit") %>
+      <%= submit_tag("Save Recipe", :id => "recipe_submit", :class => "btn") %>
     </div>
 
 <% end %>
