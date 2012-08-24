@@ -42,7 +42,7 @@
                 <%= link_to "Saved Recipes", recipes_path %>
               </li>
               <li class="<%=get_link_class :add, params[:p]%>">
-                <%= link_to 'Add Recipe', new_recipe_path %>
+                <a data-toggle="modal" data-target="#addRecipeModal">Add Recipe</a>
               </li>
             </ul>
         <% end %>

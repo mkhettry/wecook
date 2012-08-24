@@ -1,21 +1,10 @@
-<%= form_for(@recipe) do |f| %>
-  <% if @recipe.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
-
-      <ul>
-      <% @recipe.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_tag({:controller => "recipes", :action => "create"}) do %>
+    <div class="field">
+      <%= label_tag("recipe[url]", "URL for new Recipe") %><br />
+      <%= text_field_tag("recipe[url]", nil, :size => 105) %>
     </div>
-  <% end %>
+    <div class="actions">
+      <%= submit_tag("Save Recipe", :id => "recipe_submit") %>
+    </div>
 
-  <div class="field">
-    <%= f.label :url, "URL for new Recipe" %><br />
-    <%= f.text_field :url, :size => 105 %>
-  </div>
-  <div class="actions">
-    <%= f.submit :id => "recipe_submit" %>
-  </div>
 <% end %>
