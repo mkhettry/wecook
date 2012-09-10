@@ -1,4 +1,5 @@
 <div class="container">
+  <%= render :partial => "new_recipe_modal" %>
   <ul class="thumbnails">
     <% @user_recipes.each_index do |index| %>
         <% user_recipe = @user_recipes[index] %>
@@ -6,7 +7,7 @@
         <li class="span3" id="ur_<%=user_recipe.id%>">
 
 
-          <%= render :partial => "new_recipe_modal" %>
+
           <%= render :partial => 'recipe_details', :locals => {:recipe => recipe} %>
 
           <% provisional = recipe.is_ready? ? "thumbnail" : "thumbnail provisional" %>
