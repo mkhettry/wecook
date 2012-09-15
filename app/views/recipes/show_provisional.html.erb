@@ -18,13 +18,13 @@
         var codeToDisplayMap = { "in" : "Ingredient", "pr" : "Direction", "ot" : "Other"};
 
         $(".prov-line").click(
-            function(event) {
-                var currentClass = $(this).attr('recipe-class');
-                var nextClass = getNextLineType(currentClass);
-                switchLineType($(this),nextClass, currentClass);
-                $('#text_field').val($('#text_field').val() + '|' + $(this).attr('recipe-line') + '=' + nextClass);
-            }
-        );
+                function(event) {
+                    var currentClass = $(this).attr('recipe-class');
+                    var nextClass = getNextLineType(currentClass);
+                    switchLineType($(this),nextClass, currentClass);
+                    $('#text_field').val($('#text_field').val() + '|' + $(this).attr('recipe-line') + '=' + nextClass);
+                }
+                );
 
         function getNextLineType(currentClass) {
             var nextClass;
@@ -49,58 +49,54 @@
     })
 </script>
 
-
 <% class_to_display = {"pr" => "Direction", "ot" => "Other", "in" => "Ingredient"} %>
 
-<div class="container">
-  <div>
+<div>
 
-    <div class="row">
+  <div class="row">
       <span class="span7 offset1 prov-title">
         <h3><%= @recipe.title %></h3>
       </span>
-    </div>
+  </div>
 
-    <% @recipe.get_lines_with_corrected_prediction(@recipe.corrections).each_with_index do |map,idx| %>
-        <% id_string = idx.to_s %>
-        <% recipe_class = map[:class] %>
+  <% @recipe.get_lines_with_corrected_prediction(@recipe.corrections).each_with_index do |map,idx| %>
+      <% id_string = idx.to_s %>
+      <% recipe_class = map[:class] %>
 
-        <div class = "row prov-line" recipe-class="<%= recipe_class %>" recipe-line="<%= id_string %>">
-            <div class="span1 offset1 label <%= recipe_class %>">
-                <%= class_to_display[recipe_class] %>
-            </div>
-
-            <div class="span6 prov-text <%= recipe_class %>" >
-            <%= map[:line] %>
-            </div>
+      <div class = "row prov-line" recipe-class="<%= recipe_class %>" recipe-line="<%= id_string %>">
+        <div class="span1 offset1 label <%= recipe_class %>">
+          <%= class_to_display[recipe_class] %>
         </div>
-    <% end %>
 
-    <br/>
-    <div class="clear"></div>
-    <%= form_tag(submit_provisional_recipe_path(@recipe)) do %>
-        <%= text_field_tag :changed, nil, :id => "text_field", :style => "display:none" %>
-        <%= text_field_tag :user_help, nil, :id => "user_help_field", :style => "display:none"%>
-        <%= submit_tag 'Save Changes', :class => "btn btn-primary" %>
-    <% end %>
+        <div class="span6 prov-text <%= recipe_class %>" >
+          <%= map[:line] %>
+        </div>
+      </div>
+  <% end %>
+
+  <br/>
+  <div class="clear"></div>
+  <%= form_tag(submit_provisional_recipe_path(@recipe)) do %>
+      <%= text_field_tag :changed, nil, :id => "text_field", :style => "display:none" %>
+      <%= text_field_tag :user_help, nil, :id => "user_help_field", :style => "display:none"%>
+      <%= submit_tag 'Save Changes', :class => "btn btn-primary" %>
+  <% end %>
+</div>
+
+<div class="modal hide fade in" id="provisional-help-modal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Correct the recipe</h3>
   </div>
-
-  <div class="modal hide fade in" id="provisional-help-modal">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">×</button>
-      <h3>Correct the recipe</h3>
-    </div>
-    <div class="modal-body">
-      <p>We have guessed the ingredients and the directions of the recipe you had saved.
-        Click on any recipe line to correct it. </p>
-      <p>Don't forget to save the recipe once you are done!</p>
-    </div>
-    <div class="modal-footer">
-      <a id="button-user-help" href="#" class="btn" data-dismiss="modal">Don't show this again</a>
-      <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
-    </div>
+  <div class="modal-body">
+    <p>We have guessed the ingredients and the directions of the recipe you had saved.
+      Click on any recipe line to correct it. </p>
+    <p>Don't forget to save the recipe once you are done!</p>
   </div>
-
+  <div class="modal-footer">
+    <a id="button-user-help" href="#" class="btn" data-dismiss="modal">Don't show this again</a>
+    <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+  </div>
 </div>
 
 

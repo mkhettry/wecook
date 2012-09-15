@@ -18,14 +18,6 @@ ActiveRecord::Schema.define(:version => 20120812124936) do
     t.integer "recipe_id"
   end
 
-  create_table "icons", :force => true do |t|
-    t.string   "icon_file_name"
-    t.string   "icon_content_type"
-    t.integer  "icon_file_size"
-    t.datetime "icon_updated_at"
-    t.integer  "recipe_id"
-  end
-
   create_table "images", :force => true do |t|
     t.integer  "recipe_id"
     t.binary   "contents"
@@ -52,18 +44,6 @@ ActiveRecord::Schema.define(:version => 20120812124936) do
     t.string   "state"
     t.boolean  "structured"
     t.string   "corrections", :default => ""
-    t.integer  "site_id"
-  end
-
-  create_table "sites", :force => true do |t|
-    t.string   "name"
-    t.string   "url",               :limit => 63
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "icon_file_name"
-    t.string   "icon_content_type"
-    t.integer  "icon_file_size"
-    t.datetime "icon_updated_at"
   end
 
   create_table "taggings", :force => true do |t|

@@ -1,70 +1,30 @@
-<body>
+<div class="row">
+  <!--Column 1-->
+  <div class="span5 offset2">
+    <object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/3US0-bdZ3G0?hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/3US0-bdZ3G0?hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>
+  </div>
+
+  <!--Column 2-->
+  <div class="span3">
+
+    <div class="row"> <!-- Login form -->
+      <div class="span3">
+        <%= render :partial => 'sign_in' %>
+      </div>
+    </div> <!-- End Login form -->
+
+
+    <div class="row">
+      <div class="span3">
+        <strong>Welcome to WeCook. <br/> </strong>
+        Save and share any recipe. Discover what others are cooking.
+      </div>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
     $(function() {
         $("#email").focus();
     });
 </script>
-
-<div class="container">
-  <div class="row">
-
-    <!--Column 1-->
-    <div class="span5 offset2">
-      <object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/3US0-bdZ3G0?hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/3US0-bdZ3G0?hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>
-    </div>
-
-    <!--Column 2-->
-    <div class="span3">
-
-      <div class="row"> <!-- Login form -->
-        <div class="span3">
-          <div class="well" align="center">
-            <%= link_to image_tag("LoginWithFacebookButton.jpg"),  "/auth/facebook" %> <br/><br/>
-            <p id="welcome_or" align="center" style="text-align:center;">Or</p>
-
-            <div align="center">
-              <%= form_tag login_path do%>
-                  <% control_group_class = "control-group" %>
-                  <% if params[:loginfail] %>
-                      <% control_group_class += " error" %>
-                  <% end %>
-
-                  <div class="<%=control_group_class%>">
-                    <%= label_tag :email, "", :class=>"control-label"%>
-                    <div class="controls">
-                      <%= text_field_tag :email, params[:email], :class=>"input-medium", :placeholder => "Email"%>
-                    </div>
-                  </div>
-
-                  <div class="<%=control_group_class%>">
-                    <%= label_tag :password, "", :class=>"control-label" %>
-                    <div class="controls">
-                      <%= password_field_tag :password, params[:password], :class=>"input-medium", :placeholder => "Password"%>
-                      <% if params[:loginfail] %>
-                          <div class="help-inline">
-                            Incorrect email or password.
-                          </div>
-                      <% end %>
-
-                    </div>
-                  </div>
-                  <%= submit_tag "Sign in", :class=>"btn btn-primary" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div> <!-- End Login form -->
-
-
-      <div class="row">
-        <div class="span3">
-          <strong>Welcome to WeCook. <br/> </strong>
-          Save and share any recipe. Discover what others are cooking.
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-</body>

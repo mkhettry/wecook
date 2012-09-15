@@ -1,32 +1,29 @@
-<div class="container">
-  <%= render :partial => "new_recipe_modal" %>
-  <ul class="thumbnails">
-    <% @user_recipes.each_index do |index| %>
-        <% user_recipe = @user_recipes[index] %>
-        <% recipe = user_recipe.recipe %>
-        <li class="span3" id="ur_<%=user_recipe.id%>">
+<%= render :partial => "new_recipe_modal" %>
+<ul class="thumbnails">
+  <% @user_recipes.each_index do |index| %>
+      <% user_recipe = @user_recipes[index] %>
+      <% recipe = user_recipe.recipe %>
+      <li class="span3" id="ur_<%=user_recipe.id%>">
 
+        <%= render :partial => 'recipe_details', :locals => {:recipe => recipe} %>
 
+        <% provisional = recipe.is_ready? ? "thumbnail" : "thumbnail provisional" %>
+        <div class="<%= provisional %>" style="height:240px">
+          <%= get_image recipe %>
+          <h5><%= recipe.title[0..40] %></h5>
 
-          <%= render :partial => 'recipe_details', :locals => {:recipe => recipe} %>
-
-          <% provisional = recipe.is_ready? ? "thumbnail" : "thumbnail provisional" %>
-          <div class="<%= provisional %>" style="height:240px">
-            <%= get_image recipe %>
-            <h5><%= recipe.title[0..40] %></h5>
-
-            <div class="recipe-footer">
-              <div class="recipe-meta">
-                <%= render :partial => 'recipe_meta', :locals => {:user_recipe => user_recipe} %>
-              </div>
-              <div class="recipe-options">
-                <%= render :partial => 'recipe_options', :locals => {:user_recipe => user_recipe} %>
-              </div>
+          <div class="recipe-footer">
+            <div class="recipe-meta">
+              <%= render :partial => 'recipe_meta', :locals => {:user_recipe => user_recipe} %>
+            </div>
+            <div class="recipe-options">
+              <%= render :partial => 'recipe_options', :locals => {:user_recipe => user_recipe} %>
             </div>
           </div>
-        </li>
-    <% end %>
-  </ul>
+        </div>
+      </li>
+  <% end %>
+</ul>
 
-  <%= will_paginate(@user_recipes) %>
-</div>
+<%= will_paginate(@user_recipes) %>
+
