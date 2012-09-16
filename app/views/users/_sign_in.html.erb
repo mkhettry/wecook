@@ -1,11 +1,13 @@
-<div class="well span7 offset2" >
+<div id="login" class="well span7 offset2" >
   <div class="row">
 
-    <div id="social-login" class="span3" align="center">
+    <div id="social-login" class="span3">
+      <h4>Sign in to WeCook</h4>
       <%= link_to image_tag("LoginWithFacebookButton.jpg"),  "/auth/facebook" %>
     </div>
 
     <div id="email-login" class="span3">
+      <h4>Or with Email</h4>
       <%= form_tag login_path do%>
           <% control_group_class = "control-group" %>
           <% if params[:loginfail] %>
