@@ -4,9 +4,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   private
-  def require_login
-    redirect_to welcome_path if current_user.nil?
-  end
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
