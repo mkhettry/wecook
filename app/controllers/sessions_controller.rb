@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     end
 
     if not user
-      redirect_to :action => "new", :loginfail => 'true'
+      redirect_to :action => "new", :loginfail => 'true', :email=> params[:email]
     else
       session[:user_id] = user.id
       redirect_to recipes_path
