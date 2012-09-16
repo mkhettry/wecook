@@ -5,6 +5,7 @@
         <div class="<%= class_for_form(@user, :name) %>">
           <div class="controls">
             <%= text_field_tag("user[name]", @user[:name], :class=>"input-medium", :placeholder => "Name") %>
+            <br/>
             <div class="help-inline">
               <%= error_message_for_form(@user, :name)%>
             </div>
@@ -14,6 +15,7 @@
         <div class="<%= class_for_form(@user, :email) %>">
           <div class="controls">
             <%= text_field_tag("user[email]", @user[:email], :class=>"input-medium", :placeholder => "Email") %>
+            <br/>
             <div class="help-inline">
               <%= error_message_for_form(@user, :email)%>
             </div>
@@ -23,6 +25,7 @@
         <div class="<%= class_for_form(@user, :password) %>">
           <div class="controls">
             <%= password_field_tag("user[password]", nil, :class=>"input-medium", :placeholder => "Password") %>
+            <br/>
             <div class="help-inline">
               <%= error_message_for_form(@user, :password)%>
             </div>
@@ -33,6 +36,7 @@
           <div class="controls">
             <%= password_field_tag("user[password_confirmation]", nil, :class=>"input-medium",
                                    :placeholder => "Confirm Password") %>
+            <br/>
             <div class="help-inline">
               <%= error_message_for_form(@user, :password_confirmation)%>
             </div>
