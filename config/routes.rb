@@ -12,9 +12,7 @@ Cooks::Application.routes.draw do
   resources :recipes
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout
-
-  get "welcome" => "users#welcome", :as => "welcome"
-
+  match "/signin" => "sessions#new", :as => :signin
 
   resources :recipes do
     member do

@@ -2,15 +2,17 @@ require 'nokogiri'
 
 class RecipesController < ApplicationController
 
-  before_filter :require_login
-
   # GET /recipes
   # GET /recipes.xml
   def index
     user = current_user
-    Rails.logger.info("user id: " + user.id.to_s)
     query_hash = {:page => params[:page], :order => "updated_at desc", :per_page => UserRecipe.per_page}
-    if (params[:p] == "all")
+    if (user.nil?)
+      query_hash[:joins] = :recipe
+      query_hash[:conditions] = ["recipes.state = ?", :ready]
+      query_hash[:per_page] = UserRecipe.per_page
+      @user_recipes = UserRecipe.paginate query_hash
+    elsif (params[:p] == "all")
       query_hash[:joins] = :recipe
       query_hash[:conditions] = ["user_id != ? and recipes.state = ?", user.id, :ready]
       query_hash[:per_page] = UserRecipe.per_page
