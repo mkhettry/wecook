@@ -2,7 +2,7 @@
     <i class="icon-trash"></i>
 <% end %>
 
-<% if user_recipe.recipe.editable? %>
+<% if current_user && current_user == user_recipe.user && user_recipe.recipe.editable? %>
     <%= link_to show_provisional_recipe_path(user_recipe.recipe)  do%>
         <i class="icon-edit"></i>
     <%end%>
