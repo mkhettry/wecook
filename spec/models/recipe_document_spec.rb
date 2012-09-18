@@ -123,5 +123,14 @@ describe RecipeDocument do
       ingredients[1].should == "Salt and black pepper"
       ingredients.last.should == "1 cup coarse bread crumbs."
     end
+
+    it "should extract ingredients/directions for food52" do
+      rd = RecipeDocument.new :file => "spec/fixtures/webpages/Gin_Spritz_recipe_from_food52.html",
+                              :url => "http://www.food52.com/recipes/4175_gin_spritz"
+
+      rd.extract_prep_structured.should == ["Muddle the lime, mint, and sugar together. Transfer to a cocktail shaker with ice and the gin. Shake until chilled.", "Pour into a chilled glass and finish with prosecco."]
+      rd.extract_ingredients_structured.should == ["juice of one lime", "4-6 mint leaves", "1 tbsp sugar", "1 shot gin", "prosecco"]
+    end
+
   end
 end

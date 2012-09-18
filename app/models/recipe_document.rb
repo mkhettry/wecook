@@ -162,10 +162,15 @@ class RecipeDocument
   # allrecipes.com,
   # TODO: food.com is problematic here.
   def extract_ingredients_structured
-    ingredients = @doc.xpath("//div[contains(@class, 'ingredients')]//li").collect { |s| clean_text(s.text)}
+    # NOTE manish 9/17/12 This is for food52 http://www.food52.com/recipes/4175_gin_spritz
+    # Interestingly it has to be evaluated before  li[contains(@itemprop]!)]
+    ingredients = @doc.xpath("//p[contains(@itemprop, 'ingredients')]").collect { |s| clean_text(s.text)}
+
+    ingredients = @doc.xpath("//div[contains(@class, 'ingredients')]//li").collect { |s| clean_text(s.text)
+    } if ingredients.empty?
     ingredients = @doc.xpath("//div[contains(@id, 'ingredients')]//li").collect { |s| clean_text(s.text)} if ingredients.empty?
 
-    # READ READ READ READ: a lot of these patterns have no test. You can take two or three of these
+    # READ READ READ READ: a lot of these patterns have no test. You can remove two or three of these
     # patterns and the test will still pass. In the future if you add a pattern, document the website
     # or page for which you are adding the pattern
 
@@ -173,7 +178,6 @@ class RecipeDocument
     ingredients = @doc.xpath("//li[contains(@itemprop,'ingredient')]").collect { |s| clean_text(s.text)} if ingredients.empty?
     ingredients = @doc.xpath("//span[contains(@class, 'ingredient')]").collect { |s| clean_text(s.text)} if ingredients.empty?
     ingredients = @doc.css("div.ingredients-section li").collect { |s| clean_text(s.text)} if ingredients.empty?
-
     ingredients
   end
 
@@ -194,6 +198,9 @@ class RecipeDocument
     # http://dinersjournal.blogs.nytimes.com/2011/10/28/the-minimalist-free-form-apple-or-pear-tart/
     # http://dinersjournal.blogs.nytimes.com/2011/09/30/the-minimalist-pasta-with-cauliflower/
     prep_text_nodes = @doc.css("div.recipe-process li") if prep_text_nodes.empty?
+
+    # NOTE manish 9/17/12 food52 http://food52.com/recipes/18763_eggplant_dip_with_yogurt_boranie_bademjan
+    prep_text_nodes = @doc.xpath("//p[contains(@itemprop, 'recipeInstructions')]") if prep_text_nodes.empty?
 
     prep_text_nodes.each do |p|
       new_lines = create_lines_from_nodes(p)
