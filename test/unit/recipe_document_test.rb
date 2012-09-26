@@ -308,7 +308,7 @@ class RecipeDocumentTest < ActiveSupport::TestCase
   test "sidebar is stripped from blogger two" do
     r = RecipeDocument.new_document(
             :url => 'http://mildredsrecipes.blogspot.com/2010/12/borlotti-bean-soup-with-pico-de-gallo.html',
-            :file => fixture_path + 'webpages/borlotti.html')
+            :file => fixture_path + 'webpages/Borlotti.html')
     lines = r.extract_lines
     does_not_contain(lines, "Recipes from the kitchen of Mildreds vegetarian restaurant")
   end
@@ -316,7 +316,7 @@ class RecipeDocumentTest < ActiveSupport::TestCase
   test "sidebar stripping from blogger does not remove main content" do
     r = RecipeDocument.new_document(
             :url => 'http://mildredsrecipes.blogspot.com/2010/12/borlotti-bean-soup-with-pico-de-gallo.html',
-            :file => fixture_path + 'webpages/borlotti.html')
+            :file => fixture_path + 'webpages/Borlotti.html')
     lines = r.extract_lines
     lines.detect {|line| line.include?("5 chopped cloves garlic")}
   end
