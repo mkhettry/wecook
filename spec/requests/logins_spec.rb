@@ -13,7 +13,7 @@ describe "Logins" do
     end
 
     def submit_form
-      click_button "user_submit"
+      click_button "Join"
     end
 
     it "create native user that does not exist successfully" do
@@ -32,9 +32,8 @@ describe "Logins" do
 
       fill_form("me", "me@m", "pw", "pw2")
       submit_form
-
       current_path.should == "/users"
-      page.should have_content "Password doesn't match confirmation"
+      page.should have_content "Doesn't match confirmation"
     end
 
     it "does not create user when email exists" do
@@ -46,7 +45,7 @@ describe "Logins" do
       submit_form
 
       current_path.should == "/users"
-      page.should have_content "Email has already been taken"
+      page.should have_content "Has already been taken"
     end
   end
 end
