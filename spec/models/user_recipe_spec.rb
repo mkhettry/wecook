@@ -6,7 +6,7 @@ describe "UserRecipe" do
   fixtures :users, :recipes
 
   it "finds recipes for user" do
-    (1..15).each do |i|
+    (1..25).each do |i|
       Recipe.create! :url => "url_#{i}", :title => "title_#{i}"
       UserRecipe.create("url_#{i}", users(:user2)).save
     end
