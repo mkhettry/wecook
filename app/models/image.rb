@@ -6,6 +6,9 @@ class Image < ActiveRecord::Base
   if Rails.env.production?
     has_attached_file :jpg,
                       :storage => :s3,
+                      #
+                      :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
+                      :url => "/system/:attachment/:id/:style/:filename",
                       :bucket => "wecook-production-us",
                       :s3_credentials => {
                           :access_key_id => ENV['S3_KEY'],
