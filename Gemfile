@@ -17,6 +17,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'rake'
+gem 'thin'
 
 gem 'acts-as-taggable-on'
 gem 'less-rails-bootstrap'
