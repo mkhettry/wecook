@@ -17,9 +17,11 @@ x.open('POST', '<%= location %>' + 'bookmarks/', true);
 //x.setRequestHeader('Content-length', 3);
 //x.setRequestHeader('Connection', 'close');
 x.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+x.setRequestHeader('Accept', 'application/json');
 x.onreadystatechange=function() {
     if (x.readyState == 4){
-        if (x.status == 0){
+        console.log(x);
+        if (x.status == 200){
             alert('Recipe saved successfully');
         } else{
             alert('Recipe could not be saved ' + x.status);

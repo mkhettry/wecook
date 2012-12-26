@@ -1,6 +1,6 @@
 class BookmarksController < ApplicationController
   skip_before_filter :verify_authenticity_token
-
+  before_filter :allow_cross_domain_access, :only => [:create]
   # GET /bookmarks
   # GET /bookmarks.xml
   def index
@@ -50,7 +50,9 @@ class BookmarksController < ApplicationController
     # TODO: error handling?
     user_recipe.save
     respond_to do |format|
-      format.js {render :nothing => true}
+      format.json do
+        render :json => "['a']"
+      end
     end
   end
 
@@ -80,5 +82,10 @@ class BookmarksController < ApplicationController
       format.html { redirect_to(bookmarks_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+  def allow_cross_domain_access
+    response.headers["Access-Control-Allow-Origin"] = "*"
   end
 end
