@@ -6,6 +6,8 @@ class RecipesController < ApplicationController
   # GET /recipes.xml
   def index
     user = current_user
+    Rails.logger.info("***** session=#{session.inspect}")
+
     query_hash = {:page => params[:page], :order => "updated_at desc", :per_page => UserRecipe.per_page}
     if (user.nil?)
       query_hash[:joins] = :recipe
