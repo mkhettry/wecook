@@ -1,6 +1,6 @@
 class BookmarksController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  before_filter :allow_cross_domain_access, :only => [:create]
+  before_filter :allow_cross_domain_access, :only => [:create, :new]
   # GET /bookmarks
   # GET /bookmarks.xml
   def index
@@ -29,6 +29,7 @@ class BookmarksController < ApplicationController
     @recipe = Recipe.new
     @url = params[:url]
     Rails.logger.info("bookmarks#new")
+    Rails.logger.info("session is #{session}")
     respond_to do |format|
       format.html # new.html.erb
       format.js
