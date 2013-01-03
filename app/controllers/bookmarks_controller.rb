@@ -1,6 +1,7 @@
 class BookmarksController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :allow_cross_domain_access, :only => [:create, :new]
+
   # GET /bookmarks
   # GET /bookmarks.xml
   def index
@@ -45,14 +46,20 @@ class BookmarksController < ApplicationController
   # POST /bookmarks
   # POST /bookmarks.xml
   def create
-    user = User.find(params[:user_id])
-    user_recipe = UserRecipe.create(params[:foobar], user)
-    Rails.logger.info("Got this recipe: " + user_recipe.recipe.url)
-    # TODO: error handling?
-    user_recipe.save
-    respond_to do |format|
-      format.json do
-        render :json => "['a']"
+    if !params[:user_id].blank?
+      user = User.find(params[:user_id])
+      user_recipe = UserRecipe.create(params[:foobar], user)
+      user_recipe.save
+      respond_to do |format|
+        format.json do
+          render :json => "{ \"msg\": \"Recipe saved!\" }"
+        end
+      end
+    else
+      respond_to do |format|
+        format.json do
+          render :json => "{ \"msg\": \"You are not logged in\" }"
+        end
       end
     end
   end
