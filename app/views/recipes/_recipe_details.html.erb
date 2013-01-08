@@ -1,29 +1,14 @@
-<div id="<%= 'recipe_' + recipe.id.to_s    %>" class="modal hide fade in">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3><%= recipe.title %></h3>
-  </div>
-  <div class="modal-body">
-      <h4>Ingredients</h4>
-      <br/>
-      <ul>
-        <% recipe.ingredients.each do |i| %>
-          <li> <%=  i.raw_text %> </li>
-        <% end %>
-      </ul>
+<div class="recipe-detail-section">Ingredients</div>
 
-      <hr>
-      <h4>Directions</h4>
-      <br/>
-      <ol>
-        <% recipe.directions.each do |p| %>
-          <li><%= remove_start_numbering(p.raw_text) %></li>
-          <br/>
-        <% end %>
-      </ol>
-    </div>
-  <div class="modal-footer">
-    <a href="#" class="btn" class="close" data-dismiss="modal">Close</a>
-  </div>
-</div>
+<ul class="recipe-detail-ingredients">
+  <% recipe.ingredients.each do |i| %>
+    <li class="recipe-detail-item"> <%=  i.raw_text %> </li>
+  <% end %>
+</ul>
 
+<div class="recipe-detail-section">Directions</div>
+<ol>
+  <% recipe.directions.each do |p| %>
+    <li class="recipe-detail-direction-item"><%= remove_start_numbering(p.raw_text) %></li>
+  <% end %>
+</ol>

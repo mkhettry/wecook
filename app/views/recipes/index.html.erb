@@ -5,7 +5,7 @@
       <% recipe = user_recipe.recipe %>
       <li class="span3" id="ur_<%=user_recipe.id%>">
 
-        <%= render :partial => 'recipe_details', :locals => {:recipe => recipe} %>
+        <%= render :partial => 'recipe_details_modal', :locals => {:recipe => recipe} %>
 
         <% provisional = recipe.is_ready? ? "thumbnail" : "thumbnail provisional" %>
         <div class="<%= provisional %>" style="height:240px">

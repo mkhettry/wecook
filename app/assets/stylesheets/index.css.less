@@ -2,6 +2,7 @@
 @import "twitter/bootstrap/mixins";
 
 @black: black;
+@gray: gray;
 
 .recipe-footer a {
   color: @black;
@@ -25,4 +26,49 @@
     padding-top: 2px;
     padding-bottom: 4px;
     font-size:smaller;
+}
+
+.recipe-title {
+    font-size: 20px;
+    line-height: 1.1em;
+    margin-bottom: 20px;
+    font-family: @serifFontFamily;
+}
+
+.recipe-detail-image {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 4px solid black;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recipe-url {
+    font-size: 16px;
+    color: @gray;
+}
+
+.recipe-heading {
+    border-bottom: 1px dotted;
+}
+
+.recipe-detail-section {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.1em;
+    padding-bottom: 10px;
+}
+
+.recipe-detail-ingredients {
+    padding-bottom: 20px;
+}
+
+.recipe-detail-item {
+    padding-top: 2px;
+}
+
+.recipe-detail-direction-item {
+    padding-top: 6px;
 }

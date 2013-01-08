@@ -1,0 +1,13 @@
+<div id="<%= 'recipe_' + recipe.id.to_s    %>" class="modal hide fade in">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3><%= recipe.title %></h3>
+  </div>
+  <div class="modal-body">
+    <%= render :partial => 'recipe_details', :locals => {:recipe => recipe} %>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" class="close" data-dismiss="modal">Close</a>
+  </div>
+</div>
+

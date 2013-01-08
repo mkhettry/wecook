@@ -1,13 +1,12 @@
-<div class="left_nav">
+<div class="row">
+  <div class="span6 offset1 well">
+    <div class="recipe-heading">
+        <div class="recipe-title"><%= @recipe.title %></div>
+        <%= link_to "Read original recipe at #{@recipe.site_source()}", @recipe.url, :target => '_blank', :class => "recipe-url" %>
+    </div>
+    <%= image_tag(@recipe.sample_image, :size => "450x310", :class => "recipe-detail-image") %>
 
+    <%= render :partial => 'recipe_details', :locals => {:recipe => @recipe} %>
+  </div>
 </div>
 
-<div id="recipe_detail" class="main_content">
-  <%= render :partial => 'recipe_header' %>
-  <%= render :partial => 'recipe_details' %>
-  <div class="section_header"></div>
-  <%=
-      link_to "Read original recipe at #{@recipe.site_source()}", @recipe.url, :target => '_blank' %>
-</div>
-<div class="clear"></div>
-<%= button_to 'My Recipes', recipes_path, :method => "get" %>
