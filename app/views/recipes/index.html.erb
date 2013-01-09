@@ -10,7 +10,14 @@
         <% provisional = recipe.is_ready? ? "thumbnail" : "thumbnail provisional" %>
         <div class="<%= provisional %>" style="height:240px">
           <%= get_image recipe %>
-          <h5><%= recipe.title[0..40] %></h5>
+
+          <div class="recipe-card-title">
+            <% if recipe.title.length > 36 %>
+                <%= recipe.title[0..35] + "..." %>
+            <% else %>
+                <%= recipe.title %>
+            <% end %>
+          </div>
 
           <div class="recipe-footer">
             <div class="recipe-meta">

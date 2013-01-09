@@ -3,6 +3,9 @@
 
 @black: black;
 @gray: gray;
+//can add preferred sans-serif and serif fonts here
+@sansFonts: @sansFontFamily;
+@serifFonts: @serifFontFamily;
 
 .recipe-footer a {
   color: @black;
@@ -18,21 +21,34 @@
   }
 }
 
+.thumbnail {
+    background-color: lighten(@grayLighter, 10%);
+}
+
+.recipe-card-title {
+    color: @black;
+    font-family: @serifFonts;
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .recipe-footer {
-    padding-top: 2px;
+    margin-top: 5px;
 }
 
 .recipe-meta {
-    padding-top: 2px;
-    padding-bottom: 4px;
+    font-family: @sansFonts;
+    margin-bottom: 5px;
     font-size:smaller;
 }
 
 .recipe-title {
-    font-size: 20px;
+    font-size: 24px;
     line-height: 1.1em;
-    margin-bottom: 20px;
-    font-family: @serifFontFamily;
+    margin-bottom: 15px;
+    font-family: @serifFonts;
 }
 
 .recipe-detail-image {
@@ -46,7 +62,8 @@
 }
 
 .recipe-url {
-    font-size: 16px;
+    font-family: @sansFonts;
+    font-size: 13px;
     color: @gray;
 }
 
@@ -55,10 +72,10 @@
 }
 
 .recipe-detail-section {
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 18px;
+    font-family: @serifFonts;
     line-height: 1.1em;
-    padding-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .recipe-detail-ingredients {
@@ -67,12 +84,12 @@
 
 .recipe-detail-item {
     padding-top: 2px;
+    font-size: 13px;
+    font-family: @sansFonts;
 }
 
 .recipe-detail-direction-item {
     padding-top: 6px;
-}
-
-.thumbnail {
-    background-color: lighten(@grayLighter, 10%);
+    font-size: 13px;
+    font-family: @sansFonts;
 }

@@ -1,10 +1,10 @@
 <% if current_user && current_user == user_recipe.user %>
-    <%= link_to archive_recipe_path(user_recipe), :method => :post, :remote => true do %>
+    <%= link_to archive_recipe_path(user_recipe), :rel=>"tooltip", :title=>"Delete", :method => :post, :remote => true do %>
         <i class="icon-trash"></i>
     <% end %>
 
     <% if user_recipe.recipe.editable? %>
-        <%= link_to show_provisional_recipe_path(user_recipe.recipe)  do%>
+        <%= link_to show_provisional_recipe_path(user_recipe.recipe), :rel=>"tooltip nofollow", :title=>"Edit" do%>
             <i class="icon-edit"></i>
         <%end%>
     <% end %>
