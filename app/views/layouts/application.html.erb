@@ -43,7 +43,9 @@
 
         <ul class="nav pull-right">
           <li>
-            <%= render :partial => "search_recipe" %>
+            <%= form_tag(recipe_search_path, :method => "get", :class => "navbar-search") do %>
+                <input type="text" class="search-query input-medium" placeholder="Search">
+            <% end %>
           </li>
 
           <li class="dropdown">
