@@ -7,7 +7,7 @@
 
         <%= render :partial => 'recipe_details_modal', :locals => {:recipe => recipe} %>
 
-        <% provisional = recipe.is_ready? ? "thumbnail" : "thumbnail provisional" %>
+        <% provisional = recipe.is_ready? ? "corrected thumbnail" : "provisional thumbnail" %>
         <div class="<%= provisional %>" style="height:240px">
           <%= get_image recipe %>
 
