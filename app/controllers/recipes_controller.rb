@@ -45,6 +45,13 @@ class RecipesController < ApplicationController
     end
   end
 
+  def search
+    respond_to do |format|
+      format.html # search.html.erb
+      format.js
+      format.xml  { render :xml => @recipe }
+    end
+  end
 
   def show_provisional
     @recipe = Recipe.find(params[:id])
